@@ -2,20 +2,37 @@
 //  ContentView.swift
 //  System Settings
 //
-//  Created by Chris on 1/1/25.
-//
 
 import SwiftUI
 
 struct ContentView: View {
+    // Variables
+    @State private var searchText = String()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            HStack {
+                VStack(spacing: 0) {
+                    List {
+                        // Empty
+                    }
+                    .searchable(text: $searchText, placement: .sidebar)
+                    .frame(height: 35)
+                    Divider()
+                    List {
+                        
+                    }
+                }
+            }
         }
-        .padding()
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                HStack {
+                    Button("Back", systemImage: "chevron.backward") {}.disabled(true)
+                    Button("Forward", systemImage: "chevron.forward") {}.disabled(true)
+                }
+            }
+        }
     }
 }
 
