@@ -6,9 +6,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var dividerOpacity = 0.0
     @State private var searchText = ""
     @State private var selection: SettingsItem? = mainOptions.first
-
+    
     var body: some View {
         NavigationSplitView {
             List {}
@@ -17,11 +18,31 @@ struct ContentView: View {
                 .searchable(text: $searchText, placement: .sidebar)
                 .navigationSplitViewColumnWidth(215)
             List(selection: $selection) {
-                ForEach(mainOptions) { setting in
-                    NavigationLink(value: setting) {
-                        SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                Section {
+                    ForEach(radioOptions) { setting in
+                        NavigationLink(value: setting) {
+                            SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                                .overlay {
+                                    if setting == radioOptions.first {
+                                        DividerGeometryView(dividerOpacity: $dividerOpacity)
+                                    }
+                                }
+                        }
                     }
                 }
+                
+                Section {
+                    ForEach(mainOptions) { setting in
+                        NavigationLink(value: setting) {
+                            SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                        }
+                    }
+                }
+            }
+            .overlay {
+                Divider()
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .opacity(dividerOpacity)
             }
             .toolbar(removing: .sidebarToggle)
         } detail: {
@@ -31,7 +52,7 @@ struct ContentView: View {
                 }
                 .formStyle(.grouped)
                 .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: -15))
-
+                
             }
             .navigationTitle(selection?.title ?? "")
             .scrollContentBackground(.hidden)
@@ -46,6 +67,19 @@ struct ContentView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+struct DividerGeometryView: View {
+    @Binding var dividerOpacity: Double
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Color.clear
+                .onChange(of: geometry.frame(in: .scrollView).minY) {
+                    dividerOpacity = (96.0 - geometry.frame(in: .scrollView).minY) / 4
+                }
         }
     }
 }
