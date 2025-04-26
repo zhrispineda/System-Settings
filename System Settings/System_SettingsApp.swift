@@ -7,7 +7,6 @@ import SwiftUI
 
 @main
 struct System_SettingsApp: App {
-    
     init() {
         NSSplitViewItem.swizzle()
         NSView.swizzle()
