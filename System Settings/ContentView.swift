@@ -7,34 +7,33 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var searchText = ""
-    @State private var selection: SettingsOptions = .general
+    @State private var selection: SettingsItem? = mainOptions.first
 
     var body: some View {
         NavigationSplitView {
             List {}
-                .frame(height: 38)
+                .frame(height: 30)
                 .scrollDisabled(true)
                 .searchable(text: $searchText, placement: .sidebar)
                 .navigationSplitViewColumnWidth(215)
-            List(SettingsOptions.allCases, selection: $selection) { setting in
-                NavigationLink(value: setting) {
-                    SettingsCell(setting.rawValue, color: setting.color, symbol: setting.symbol)
+            List(selection: $selection) {
+                ForEach(mainOptions) { setting in
+                    NavigationLink(value: setting) {
+                        SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                    }
                 }
             }
             .toolbar(removing: .sidebarToggle)
-            .toolbar {
-               Color.clear
-            }
         } detail: {
             List {
                 Form {
-                    selection.destination
+                    selection?.destination
                 }
                 .formStyle(.grouped)
                 .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: -15))
 
             }
-            .navigationTitle(selection.rawValue)
+            .navigationTitle(selection?.title ?? "")
             .scrollContentBackground(.hidden)
             .navigationSplitViewColumnWidth(500)
             .toolbar {

@@ -5,37 +5,31 @@
 
 import SwiftUI
 
-enum SettingsOptions: String, Identifiable, CaseIterable, Hashable {
+enum SettingsOptions: String {
     case general = "General"
     case accessibility = "Accessibility"
+    case appearance = "Appearance"
+}
+
+struct SettingsItem: Identifiable, Hashable {
+    var id: String { title }
+    let type: SettingsOptions
+    var title: String { type.rawValue }
+    let icon: String
+    var color: Color
+    let destination: AnyView
     
-    var id: String { rawValue }
-    
-    @ViewBuilder
-    var destination: some View {
-        switch self {
-        case .general:
-            GeneralView()
-        case .accessibility:
-            EmptyView()
-        }
+    static func == (lhs: SettingsItem, rhs: SettingsItem) -> Bool {
+        lhs.id == rhs.id
     }
     
-    var color: Color {
-        switch self {
-        case .general:
-            .gray
-        case .accessibility:
-            .blue
-        }
-    }
-    
-    var symbol: String {
-        switch self {
-        case .general:
-            "gear"
-        case .accessibility:
-            "accessibility"
-        }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
+
+let mainOptions: [SettingsItem] = [
+    SettingsItem(type: .general, icon: "gear", color: .gray, destination: AnyView(GeneralView())),
+    SettingsItem(type: .accessibility, icon: "accessibility", color: .blue, destination: AnyView(EmptyView())),
+    SettingsItem(type: .appearance, icon: "appearance.lightmode", color: .black, destination: AnyView(EmptyView()))
+]

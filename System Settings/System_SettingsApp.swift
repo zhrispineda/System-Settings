@@ -7,6 +7,8 @@ import SwiftUI
 
 @main
 struct System_SettingsApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     init() {
         NSSplitViewItem.swizzle()
         NSView.swizzle()
@@ -23,5 +25,11 @@ struct System_SettingsApp: App {
                 }
         }
         .windowResizability(.contentSize)
+    }
+}
+
+class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
     }
 }

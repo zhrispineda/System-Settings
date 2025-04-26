@@ -18,7 +18,7 @@ struct SettingsCell: View {
     
     var body: some View {
         HStack {
-            Image(systemName: symbol)
+            Image(_internalSystemName: symbol)
                 .frame(width: 15, height: 15)
                 .background(in:
                     RoundedRectangle(cornerRadius: 3.0)
