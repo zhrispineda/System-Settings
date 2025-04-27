@@ -32,19 +32,7 @@ struct BluetoothView: View {
                 .foregroundStyle(.secondary)
         } footer: {
             if !bluetoothEnabled {
-                Button {
-                    if let url = URL(string: "help:anchor=blth8111") {
-                        NSWorkspace.shared.open(url)
-                    }
-                } label: {
-                    Image(systemName: "questionmark.circle.fill")
-                        .fontWeight(.regular)
-                        .foregroundStyle(.primary, Color(NSColor.controlColor))
-                        .imageScale(.large)
-                        .shadow(radius: 0.5)
-                }
-                .buttonStyle(.plain)
-                .scaleEffect(1.2)
+                HelpButton(topicID: "blth8111")
             }
         }
         
@@ -56,19 +44,7 @@ struct BluetoothView: View {
             } header: {
                 Text("My Devices")
             } footer: {
-                Button {
-                    if let url = URL(string: "help:anchor=blth8111") {
-                        NSWorkspace.shared.open(url)
-                    }
-                } label: {
-                    Image(systemName: "questionmark.circle.fill")
-                        .fontWeight(.regular)
-                        .foregroundStyle(.primary, Color(NSColor.controlColor))
-                        .imageScale(.large)
-                        .shadow(radius: 0.5)
-                }
-                .buttonStyle(.plain)
-                .scaleEffect(1.2)
+                HelpButton(topicID: "blth8111")
             }
             
             Section {

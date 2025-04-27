@@ -36,6 +36,9 @@ struct ContentView: View {
                                         .foregroundStyle(.secondary)
                                 }
                             }
+                            .overlay {
+                                DividerGeometryView(dividerOpacity: $dividerOpacity)
+                            }
                         }
                     }
                 }
@@ -44,11 +47,6 @@ struct ContentView: View {
                     ForEach(radioOptions) { setting in
                         NavigationLink(value: setting) {
                             SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
-                                .overlay {
-                                    if setting == radioOptions.first {
-                                        DividerGeometryView(dividerOpacity: $dividerOpacity)
-                                    }
-                                }
                         }
                     }
                 }
@@ -73,7 +71,7 @@ struct ContentView: View {
                 selection?.destination
             }
             .formStyle(.grouped)
-            ._safeAreaInsets(EdgeInsets(top: -18, leading: 0, bottom: 0, trailing: 0))
+            ._safeAreaInsets(EdgeInsets(top: -19, leading: 0, bottom: 0, trailing: 0))
             .navigationTitle(selection?.title ?? "")
             .navigationSplitViewColumnWidth(500)
             .toolbar {
@@ -97,7 +95,7 @@ struct DividerGeometryView: View {
         GeometryReader { geometry in
             Color.clear
                 .onChange(of: geometry.frame(in: .scrollView).minY) {
-                    dividerOpacity = (96.0 - geometry.frame(in: .scrollView).minY) / 4
+                    dividerOpacity = (94.0 - geometry.frame(in: .scrollView).minY) / 4
                 }
         }
     }
