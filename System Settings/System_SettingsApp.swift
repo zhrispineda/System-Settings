@@ -18,11 +18,6 @@ struct System_SettingsApp: App {
         WindowGroup {
             ContentView()
                 .frame(minHeight: 415)
-                .task {
-                    if let window = NSApp.windows.first {
-                        window.titlebarAppearsTransparent = true
-                    }
-                }
         }
         .windowResizability(.contentSize)
     }

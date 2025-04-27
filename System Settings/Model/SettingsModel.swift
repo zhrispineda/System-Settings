@@ -15,6 +15,12 @@ enum SettingsOptions: String {
     case accessibility = "Accessibility"
     case appearance = "Appearance"
     case siri = "Apple Intelligence & Siri"
+    case controlCenter = "Control Center"
+    case desktopDock = "Desktop & Dock"
+    case displays = "Displays"
+    case screenSaver = "Screen Saver"
+    case spotlight = "Spotlight"
+    case wallpaper = "Wallpaper"
 }
 
 struct SettingsItem: Identifiable, Hashable {
@@ -36,7 +42,7 @@ struct SettingsItem: Identifiable, Hashable {
 
 let radioOptions: [SettingsItem] = [
     SettingsItem(type: .wifi, icon: "wifi", color: .blue, destination: AnyView(EmptyView())),
-    SettingsItem(type: .bluetooth, icon: "bluetooth", color: .blue, destination: AnyView(EmptyView())),
+    SettingsItem(type: .bluetooth, icon: "bluetooth", color: .blue, destination: AnyView(BluetoothView())),
     SettingsItem(type: .network, icon: "network", color: .blue, destination: AnyView(EmptyView())),
     SettingsItem(type: .battery, icon: "battery.100", color: .green, destination: AnyView(EmptyView()))
 ]
@@ -45,5 +51,11 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .general, icon: "gear", color: .gray, destination: AnyView(GeneralView())),
     SettingsItem(type: .accessibility, icon: "accessibility", color: .blue, destination: AnyView(EmptyView())),
     SettingsItem(type: .appearance, icon: "appearance.lightmode", color: .black, destination: AnyView(EmptyView())),
-    SettingsItem(type: .siri, icon: "siri", destination: AnyView(EmptyView()))
+    SettingsItem(type: .siri, icon: "siri", destination: AnyView(EmptyView())),
+    SettingsItem(type: .controlCenter, icon: "switch.2", color: .gray, destination: AnyView(EmptyView())),
+    SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(EmptyView())),
+    SettingsItem(type: .displays, icon: "sun.max.fill", color: .blue, destination: AnyView(EmptyView())),
+    SettingsItem(type: .screenSaver, icon: "moon.and.stars.artframe", color: .cyan, destination: AnyView(EmptyView())),
+    SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .gray, destination: AnyView(EmptyView())),
+    SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(EmptyView()))
 ]

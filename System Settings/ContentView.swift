@@ -46,16 +46,12 @@ struct ContentView: View {
             }
             .toolbar(removing: .sidebarToggle)
         } detail: {
-            List {
-                Form {
-                    selection?.destination
-                }
-                .formStyle(.grouped)
-                .listRowInsets(EdgeInsets(top: 0, leading: -15, bottom: 0, trailing: -15))
-                
+            Form {
+                selection?.destination
             }
+            .formStyle(.grouped)
+            ._safeAreaInsets(EdgeInsets(top: -18, leading: 0, bottom: 0, trailing: 0))
             .navigationTitle(selection?.title ?? "")
-            .scrollContentBackground(.hidden)
             .navigationSplitViewColumnWidth(500)
             .toolbar {
                 ToolbarItem(placement: .navigation) {
@@ -86,4 +82,5 @@ struct DividerGeometryView: View {
 
 #Preview {
     ContentView()
+        .frame(height: 500)
 }
