@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct SettingsCell: View {
+    @Environment(\.appearsActive) var appearsActive
     let title: String
     let color: Color
     let symbol: String
@@ -31,6 +32,7 @@ struct SettingsCell: View {
             }
             
             Text(title)
+                .foregroundStyle(appearsActive ? .primary : .secondary)
         }
     }
 }

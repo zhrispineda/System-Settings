@@ -6,9 +6,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.appearsActive) var appearsActive
     @State private var dividerOpacity = 0.0
     @State private var searchText = ""
     @State private var selection: SettingsItem? = mainOptions.first
+    @State private var sidebarOpacity = 1.0
     
     var body: some View {
         NavigationSplitView {
@@ -18,6 +20,26 @@ struct ContentView: View {
                 .searchable(text: $searchText, placement: .sidebar)
                 .navigationSplitViewColumnWidth(215)
             List(selection: $selection) {
+                Section {
+                    ForEach(accountOptions) { setting in
+                        NavigationLink(value: setting) {
+                            HStack {
+                                Image(systemName: "person.crop.circle.fill")
+                                    .font(.system(size: 32))
+                                    .foregroundStyle(.white, Color(NSColor.lightGray))
+                                    .padding(.horizontal, -3)
+                                VStack(alignment: .leading) {
+                                    Text("Sign in")
+                                        .fontWeight(.semibold)
+                                    Text("with your Apple Account")
+                                        .font(.callout)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 Section {
                     ForEach(radioOptions) { setting in
                         NavigationLink(value: setting) {
@@ -39,6 +61,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .opacity(appearsActive ? 1.0 : 0.5)
             .overlay {
                 Divider()
                     .frame(maxHeight: .infinity, alignment: .top)

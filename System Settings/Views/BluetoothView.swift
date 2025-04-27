@@ -38,12 +38,13 @@ struct BluetoothView: View {
                     }
                 } label: {
                     Image(systemName: "questionmark.circle.fill")
-                        .foregroundStyle(.black, .white)
+                        .fontWeight(.regular)
+                        .foregroundStyle(.primary, Color(NSColor.controlColor))
                         .imageScale(.large)
-                        .shadow(radius: 1.0)
+                        .shadow(radius: 0.5)
                 }
                 .buttonStyle(.plain)
-                .scaleEffect(1.25)
+                .scaleEffect(1.2)
             }
         }
         
@@ -61,12 +62,13 @@ struct BluetoothView: View {
                     }
                 } label: {
                     Image(systemName: "questionmark.circle.fill")
-                        .foregroundStyle(.black, .white)
+                        .fontWeight(.regular)
+                        .foregroundStyle(.primary, Color(NSColor.controlColor))
                         .imageScale(.large)
-                        .shadow(radius: 1.0)
+                        .shadow(radius: 0.5)
                 }
                 .buttonStyle(.plain)
-                .scaleEffect(1.25)
+                .scaleEffect(1.2)
             }
             
             Section {

@@ -6,6 +6,8 @@
 import SwiftUI
 
 enum SettingsOptions: String {
+    case signIn = "Sign in"
+    
     case wifi = "Wi-Fi"
     case bluetooth = "Bluetooth"
     case network = "Network"
@@ -39,6 +41,10 @@ struct SettingsItem: Identifiable, Hashable {
         hasher.combine(id)
     }
 }
+
+let accountOptions: [SettingsItem] = [
+    SettingsItem(type: .signIn, icon: "", destination: AnyView(EmptyView()))
+]
 
 let radioOptions: [SettingsItem] = [
     SettingsItem(type: .wifi, icon: "wifi", color: .blue, destination: AnyView(EmptyView())),
