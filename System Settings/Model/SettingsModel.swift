@@ -33,6 +33,15 @@ enum SettingsOptions: String {
     case privacySecurity = "Privacy & Security"
     case touchIDPassword = "Touch ID & Password"
     case usersGroups = "Users & Groups"
+    
+    case internetAccounts = "Internet Accounts"
+    case gameCenter = "Game Center"
+    case icloud = "iCloud"
+    case walletApplePay = "Wallet & Apple Pay"
+    
+    case keyboard = "Keyboard"
+    case trackpad = "Trackpad"
+    case printersScanners = "Printers & Scanners"
 }
 
 struct SettingsItem: Identifiable, Hashable {
@@ -88,4 +97,17 @@ let authOptions: [SettingsItem] = [
     SettingsItem(type: .privacySecurity, icon: "hand.raised.fill", color: .blue, destination: AnyView(EmptyView())),
     SettingsItem(type: .touchIDPassword, icon: "touchid", color: .white, destination: AnyView(EmptyView())),
     SettingsItem(type: .usersGroups, icon: "person.2.fill", color: .blue, destination: AnyView(EmptyView()))
+]
+
+let serviceOptions: [SettingsItem] = [
+    SettingsItem(type: .internetAccounts, icon: "at", color: .blue, destination: AnyView(EmptyView())),
+    SettingsItem(type: .gameCenter, icon: "Game Center", destination: AnyView(EmptyView())),
+    SettingsItem(type: .icloud, icon: "iCloud", destination: AnyView(EmptyView())),
+    SettingsItem(type: .walletApplePay, icon: "Wallet", destination: AnyView(EmptyView()))
+]
+
+let inputOptions: [SettingsItem] = [
+    SettingsItem(type: .keyboard, icon: "keyboard.fill", color: .gray, destination: AnyView(EmptyView())),
+    SettingsItem(type: .trackpad, icon: "rectangle.and.hand.point.up.left.fill", color: .gray, destination: AnyView(EmptyView())),
+    SettingsItem(type: .printersScanners, icon: "printer.fill", color: .gray, destination: AnyView(EmptyView()))
 ]

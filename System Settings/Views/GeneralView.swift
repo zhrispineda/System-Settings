@@ -11,6 +11,7 @@ struct GeneralView: View {
     @State private var titleOpacity = 0.0
     
     var body: some View {
+        // Placard
         Section {
             VStack(spacing: 5) {
                 IconView("gear", color: .gray)

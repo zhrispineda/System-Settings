@@ -21,15 +21,16 @@ struct IconView: View {
             RoundedRectangle(cornerRadius: 5.0)
                 .foregroundStyle(color.gradient)
                 .scaledToFit()
-                .shadow(radius: 0.3, y: 0.3)
+                .frame(width: 20, height: 20)
             Image(_internalSystemName: symbol)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 15, height: 15)
                 .symbolRenderingMode(symbol == "touchid" ? .multicolor : .none)
                 .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
+                .frame(width: 20, height: 20)
+                .padding([.top, .leading], symbol == "rectangle.and.hand.point.up.left.fill" ? 2 : 0)
         }
-        .frame(width: 20, height: 20)
     }
 }
 

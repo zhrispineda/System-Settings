@@ -24,22 +24,10 @@ struct ContentView: View {
                 Section {
                     ForEach(accountOptions) { setting in
                         NavigationLink(value: setting) {
-                            HStack {
-                                Image(systemName: "person.crop.circle.fill")
-                                    .font(.system(size: 32))
-                                    .foregroundStyle(.white, Color(NSColor.lightGray))
-                                    .padding(.horizontal, -3)
-                                VStack(alignment: .leading) {
-                                    Text("Sign in")
-                                        .fontWeight(.semibold)
-                                    Text("with your Apple Account")
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
+                            AppleAccountCell()
+                                .overlay {
+                                    DividerGeometryView(dividerOpacity: $dividerOpacity)
                                 }
-                            }
-                            .overlay {
-                                DividerGeometryView(dividerOpacity: $dividerOpacity)
-                            }
                         }
                     }
                 }
@@ -79,6 +67,24 @@ struct ContentView: View {
                         }
                     }
                 }
+                
+                // MARK: Services
+                Section {
+                    ForEach(serviceOptions) { setting in
+                        NavigationLink(value: setting) {
+                            SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                        }
+                    }
+                }
+                
+                // MARK: Input
+                Section {
+                    ForEach(inputOptions) { setting in
+                        NavigationLink(value: setting) {
+                            SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                        }
+                    }
+                }
             }
             .opacity(appearsActive ? 1.0 : 0.5)
             .overlay {
@@ -88,36 +94,25 @@ struct ContentView: View {
             }
             .toolbar(removing: .sidebarToggle)
         } detail: {
-            Form {
-                selection?.destination
-            }
-            .formStyle(.grouped)
-            ._safeAreaInsets(EdgeInsets(top: -19, leading: 0, bottom: 0, trailing: 0))
-            .navigationTitle(selection?.title ?? "")
-            .navigationSplitViewColumnWidth(500)
-            .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    HStack {
-                        Button("", systemImage: "chevron.left") {}
-                            .disabled(true)
-                        Button("", systemImage: "chevron.right") {}
-                            .disabled(true)
+            NavigationStack {
+                Form {
+                    selection?.destination
+                }
+                .formStyle(.grouped)
+                ._safeAreaInsets(EdgeInsets(top: -19, leading: 0, bottom: 0, trailing: 0))
+                .navigationTitle(selection?.title ?? "")
+                .navigationSplitViewColumnWidth(500)
+                .toolbar {
+                    ToolbarItem(placement: .navigation) {
+                        HStack {
+                            Button("", systemImage: "chevron.left") {}
+                                .disabled(true)
+                            Button("", systemImage: "chevron.right") {}
+                                .disabled(true)
+                        }
                     }
                 }
             }
-        }
-    }
-}
-
-struct DividerGeometryView: View {
-    @Binding var dividerOpacity: Double
-    
-    var body: some View {
-        GeometryReader { geometry in
-            Color.clear
-                .onChange(of: geometry.frame(in: .scrollView).minY) {
-                    dividerOpacity = (94.0 - geometry.frame(in: .scrollView).minY) / 4
-                }
         }
     }
 }
