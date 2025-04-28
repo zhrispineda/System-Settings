@@ -24,7 +24,7 @@ struct SettingsCell: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 25)
-                    .padding(.leading, -2)
+                    .padding(.leading, -2.5)
                     .padding(.trailing, -5)
                     .padding(.vertical, -2.5)
             } else {

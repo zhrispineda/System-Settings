@@ -20,6 +20,7 @@ struct ContentView: View {
                 .searchable(text: $searchText, placement: .sidebar)
                 .navigationSplitViewColumnWidth(215)
             List(selection: $selection) {
+                // MARK: Apple Account
                 Section {
                     ForEach(accountOptions) { setting in
                         NavigationLink(value: setting) {
@@ -43,6 +44,7 @@ struct ContentView: View {
                     }
                 }
                 
+                // MARK: Radio + Battery/Power
                 Section {
                     ForEach(radioOptions) { setting in
                         NavigationLink(value: setting) {
@@ -51,8 +53,27 @@ struct ContentView: View {
                     }
                 }
                 
+                // MARK: Main
                 Section {
                     ForEach(mainOptions) { setting in
+                        NavigationLink(value: setting) {
+                            SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                        }
+                    }
+                }
+                
+                // MARK: Focus
+                Section {
+                    ForEach(focusOptions) { setting in
+                        NavigationLink(value: setting) {
+                            SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                        }
+                    }
+                }
+                
+                // MARK: Authentication
+                Section {
+                    ForEach(authOptions) { setting in
                         NavigationLink(value: setting) {
                             SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
                         }

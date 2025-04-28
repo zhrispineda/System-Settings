@@ -15,7 +15,7 @@ struct System_SettingsApp: App {
     }
     
     var body: some Scene {
-        WindowGroup {
+        Window("", id: "System Settings") {
             ContentView()
                 .frame(minHeight: 415)
         }

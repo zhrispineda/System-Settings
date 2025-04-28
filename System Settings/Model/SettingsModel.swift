@@ -23,6 +23,16 @@ enum SettingsOptions: String {
     case screenSaver = "Screen Saver"
     case spotlight = "Spotlight"
     case wallpaper = "Wallpaper"
+    
+    case notifications = "Notifications"
+    case sound = "Sound"
+    case focus = "Focus"
+    case screenTime = "Screen Time"
+    
+    case lockScreen = "Lock Screen"
+    case privacySecurity = "Privacy & Security"
+    case touchIDPassword = "Touch ID & Password"
+    case usersGroups = "Users & Groups"
 }
 
 struct SettingsItem: Identifiable, Hashable {
@@ -64,4 +74,18 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .screenSaver, icon: "moon.and.stars.artframe", color: .cyan, destination: AnyView(EmptyView())),
     SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .gray, destination: AnyView(EmptyView())),
     SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(EmptyView()))
+]
+
+let focusOptions: [SettingsItem] = [
+    SettingsItem(type: .notifications, icon: "bell.badge.fill", color: .red, destination: AnyView(EmptyView())),
+    SettingsItem(type: .sound, icon: "speaker.3.fill", color: .pink, destination: AnyView(EmptyView())),
+    SettingsItem(type: .focus, icon: "moon.fill", color: .indigo, destination: AnyView(EmptyView())),
+    SettingsItem(type: .screenTime, icon: "hourglass", color: .indigo, destination: AnyView(EmptyView()))
+]
+
+let authOptions: [SettingsItem] = [
+    SettingsItem(type: .lockScreen, icon: "lock.dots.fill", color: .black, destination: AnyView(EmptyView())),
+    SettingsItem(type: .privacySecurity, icon: "hand.raised.fill", color: .blue, destination: AnyView(EmptyView())),
+    SettingsItem(type: .touchIDPassword, icon: "touchid", color: .white, destination: AnyView(EmptyView())),
+    SettingsItem(type: .usersGroups, icon: "person.2.fill", color: .blue, destination: AnyView(EmptyView()))
 ]
