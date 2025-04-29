@@ -81,7 +81,7 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(EmptyView())),
     SettingsItem(type: .displays, icon: "sun.max.fill", color: .blue, destination: AnyView(EmptyView())),
     SettingsItem(type: .screenSaver, icon: "moon.and.stars.artframe", color: .cyan, destination: AnyView(EmptyView())),
-    SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .gray, destination: AnyView(EmptyView())),
+    SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .gray, destination: AnyView(SpotlightView())),
     SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(EmptyView()))
 ]
 

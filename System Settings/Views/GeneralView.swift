@@ -11,7 +11,7 @@ struct GeneralView: View {
     @State private var titleOpacity = 0.0
     
     var body: some View {
-        CustomForm {
+        CustomForm(title: "General") {
             // Placard
             Section {
                 VStack(spacing: 5) {

@@ -11,7 +11,7 @@ struct BluetoothView: View {
     @State private var bluetoothEnabled = true
     
     var body: some View {
-        CustomForm {
+        CustomForm(title: "Bluetooth") {
             Section {
                 HStack(alignment: .top, spacing: 15) {
                     IconView("bluetooth", color: .blue)

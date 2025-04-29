@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct CustomForm<Content: View>: View {
+    let title: String
     @ViewBuilder let content: Content
     
     var body: some View {
@@ -14,7 +15,7 @@ struct CustomForm<Content: View>: View {
         }
         .formStyle(.grouped)
         .navigationDestination(for: String.self) {_ in }
-        .navigationTitle("General")
+        .navigationTitle(title)
         .navigationSplitViewColumnWidth(500)
         .toolbar {
             ToolbarItem(placement: .navigation) {
