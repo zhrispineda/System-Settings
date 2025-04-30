@@ -7,6 +7,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.appearsActive) var appearsActive
+    @FocusState private var isFocused: Bool
     @State private var dividerOpacity = 0.0
     @State private var searchText = ""
     @State private var selection: SettingsItem? = mainOptions.first
@@ -51,7 +52,11 @@ struct ContentView: View {
                 // MARK: Input
                 SettingsSection(path: $path, selection: $selection, options: inputOptions)
             }
+            .focused($isFocused)
             .opacity(appearsActive ? 1.0 : 0.5)
+            .onAppear {
+                isFocused = true
+            }
             .overlay {
                 Divider()
                     .frame(maxHeight: .infinity, alignment: .top)
@@ -68,5 +73,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .frame(height: 500)
+        .frame(width: 715, height: 700)
 }
