@@ -1,0 +1,759 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "General": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일반"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כללי"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umum"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algemeen"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genel"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Основные"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yleiset"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Általános"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generali"
+          }
+        },
+        "es_419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Γενικά"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عام"
+          }
+        },
+        "zh_TW": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        },
+        "fr_CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Général"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allmänt"
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generelt"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सामान्य"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogólne"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generelt"
+          }
+        },
+        "zh_HK": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ทั่วไป"
+          }
+        },
+        "zh_CN": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通用"
+          }
+        },
+        "en_GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "es_US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obecné"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umum"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všeobecné"
+          }
+        },
+        "en_AU": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Splošno"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allgemein"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cài đặt chung"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "pt_BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geral"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Général"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Загальні"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        },
+        "pt_PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geral"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Općenito"
+          }
+        }
+      }
+    },
+    "Manage your overall setup and preferences for Mac, such as software updates, device language, AirDrop, and more.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소프트웨어 업데이트, 기기 언어, AirDrop 등 Mac에서 사용할 전반적인 설정 및 선호 사항을 관리합니다."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "באפשרותך לנהל את ההעדפות וההגדרות הכוללות שלך ב-Mac כגון עדכוני תוכנה, שפת המכשיר, AirDrop ועוד."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kelola seluruh pengaturan dan preferensi Anda untuk Mac, seperti pembaruan perangkat lunak, bahasa perangkat, AirDrop, dan lainnya."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beheer je algemene configuratie en voorkeuren voor de Mac, zoals software-updates, taal van het apparaat en AirDrop."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac için yazılım güncellemeleri, aygıt dili, AirDrop ve benzeri gibi genel ayarlarınızı ve tercihlerinizi yönetin."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настройте основные параметры Mac, такие как обновление ПО, язык устройства и AirDrop."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hallitse Macin yleisiä määrityksiä ja asetuksia, kuten ohjelmistopäivityksiä, laitteen kieltä ja AirDropia."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kezelheti a Mac általános, például a szoftverfrissítésekre, az eszköz nyelvére, az AirDropra és továbbiakra vonatkozó beállításait."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestisci la configurazione e le preferenze globali del Mac, come gli aggiornamenti software, la lingua del dispositivo, AirDrop e altro ancora."
+          }
+        },
+        "es_419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Administra tu configuración y tus preferencias generales para la Mac, como las actualizaciones de software, el idioma del dispositivo, AirDrop y más."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Διαχειριστείτε τη διαμόρφωση και τις προτιμήσεις σας για το Mac, όπως ενημερώσεις λογισμικού, γλώσσα συσκευής, AirDrop και άλλα."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestiona la configuració i les preferències generals del Mac, com ara les actualitzacions del programari, l’idioma del dispositiu i l’AirDrop."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إدارة الإعدادات والتفضيلات العامة على Mac، مثل تحديثات البرامج ولغة الجهاز والإرسال السريع والمزيد."
+          }
+        },
+        "zh_TW": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理Mac的整體設定和偏好設定，例如軟體更新、裝置語言、AirDrop等。"
+          }
+        },
+        "fr_CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gérez la configuration et les préférences générales du Mac, comme les mises à jour logicielles, la langue d’utilisation, AirDrop et bien d’autres fonctionnalités."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hantera allmänna inställningar för datorn, till exempel programuppdateringar, enhetsspråk, AirDrop med mera."
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Administrer oppsettet og valgene for Macen, som program­vare­opp­dateringer, språk på enheten, AirDrop og annet."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac के लिए अपना समग्र सेटअप और प्राथमिकता प्रबंधित करें, जैसे सॉफ़्टवेयर अपडेट, डिवाइस भाषा, AirDrop और बहुत कुछ।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zarządzaj ogólną konfiguracją i preferencjami Maca, między innymi uaktualnieniami oprogramowania, językiem urządzenia i AirDrop."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage your overall setup and preferences for Mac, such as software updates, device language, AirDrop, and more."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Administrer den overordnede konfiguration og indstillingerne til Mac, f.eks. softwareopdateringer, sprog på enhed, AirDrop m.m."
+          }
+        },
+        "zh_HK": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理Mac的整體設定和偏好設定，例如軟件更新、裝置語言、AirDrop等。"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "จัดการการตั้งค่าโดยทั่วไปของคุณและการตั้งค่าสำหรับ Mac เช่น รายการอัปเดตซอฟต์แวร์, ภาษาของอุปกรณ์, AirDrop และอื่นๆ"
+          }
+        },
+        "zh_CN": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理Mac的整体设置和偏好设置，例如软件更新、设备语言、隔空投送等。"
+          }
+        },
+        "en_GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage your overall setup and preferences for Mac, such as software updates, device language, AirDrop and more."
+          }
+        },
+        "es_US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Administra tu configuración y tus preferencias generales para la Mac, como las actualizaciones de software, el idioma del dispositivo, AirDrop y más."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Správa celkové konfigurace a předvoleb Macu, jako je například aktualizace softwaru, jazyk zařízení, AirDrop a další."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urus persediaan dan keutamaan keseluruhan anda untuk Mac, seperti kemas kini perisian, bahasa peranti, AirDrop dan banyak lagi."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Správa celkovej konfigurácie a nastavení Macu, napríklad aktualizácií softvéru, jazyka zariadenia, AirDropu a ďalších oblastí."
+          }
+        },
+        "en_AU": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage your overall set-up and preferences for Mac, such as software updates, device language, AirDrop and more."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upravljajte splošne nastavitve za Mac, kot so posodobitve programske opreme, jezik naprave, AirDrop in drugo."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwalte die allgemeinen Konfigurationen und Einstellungen für den Mac wie Softwareupdates, Gerätesprache, AirDrop, und mehr."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quản lý thiết lập và tùy chọn tổng thể của bạn cho máy Mac, ví dụ như bản cập nhật phần mềm, ngôn ngữ thiết bị, AirDrop, v.v."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestionați‑vă configurarea și preferințele de ansamblu pentru Mac, precum actualizările software, limba dispozitivului, AirDrop și multe altele."
+          }
+        },
+        "pt_BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerencie configurações e preferências gerais do Mac, como atualizações de software, idioma do dispositivo, AirDrop e outras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gérez la configuration de votre Mac et vos préférences générales pour ce dernier, telles que ses mises à jour logicielles, sa langue d’utilisation, la fonctionnalité AirDrop et bien d’autres."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Керуйте всіма налаштуваннями Mac, як‑от оновленнями ПЗ, мовою пристрою, AirDrop тощо."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestiona la configuración y las preferencias generales del Mac, como las actualizaciones de software, el idioma del dispositivo, AirDrop, etc."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソフトウェアアップデート、デバイスの言語、AirDropなど、\nMacの全体的な設定や自分の好みの設定を管理します。"
+          }
+        },
+        "pt_PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pode gerir a configuração e preferências gerais do Mac, como atualizações de software, idioma do dispositivo, AirDrop, entre outras."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upravljajte općenitim podešavanjem i postavkama za Mac, kao što su ažuriranja softvera, jezik uređaja, AirDrop i ostalo."
+          }
+        }
+      }
+    },
+    "MDMDisabledSettingsPane": {
+      "extractionState": "manual",
+      "localizations": {
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 설정은 특정 프로필에 의해 제어됩니다."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הגדרות אלו נשלטות על ידי פרופיל."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan ini dikontrol oleh profil."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze instellingen worden bestuurd door een profiel."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ayarlar bir profil tarafından denetleniyor."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Эти параметры контролируются профилем."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Näitä asetuksia ohjaa profiili."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezeket a beállításokat egy profil vezérli."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queste impostazioni sono controllate da un profilo."
+          }
+        },
+        "es_419": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un perfil controla estas configuraciones."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Αυτές οι ρυθμίσεις ελέγχονται από ένα προφίλ."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les configuracions estan controlades per un perfil."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتم التحكم في هذه الإعدادات بواسطة ملف تعريف."
+          }
+        },
+        "zh_TW": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這些設定受到描述檔的控制。"
+          }
+        },
+        "fr_CA": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ces réglages sont contrôlés par un profil."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De här inställningarna styrs av en profil."
+          }
+        },
+        "no": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disse innstillingene kontrolleres av en profil."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ये सेटिंग्ज़ किसी प्रोफ़ाइल से नियंत्रित की जाती हैं।"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te ustawienia są kontrolowane przy użyciu profilu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These settings are controlled by a profile."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disse indstillinger styres af en profil."
+          }
+        },
+        "zh_HK": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這些設定由描述檔控制。"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "การตั้งค่าเหล่านี้ถูกควบคุมโดยโปรไฟล์"
+          }
+        },
+        "zh_CN": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些设置受描述文件控制。"
+          }
+        },
+        "en_GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These settings are controlled by a profile."
+          }
+        },
+        "es_US": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un perfil controla estas configuraciones."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tato nastavení jsou spravována profilem."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seting ini dikawal oleh profil."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tieto nastavenia sú ovládané profilom."
+          }
+        },
+        "en_AU": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These settings are controlled by a profile."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te nastavitve nadzira profil."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Einstellungen werden von einem Profil gesteuert."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Những cài đặt này được điều khiển bằng một hồ sơ."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceste configurări sunt controlate de un profil."
+          }
+        },
+        "pt_BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estes ajustes são controlados por um perfil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ces réglages sont contrôlés par un profil."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цими параметрами керує профіль."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un perfil controla estos ajustes."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらの設定はプロファイルにより制御されています。"
+          }
+        },
+        "pt_PT": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estas definições são controladas por um perfil."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ovim postavkama upravlja profil."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

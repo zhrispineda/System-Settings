@@ -9,17 +9,18 @@ import SwiftUI
 
 struct BluetoothView: View {
     @State private var bluetoothEnabled = true
+    let table = "Bluetooth"
     
     var body: some View {
-        CustomForm(title: "Bluetooth") {
+        CustomForm(title: "bluetooth".localize(table: table)) {
             Section {
                 HStack(alignment: .top, spacing: 15) {
                     IconView("bluetooth", color: .blue)
                         .scaleEffect(1.3)
                         .padding(.top, 2)
                     Toggle(isOn: $bluetoothEnabled) {
-                        Text("Bluetooth")
-                        Text("Connect to accessories you can use for activities such as streaming music, typing, and gaming. [Learn more…](help:anchor=blth1004)")
+                        Text("bluetooth", tableName: table)
+                        Text("\("bluetooth_tech_description".localize(table: table)) [\("learn_more".localize(table: table))](help:anchor=blth1004)")
                             .font(.callout)
                     }
                     .controlSize(.large)
@@ -28,7 +29,7 @@ struct BluetoothView: View {
                 .padding([.leading, .top, .trailing], 6)
                 .padding(.bottom, -6)
                 
-                Text(bluetoothEnabled ? "This Mac is discoverable as “\(Host.current().localizedName ?? "")“ while Bluetooth Settings is open." : "AirDrop, AirPlay, Find My, and Location Services use Bluetooth.")
+                Text("now_discoverable_as_mac".localize(table: table, Host.current().localizedName ?? "Mac"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
             } footer: {
@@ -39,22 +40,22 @@ struct BluetoothView: View {
             
             if bluetoothEnabled {
                 Section {
-                    Text("No Bluetooth Devices")
+                    Text("empty_connected_paired_devices", tableName: table)
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(.secondary)
                 } header: {
-                    Text("My Devices")
+                    Text("my_devices", tableName: table)
                 } footer: {
                     HelpButton(topicID: "blth8111")
                 }
                 
                 Section {
-                    Text("No Nearby Devices")
+                    Text("empty_nearby_devices", tableName: table)
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(.secondary)
                 } header: {
                     HStack {
-                        Text("Nearby Devices")
+                        Text("nearby_devices", tableName: table)
                         Spacer()
                         ProgressView()
                             .controlSize(.small)

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct GeneralView: View {
     @State private var titleOpacity = 0.0
+    let table = "General"
     
     var body: some View {
-        CustomForm(title: "General") {
+        CustomForm(title: "General".localize(table: table)) {
             // Placard
             Section {
                 VStack(spacing: 5) {
@@ -21,18 +22,18 @@ struct GeneralView: View {
                         .overlay {
                             DividerGeometryView(dividerOpacity: $titleOpacity)
                         }
-                    Text("General")
+                    Text("General", tableName: table)
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.top, 20)
-                    Text("Manage your overall setup and preferences for Mac, such as software updates, device language, AirDrop, and more.")
+                    Text("Manage your overall setup and preferences for Mac, such as software updates, device language, AirDrop, and more.", tableName: table)
                         .foregroundStyle(.secondary)
                         .font(.callout)
                         .padding(.bottom, 5)
                 }
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
-                .navigationTitle(titleOpacity > 37.0 ? "General" : "")
+                .navigationTitle(titleOpacity > 37.0 ? "General".localize(table: table) : "")
             }
             
             Section {
