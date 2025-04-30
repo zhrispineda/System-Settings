@@ -22,7 +22,6 @@ struct SettingsSection: View {
                                 IconView(setting.icon, color: .gray)
                                     .shadow(radius: 0.0, y: 0.3)
                                 Text(setting.title)
-                                    .foregroundStyle(Color(NSColor.alternateSelectedControlTextColor))
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
