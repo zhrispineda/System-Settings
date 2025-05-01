@@ -9,10 +9,10 @@ struct ContentView: View {
     @Environment(\.appearsActive) var appearsActive
     @FocusState private var isFocused: Bool
     @State private var dividerOpacity = 0.0
+    @State private var path = NavigationPath()
     @State private var searchText = ""
     @State private var selection: SettingsItem? = mainOptions.first
     @State private var sidebarOpacity = 1.0
-    @State private var path = NavigationPath()
     
     var body: some View {
         NavigationSplitView {

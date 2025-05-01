@@ -62,7 +62,7 @@ struct SettingsItem: Identifiable, Hashable {
 }
 
 let accountOptions: [SettingsItem] = [
-    SettingsItem(type: .signIn, icon: "", destination: AnyView(EmptyView()))
+    SettingsItem(type: .signIn, icon: "", destination: AnyView(SignInView()))
 ]
 
 let radioOptions: [SettingsItem] = [
