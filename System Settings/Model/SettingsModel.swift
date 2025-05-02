@@ -109,5 +109,5 @@ let serviceOptions: [SettingsItem] = [
 let inputOptions: [SettingsItem] = [
     SettingsItem(type: .keyboard, icon: "keyboard.fill", color: .gray, destination: AnyView(EmptyView())),
     SettingsItem(type: .trackpad, icon: "rectangle.and.hand.point.up.left.fill", color: .gray, destination: AnyView(EmptyView())),
-    SettingsItem(type: .printersScanners, icon: "printer.fill", color: .gray, destination: AnyView(EmptyView()))
+    SettingsItem(type: .printersScanners, icon: "printer.fill", color: .gray, destination: AnyView(PrintersScannersView()))
 ]
