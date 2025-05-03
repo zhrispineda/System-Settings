@@ -75,7 +75,7 @@ let radioOptions: [SettingsItem] = [
 let mainOptions: [SettingsItem] = [
     SettingsItem(type: .general, icon: "gear", color: .gray, destination: AnyView(GeneralView())),
     SettingsItem(type: .accessibility, icon: "accessibility", color: .blue, destination: AnyView(EmptyView())),
-    SettingsItem(type: .appearance, icon: "appearance.lightmode", color: .black, destination: AnyView(EmptyView())),
+    SettingsItem(type: .appearance, icon: "appearance.lightmode", color: .black, destination: AnyView(AppearanceView())),
     SettingsItem(type: .siri, icon: "siri", destination: AnyView(EmptyView())),
     SettingsItem(type: .controlCenter, icon: "switch.2", color: .gray, destination: AnyView(EmptyView())),
     SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(EmptyView())),

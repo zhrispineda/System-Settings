@@ -110,7 +110,7 @@ struct SpotlightView: View {
             
             Section {
                 Toggle("Help Apple Improve Search", isOn: $improveSearch)
-                VStack {
+                VStack(alignment: .leading) {
                     Text("Help improve Search by allowing Apple to store your Safari, Siri, Spotlight, Lookup, and #images search queries. The information collected is stored in a way that does not identify you and is used to improve search results.")
                         .font(.callout)
                         .foregroundStyle(.secondary)
