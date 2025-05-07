@@ -16,16 +16,23 @@ struct AudioDevice: Identifiable {
 struct SoundView: View {
     @State private var alertSound = "Tink"
     @State private var alertVolume = 100.0
+    @State private var outputBalance = 50.0
     @State private var feedbackSound = false
     @State private var hoverTask: Task<Void, Never>? = nil
+    @State private var outputMuted = false
+    @State private var outputVolume = 100.0
     @State private var selectedDevice = "OUTPUT"
     @State private var selectedOutput = "DEFAULT_ALERT_DEVICE"
+    @State private var selectedInputDevice: AudioDevice.ID? = nil
     @State private var selectedOutputDevice: AudioDevice.ID? = nil
     @State private var startupSound = true
     @State private var soundEffects = true
     let alertSounds = ["Tink", "Blow", "Pop", "Glass", "Funk", "Hero", "Frog", "Basso", "Bottle", "Purr", "Morse", "Ping", "Sosumi", "Submarine"]
     let deviceOptions = ["OUTPUT", "INPUT"]
-    let devices = [
+    let inputDevices = [
+        AudioDevice(name: "Microphone", type: "Built-in")
+    ]
+    let outputDevices = [
         AudioDevice(name: "Speakers", type: "Built-in")
     ]
     let outputOptions = ["DEFAULT_ALERT_DEVICE"]
@@ -83,18 +90,51 @@ struct SoundView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 ._safeAreaInsets(EdgeInsets(top: 0, leading: -356, bottom: 0, trailing: 0))
                 
-                Table(devices, selection: $selectedOutputDevice) {
-                    TableColumn("Name", value: \.name)
-                    TableColumn("Type", value: \.type)
+                if selectedDevice == "OUTPUT" {
+                    Table(outputDevices, selection: $selectedOutputDevice) {
+                        TableColumn("Name", value: \.name)
+                        TableColumn("Type", value: \.type)
+                    }
+                } else {
+                    Table(inputDevices, selection: $selectedInputDevice) {
+                        TableColumn("Name", value: \.name)
+                        TableColumn("Type", value: \.type)
+                    }
                 }
             }
             
             Section {
                 if selectedDevice == "OUTPUT" {
-                    Text("OUTPUT_VOLUME", tableName: table)
-                    Text("BALANCE", tableName: table)
-                } else {
+                    VStack {
+                        Slider(value: $outputVolume, in: 0...100, step: 15) {
+                            Text("OUTPUT_VOLUME", tableName: table)
+                        } minimumValueLabel: {
+                            Image(systemName: "speaker.fill")
+                        } maximumValueLabel: {
+                            Image(systemName: "speaker.3.fill")
+                        }
+                        
+                        Toggle("OUTPUT_MUTE".localize(table: table), isOn: $outputMuted)
+                            .toggleStyle(.checkbox)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
                     
+                    VStack {
+                        Slider(value: $outputBalance, in: 0...100, step: 50) {
+                            Text("BALANCE", tableName: table)
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            Text("Left")
+                            Spacer()
+                            Text("Right")
+                        }
+                        .font(.caption)
+                    }
+                } else {
+                    Text("INPUT_VOLUME", tableName: table)
+                    Text("INPUT_LEVEL", tableName: table)
                 }
             } footer: {
                 Spacer()
