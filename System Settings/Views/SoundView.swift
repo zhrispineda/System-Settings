@@ -19,6 +19,7 @@ struct SoundView: View {
     @State private var outputBalance = 50.0
     @State private var feedbackSound = false
     @State private var hoverTask: Task<Void, Never>? = nil
+    @State private var inputVolume = 50.0
     @State private var outputMuted = false
     @State private var outputVolume = 100.0
     @State private var selectedDevice = "OUTPUT"
@@ -133,8 +134,21 @@ struct SoundView: View {
                         .font(.caption)
                     }
                 } else {
-                    Text("INPUT_VOLUME", tableName: table)
-                    Text("INPUT_LEVEL", tableName: table)
+                    Slider(value: $inputVolume, in: 0...100, step: 15) {
+                        Text("INPUT_VOLUME", tableName: table)
+                    } minimumValueLabel: {
+                        Image(systemName: "microphone.and.signal.meter.fill")
+                    } maximumValueLabel: {
+                        Image(systemName: "microphone.and.signal.meter.fill")
+                    }
+                    
+                    HStack(spacing: 10) {
+                        Text("INPUT_LEVEL", tableName: table)
+                        Spacer()
+                        ForEach(1...15, id: \.self) {_ in
+                            Image(.levelOff)
+                        }
+                    }
                 }
             } footer: {
                 Spacer()
@@ -168,5 +182,5 @@ struct SoundView: View {
 
 #Preview {
     SoundView()
-        .frame(height: 500)
+        .frame(width: 500, height: 700)
 }
