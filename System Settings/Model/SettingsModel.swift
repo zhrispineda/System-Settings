@@ -66,7 +66,7 @@ let accountOptions: [SettingsItem] = [
 ]
 
 let radioOptions: [SettingsItem] = [
-    SettingsItem(type: .wifi, icon: "wifi", color: .blue, destination: AnyView(EmptyView())),
+    SettingsItem(type: .wifi, icon: "wifi", color: .blue, destination: AnyView(WiFiView())),
     SettingsItem(type: .bluetooth, icon: "bluetooth", color: .blue, destination: AnyView(BluetoothView())),
     SettingsItem(type: .network, icon: "network", color: .blue, destination: AnyView(EmptyView())),
     SettingsItem(type: .battery, icon: "battery.100", color: .green, destination: AnyView(EmptyView()))
