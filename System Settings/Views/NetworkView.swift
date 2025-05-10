@@ -38,11 +38,11 @@ struct NetworkView: View {
                 Menu {
                     Button("Add Service…") {}
                     Menu {
-                        Button("L2TP over IPSec…") {}
-                        Button("Cisco IPSec…") {}
-                        Button("IKEv2…") {}
+                        Button("\("L2TP over IPSec".localize(table: "VPN"))…") {}
+                        Button("\("Cisco IPSec".localize(table: "VPN"))…") {}
+                        Button("\("IKEv2".localize(table: "VPN"))…") {}
                     } label: {
-                        Text("Add VPN Configuration")
+                        Text("Add VPN Configuration", tableName: "VPN")
                     }
                     Divider()
                     Button("Manage Virtual Interfaces…") {}
@@ -65,13 +65,13 @@ struct NetworkView: View {
                     Image(systemName: "ellipsis")
                 }
                 .frame(width: 42)
-                HelpButton(topicID: "")
+                HelpButton(topicID: "mchlee7b367f")
             }
         }
     }
 }
 
-/// A view that displays a simulated network interface option with an icon, interface name, and status.
+/// A view that displays a simulated network interface option with an interface name, icon, and status.
 struct NetworkStatusView: View {
     let titleKey: String
     let status: NetworkStatus
