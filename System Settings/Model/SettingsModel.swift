@@ -100,9 +100,9 @@ let authOptions: [SettingsItem] = [
 ]
 
 let serviceOptions: [SettingsItem] = [
-    SettingsItem(type: .internetAccounts, icon: "at", color: .blue, destination: AnyView(EmptyView())),
+    SettingsItem(type: .internetAccounts, icon: "at", color: .blue, destination: AnyView(InternetAccountsView())),
     SettingsItem(type: .gameCenter, icon: "Game Center", destination: AnyView(EmptyView())),
-    SettingsItem(type: .icloud, icon: "iCloud", destination: AnyView(EmptyView())),
+    SettingsItem(type: .icloud, icon: "iCloud", destination: AnyView(SignInView())),
     SettingsItem(type: .walletApplePay, icon: "Wallet", destination: AnyView(EmptyView()))
 ]
 
