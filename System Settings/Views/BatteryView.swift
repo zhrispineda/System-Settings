@@ -6,6 +6,80 @@
 //
 
 import SwiftUI
+import Charts
+
+struct BatteryData {
+    let date: Date
+    let level: Double
+    
+    static let data: [BatteryData] = {
+        var batteryDataArray = [BatteryData]()
+        let timeInterval = 1000
+        
+        var currentLevel = 100.0
+        
+        for interval in stride(from: -23 * 3600, to: 3600, by: timeInterval) {
+            let currentDate = Date() + TimeInterval(interval)
+            let batteryData = BatteryData(date: currentDate, level: interval > 0 ? 0 : currentLevel)
+            batteryDataArray.append(batteryData)
+        }
+        
+        return batteryDataArray
+    }()
+}
+
+
+struct BatteryChart: View {
+    let hourFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h"
+        return formatter
+    }()
+    
+    var body: some View {
+        Chart(BatteryData.data, id: \.date) {
+            BarMark(
+                x: .value("Time", $0.date ..< $0.date.advanced(by: 1000)),
+                y: .value("Battery Level", $0.level)
+            )
+            .foregroundStyle(.green)
+        }
+        .chartXScale(domain: BatteryData.data.first!.date ... BatteryData.data.last!.date)
+        .chartXAxis {
+            AxisMarks(values: .stride(by: .hour, count: 3)) { value in
+                if let date = value.as(Date.self) {
+                    let hour = Calendar.current.component(.hour, from: date)
+                    AxisValueLabel {
+                        VStack(alignment: .leading) {
+                            switch hour {
+                            case 0, 12:
+                                Text(date, format: .dateTime.hour(.defaultDigits(amPM: .narrow)))
+                                    .textCase(.uppercase)
+                            default:
+                                Text(hourFormatter.string(from: date))
+                            }
+                        }
+                    }
+                    
+                    AxisGridLine()
+                    AxisTick()
+                }
+            }
+        }
+        .chartYAxis {
+            AxisMarks(
+                values: [0, 50, 100]
+            ){
+                AxisValueLabel(format: Decimal.FormatStyle.Percent.percent.scale(1))
+            }
+            AxisMarks(
+                values: [0, 25, 50, 75, 100]
+            ){
+                AxisGridLine()
+            }
+        }
+    }
+}
 
 struct BatteryView: View {
     @State private var selectedBattery = "ENERGY_MODE_AUTO"
@@ -96,9 +170,19 @@ struct BatteryView: View {
                 VStack(alignment: .leading) {
                     Text("Last charged to 100%")
                     Text("Today, 9:41 AM")
-                        .font(.callout)
+                        .font(.caption)
                         .fontWeight(.regular)
                         .foregroundStyle(.secondary)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Battery Level")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                    
+                    BatteryChart()
+                        .frame(height: 110)
+                        .padding(.top, -5)
                 }
             } footer: {
                 Spacer()
