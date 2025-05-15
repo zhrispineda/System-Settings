@@ -75,6 +75,7 @@ struct ContentView: View {
                             Text("No results for “\(searchText)“")
                                 .foregroundStyle(.secondary)
                                 .font(.footnote)
+                                .multilineTextAlignment(.center)
                         }
                         .frame(maxWidth: .infinity, minHeight: 0, idealHeight: geo.size.height, maxHeight: .infinity)
                         .edgesIgnoringSafeArea(.all)

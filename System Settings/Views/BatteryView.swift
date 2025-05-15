@@ -84,15 +84,17 @@ struct BatteryChart: View {
 struct BatteryView: View {
     @State private var selectedBattery = "ENERGY_MODE_AUTO"
     @State private var selectedPower = "ENERGY_MODE_AUTO"
-    @State private var selectedTimeframe = "Last 24 Hours"
+    @State private var selectedTimeframe = "HOURLY_GRAPH_TITLE_FMT"
     let powerOptions = ["ENERGY_MODE_ECO", "ENERGY_MODE_AUTO", "ENERGY_MODE_PRO"]
-    let timeframeOptions = ["Last 24 Hours", "Last 10 Days"]
+    let powerTable = "PowerPreferences"
+    let timeframeOptions = ["HOURLY_GRAPH_TITLE_FMT", "DAILY_GRAPH_TITLE_FMT"]
+    let table = "BatteryUI"
     private var onBatteryText: String {
         switch selectedBattery {
         case "ENERGY_MODE_ECO":
             return "ENERGY_MODE_ECO_TEXT"
         case "ENERGY_MODE_PRO":
-            return "ENERGY_MODE_PRO_TEXT"
+            return "ENERGY_MODE_PRO_TEXT".localize(table: "BatteryUI-J316")
         default:
             return "ENERGY_MODE_AUTO_TEXT"
         }
@@ -100,7 +102,7 @@ struct BatteryView: View {
     private var onPowerText: String {
         switch selectedPower {
         case "ENERGY_MODE_PRO":
-            return "ENERGY_MODE_PRO_TEXT"
+            return "ENERGY_MODE_PRO_TEXT".localize(table: "BatteryUI-J316")
         case "ENERGY_MODE_ECO":
             return "ENERGY_MODE_ECO_ADAPTER_TEXT"
         default:
@@ -109,11 +111,11 @@ struct BatteryView: View {
     }
     
     var body: some View {
-        CustomForm(title: "Battery") {
+        CustomForm(title: "BATTERY_PREF_TITLE".localize(table: powerTable)) {
             Section {
                 // Battery Health
                 HStack {
-                    LabeledContent("Battery Health", value: "Normal")
+                    LabeledContent("BATT_HEALTH_TITLE".localize(table: table), value: "BATT_HEALTH_CONDITION_NORMAL".localize(table: table))
                     Button("", systemImage: "info.circle") {
                         
                     }
@@ -127,29 +129,29 @@ struct BatteryView: View {
             // Energy Mode
             Section {
                 VStack(alignment: .leading) {
-                    Picker("On battery", selection: $selectedBattery) {
+                    Picker("On battery".localize(table: powerTable), selection: $selectedBattery) {
                         ForEach(powerOptions, id: \.self) { option in
-                            Text(option)
+                            Text(option.localize(table: powerOptions[2] == option ? "BatteryUI-J316" : table))
                         }
                     }
-                    Text(onBatteryText)
+                    Text(onBatteryText.localize(table: table))
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
                 VStack(alignment: .leading) {
-                    Picker("On power adapter", selection: $selectedPower) {
+                    Picker("On power adapter".localize(table: powerTable), selection: $selectedPower) {
                         ForEach(powerOptions, id: \.self) { option in
-                            Text(option)
+                            Text(option.localize(table: powerOptions[2] == option ? "BatteryUI-J316" : table))
                         }
                     }
-                    Text(onPowerText)
+                    Text(onPowerText.localize(table: table))
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
             } header: {
                 VStack(alignment: .leading) {
-                    Text("Energy Mode")
-                    Text("Your Mac can optimize either its battery usage with Low Power Mode, or its performance in resource-intensive tasks with High Power Mode.")
+                    Text("Energy Mode", tableName: powerTable)
+                    Text("Your Mac can optimize either its battery usage with Low Power Mode, or its performance in resource-intensive tasks with High Power Mode.", tableName: powerTable)
                         .font(.callout)
                         .fontWeight(.regular)
                         .foregroundStyle(.secondary)
@@ -160,7 +162,7 @@ struct BatteryView: View {
             Section {
                 Picker("", selection: $selectedTimeframe) {
                     ForEach(timeframeOptions, id: \.self) { timeframe in
-                        Text(timeframe)
+                        Text(timeframe.localize(table: table, timeframe == timeframeOptions[0] ? "24" : "10"))
                     }
                 }
                 .pickerStyle(.segmented)
@@ -168,7 +170,7 @@ struct BatteryView: View {
                 ._safeAreaInsets(EdgeInsets(top: 0, leading: -356, bottom: 0, trailing: 0))
                 
                 VStack(alignment: .leading) {
-                    Text("Last charged to 100%")
+                    Text("LAST_CHARGED_TO_FMT".localize(table: table, "100%"))
                     Text("Today, 9:41 AM")
                         .font(.caption)
                         .fontWeight(.regular)
@@ -176,7 +178,7 @@ struct BatteryView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Battery Level")
+                    Text("BATTERY_LEVEL_GRAPH_TITLE", tableName: table)
                         .font(.headline)
                         .fontWeight(.bold)
                     
@@ -186,7 +188,7 @@ struct BatteryView: View {
                 }
             } footer: {
                 Spacer()
-                Button("Options…") {}
+                Button("Options…".localize(table: powerTable)) {}
                 HelpButton(topicID: "mchlfc3b7879")
             }
         }
