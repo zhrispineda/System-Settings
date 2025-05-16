@@ -23,6 +23,14 @@ struct IconView: View {
                 .scaledToFit()
                 .frame(width: 20, height: 20)
             switch symbol {
+            case "Apple Intelligence & Siri":
+                Image(.appleIntelligenceSiri)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25, height: 25)
+                    .symbolRenderingMode(.multicolor)
+                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
+                    .offset(y: -3)
             case "airdrop", "touchid":
                 Image(_internalSystemName: symbol)
                     .resizable()
