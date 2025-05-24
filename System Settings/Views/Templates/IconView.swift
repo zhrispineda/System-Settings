@@ -53,6 +53,12 @@ struct IconView: View {
                     .frame(width: 15, height: 15)
                     .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
                     .padding([.bottom, .leading], 2)
+            case "play.fill", "moon.fill":
+                Image(_internalSystemName: symbol)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 12, height: 12)
+                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
             default:
                 Image(_internalSystemName: symbol)
                     .resizable()
