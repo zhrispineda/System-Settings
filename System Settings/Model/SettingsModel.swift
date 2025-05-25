@@ -78,7 +78,7 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .appearance, icon: "appearance.lightmode", color: .black, destination: AnyView(AppearanceView())),
     SettingsItem(type: .siri, icon: "siri", destination: AnyView(SiriView())),
     SettingsItem(type: .controlCenter, icon: "switch.2", color: .gray, destination: AnyView(ControlCenterView())),
-    SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(EmptyView())),
+    SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(DesktopDockView())),
     SettingsItem(type: .displays, icon: "sun.max.fill", color: .blue, destination: AnyView(EmptyView())),
     SettingsItem(type: .screenSaver, icon: "moon.and.stars.artframe", color: .cyan, destination: AnyView(EmptyView())),
     SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .gray, destination: AnyView(SpotlightView())),

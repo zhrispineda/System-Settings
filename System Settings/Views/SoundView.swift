@@ -94,6 +94,7 @@ struct SoundView: View {
                 if selectedDevice == "OUTPUT" {
                     Table(outputDevices, selection: $selectedOutputDevice) {
                         TableColumn("Name", value: \.name)
+                            .disabledCustomizationBehavior(.resize)
                         TableColumn("Type", value: \.type)
                     }
                 } else {
