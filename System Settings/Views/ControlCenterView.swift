@@ -130,15 +130,8 @@ struct ControlCenterView: View {
                     }
                 }
             } header: {
-                VStack(alignment: .leading) {
-                    Text("Control Center Modules", tableName: table)
-                        .font(.callout)
-                        .bold()
-                    Text("These modules are always visible in Control Center. You can choose when they should also show in the Menu Bar.", tableName: table)
-                        .fontWeight(.regular)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
+                Text("Control Center Modules", tableName: table)
+                Text("These modules are always visible in Control Center. You can choose when they should also show in the Menu Bar.", tableName: table)
             }
             
             Section {
@@ -152,15 +145,8 @@ struct ControlCenterView: View {
                 Toggle("Show in Control Center".localize(table: table), isOn: $accessibilityControlCenter)
                     .padding(.leading, 28)
             } header: {
-                VStack(alignment: .leading) {
-                    Text("Other Modules", tableName: table)
-                        .font(.callout)
-                        .bold()
-                    Text("These modules can be added to Control Center and the Menu Bar.", tableName: table)
-                        .fontWeight(.regular)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
+                Text("Other Modules", tableName: table)
+                Text("These modules can be added to Control Center and the Menu Bar.", tableName: table)
             }
             
             // Battery

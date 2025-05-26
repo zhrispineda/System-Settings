@@ -149,13 +149,8 @@ struct BatteryView: View {
                         .foregroundStyle(.secondary)
                 }
             } header: {
-                VStack(alignment: .leading) {
-                    Text("Energy Mode", tableName: powerTable)
-                    Text("Your Mac can optimize either its battery usage with Low Power Mode, or its performance in resource-intensive tasks with High Power Mode.", tableName: powerTable)
-                        .font(.callout)
-                        .fontWeight(.regular)
-                        .foregroundStyle(.secondary)
-                }
+                Text("Energy Mode", tableName: powerTable)
+                Text("Your Mac can optimize either its battery usage with Low Power Mode, or its performance in resource-intensive tasks with High Power Mode.", tableName: powerTable)
             }
             
             // Battery usage
