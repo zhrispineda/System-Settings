@@ -54,19 +54,20 @@ struct DesktopDockView: View {
     let widgetStyleOptions = ["Automatic", "Monochrome", "Full-color"]
     let webBrowsers = ["Safari"]
     let openWithTabsOptions = ["Never", "Always", "In Full Screen"]
+    let table = "DesktopSettings"
     
     var body: some View {
         CustomForm(title: "Desktop & Dock") {
-            Section("Dock") {
+            Section("Dock".localize(table: table)) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Size")
+                        Text("Size", tableName: table)
                         Slider(value: $dockSize, in: 0...100, step: 50.0)
                             .labelsHidden()
                         HStack {
-                            Text("Small")
+                            Text("Small", tableName: table)
                             Spacer()
-                            Text("Large")
+                            Text("Large", tableName: table)
                         }
                         .font(.caption)
                     }
@@ -74,13 +75,13 @@ struct DesktopDockView: View {
                     .padding(.trailing, 10)
                     
                     VStack(alignment: .leading) {
-                        Text("Magnification")
+                        Text("Magnification", tableName: table)
                         Slider(value: $dockMagnification, in: 0...100, step: 50.0)
                             .labelsHidden()
                         HStack {
-                            Text("Off\tSmall")
+                            Text("\("Off".localize(table: table))\t\("Small".localize(table: table))")
                             Spacer()
-                            Text("Large")
+                            Text("Large", tableName: table)
                         }
                         .font(.caption)
                     }
@@ -89,125 +90,125 @@ struct DesktopDockView: View {
             }
             
             Section {
-                Picker("Position on screen", selection: $dockPosition) {
+                Picker("Position on screen".localize(table: table), selection: $dockPosition) {
                     ForEach(positionOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 }
-                Picker("Minimize windows using", selection: $minimizeEffect) {
+                Picker("Minimize windows using".localize(table: table), selection: $minimizeEffect) {
                     ForEach(effectOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 }
-                Picker("Double-click a window's title bar to", selection: $doubleClickAction) {
+                Picker("Double-click a window’s title bar to".localize(table: table), selection: $doubleClickAction) {
                     ForEach(windowActions, id: \.self) { option in
                         if windowActions[windowActions.count - 2] == option {
-                            Text(option)
+                            Text(option.localize(table: table))
                             Divider()
                         } else {
-                            Text(option)
+                            Text(option.localize(table: table))
                         }
                     }
                 }
-                Toggle("Minimize windows into application icon", isOn: $minimizeWindowIntoIcon)
+                Toggle("Minimize windows into application icon".localize(table: table), isOn: $minimizeWindowIntoIcon)
             }
             
             Section {
-                Toggle("Automatically hide and show the Dock", isOn: $autoHideDock)
-                Toggle("Animate opening applications", isOn: $animateAppOpen)
-                Toggle("Show indicators for open applications", isOn: $openAppIndicator)
-                Toggle("Show suggested and recent apps in Dock", isOn: $suggestRecentApps)
+                Toggle("Automatically hide and show the Dock".localize(table: table), isOn: $autoHideDock)
+                Toggle("Animate opening applications".localize(table: table), isOn: $animateAppOpen)
+                Toggle("Show indicators for open applications".localize(table: table), isOn: $openAppIndicator)
+                Toggle("Show suggested and recent apps in Dock".localize(table: table), isOn: $suggestRecentApps)
             }
             
-            Section("Desktop & Stage Manager") {
+            Section("Desktop & Stage Manager".localize(table: table)) {
                 HStack {
-                    Text("Show Items")
+                    Text("Show Items", tableName: table)
                     Spacer()
-                    Toggle("On Desktop", isOn: $showItemsDesktop)
+                    Toggle("On Desktop".localize(table: table), isOn: $showItemsDesktop)
                         .toggleStyle(.checkbox)
-                    Toggle("In Stage Manager", isOn: $showItemsStageManager)
+                    Toggle("In Stage Manager".localize(table: table), isOn: $showItemsStageManager)
                         .toggleStyle(.checkbox)
                 }
                 Picker(selection: $clickWallpaperAction) {
                     ForEach(clickWallpaperOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 } label: {
-                    Text("Click wallpaper to reveal desktop")
-                    Text("Clicking your wallpaper will move all windows out of the way to allow access to your desktop items and widgets.")
+                    Text("Click wallpaper to reveal desktop", tableName: table)
+                    Text("Clicking your wallpaper will move all windows out of the way to allow access to your desktop items and widgets.", tableName: table)
                 }
             }
             
             Section {
                 Toggle(isOn: $stageManagerEnabled) {
-                    Text("Stage Manager")
-                    Text("Stage Manager arranges your recent windows into a single strip for reduced clutter and quick access.")
+                    Text("Stage Manager", tableName: table)
+                    Text("Stage Manager arranges your recent windows into a single strip for reduced clutter and quick access.", tableName: table)
                 }
-                Toggle("Show recent apps in Stage Manager", isOn: $stageManagerRecents)
-                Picker("Show windows from an application", selection: $stageManagerWindows) {
+                Toggle("Show recent apps in Stage Manager".localize(table: table), isOn: $stageManagerRecents)
+                Picker("Show windows from an application".localize(table: table), selection: $stageManagerWindows) {
                     ForEach(stageManagerWindowOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 }
             }
             
-            Section("Widgets") {
+            Section("Widgets".localize(table: table)) {
                 HStack {
-                    Text("Show Widgets")
+                    Text("Show Widgets", tableName: table)
                     Spacer()
-                    Toggle("On Desktop", isOn: $showWidgetsDesktop)
+                    Toggle("On Desktop".localize(table: table), isOn: $showWidgetsDesktop)
                         .toggleStyle(.checkbox)
-                    Toggle("In Stage Manager", isOn: $showWidgetsStageManager)
+                    Toggle("In Stage Manager".localize(table: table), isOn: $showWidgetsStageManager)
                         .toggleStyle(.checkbox)
                 }
-                Picker("Widget style", selection: $widgetStyle) {
+                Picker("Widget style".localize(table: table), selection: $widgetStyle) {
                     ForEach(widgetStyleOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 }
-                Toggle("Use iPhone widgets", isOn: $phoneWidgets)
+                Toggle("Use iPhone widgets".localize(table: table), isOn: $phoneWidgets)
             }
             
             Section {
-                Picker("Default web browser", selection: $defaultBrowser) {
+                Picker("Default web browser".localize(table: table), selection: $defaultBrowser) {
                     ForEach(webBrowsers, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 }
             }
             
-            Section("Windows") {
-                Picker("Prefer tabs when opening documents", selection: $preferTabsDocs) {
+            Section("Windows".localize(table: table)) {
+                Picker("Prefer tabs when opening documents".localize(table: table), selection: $preferTabsDocs) {
                     ForEach(openWithTabsOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 }
-                Toggle("Ask to keep changes when closing documents", isOn: $askKeepChanges)
+                Toggle("Ask to keep changes when closing documents".localize(table: table), isOn: $askKeepChanges)
                 Toggle(isOn: $closeWindowsOnQuit) {
-                    Text("Close windows when quitting an application")
-                    Text("When enabled, open documents and windows will not be restored when you re-open an application.")
+                    Text("Close windows when quitting an application", tableName: table)
+                    Text("When enabled, open documents and windows will not be restored when you re-open an application.", tableName: table)
                 }
             }
             
             Section {
-                Toggle("Drag windows to screen edges to tile", isOn: $dragWindowToTile)
-                Toggle("Drag windows to menu bar to fill screen", isOn: $dragWindowToFill)
-                Toggle("Hold ⌥ key while dragging windows to tile", isOn: $holdKeyToTile)
-                Toggle("Tiled windows have margins", isOn: $tiledWindowsMargins)
+                Toggle("Drag windows to screen edges to tile".localize(table: table), isOn: $dragWindowToTile)
+                Toggle("Drag windows to menu bar to fill screen".localize(table: table), isOn: $dragWindowToFill)
+                Toggle("Hold ⌥ key while dragging windows to tile".localize(table: table), isOn: $holdKeyToTile)
+                Toggle("Tiled windows have margins".localize(table: table), isOn: $tiledWindowsMargins)
             }
             
             Section {
-                Toggle("Automatically rearrange Spaces based on most recent use", isOn: $autoRearrangeSpaces)
-                Toggle("When switching to an application, switch to a Space with open windows for the application", isOn: $openWindowsSpaces)
-                Toggle("Group windows by application", isOn: $groupWindowsByApps)
-                Toggle("Displays have separate Spaces", isOn: $displaysSeparateSpaces)
-                Toggle("Drag windows to top of screen to enter Mission Control", isOn: $dragWindowMissionControl)
+                Toggle("Automatically rearrange Spaces based on most recent use".localize(table: table), isOn: $autoRearrangeSpaces)
+                Toggle("When switching to an application, switch to a Space with open windows for the application".localize(table: table), isOn: $openWindowsSpaces)
+                Toggle("Group windows by application".localize(table: table), isOn: $groupWindowsByApps)
+                Toggle("Displays have separate Spaces".localize(table: table), isOn: $displaysSeparateSpaces)
+                Toggle("Drag windows to top of screen to enter Mission Control".localize(table: table), isOn: $dragWindowMissionControl)
             } header: {
-                Text("Mission Control")
-                Text("Mission Control shows an overview of your open windows and thumbnails of full-screen applications, all arranged in a unified view.")
+                Text("Mission Control", tableName: table)
+                Text("Mission Control shows an overview of your open windows and thumbnails of full-screen applications, all arranged in a unified view.", tableName: table)
             } footer: {
-                Button("Shortcuts…") {}
-                Button("Hot Corners…") {}
+                Button("Shortcuts…".localize(table: table)) {}
+                Button("Hot Corners…".localize(table: table)) {}
                 HelpButton(topicID: "mchlp1119")
             }
         }
@@ -216,5 +217,5 @@ struct DesktopDockView: View {
 
 #Preview {
     DesktopDockView()
-        .frame(width: 500, height: 900)
+        .frame(width: 500, height: 1700)
 }
