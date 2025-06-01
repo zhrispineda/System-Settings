@@ -10,6 +10,15 @@ import SwiftUI
 struct DisplaysView: View {
     @State private var hover = false
     @State private var selected: ImageResource = .resolution2
+    @State private var brightness = 0.5
+    @State private var autoBrightness = true
+    @State private var trueTone = true
+    @State private var preset = "Apple XDR Display (P3-1600 nits)"
+    @State private var refreshRate = "ProMotion"
+    @State private var tvOption = "Ask What to Show"
+    let presetOptions = ["Apple XDR Display (P3-1600 nits)"]
+    let refreshOptions = ["ProMotion"]
+    let tvOptions = ["Ask What to Show"]
     
     var body: some View {
         CustomForm(title: "Displays") {
@@ -39,6 +48,59 @@ struct DisplaysView: View {
                 }
             } header: {
                 Text("")
+            }
+            
+            Section {
+                Slider(value: $brightness, in: 0.0...1.0) {
+                        Text("Brightness")
+                    } minimumValueLabel: {
+                        Image(systemName: "sun.min.fill")
+                            .font(.system(size: 13))
+                    } maximumValueLabel: {
+                        Image(systemName: "sun.max.fill")
+                            .font(.system(size: 13))
+                    }
+                Toggle(isOn: $autoBrightness) {
+                    Text("Automatically adjust brightness")
+                    if !autoBrightness {
+                        Text("\(Image(systemName: "exclamationmark.triangle.fill")) Energy usage may be higher when your display does not automatically adjust. Display and battery performance may also be reduced over time when this is turned off.")
+                    }
+                }
+                Toggle(isOn: $autoBrightness) {
+                    Text("True Tone")
+                    Text("Automatically adapt display to make colors appear consistent in different ambient lighting conditions.")
+                }
+            }
+            
+            Section {
+                Picker("Preset", selection: $preset) {
+                    ForEach(presetOptions, id: \.self) { option in
+                        Text(option)
+                    }
+                }
+            }
+            
+            Section {
+                Picker("Refresh rate", selection: $refreshRate) {
+                    ForEach(refreshOptions, id: \.self) { option in
+                        Text(option)
+                    }
+                }
+            }
+            
+            Section {
+                Picker(selection: $tvOption) {
+                    ForEach(tvOptions, id: \.self) { option in
+                        Text(option)
+                    }
+                } label: {
+                    Text("When connected to TV")
+                    Text("Choose what to show or use the TV as a secondary display.")
+                }
+            } footer: {
+                Button("Advanced…") {}
+                Button("Night Shift…") {}
+                HelpButton(topicID: "mh40768")
             }
         }
     }
