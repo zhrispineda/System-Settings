@@ -17,11 +17,12 @@ struct DisplaysView: View {
     @State private var refreshRate = "ProMotion"
     @State private var tvOption = "Ask What to Show"
     let presetOptions = ["Apple XDR Display (P3-1600 nits)"]
-    let refreshOptions = ["ProMotion"]
-    let tvOptions = ["Ask What to Show"]
+    let refreshOptions = ["ProMotion", "60 Hertz", "59.94 Hertz", "50 Hertz", "48 Hertz", "47.95 Hertz"]
+    let tvOptions = ["Ask What to Show", "Mirror Entire Screen", "Choose Window or App", "Use as Extended Display"]
+    let table = "DisplaysExt"
     
     var body: some View {
-        CustomForm(title: "Displays") {
+        CustomForm(title: "Displays".localize(table: table)) {
             Section {
                 VStack {
                     HStack(spacing: 10) {
@@ -32,6 +33,7 @@ struct DisplaysView: View {
                         ResolutionOption(selected: $selected, title: "More Space", image: .resolution1, resolution: "2056 × 1329")
                     }
                     .padding(.bottom, -15)
+                    
                     HStack(spacing: 10) {
                         Image(.fadeLine)
                             .resizable()
@@ -42,17 +44,17 @@ struct DisplaysView: View {
                     .padding(.horizontal)
                 }
                 if selected != .resolution2 {
-                    Text("Using a scaled resolution may affect performance.")
+                    Text("Using a scaled resolution may affect performance.", tableName: table)
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
             } header: {
-                Text("")
+                Text("") // Blank for padding above section
             }
             
             Section {
                 Slider(value: $brightness, in: 0.0...1.0) {
-                        Text("Brightness")
+                        Text("Brightness", tableName: table)
                     } minimumValueLabel: {
                         Image(systemName: "sun.min.fill")
                             .font(.system(size: 13))
@@ -61,19 +63,19 @@ struct DisplaysView: View {
                             .font(.system(size: 13))
                     }
                 Toggle(isOn: $autoBrightness) {
-                    Text("Automatically adjust brightness")
+                    Text("Automatically adjust brightness", tableName: table)
                     if !autoBrightness {
-                        Text("\(Image(systemName: "exclamationmark.triangle.fill")) Energy usage may be higher when your display does not automatically adjust. Display and battery performance may also be reduced over time when this is turned off.")
+                        Text("%@ Energy usage may be higher when your display does not automatically adjust. Display and battery performance may also be reduced over time when this is turned off.".localize(table: table, "⚠️"))
                     }
                 }
-                Toggle(isOn: $autoBrightness) {
-                    Text("True Tone")
-                    Text("Automatically adapt display to make colors appear consistent in different ambient lighting conditions.")
+                Toggle(isOn: $trueTone) {
+                    Text("True Tone", tableName: table)
+                    Text("Automatically adapt display to make colors appear consistent in different ambient lighting conditions.", tableName: table)
                 }
             }
             
             Section {
-                Picker("Preset", selection: $preset) {
+                Picker("Preset".localize(table: table), selection: $preset) {
                     ForEach(presetOptions, id: \.self) { option in
                         Text(option)
                     }
@@ -81,9 +83,14 @@ struct DisplaysView: View {
             }
             
             Section {
-                Picker("Refresh rate", selection: $refreshRate) {
+                Picker("Refresh rate".localize(table: table), selection: $refreshRate) {
                     ForEach(refreshOptions, id: \.self) { option in
-                        Text(option)
+                        if option == refreshOptions[0] {
+                            Text(option)
+                            Divider()
+                        } else {
+                            Text(option)
+                        }
                     }
                 }
             }
@@ -91,15 +98,15 @@ struct DisplaysView: View {
             Section {
                 Picker(selection: $tvOption) {
                     ForEach(tvOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localize(table: table))
                     }
                 } label: {
-                    Text("When connected to TV")
-                    Text("Choose what to show or use the TV as a secondary display.")
+                    Text("When connected to TV", tableName: table)
+                    Text("Choose what to show or use the TV as a secondary display.", tableName: table)
                 }
             } footer: {
-                Button("Advanced…") {}
-                Button("Night Shift…") {}
+                Button("Advanced…".localize(table: table)) {}
+                Button("Night Shift…".localize(table: table)) {}
                 HelpButton(topicID: "mh40768")
             }
         }
@@ -109,9 +116,10 @@ struct DisplaysView: View {
 struct ResolutionOption: View {
     @Binding var selected: ImageResource
     @State private var hovering = false
-    var title: String = ""
+    var title: LocalizedStringKey = ""
     var image: ImageResource
-    var resolution: String
+    var resolution: LocalizedStringKey
+    let table = "DisplaysExt"
     
     var body: some View {
         Button {
@@ -130,10 +138,10 @@ struct ResolutionOption: View {
                     .onHover { hover in
                         hovering = hover
                     }
-                Text(title)
+                Text(title, tableName: table)
                     .font(.system(size: 11))
                     .fontWeight(title == "Default" ? .semibold : .regular)
-                Text(resolution)
+                Text(resolution, tableName: table)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .opacity(hovering ? 1 : 0)
