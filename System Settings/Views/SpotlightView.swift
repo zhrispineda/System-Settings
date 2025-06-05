@@ -46,8 +46,7 @@ struct SpotlightView: View {
                             .font(.footnote)
                     }
                 }
-                .padding([.leading, .top, .trailing], 6)
-                .padding(.bottom, -6)
+                .padding([.leading, .trailing], 6)
             }
             
             Section {

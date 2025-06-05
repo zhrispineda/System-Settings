@@ -80,13 +80,13 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .controlCenter, icon: "switch.2", color: .gray, destination: AnyView(ControlCenterView())),
     SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(DesktopDockView())),
     SettingsItem(type: .displays, icon: "sun.max.fill", color: .blue, destination: AnyView(DisplaysView())),
-    SettingsItem(type: .screenSaver, icon: "moon.and.stars.artframe", color: .cyan, destination: AnyView(EmptyView())),
+    SettingsItem(type: .screenSaver, icon: "moon.and.stars.artframe", color: .cyan, destination: AnyView(ScreenSaverView())),
     SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .gray, destination: AnyView(SpotlightView())),
-    SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(EmptyView()))
+    SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(WallpaperView()))
 ]
 
 let focusOptions: [SettingsItem] = [
-    SettingsItem(type: .notifications, icon: "bell.badge.fill", color: .red, destination: AnyView(EmptyView())),
+    SettingsItem(type: .notifications, icon: "bell.badge.fill", color: .red, destination: AnyView(NotificationsView())),
     SettingsItem(type: .sound, icon: "speaker.3.fill", color: .pink, destination: AnyView(SoundView())),
     SettingsItem(type: .focus, icon: "moon.fill", color: .indigo, destination: AnyView(EmptyView())),
     SettingsItem(type: .screenTime, icon: "hourglass", color: .indigo, destination: AnyView(EmptyView()))
