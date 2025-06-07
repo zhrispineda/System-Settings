@@ -8,14 +8,16 @@ import SwiftUI
 struct SettingsCell: View {
     @Environment(\.appearsActive) var appearsActive
     let title: String
+    let subtitle: String
     let color: Color
     let symbol: String
     let shadow: Bool
     
-    private let imageIcons: Set<String> = ["Coverage", "iCloud", "Wallet", "TimeMachine"]
+    private let imageIcons: Set<String> = ["Coverage", "FaceTime", "Find My", "Home", "iCloud", "Kerberos", "Messages", "Wallet", "TimeMachine", "Tips", "Wallet_Notification"]
     
-    init(_ title: String, color: Color, symbol: String, shadow: Bool = true) {
+    init(_ title: String, subtitle: String = "", color: Color, symbol: String, shadow: Bool = true) {
         self.title = title
+        self.subtitle = subtitle
         self.color = color
         self.symbol = symbol
         self.shadow = shadow
@@ -26,7 +28,7 @@ struct SettingsCell: View {
             if color == .accentColor {
                 if imageIcons.contains(symbol) {
                     switch symbol {
-                    case "Coverage", "TimeMachine":
+                    case "Coverage", "TimeMachine", "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
                         Image(symbol)
                             .resizable()
                             .scaledToFit()
@@ -66,9 +68,15 @@ struct SettingsCell: View {
                 IconView(symbol, color: color)
             }
             
-            Text(title)
-                .foregroundStyle(appearsActive ? .primary : .secondary)
-                .padding(.leading, title == "AirDrop" ? 1 : 0)
+            LabeledContent {} label: {
+                Text(title)
+                    .foregroundStyle(appearsActive ? .primary : .secondary)
+                if !subtitle.isEmpty {
+                    Text(subtitle)
+                        .foregroundStyle(appearsActive ? .secondary : .tertiary)
+                }
+            }
+            .padding(.leading, title == "AirDrop" ? 1 : 0)
         }
     }
 }
