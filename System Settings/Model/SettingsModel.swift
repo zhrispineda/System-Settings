@@ -93,21 +93,21 @@ let focusOptions: [SettingsItem] = [
 ]
 
 let authOptions: [SettingsItem] = [
-    SettingsItem(type: .lockScreen, icon: "lock.dots.fill", color: .black, destination: AnyView(EmptyView())),
-    SettingsItem(type: .privacySecurity, icon: "hand.raised.fill", color: .blue, destination: AnyView(EmptyView())),
-    SettingsItem(type: .touchIDPassword, icon: "touchid", color: .white, destination: AnyView(EmptyView())),
-    SettingsItem(type: .usersGroups, icon: "person.2.fill", color: .blue, destination: AnyView(EmptyView()))
+    SettingsItem(type: .lockScreen, icon: "lock.dots.fill", color: .black, destination: AnyView(LockScreenView())),
+    SettingsItem(type: .privacySecurity, icon: "hand.raised.fill", color: .blue, destination: AnyView(PrivacySecurityView())),
+    SettingsItem(type: .touchIDPassword, icon: "touchid", color: .white, destination: AnyView(PasswordView())),
+    SettingsItem(type: .usersGroups, icon: "person.2.fill", color: .blue, destination: AnyView(UsersGroupsView()))
 ]
 
 let serviceOptions: [SettingsItem] = [
     SettingsItem(type: .internetAccounts, icon: "at", color: .blue, destination: AnyView(InternetAccountsView())),
-    SettingsItem(type: .gameCenter, icon: "Game Center", destination: AnyView(EmptyView())),
+    SettingsItem(type: .gameCenter, icon: "Game Center", destination: AnyView(GameCenterView())),
     SettingsItem(type: .icloud, icon: "iCloud", destination: AnyView(SignInView())),
-    SettingsItem(type: .walletApplePay, icon: "Wallet", destination: AnyView(EmptyView()))
+    SettingsItem(type: .walletApplePay, icon: "Wallet", destination: AnyView(WalletView()))
 ]
 
 let inputOptions: [SettingsItem] = [
-    SettingsItem(type: .keyboard, icon: "keyboard.fill", color: .gray, destination: AnyView(EmptyView())),
-    SettingsItem(type: .trackpad, icon: "rectangle.and.hand.point.up.left.fill", color: .gray, destination: AnyView(EmptyView())),
+    SettingsItem(type: .keyboard, icon: "keyboard.fill", color: .gray, destination: AnyView(KeyboardView())),
+    SettingsItem(type: .trackpad, icon: "rectangle.and.hand.point.up.left.fill", color: .gray, destination: AnyView(TrackpadView())),
     SettingsItem(type: .printersScanners, icon: "printer.fill", color: .gray, destination: AnyView(PrintersScannersView()))
 ]
