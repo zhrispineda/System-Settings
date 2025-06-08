@@ -12,7 +12,6 @@ struct ContentView: View {
     @State private var path = NavigationPath()
     @State private var searchText = ""
     @State private var selection: SettingsItem? = mainOptions.first
-    @State private var sidebarOpacity = 1.0
     
     var body: some View {
         NavigationSplitView {

@@ -88,8 +88,8 @@ let mainOptions: [SettingsItem] = [
 let focusOptions: [SettingsItem] = [
     SettingsItem(type: .notifications, icon: "bell.badge.fill", color: .red, destination: AnyView(NotificationsView())),
     SettingsItem(type: .sound, icon: "speaker.3.fill", color: .pink, destination: AnyView(SoundView())),
-    SettingsItem(type: .focus, icon: "moon.fill", color: .indigo, destination: AnyView(EmptyView())),
-    SettingsItem(type: .screenTime, icon: "hourglass", color: .indigo, destination: AnyView(EmptyView()))
+    SettingsItem(type: .focus, icon: "moon.fill", color: .indigo, destination: AnyView(FocusView())),
+    SettingsItem(type: .screenTime, icon: "hourglass", color: .indigo, destination: AnyView(ScreenTimeView()))
 ]
 
 let authOptions: [SettingsItem] = [
