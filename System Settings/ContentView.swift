@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List {}
-                .frame(height: 30)
+                .frame(height: 0)
                 .scrollDisabled(true)
                 .searchable(text: $searchText, placement: .sidebar)
                 .navigationSplitViewColumnWidth(215)

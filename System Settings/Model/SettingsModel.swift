@@ -61,10 +61,12 @@ struct SettingsItem: Identifiable, Hashable {
     }
 }
 
+@MainActor
 let accountOptions: [SettingsItem] = [
     SettingsItem(type: .signIn, icon: "", destination: AnyView(SignInView()))
 ]
 
+@MainActor
 let radioOptions: [SettingsItem] = [
     SettingsItem(type: .wifi, icon: "wifi", color: .blue, destination: AnyView(WiFiView())),
     SettingsItem(type: .bluetooth, icon: "bluetooth", color: .blue, destination: AnyView(BluetoothView())),
@@ -72,6 +74,7 @@ let radioOptions: [SettingsItem] = [
     SettingsItem(type: .battery, icon: "battery.100", color: .green, destination: AnyView(BatteryView()))
 ]
 
+@MainActor
 let mainOptions: [SettingsItem] = [
     SettingsItem(type: .general, icon: "gear", color: .gray, destination: AnyView(GeneralView())),
     SettingsItem(type: .accessibility, icon: "accessibility", color: .blue, destination: AnyView(AccessibilityView())),
@@ -85,6 +88,7 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(WallpaperView()))
 ]
 
+@MainActor
 let focusOptions: [SettingsItem] = [
     SettingsItem(type: .notifications, icon: "bell.badge.fill", color: .red, destination: AnyView(NotificationsView())),
     SettingsItem(type: .sound, icon: "speaker.3.fill", color: .pink, destination: AnyView(SoundView())),
@@ -92,6 +96,7 @@ let focusOptions: [SettingsItem] = [
     SettingsItem(type: .screenTime, icon: "hourglass", color: .indigo, destination: AnyView(ScreenTimeView()))
 ]
 
+@MainActor
 let authOptions: [SettingsItem] = [
     SettingsItem(type: .lockScreen, icon: "lock.dots.fill", color: .black, destination: AnyView(LockScreenView())),
     SettingsItem(type: .privacySecurity, icon: "hand.raised.fill", color: .blue, destination: AnyView(PrivacySecurityView())),
@@ -99,6 +104,7 @@ let authOptions: [SettingsItem] = [
     SettingsItem(type: .usersGroups, icon: "person.2.fill", color: .blue, destination: AnyView(UsersGroupsView()))
 ]
 
+@MainActor
 let serviceOptions: [SettingsItem] = [
     SettingsItem(type: .internetAccounts, icon: "at", color: .blue, destination: AnyView(InternetAccountsView())),
     SettingsItem(type: .gameCenter, icon: "Game Center", destination: AnyView(GameCenterView())),
@@ -106,6 +112,7 @@ let serviceOptions: [SettingsItem] = [
     SettingsItem(type: .walletApplePay, icon: "Wallet", destination: AnyView(WalletView()))
 ]
 
+@MainActor
 let inputOptions: [SettingsItem] = [
     SettingsItem(type: .keyboard, icon: "keyboard.fill", color: .gray, destination: AnyView(KeyboardView())),
     SettingsItem(type: .trackpad, icon: "rectangle.and.hand.point.up.left.fill", color: .gray, destination: AnyView(TrackpadView())),
