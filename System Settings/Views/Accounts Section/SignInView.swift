@@ -84,7 +84,7 @@ struct SignInView: View {
             }
             .padding([.horizontal, .top])
         }
-        .frame(width: 500, height: 300)
+        .frame(width: 490, height: 300)
         .navigationTitle("SIGN_IN_WATCH_OS".localize(table: table))
         .toolbar {
             ToolbarItem(placement: .navigation) {

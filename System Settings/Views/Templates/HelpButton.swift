@@ -14,14 +14,10 @@ struct HelpButton: View {
                 NSWorkspace.shared.open(url)
             }
         } label: {
-            Image(systemName: "questionmark.circle.fill")
-                .fontWeight(.regular)
-                .foregroundStyle(.primary, Color(NSColor.controlColor))
-                .imageScale(.large)
-                .shadow(radius: 0.5)
+            Image(systemName: "questionmark")
+                .foregroundStyle(Color.accentColor)
         }
-        .buttonStyle(.plain)
-        .scaleEffect(1.2)
+        .clipShape(Circle())
     }
 }
 

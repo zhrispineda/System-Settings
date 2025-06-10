@@ -54,8 +54,12 @@ struct WiFiView: View {
                     Text("Allow this Mac to automatically discover nearby personal hotspots when no Wi‑Fi network is available.", tableName: table)
                 }
             } footer: {
-                Button("Advanced…".localize(table: table)) {}
-                HelpButton(topicID: "mh11935")
+                HStack {
+                    Spacer()
+                    Button("Advanced…".localize(table: table)) {}
+                    HelpButton(topicID: "mh11935")
+                }
+                
             }
         }
     }
