@@ -15,57 +15,47 @@ struct ContentView: View {
     
     var body: some View {
         NavigationSplitView {
-            List {}
-                .frame(height: 0)
-                .scrollDisabled(true)
-                .searchable(text: $searchText, placement: .sidebar)
-                .navigationSplitViewColumnWidth(215)
-            if searchText.isEmpty {
-                List(selection: $selection) {
-                    // MARK: Apple Account
-                    Section {
-                        ForEach(accountOptions) { setting in
-                            NavigationLink(value: setting) {
-                                AppleAccountCell()
-                                    .overlay {
-                                        DividerGeometryView(dividerOpacity: $dividerOpacity)
-                                    }
-                            }
+            List(selection: $selection) {
+                // MARK: Apple Account
+                Section {
+                    ForEach(accountOptions) { setting in
+                        NavigationLink(value: setting) {
+                            AppleAccountCell()
                         }
                     }
-                    
-                    // MARK: Radio + Battery/Power
-                    SettingsSection(path: $path, selection: $selection, options: radioOptions)
-                    
-                    // MARK: Main
-                    SettingsSection(path: $path, selection: $selection, options: mainOptions)
-                    
-                    // MARK: Focus
-                    SettingsSection(path: $path, selection: $selection, options: focusOptions)
-                    
-                    // MARK: Authentication
-                    SettingsSection(path: $path, selection: $selection, options: authOptions)
-                    
-                    // MARK: Services
-                    SettingsSection(path: $path, selection: $selection, options: serviceOptions)
-                    
-                    // MARK: Input
-                    SettingsSection(path: $path, selection: $selection, options: inputOptions)
                 }
-                .focused($isFocused)
-                .opacity(appearsActive ? 1.0 : 0.5)
-                .onAppear {
-                    isFocused = true
-                }
-                .overlay {
-                    Divider()
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .opacity(dividerOpacity)
-                }
-                .toolbar(removing: .sidebarToggle)
-            } else {
-                SearchView(searchText: $searchText)
+                
+                // MARK: Radio + Battery/Power
+                SettingsSection(path: $path, selection: $selection, options: radioOptions)
+                
+                // MARK: Main
+                SettingsSection(path: $path, selection: $selection, options: mainOptions)
+                
+                // MARK: Focus
+                SettingsSection(path: $path, selection: $selection, options: focusOptions)
+                
+                // MARK: Authentication
+                SettingsSection(path: $path, selection: $selection, options: authOptions)
+                
+                // MARK: Services
+                SettingsSection(path: $path, selection: $selection, options: serviceOptions)
+                
+                // MARK: Input
+                SettingsSection(path: $path, selection: $selection, options: inputOptions)
             }
+            .searchable(text: $searchText, placement: .sidebar)
+            .focused($isFocused)
+            .opacity(appearsActive ? 1.0 : 0.5)
+            .onAppear {
+                isFocused = true
+            }
+            .overlay {
+                Divider()
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .opacity(dividerOpacity)
+            }
+            .toolbar(removing: .sidebarToggle)
+            .navigationSplitViewColumnWidth(215)
         } detail: {
             NavigationStack(path: $path) {
                 selection?.destination
