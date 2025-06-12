@@ -17,7 +17,7 @@ struct GeneralView: View {
             Section {
                 VStack(spacing: 5) {
                     IconView("gear", color: .gray)
-                        .scaleEffect(3.2)
+                        .scaleEffect(2.5)
                         .padding(.top, 30)
                         .overlay {
                             DividerGeometryView(dividerOpacity: $titleOpacity)
