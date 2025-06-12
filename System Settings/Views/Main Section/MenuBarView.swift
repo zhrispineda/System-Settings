@@ -2,12 +2,12 @@
 //  ControlCenterView.swift
 //  System Settings
 //
-//  System Settings > Control Center
+//  System Settings > Menu Bar
 //
 
 import SwiftUI
 
-struct ControlCenterView: View {
+struct MenuBarView: View {
     @State private var wifiSelection = "Show in Menu Bar"
     @State private var bluetoothSelection = "Don't Show in Menu Bar"
     @State private var airDropSelection = "Don't Show in Menu Bar"
@@ -287,6 +287,6 @@ struct ControlCenterView: View {
 }
 
 #Preview {
-    ControlCenterView()
+    MenuBarView()
         .frame(height: 700)
 }

@@ -8,7 +8,6 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.appearsActive) var appearsActive
     @FocusState private var isFocused: Bool
-    @State private var dividerOpacity = 0.0
     @State private var path = NavigationPath()
     @State private var searchText = ""
     @State private var selection: SettingsItem? = mainOptions.first
@@ -48,11 +47,6 @@ struct ContentView: View {
             .opacity(appearsActive ? 1.0 : 0.5)
             .onAppear {
                 isFocused = true
-            }
-            .overlay {
-                Divider()
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .opacity(dividerOpacity)
             }
             .toolbar(removing: .sidebarToggle)
             .navigationSplitViewColumnWidth(215)

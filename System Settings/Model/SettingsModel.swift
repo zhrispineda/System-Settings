@@ -16,11 +16,10 @@ enum SettingsOptions: String {
     case general = "General"
     case accessibility = "Accessibility"
     case appearance = "Appearance"
+    case menuBar = "Menu Bar"
     case siri = "Apple Intelligence & Siri"
-    case controlCenter = "Control Center"
     case desktopDock = "Desktop & Dock"
     case displays = "Displays"
-    case screenSaver = "Screen Saver"
     case spotlight = "Spotlight"
     case wallpaper = "Wallpaper"
     
@@ -79,12 +78,11 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .general, icon: "gear", color: .gray, destination: AnyView(GeneralView())),
     SettingsItem(type: .accessibility, icon: "accessibility", color: .blue, destination: AnyView(AccessibilityView())),
     SettingsItem(type: .appearance, icon: "appearance.lightmode", color: .black, destination: AnyView(AppearanceView())),
+    SettingsItem(type: .menuBar, icon: "menubar.rectangle", color: .gray, destination: AnyView(MenuBarView())),
     SettingsItem(type: .siri, icon: "siri", destination: AnyView(SiriView())),
-    SettingsItem(type: .controlCenter, icon: "switch.2", color: .gray, destination: AnyView(ControlCenterView())),
     SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(DesktopDockView())),
     SettingsItem(type: .displays, icon: "sun.max.fill", color: .blue, destination: AnyView(DisplaysView())),
-    SettingsItem(type: .screenSaver, icon: "moon.and.stars.artframe", color: .cyan, destination: AnyView(ScreenSaverView())),
-    SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .gray, destination: AnyView(SpotlightView())),
+    SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .blue, destination: AnyView(SpotlightView())),
     SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(WallpaperView()))
 ]
 
