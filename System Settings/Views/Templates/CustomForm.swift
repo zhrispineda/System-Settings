@@ -13,6 +13,7 @@ struct CustomForm<Content: View>: View {
         Form {
             content
         }
+        .contentMargins(.top, -20, for: .scrollContent)
         .formStyle(.grouped)
         .scrollEdgeEffectStyle(.hard, for: .top)
         .safeAreaBar(edge: .top) {
