@@ -80,7 +80,7 @@ struct IconView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 14, height: 14)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
+                    .foregroundStyle(.white.shadow(.drop(radius: 1.5, y: 0.0)))
                     .padding([.top, .leading], symbol == "rectangle.and.hand.point.up.left.fill" ? 2 : 0)
             }
         }
