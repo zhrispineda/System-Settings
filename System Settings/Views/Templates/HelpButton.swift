@@ -18,6 +18,9 @@ struct HelpButton: View {
                 .foregroundStyle(Color.accentColor)
         }
         .clipShape(Circle())
+        .accessibilityLabel("Help")
+        .padding(.leading, -5)
+        .padding(.trailing, -15)
     }
 }
 

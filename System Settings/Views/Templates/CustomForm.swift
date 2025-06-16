@@ -20,9 +20,9 @@ struct CustomForm<Content: View>: View {
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 HStack {
-                    Button("", systemImage: "chevron.left") {}
+                    Button("Back", systemImage: "chevron.left") {}
                         .disabled(true)
-                    Button("", systemImage: "chevron.right") {}
+                    Button("Forward", systemImage: "chevron.right") {}
                         .disabled(true)
                 }
             }

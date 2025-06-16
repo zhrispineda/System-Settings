@@ -46,7 +46,7 @@ struct MenuBarView: View {
     let table = "ControlCenterSettings"
     
     var body: some View {
-        CustomForm(title: "Control Center") {
+        CustomForm(title: "Menu Bar") {
             Section {
                 // Wi-Fi
                 HStack {

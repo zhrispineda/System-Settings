@@ -10,7 +10,7 @@ struct IconView: View {
     var color: Color
     var size: Int
     
-    init(_ symbol: String, color: Color, size: Int = 20) {
+    init(_ symbol: String, color: Color, size: Int = 19) {
         self.symbol = symbol
         self.color = color
         self.size = size
@@ -21,7 +21,7 @@ struct IconView: View {
             RoundedRectangle(cornerRadius: 5.0)
                 .foregroundStyle(color.gradient)
                 .scaledToFit()
-                .frame(width: 20, height: 20)
+                .frame(width: CGFloat(size), height: CGFloat(size))
             switch symbol {
             case "Apple Intelligence & Siri":
                 Image(.appleIntelligenceSiri)
@@ -79,7 +79,7 @@ struct IconView: View {
                 Image(_internalSystemName: symbol)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 15, height: 15)
+                    .frame(width: 14, height: 14)
                     .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
                     .padding([.top, .leading], symbol == "rectangle.and.hand.point.up.left.fill" ? 2 : 0)
             }
