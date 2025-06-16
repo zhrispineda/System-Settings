@@ -14,6 +14,10 @@ struct CustomForm<Content: View>: View {
             content
         }
         .formStyle(.grouped)
+        .scrollEdgeEffectStyle(.hard, for: .top)
+        .safeAreaBar(edge: .top) {
+            Divider()
+        }
         .navigationDestination(for: String.self) {_ in }
         .navigationTitle(title)
         .navigationSplitViewColumnWidth(500)
@@ -27,10 +31,10 @@ struct CustomForm<Content: View>: View {
                 }
             }
         }
-        ._safeAreaInsets(EdgeInsets(top: -19, leading: 0, bottom: 0, trailing: 0))
     }
 }
 
 #Preview {
     ContentView()
+        .frame(width: 725, height: 600)
 }
