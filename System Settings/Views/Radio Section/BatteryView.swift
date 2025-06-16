@@ -160,10 +160,10 @@ struct BatteryView: View {
                         Text(timeframe.localize(table: table, timeframe == timeframeOptions[0] ? "24" : "10"))
                     }
                 }
-                .pickerStyle(.segmented)
-                .fixedSize(horizontal: false, vertical: true)
-                ._safeAreaInsets(EdgeInsets(top: 0, leading: -356, bottom: 0, trailing: 0))
-                
+                .frame(maxWidth: .infinity)
+                .pickerStyle(.palette)
+                .labelsHidden()
+
                 VStack(alignment: .leading) {
                     Text("LAST_CHARGED_TO_FMT".localize(table: table, "100%"))
                     Text("Today, 9:41 AM")
@@ -181,10 +181,18 @@ struct BatteryView: View {
                         .frame(height: 110)
                         .padding(.top, -5)
                 }
+
+                VStack(alignment: .leading) {
+                    Text("SCREEN_ON_USAGE_GRAPH_TITLE", tableName: table)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                }
             } footer: {
-                Spacer()
-                Button("Options…".localize(table: powerTable)) {}
-                HelpButton(topicID: "mchlfc3b7879")
+                HStack {
+                    Button("Options…".localize(table: powerTable)) {}
+                    HelpButton(topicID: "mchlfc3b7879")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }

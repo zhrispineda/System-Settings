@@ -35,37 +35,39 @@ struct NetworkView: View {
             } header: {
                 Text("Other Services")
             } footer: {
-                Menu {
-                    Button("Add Service…") {}
+                HStack {
+                    Spacer()
                     Menu {
-                        Button("\("L2TP over IPSec".localize(table: "VPN"))…") {}
-                        Button("\("Cisco IPSec".localize(table: "VPN"))…") {}
-                        Button("\("IKEv2".localize(table: "VPN"))…") {}
-                    } label: {
-                        Text("Add VPN Configuration", tableName: "VPN")
-                    }
-                    Divider()
-                    Button("Manage Virtual Interfaces…") {}
-                    Button("Set Service Order…") {}
-                    Divider()
-                    Menu {
-                        Picker("", selection: $selection) {
-                            ForEach(options, id: \.self) {
-                                Text($0)
-                            }
+                        Button("Add Service…") {}
+                        Menu {
+                            Button("\("L2TP over IPSec".localize(table: "VPN"))…") {}
+                            Button("\("Cisco IPSec".localize(table: "VPN"))…") {}
+                            Button("\("IKEv2".localize(table: "VPN"))…") {}
+                        } label: {
+                            Text("Add VPN Configuration", tableName: "VPN")
                         }
-                        .pickerStyle(.inline)
-                        .labelsHidden()
                         Divider()
-                        Button("Edit Locations…") {}
+                        Button("Manage Virtual Interfaces…") {}
+                        Button("Set Service Order…") {}
+                        Divider()
+                        Menu {
+                            Picker("", selection: $selection) {
+                                ForEach(options, id: \.self) {
+                                    Text($0)
+                                }
+                            }
+                            .pickerStyle(.inline)
+                            .labelsHidden()
+                            Divider()
+                            Button("Edit Locations…") {}
+                        } label: {
+                            Text("Locations")
+                        }
                     } label: {
-                        Text("Locations")
+                        Image(systemName: "ellipsis")
                     }
-                } label: {
-                    Image(systemName: "ellipsis")
+                    HelpButton(topicID: "mchlee7b367f")
                 }
-                .frame(width: 42)
-                HelpButton(topicID: "mchlee7b367f")
             }
         }
     }
