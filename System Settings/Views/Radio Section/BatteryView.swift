@@ -111,7 +111,7 @@ struct BatteryView: View {
     }
     
     var body: some View {
-        CustomForm(title: "BATTERY_PREF_TITLE".localize(table: powerTable)) {
+        CustomForm(title: "") {
             Section {
                 // Battery Health
                 HStack {
@@ -194,6 +194,17 @@ struct BatteryView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
+        }
+        .safeAreaBar(edge: .top) {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("BATTERY_PREF_TITLE".localize(table: powerTable))
+                    .fontWeight(.semibold)
+                Text("\(Image(systemName: "battery.100")) Battery Level: 100%")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.leading, -150)
+            .padding(.top, -40)
         }
     }
 }
