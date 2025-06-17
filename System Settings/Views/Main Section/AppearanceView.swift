@@ -12,6 +12,7 @@ struct AppearanceView: View {
     @State private var selectedAccent = "Multicolor"
     @State private var selectedAccentColor = Color.blue
     @State private var selectedHighlight = "Accent Color"
+    @State private var selectedFolderColor = FolderColor.automatic
     @State private var selectedSidebar = "SIDEBAR_ICON_MEDIUM"
     @State private var selectedScroll = 1
     @State private var selectedClick = "NEXT_PAGE"
@@ -81,7 +82,28 @@ struct AppearanceView: View {
 
             Section {
                 Text("Icon & widget style")
-                Text("Folder color")
+                Picker("Folder color", selection: $selectedFolderColor) {
+                    ForEach(FolderColor.allCases) { option in
+                        if FolderColor.automatic == option || FolderColor.graphite == option {
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                    .tint(option.color)
+                                Text(option.label)
+                            }
+                            .tag(option)
+                            Divider()
+                        } else {
+                            HStack {
+                                if option.color != .clear {
+                                    Image(systemName: "circle.fill")
+                                        .tint(option.color)
+                                }
+                                Text(option.label)
+                            }
+                            .tag(option)
+                        }
+                    }
+                }
             }
 
             Section("Windows") {
@@ -219,6 +241,51 @@ struct DisplayButton: View {
             .help(helpText.localize(table: "Appearance"))
         }
         .buttonStyle(.plain)
+    }
+}
+
+enum FolderColor: String, CaseIterable, Identifiable {
+    case automatic
+    case red
+    case orange
+    case yellow
+    case green
+    case blue
+    case purple
+    case pink
+    case graphite
+    case other
+
+    var id: String { self.rawValue }
+
+    var label: String {
+        switch self {
+        case .automatic: return "Automatic"
+        case .red: return "Red"
+        case .orange: return "Orange"
+        case .yellow: return "Yellow"
+        case .green: return "Green"
+        case .blue: return "Blue"
+        case .purple: return "Purple"
+        case .pink: return "Pink"
+        case .graphite: return "Graphite"
+        case .other: return "Other"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .automatic: return .blue
+        case .red: return .red
+        case .orange: return .orange
+        case .yellow: return .yellow
+        case .green: return .green
+        case .blue: return .blue
+        case .purple: return .purple
+        case .pink: return .pink
+        case .graphite: return .gray
+        case .other: return .clear
+        }
     }
 }
 

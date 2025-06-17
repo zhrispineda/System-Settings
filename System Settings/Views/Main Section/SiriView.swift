@@ -63,7 +63,7 @@ struct SiriView: View {
                     Picker("KEYBOARD_SHORTCUT_LABEL".localize(table: table), selection: $selectedShortcutOption) {
                         ForEach(shortcutOptions, id: \.self) { option in
                             if shortcutOptions.first == option || shortcutOptions[shortcutOptions.count - 2] == option {
-                                Text(option.localize(table: table))
+                                Text(option.localize(table: table, " "))
                                 Divider()
                             } else {
                                 Text(option.localize(table: table))
