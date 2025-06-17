@@ -1,25 +1,25 @@
 {
   "images" : [
     {
-      "filename" : "AppearanceDark.png",
+      "filename" : "AppearanceDark 2.png",
       "idiom" : "universal",
       "language-direction" : "left-to-right",
       "scale" : "1x"
     },
     {
-      "filename" : "RTL-AppearanceDark.png",
+      "filename" : "RTL_AppearanceDark.png",
       "idiom" : "universal",
       "language-direction" : "right-to-left",
       "scale" : "1x"
     },
     {
-      "filename" : "AppearanceDark@2x.png",
+      "filename" : "AppearanceDark@2x 2.png",
       "idiom" : "universal",
       "language-direction" : "left-to-right",
       "scale" : "2x"
     },
     {
-      "filename" : "RTL-AppearanceDark@2x.png",
+      "filename" : "RTL_AppearanceDark@2x.png",
       "idiom" : "universal",
       "language-direction" : "right-to-left",
       "scale" : "2x"

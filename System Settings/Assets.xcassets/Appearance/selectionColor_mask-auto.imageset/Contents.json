@@ -1,25 +1,25 @@
 {
   "images" : [
     {
-      "filename" : "selectionColor_mask-auto.png",
+      "filename" : "selectionColor_mask-auto 2.png",
       "idiom" : "universal",
       "language-direction" : "left-to-right",
       "scale" : "1x"
     },
     {
-      "filename" : "selectionColor_mask-auto 1.png",
+      "filename" : "RTL_selectionColor_mask-auto.png",
       "idiom" : "universal",
       "language-direction" : "right-to-left",
       "scale" : "1x"
     },
     {
-      "filename" : "selectionColor_mask-auto@2x.png",
+      "filename" : "selectionColor_mask-auto@2x 2.png",
       "idiom" : "universal",
       "language-direction" : "left-to-right",
       "scale" : "2x"
     },
     {
-      "filename" : "selectionColor_mask-auto@2x 1.png",
+      "filename" : "RTL_selectionColor_mask-auto@2x.png",
       "idiom" : "universal",
       "language-direction" : "right-to-left",
       "scale" : "2x"

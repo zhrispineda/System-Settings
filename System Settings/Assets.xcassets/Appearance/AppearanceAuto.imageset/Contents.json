@@ -7,7 +7,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "RTL-AppearanceAuto.png",
+      "filename" : "RTL_AppearanceAuto.png",
       "idiom" : "universal",
       "language-direction" : "right-to-left",
       "scale" : "1x"
@@ -19,7 +19,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "RTL-AppearanceAuto@2x.png",
+      "filename" : "RTL_AppearanceAuto@2x.png",
       "idiom" : "universal",
       "language-direction" : "right-to-left",
       "scale" : "2x"

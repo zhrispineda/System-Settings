@@ -16,39 +16,43 @@ struct AppearanceView: View {
     @State private var selectedScroll = 1
     @State private var selectedClick = "NEXT_PAGE"
     @State private var wallpaperTinting = true
-    let themeOptions = ["LIGHT", "DARK", "AUTO"]
+    @State private var accentHover = true
+    let themeOptions = ["AUTO", "LIGHT", "DARK"]
     let highlightOptions = ["Accent Color", "Blue", "Purple", "Pink", "Red", "Orange", "Yellow", "Green", "Graphite", "Other"]
     let sidebarOptions = ["SIDEBAR_ICON_SMALL", "SIDEBAR_ICON_MEDIUM", "SIDEBAR_ICON_LARGE"]
     let scrollOptions = ["SHOW_SCROLL_AUTOMATICALLY", "SHOW_SCROLL_WHEN_SCROLLING", "SHOW_SCROLL_ALWAYS"]
     let clickOptions = ["NEXT_PAGE", "GO_THERE"]
     let table = "Appearance"
-    
+
     var body: some View {
         CustomForm(title: "APPEARANCE".localize(table: table)) {
             Section {
                 HStack(alignment: .top) {
                     Text("APPEARANCE", tableName: table)
+
                     Spacer()
-                    
-                    DisplayButton(option: "LIGHT", helpText: "LIGHT_TOOLTIP", image: .appearanceLight, selected: $selectedTheme, color: $selectedAccentColor)
-                    
-                    DisplayButton(option: "DARK", helpText: "DARK_TOOLTIP", image: .appearanceDark, selected: $selectedTheme, color: $selectedAccentColor)
-                    
+
                     DisplayButton(option: "AUTO", helpText: "AUTO_TOOLTIP", image: .appearanceAuto, selected: $selectedTheme, color: $selectedAccentColor)
+
+                    DisplayButton(option: "LIGHT", helpText: "LIGHT_TOOLTIP", image: .appearanceLight, selected: $selectedTheme, color: $selectedAccentColor)
+
+                    DisplayButton(option: "DARK", helpText: "DARK_TOOLTIP", image: .appearanceDark, selected: $selectedTheme, color: $selectedAccentColor)
                 }
-                
-                HStack(alignment: .top) {
+            }
+
+            Section("Theme") {
+                HStack(alignment: .top, spacing: -3) {
                     Text("ACCENT_COLOR_TITLE", tableName: table)
                     Spacer()
-                    AccentButton(label: "Multicolor", option: .clear, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Blue", option: .blue, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Purple", option: .purple, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Pink", option: .pink, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Red", option: .red, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Orange", option: .orange, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Yellow", option: .yellow, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Green", option: .green, selected: $selectedAccent, accent: $selectedAccentColor)
-                    AccentButton(label: "Graphite", option: .gray, selected: $selectedAccent, accent: $selectedAccentColor)
+                    AccentButton(label: "Multicolor", option: .clear, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Blue", option: .blue, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Purple", option: .purple, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Pink", option: .pink, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Red", option: .red, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Orange", option: .orange, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Yellow", option: .yellow, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Green", option: .green, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
+                    AccentButton(label: "Graphite", option: .gray, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
                 }
                 .onChange(of: selectedAccent) {
                     if selectedAccent == "Multicolor" {
@@ -57,13 +61,14 @@ struct AppearanceView: View {
                         selectedHighlight = selectedAccent
                     }
                 }
-                
-                Picker("HIGHLIGHT_COLOR_TITLE".localize(table: table), selection: $selectedHighlight) {
+
+                Picker("Text highlight color".localize(table: table), selection: $selectedHighlight) {
                     ForEach(highlightOptions, id: \.self) { color in
                         HStack {
                             switch color {
                             case "Accent Color":
                                 Image(.nsMulticolorHighlight)
+                                    .clipShape(Circle())
                             default:
                                 EmptyView()
                             }
@@ -72,16 +77,23 @@ struct AppearanceView: View {
                         .selectionDisabled(selectedAccent != "Multicolor" && color == "Accent Color")
                     }
                 }
-                
+            }
+
+            Section {
+                Text("Icon & widget style")
+                Text("Folder color")
+            }
+
+            Section("Windows") {
                 Picker("SIDEBAR_ICON_SIZE_TITLE".localize(table: table), selection: $selectedSidebar) {
                     ForEach(sidebarOptions, id: \.self) { size in
                         Text(size.localize(table: table))
                     }
                 }
-                
+
                 Toggle("ALLOW_WALLPAPER_TINTING_TITLE".localize(table: table), isOn: $wallpaperTinting)
             }
-            
+
             Section {
                 Picker(selection: $selectedScroll, label: Text("SHOW_SCROLL_TITLE", tableName: table)) {
                     Text("SHOW_SCROLL_AUTOMATICALLY", tableName: table).tag(1)
@@ -89,7 +101,7 @@ struct AppearanceView: View {
                     Text("SHOW_SCROLL_ALWAYS", tableName: table).tag(3)
                 }
                 .pickerStyle(.radioGroup)
-                
+
                 VStack {
                     Picker("SCROLLER_CLICKS_TITLE".localize(table: table), selection: $selectedClick) {
                         ForEach(clickOptions, id: \.self) { option in
@@ -100,6 +112,7 @@ struct AppearanceView: View {
                 }
             } footer: {
                 HelpButton(topicID: "mchlp1225")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }
@@ -110,7 +123,9 @@ struct AccentButton: View {
     let option: Color
     @Binding var selected: String
     @Binding var accent: Color
-    
+    @Binding var accentHover: Bool
+    @State private var hovering = false
+
     var body: some View {
         VStack {
             Button {
@@ -121,36 +136,53 @@ struct AccentButton: View {
                     ZStack {
                         if option == .clear {
                             Image(.nsMulticolorAccent)
+                                .resizable()
                                 .mask(Circle())
                         } else {
                             Circle()
                                 .foregroundStyle(option)
                         }
+
+                        // Outline for each color
                         Circle()
-                            .stroke(.white.opacity(0.2), lineWidth: 1)
-                            .frame(width: 15, height: 15)
-                        if label == selected {
-                            Circle()
-                                .foregroundStyle(.white)
-                                .frame(width: 5, height: 5)
-                                .shadow(radius: 1)
-                        }
+                            .stroke(.black.opacity(0.3), lineWidth: 0.5)
+                            .frame(width: 24, height: 24)
+                            .background {
+                                // Outer blue ring
+                                Circle()
+                                    .stroke(selected == label ? .blue : .clear, lineWidth: 3)
+                                    .padding(-2)
+                                // Inner white ring
+                                Circle()
+                                    .stroke(selected == label ? .white : .clear, lineWidth: 1)
+                                    .padding(-0.5)
+                            }
                     }
-                    .frame(width: 16, height: 16)
+                    .frame(width: 38, height: 24)
                     .foregroundStyle(.blue)
                 }
             }
             .buttonStyle(.plain)
             .help(label)
-            
-            if label == selected {
+            .onContinuousHover { phase in
+                switch phase {
+                case .active:
+                    hovering = true
+                    accentHover = label == selected
+                case .ended:
+                    hovering = false
+                    accentHover = true
+                }
+            }
+
+            if hovering || (accentHover && label == selected) {
                 Text(label)
                     .foregroundStyle(.secondary)
                     .fixedSize()
                     .frame(width: 15)
                     .lineLimit(1)
                     .font(.footnote)
-                    .offset(x: option == .gray ? -13 : 0)
+                    .offset(x: option == .gray ? -10 : 0)
             }
         }
     }
@@ -162,7 +194,7 @@ struct DisplayButton: View {
     let image: ImageResource
     @Binding var selected: String
     @Binding var color: Color
-    
+
     var body: some View {
         Button {
             selected = option
@@ -195,3 +227,4 @@ struct DisplayButton: View {
         AppearanceView()
     }
 }
+
