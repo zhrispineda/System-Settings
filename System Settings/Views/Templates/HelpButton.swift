@@ -16,6 +16,7 @@ struct HelpButton: View {
         } label: {
             Image(systemName: "questionmark")
                 .foregroundStyle(Color.accentColor)
+                .fontWeight(.semibold)
         }
         .clipShape(Circle())
         .accessibilityLabel("Help")
@@ -26,4 +27,5 @@ struct HelpButton: View {
 
 #Preview {
     HelpButton(topicID: "")
+        .frame(width: 100, height: 100)
 }

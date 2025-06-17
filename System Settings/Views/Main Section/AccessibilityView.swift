@@ -40,8 +40,11 @@ struct AccessibilityView: View {
                 NavigationLink(value: "Display") {
                     SettingsCell("Display", color: .blue, symbol: "display")
                 }
-                NavigationLink(value: "Spoken Content") {
-                    SettingsCell("Spoken Content", color: .black, symbol: "rectangle.3.group.bubble.fill")
+                NavigationLink(value: "Motion") {
+                    SettingsCell("Motion", color: .green, symbol: "circle.dotted.and.circle")
+                }
+                NavigationLink(value: "Read & Speak") {
+                    SettingsCell("Read & Speak", color: .black, symbol: "rectangle.3.group.bubble.fill")
                 }
                 NavigationLink(value: "Audio Descriptions") {
                     SettingsCell("Audio Descriptions", color: .black, symbol: "quote.bubble.fill")
@@ -63,6 +66,9 @@ struct AccessibilityView: View {
                 }
                 NavigationLink(value: "Live Captions") {
                     SettingsCell("Live Captions", color: .black, symbol: "waveform.bubble.fill")
+                }
+                NavigationLink(value: "Name Recognition") {
+                    SettingsCell("Name Recognition", color: .blue, symbol: "person.wave.2.fill")
                 }
             }
             
@@ -93,13 +99,18 @@ struct AccessibilityView: View {
                 }
             }
             
-            Section("General") {
+            Section {
                 NavigationLink(value: "Siri") {
                     SettingsCell("Siri", color: .blue, symbol: "siri")
                 }
                 NavigationLink(value: "Shortcut") {
                     SettingsCell("Shortcut", color: .blue, symbol: "accessibility.badge.arrow.up.right")
                 }
+            } header: {
+                Text("General")
+            } footer: {
+                HelpButton(topicID: "mchlp1400")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }
