@@ -13,7 +13,7 @@ struct SettingsCell: View {
     let symbol: String
     let shadow: Bool
     
-    private let imageIcons: Set<String> = ["FaceTime", "Find My", "Home", "iCloud", "Kerberos", "Messages", "Wallet", "TimeMachine", "Tips", "Wallet_Notification"]
+    private let imageIcons: Set<String> = ["FaceTime", "Find My", "Home", "iCloud", "Kerberos", "Messages", "Wallet", "Tips", "Wallet_Notification"]
     
     init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, shadow: Bool = true) {
         self.title = title
@@ -28,7 +28,7 @@ struct SettingsCell: View {
             if color == .accentColor {
                 if imageIcons.contains(symbol) {
                     switch symbol {
-                    case "TimeMachine", "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
+                    case "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
                         Image(symbol)
                             .resizable()
                             .scaledToFit()
@@ -61,8 +61,10 @@ struct SettingsCell: View {
                         .padding(.trailing, -5)
                         .padding(.vertical, -2.5)
                 }
-            } else if symbol.contains("com.apple") {
+            } else if symbol.contains("com.") {
                 TestIconView(icon: symbol, size: 24)
+            } else if symbol == "TimeMachineSettingsIcon" {
+                BundleIconView(bundlePath: "/System/Library/ExtensionKit/Extensions/TimeMachineSettings.appex", icon: symbol, size: 24)
             } else {
                 IconView(symbol, color: color)
                     .shadow(radius: 0.0, y: 0.3)

@@ -45,7 +45,7 @@ struct GeneralView: View {
                     SettingsCell("Software Update", symbol: "com.apple.graphic-icon.software-update")
                 }
                 NavigationLink(value: "Storage") {
-                    SettingsCell("Storage", color: .gray, symbol: "com.apple.settings.PrivacySecurity.extension.privacy-blockDevice")
+                    SettingsCell("Storage", symbol: "com.apple.settings.PrivacySecurity.extension.privacy-blockDevice")
                 }
             }
             
@@ -63,37 +63,37 @@ struct GeneralView: View {
             
             Section {
                 NavigationLink(value: "AutoFill & Passwords") {
-                    SettingsCell("AutoFill & Passwords", color: .gray, symbol: "com.apple.Passwords-Settings.AutoFill")
+                    SettingsCell("AutoFill & Passwords", symbol: "com.apple.Passwords-Settings.AutoFill")
                 }
                 NavigationLink(value: "Date & Time") {
-                    SettingsCell("Date & Time", color: .blue, symbol: "com.apple.graphic-icon.date-and-time")
+                    SettingsCell("Date & Time", symbol: "com.apple.graphic-icon.date-and-time")
                 }
                 NavigationLink(value: "Language & Region") {
                     SettingsCell("Language & Region", color: .blue, symbol: "com.apple.graphic-icon.language")
                 }
                 NavigationLink(value: "Login Items & Extensions") {
-                    SettingsCell("Login Items & Extensions", color: .gray, symbol: "list.bullet")
+                    SettingsCell("Login Items & Extensions", symbol: "com.example.graphic-icon.login-items")
                 }
                 NavigationLink(value: "Sharing") {
-                    SettingsCell("Sharing", color: .gray, symbol: "figure.walk.diamond.fill")
+                    SettingsCell("Sharing", symbol: "com.example.graphic-icon.sharing")
                 }
                 NavigationLink(value: "Startup Disk") {
-                    SettingsCell("Startup Disk", color: .gray, symbol: "externaldrive.fill")
+                    SettingsCell("Startup Disk", symbol: "com.apple.graphic-icon.internal-drive")
                 }
                 NavigationLink(value: "Time Machine") {
-                    SettingsCell("Time Machine", color: .accentColor, symbol: "TimeMachine")
+                    SettingsCell("Time Machine", symbol: "TimeMachineSettingsIcon")
                 }
             }
             
             Section {
                 NavigationLink(value: "Device Management") {
-                    SettingsCell("Device Management", color: .gray, symbol: "checkmark.seal.fill")
+                    SettingsCell("Device Management", symbol: "com.apple.NetworkExtensionSettingsUI.icon.profile")
                 }
             }
             
             Section {
                 NavigationLink(value: "Transfer or Reset") {
-                    SettingsCell("Transfer or Reset", color: .gray, symbol: "arrow.counterclockwise")
+                    SettingsCell("Transfer or Reset", symbol: "com.apple.graphic-icon.transfer-or-reset-iphone")
                 }
             }
         }
@@ -102,5 +102,5 @@ struct GeneralView: View {
 
 #Preview {
     ContentView()
-        .frame(height: 500)
+        .frame(height: 600)
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeIcons</key>
+			<dict>
+				<key>ISGraphicIconConfiguration</key>
+				<dict>
+					<key>ISEnclosureColor</key>
+					<string>gray</string>
+					<key>ISSymbolColor</key>
+					<string>white</string>
+					<key>ISSymbolName</key>
+					<string>figure.walk.triangle.fill</string>
+				</dict>
+			</dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.example.graphic-icon.sharing</string>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeIcons</key>
+			<dict>
+				<key>ISGraphicIconConfiguration</key>
+				<dict>
+					<key>ISEnclosureColor</key>
+					<string>gray</string>
+					<key>ISSymbolColor</key>
+					<string>white</string>
+					<key>ISSymbolName</key>
+					<string>list.bullet</string>
+				</dict>
+			</dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.example.graphic-icon.login-items</string>
+		</dict>
+	</array>
+</dict>
+</plist>
