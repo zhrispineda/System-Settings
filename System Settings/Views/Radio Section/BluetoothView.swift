@@ -15,9 +15,8 @@ struct BluetoothView: View {
         CustomForm(title: "bluetooth".localize(table: "Bluetooth")) {
             Section {
                 HStack(alignment: .top, spacing: 15) {
-                    IconView("bluetooth", color: .blue)
-                        .scaleEffect(1.3)
-                        .padding(.top, 2)
+                    TestIconView(icon: "com.apple.graphic-icon.bluetooth", size: 32)
+                        .padding(-8)
                     Toggle(isOn: $bluetoothEnabled) {
                         Text(table.bluetooth)
                         Text("\(table.bluetoothTechDescription) [\(table.learnMore)](help:anchor=blth1004)")

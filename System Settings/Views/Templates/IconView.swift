@@ -4,6 +4,31 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
+
+// MARK: Experimental; to replace IconView
+struct TestIconView: View {
+    let icon: String
+    let size: CGFloat
+
+    var body: some View {
+        if let nsImage = iconImage {
+            Image(nsImage: nsImage)
+                .resizable()
+                .frame(width: size, height: size)
+        }
+    }
+
+    private var iconImage: NSImage? {
+        guard let type = UTType(icon) else { return nil }
+        let originalIcon = NSWorkspace.shared.icon(for: type)
+        guard let imageData = originalIcon.tiffRepresentation,
+              let refreshedImage = NSImage(data: imageData) else {
+            return originalIcon
+        }
+        return refreshedImage
+    }
+}
 
 struct IconView: View {
     var symbol: String

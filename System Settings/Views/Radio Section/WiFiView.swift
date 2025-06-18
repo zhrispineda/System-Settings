@@ -27,9 +27,8 @@ struct WiFiView: View {
         CustomForm(title: "Wi‑Fi".localize(table: "Wi-Fi")) {
             Section {
                 HStack(alignment: .top, spacing: 15) {
-                    IconView("wifi", color: .blue)
-                        .scaleEffect(1.3)
-                        .padding(.top, 2)
+                    TestIconView(icon: "com.apple.graphic-icon.wifi", size: 32)
+                        .padding(-8)
                     Toggle(isOn: $WiFiEnabled) {
                         Text(table.wiFi)
                         Text("\(table.setUpWiFiToWirelesslyConnectYourMacToTheInternetTurnOnWiFiThenChooseANetworkToJoin) [\(table.learnMore)](help:anchor=mchlp1180)")

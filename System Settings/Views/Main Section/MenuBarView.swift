@@ -1,5 +1,5 @@
 //
-//  ControlCenterView.swift
+//  MenuBarView.swift
 //  System Settings
 //
 //  System Settings > Menu Bar
@@ -290,3 +290,4 @@ struct MenuBarView: View {
     MenuBarView()
         .frame(height: 700)
 }
+
