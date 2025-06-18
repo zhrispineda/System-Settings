@@ -48,7 +48,7 @@ struct SettingsItem: Identifiable, Hashable {
     let type: SettingsOptions
     var title: String { type.rawValue }
     let icon: String
-    var color = Color.accentColor
+    var color = Color.blue
     let destination: AnyView
     
     static func == (lhs: SettingsItem, rhs: SettingsItem) -> Bool {
@@ -67,52 +67,52 @@ let accountOptions: [SettingsItem] = [
 
 @MainActor
 let radioOptions: [SettingsItem] = [
-    SettingsItem(type: .wifi, icon: "wifi", color: .blue, destination: AnyView(WiFiView())),
-    SettingsItem(type: .bluetooth, icon: "bluetooth", color: .blue, destination: AnyView(BluetoothView())),
-    SettingsItem(type: .network, icon: "network", color: .blue, destination: AnyView(NetworkView())),
-    SettingsItem(type: .battery, icon: "battery.100", color: .green, destination: AnyView(BatteryView()))
+    SettingsItem(type: .wifi, icon: "com.apple.graphic-icon.wifi", destination: AnyView(WiFiView())),
+    SettingsItem(type: .bluetooth, icon: "com.apple.graphic-icon.bluetooth", destination: AnyView(BluetoothView())),
+    SettingsItem(type: .network, icon: "com.apple.graphic-icon.local-network", destination: AnyView(NetworkView())),
+    SettingsItem(type: .battery, icon: "com.apple.graphic-icon.battery", destination: AnyView(BatteryView()))
 ]
 
 @MainActor
 let mainOptions: [SettingsItem] = [
-    SettingsItem(type: .general, icon: "gear", color: .gray, destination: AnyView(GeneralView())),
-    SettingsItem(type: .accessibility, icon: "accessibility", color: .blue, destination: AnyView(AccessibilityView())),
-    SettingsItem(type: .appearance, icon: "appearance.lightmode", color: .black, destination: AnyView(AppearanceView())),
-    SettingsItem(type: .menuBar, icon: "menubar.rectangle", color: .gray, destination: AnyView(MenuBarView())),
-    SettingsItem(type: .siri, icon: "siri", destination: AnyView(SiriView())),
-    SettingsItem(type: .desktopDock, icon: "menubar.dock.rectangle", color: .black, destination: AnyView(DesktopDockView())),
-    SettingsItem(type: .displays, icon: "sun.max.fill", color: .blue, destination: AnyView(DisplaysView())),
-    SettingsItem(type: .spotlight, icon: "magnifyingglass", color: .blue, destination: AnyView(SpotlightView())),
-    SettingsItem(type: .wallpaper, icon: "apple.photos", color: .cyan, destination: AnyView(WallpaperView()))
+    SettingsItem(type: .general, icon: "com.apple.graphic-icon.gear", destination: AnyView(GeneralView())),
+    SettingsItem(type: .accessibility, icon: "com.apple.graphic-icon.accessibility", destination: AnyView(AccessibilityView())),
+    SettingsItem(type: .appearance, icon: "com.apple.graphic-icon.dark-mode", destination: AnyView(AppearanceView())),
+    SettingsItem(type: .menuBar, icon: "com.apple.controlcenter.settings", destination: AnyView(MenuBarView())),
+    SettingsItem(type: .siri, icon: "com.apple.application-icon.apple-intelligence", destination: AnyView(SiriView())),
+    SettingsItem(type: .desktopDock, icon: "com.apple.graphic-icon.desktop", destination: AnyView(DesktopDockView())),
+    SettingsItem(type: .displays, icon: "com.apple.graphic-icon.display", destination: AnyView(DisplaysView())),
+    SettingsItem(type: .spotlight, icon: "com.apple.graphic-icon.search", destination: AnyView(SpotlightView())),
+    SettingsItem(type: .wallpaper, icon: "com.apple.graphic-icon.wallpaper", destination: AnyView(WallpaperView()))
 ]
 
 @MainActor
 let focusOptions: [SettingsItem] = [
-    SettingsItem(type: .notifications, icon: "bell.badge.fill", color: .red, destination: AnyView(NotificationsView())),
-    SettingsItem(type: .sound, icon: "speaker.3.fill", color: .pink, destination: AnyView(SoundView())),
-    SettingsItem(type: .focus, icon: "moon.fill", color: .indigo, destination: AnyView(FocusView())),
-    SettingsItem(type: .screenTime, icon: "hourglass", color: .indigo, destination: AnyView(ScreenTimeView()))
+    SettingsItem(type: .notifications, icon: "com.apple.graphic-icon.notifications", destination: AnyView(NotificationsView())),
+    SettingsItem(type: .sound, icon: "com.apple.graphic-icon.sound", destination: AnyView(SoundView())),
+    SettingsItem(type: .focus, icon: "com.apple.graphic-icon.focus", destination: AnyView(FocusView())),
+    SettingsItem(type: .screenTime, icon: "com.apple.graphic-icon.screen-time", destination: AnyView(ScreenTimeView()))
 ]
 
 @MainActor
 let authOptions: [SettingsItem] = [
-    SettingsItem(type: .lockScreen, icon: "lock.dots.fill", color: .black, destination: AnyView(LockScreenView())),
-    SettingsItem(type: .privacySecurity, icon: "hand.raised.fill", color: .blue, destination: AnyView(PrivacySecurityView())),
-    SettingsItem(type: .touchIDPassword, icon: "touchid", color: .white, destination: AnyView(PasswordView())),
-    SettingsItem(type: .usersGroups, icon: "person.2.fill", color: .blue, destination: AnyView(UsersGroupsView()))
+    SettingsItem(type: .lockScreen, icon: "com.apple.controlcenter.lockscreen", destination: AnyView(LockScreenView())),
+    SettingsItem(type: .privacySecurity, icon: "com.apple.graphic-icon.privacy", destination: AnyView(PrivacySecurityView())),
+    SettingsItem(type: .touchIDPassword, icon: "com.apple.graphic-icon.touch-id", destination: AnyView(PasswordView())),
+    SettingsItem(type: .usersGroups, icon: "com.apple.graphic-icon.group", destination: AnyView(UsersGroupsView()))
 ]
 
 @MainActor
 let serviceOptions: [SettingsItem] = [
-    SettingsItem(type: .internetAccounts, icon: "at", color: .blue, destination: AnyView(InternetAccountsView())),
-    SettingsItem(type: .gameCenter, icon: "Game Center", destination: AnyView(GameCenterView())),
-    SettingsItem(type: .icloud, icon: "iCloud", destination: AnyView(SignInView())),
-    SettingsItem(type: .walletApplePay, icon: "Wallet", destination: AnyView(WalletView()))
+    SettingsItem(type: .internetAccounts, icon: "com.apple.accounts.generic-account", destination: AnyView(InternetAccountsView())),
+    SettingsItem(type: .gameCenter, icon: "Game Center", color: .accentColor, destination: AnyView(GameCenterView())),
+    SettingsItem(type: .icloud, icon: "iCloud", color: .accentColor, destination: AnyView(SignInView())),
+    SettingsItem(type: .walletApplePay, icon: "Wallet", color: .accentColor, destination: AnyView(WalletView()))
 ]
 
 @MainActor
 let inputOptions: [SettingsItem] = [
-    SettingsItem(type: .keyboard, icon: "keyboard.fill", color: .gray, destination: AnyView(KeyboardView())),
-    SettingsItem(type: .trackpad, icon: "rectangle.and.hand.point.up.left.fill", color: .gray, destination: AnyView(TrackpadView())),
-    SettingsItem(type: .printersScanners, icon: "printer.fill", color: .gray, destination: AnyView(PrintersScannersView()))
+    SettingsItem(type: .keyboard, icon: "com.apple.graphic-icon.keyboard", destination: AnyView(KeyboardView())),
+    SettingsItem(type: .trackpad, icon: "com.apple.graphic-icon.trackpad-and-mouse", destination: AnyView(TrackpadView())),
+    SettingsItem(type: .printersScanners, icon: "com.apple.graphic-icon.printer-sharing", destination: AnyView(PrintersScannersView()))
 ]

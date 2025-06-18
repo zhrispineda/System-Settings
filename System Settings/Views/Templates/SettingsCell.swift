@@ -13,8 +13,6 @@ struct SettingsCell: View {
     let symbol: String
     let shadow: Bool
     
-    private let imageIcons: Set<String> = ["FaceTime", "Find My", "Home", "iCloud", "Kerberos", "Messages", "Wallet", "Tips", "Wallet_Notification"]
-    
     init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, shadow: Bool = true) {
         self.title = title
         self.subtitle = subtitle
@@ -26,40 +24,30 @@ struct SettingsCell: View {
     var body: some View {
         HStack {
             if color == .accentColor {
-                if imageIcons.contains(symbol) {
-                    switch symbol {
-                    case "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
-                        Image(symbol)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25)
-                            .padding(.leading, -2.5)
-                            .padding(.trailing, -2)
-                            .mask {
-                                RoundedRectangle(cornerRadius: 5.0)
-                                    .foregroundStyle(color.gradient)
-                                    .shadow(radius: 0.3, y: 0.3)
-                            }
-                    default:
-                        Image(symbol)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: symbol == "Wallet" ? 24 : 20)
-                            .padding(.leading, symbol == "Wallet" ? -2 : 0)
-                            .mask {
-                                RoundedRectangle(cornerRadius: 5.0)
-                                    .foregroundStyle(color.gradient)
-                                    .shadow(radius: 0.3, y: 0.3)
-                            }
-                    }
-                } else {
-                    Image(title)
+                switch symbol {
+                case "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
+                    Image(symbol)
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 25)
+                        .frame(width: 25)
                         .padding(.leading, -2.5)
-                        .padding(.trailing, -5)
-                        .padding(.vertical, -2.5)
+                        .padding(.trailing, -2)
+                        .mask {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .foregroundStyle(color.gradient)
+                                .shadow(radius: 0.3, y: 0.3)
+                        }
+                default:
+                    Image(symbol)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.horizontal, symbol == "iCloud" ? 2 : 0)
+                        .frame(width: symbol == "Wallet" || symbol == "Game Center" || symbol == "iCloud" ? 24 : 20)
+                        .mask {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .foregroundStyle(color.gradient)
+                                .padding(.horizontal, symbol == "iCloud" ? 2 : 0)
+                        }
                 }
             } else if symbol.contains("com.") {
                 TestIconView(icon: symbol, size: 24)

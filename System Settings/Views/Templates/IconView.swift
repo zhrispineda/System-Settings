@@ -67,57 +67,14 @@ struct IconView: View {
                 .foregroundStyle(color.gradient)
                 .scaledToFit()
                 .frame(width: CGFloat(size), height: CGFloat(size))
-            switch symbol {
-            case "Apple Intelligence & Siri":
-                Image(.appleIntelligenceSiri)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 25, height: 25)
-                    .symbolRenderingMode(.multicolor)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
-                    .offset(y: -3)
-            case "weather":
-                Image(.weather)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 25, height: 25)
-                    .symbolRenderingMode(.multicolor)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
-                    .offset(x: -2)
-            case "touchid":
-                Image(_internalSystemName: symbol)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 15, height: 15)
-                    .symbolRenderingMode(.multicolor)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
-            case "calendar.badge.clock":
-                Image(_internalSystemName: symbol)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 15, height: 15)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
-                    .padding(.top, 2)
-                    .padding(.leading, 3)
-            case "pencil.and.ellipsis.rectangle":
-                Image(_internalSystemName: symbol)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 15, height: 15)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
-                    .padding([.bottom, .leading], 2)
-            case "play.fill", "moon.fill":
-                Image(_internalSystemName: symbol)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 12, height: 12)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
-            default:
+            if symbol.contains("com.") {
+                TestIconView(icon: symbol, size: 24)
+                    .padding(.trailing, -2)
+            } else {
                 Image(_internalSystemName: symbol)
                     .font(.callout)
                     .frame(width: 14, height: 14)
-                    .foregroundStyle(.white.shadow(.drop(radius: 1.5, y: 0.0)))
-                    .padding([.top, .leading], symbol == "rectangle.and.hand.point.up.left.fill" ? 2 : 0)
+                    .foregroundStyle(.white)
             }
         }
     }

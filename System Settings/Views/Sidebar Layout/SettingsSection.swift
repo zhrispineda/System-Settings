@@ -19,8 +19,7 @@ struct SettingsSection: View {
                             path = NavigationPath()
                         } label: {
                             HStack(spacing: 8) {
-                                IconView(setting.icon, color: .gray)
-                                    .shadow(radius: 0.0, y: 0.3)
+                                IconView(setting.icon, color: .clear)
                                 Text(setting.title)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
