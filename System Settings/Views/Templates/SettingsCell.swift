@@ -13,9 +13,9 @@ struct SettingsCell: View {
     let symbol: String
     let shadow: Bool
     
-    private let imageIcons: Set<String> = ["Coverage", "FaceTime", "Find My", "Home", "iCloud", "Kerberos", "Messages", "Wallet", "TimeMachine", "Tips", "Wallet_Notification"]
+    private let imageIcons: Set<String> = ["FaceTime", "Find My", "Home", "iCloud", "Kerberos", "Messages", "Wallet", "TimeMachine", "Tips", "Wallet_Notification"]
     
-    init(_ title: String, subtitle: String = "", color: Color, symbol: String, shadow: Bool = true) {
+    init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, shadow: Bool = true) {
         self.title = title
         self.subtitle = subtitle
         self.color = color
@@ -28,7 +28,7 @@ struct SettingsCell: View {
             if color == .accentColor {
                 if imageIcons.contains(symbol) {
                     switch symbol {
-                    case "Coverage", "TimeMachine", "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
+                    case "TimeMachine", "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
                         Image(symbol)
                             .resizable()
                             .scaledToFit()
@@ -61,22 +61,22 @@ struct SettingsCell: View {
                         .padding(.trailing, -5)
                         .padding(.vertical, -2.5)
                 }
-            } else if shadow {
-                IconView(symbol, color: color)
-                    .shadow(radius: 0.0, y: 0.3)
+            } else if symbol.contains("com.apple") {
+                TestIconView(icon: symbol, size: 24)
             } else {
                 IconView(symbol, color: color)
+                    .shadow(radius: 0.0, y: 0.3)
             }
             
             LabeledContent {} label: {
                 Text(title)
                     .foregroundStyle(appearsActive ? .primary : .secondary)
+                    .padding(.leading, -2)
                 if !subtitle.isEmpty {
                     Text(subtitle)
                         .foregroundStyle(appearsActive ? .secondary : .tertiary)
                 }
             }
-            .padding(.leading, title == "AirDrop" ? 1 : 0)
         }
     }
 }

@@ -16,9 +16,9 @@ struct GeneralView: View {
             // Placard
             Section {
                 VStack(spacing: 5) {
-                    IconView("gear", color: .gray)
-                        .scaleEffect(2.5)
-                        .padding(.top, 30)
+                    TestIconView(icon: "com.apple.graphic-icon.gear", size: 64)
+                        .padding(.top, 8)
+                        .padding(.bottom, -19)
                         .overlay {
                             DividerGeometryView(dividerOpacity: $titleOpacity)
                         }
@@ -35,40 +35,41 @@ struct GeneralView: View {
                 .multilineTextAlignment(.center)
                 .navigationTitle(titleOpacity > 37.0 ? "General".localize(table: table) : "")
             }
-            
+
+
             Section {
                 NavigationLink(value: "About") {
-                    SettingsCell("About", color: .gray, symbol: "macbook")
+                    SettingsCell("About", symbol: "com.apple.graphic-icon.about-current-device")
                 }
                 NavigationLink(value: "Software Update") {
-                    SettingsCell("Software Update", color: .gray, symbol: "gear.badge")
+                    SettingsCell("Software Update", symbol: "com.apple.graphic-icon.software-update")
                 }
                 NavigationLink(value: "Storage") {
-                    SettingsCell("Storage", color: .gray, symbol: "externaldrive.fill")
+                    SettingsCell("Storage", color: .gray, symbol: "com.apple.settings.PrivacySecurity.extension.privacy-blockDevice")
                 }
             }
             
             Section {
                 NavigationLink(value: "AppleCare & Warranty") {
-                    SettingsCell("AppleCare & Warranty", color: .accentColor, symbol: "Coverage")
+                    SettingsCell("AppleCare & Warranty", symbol: "com.apple.graphic-icon.applecare")
                 }
             }
             
             Section {
                 NavigationLink(value: "AirDrop & Handoff") {
-                    SettingsCell("AirDrop & Handoff", color: .white, symbol: "airdrop")
+                    SettingsCell("AirDrop & Handoff", symbol: "com.apple.graphic-icon.airdrop")
                 }
             }
             
             Section {
                 NavigationLink(value: "AutoFill & Passwords") {
-                    SettingsCell("AutoFill & Passwords", color: .gray, symbol: "pencil.and.ellipsis.rectangle")
+                    SettingsCell("AutoFill & Passwords", color: .gray, symbol: "com.apple.Passwords-Settings.AutoFill")
                 }
                 NavigationLink(value: "Date & Time") {
-                    SettingsCell("Date & Time", color: .blue, symbol: "calendar.badge.clock")
+                    SettingsCell("Date & Time", color: .blue, symbol: "com.apple.graphic-icon.date-and-time")
                 }
                 NavigationLink(value: "Language & Region") {
-                    SettingsCell("Language & Region", color: .blue, symbol: "globe")
+                    SettingsCell("Language & Region", color: .blue, symbol: "com.apple.graphic-icon.language")
                 }
                 NavigationLink(value: "Login Items & Extensions") {
                     SettingsCell("Login Items & Extensions", color: .gray, symbol: "list.bullet")

@@ -35,9 +35,11 @@ struct PrintersScannersView: View {
                     .foregroundStyle(.secondary)
                     .font(.footnote)
             } footer: {
-                Spacer()
-                Button("ADD_PRINTER_ETC".localize(table: table)) {}
-                HelpButton(topicID: "prtct004")
+                HStack {
+                    Spacer()
+                    Button("ADD_PRINTER_ETC".localize(table: table)) {}
+                    HelpButton(topicID: "prtct004")
+                }
             }
         }
     }

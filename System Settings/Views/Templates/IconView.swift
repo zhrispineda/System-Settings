@@ -72,7 +72,7 @@ struct IconView: View {
                     .symbolRenderingMode(.multicolor)
                     .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
                     .offset(x: -2)
-            case "airdrop", "touchid":
+            case "touchid":
                 Image(_internalSystemName: symbol)
                     .resizable()
                     .scaledToFit()
@@ -102,8 +102,7 @@ struct IconView: View {
                     .foregroundStyle(.white.shadow(.drop(radius: 1, y: 0.5)))
             default:
                 Image(_internalSystemName: symbol)
-                    .resizable()
-                    .scaledToFit()
+                    .font(.callout)
                     .frame(width: 14, height: 14)
                     .foregroundStyle(.white.shadow(.drop(radius: 1.5, y: 0.0)))
                     .padding([.top, .leading], symbol == "rectangle.and.hand.point.up.left.fill" ? 2 : 0)
