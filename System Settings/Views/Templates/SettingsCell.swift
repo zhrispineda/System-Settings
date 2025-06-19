@@ -42,7 +42,7 @@ struct SettingsCell: View {
                         .resizable()
                         .scaledToFit()
                         .padding(.horizontal, symbol == "iCloud" ? 2 : 0)
-                        .frame(width: symbol == "Wallet" || symbol == "Game Center" || symbol == "iCloud" ? 24 : 20)
+                        .frame(width: symbol == "Wallet" || symbol == "iCloud" ? 24 : 20)
                         .mask {
                             RoundedRectangle(cornerRadius: 5.0)
                                 .foregroundStyle(color.gradient)

@@ -105,8 +105,8 @@ let authOptions: [SettingsItem] = [
 @MainActor
 let serviceOptions: [SettingsItem] = [
     SettingsItem(type: .internetAccounts, icon: "com.apple.accounts.generic-account", destination: AnyView(InternetAccountsView())),
-    SettingsItem(type: .gameCenter, icon: "Game Center", color: .accentColor, destination: AnyView(GameCenterView())),
-    SettingsItem(type: .icloud, icon: "iCloud", color: .accentColor, destination: AnyView(SignInView())),
+    SettingsItem(type: .gameCenter, icon: "com.apple.gamecenter.bubbles", destination: AnyView(GameCenterView())),
+    SettingsItem(type: .icloud, icon: "com.apple.application-icon.icq.icloud", destination: AnyView(SignInView())),
     SettingsItem(type: .walletApplePay, icon: "Wallet", color: .accentColor, destination: AnyView(WalletView()))
 ]
 

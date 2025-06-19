@@ -8,7 +8,7 @@ import UniformTypeIdentifiers
 
 struct BundleIconView: View {
     let bundlePath: String
-    let icon: String
+    var icon: String = "AppIcon"
     let size: CGFloat
 
     var body: some View {

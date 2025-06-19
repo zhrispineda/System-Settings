@@ -16,7 +16,7 @@ struct NetworkView: View {
             Section {
                 // Wi-Fi
                 NavigationLink {} label: {
-                    NetworkStatusView("Wi-Fi", status: .notConnected, symbol: "wifi", color: .blue)
+                    NetworkStatusView("Wi-Fi", status: .notConnected, symbol: "com.apple.graphic-icon.wifi", color: .blue)
                 }
             }
             
@@ -111,9 +111,14 @@ struct NetworkStatusView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
-            IconView(symbol, color: color)
-                .scaleEffect(1.3)
-                .padding(.top, 2)
+            if symbol.contains("com.") {
+                TestIconView(icon: symbol, size: 32)
+                    .padding(-8)
+            } else {
+                IconView(symbol, color: color)
+                    .scaleEffect(1.3)
+                    .padding(.top, 2)
+            }
             VStack(alignment: .leading) {
                 Text(titleKey)
                 HStack(spacing: 5) {

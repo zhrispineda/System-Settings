@@ -81,7 +81,11 @@ struct AppearanceView: View {
             }
 
             Section {
-                Text("Icon & widget style")
+                HStack {
+                    Text("Icon & widget style")
+                    Spacer()
+                    BundleIconView(bundlePath: "/System/Applications/Weather.app", size: 36)
+                }
                 Picker("Folder color", selection: $selectedFolderColor) {
                     ForEach(FolderColor.allCases) { option in
                         if FolderColor.automatic == option || FolderColor.graphite == option {
