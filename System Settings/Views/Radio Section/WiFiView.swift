@@ -26,7 +26,12 @@ struct WiFiView: View {
     var body: some View {
         CustomForm(title: "Wi‑Fi".localize(table: "Wi-Fi")) {
             Section {
-                PlacardToggle(isOn: .constant(false), icon: "com.apple.graphic-icon.wifi", title: Text(table.wiFi), subtitle: Text("\(table.setUpWiFiToWirelesslyConnectYourMacToTheInternetTurnOnWiFiThenChooseANetworkToJoin) [\(table.learnMore)](help:anchor=mchlp1180)"), disabled: true)
+                PlacardToggle(isOn: .constant(false), icon: "com.apple.graphic-icon.wifi") {
+                    Text(table.wiFi)
+                    Text("\(table.setUpWiFiToWirelesslyConnectYourMacToTheInternetTurnOnWiFiThenChooseANetworkToJoin) [\(table.learnMore)](help:anchor=mchlp1180)")
+                        .padding(.top, -0.5)
+                }
+                .disabled(true)
                 HStack {
                     Image(systemName: "circle.fill")
                         .foregroundStyle(.red)

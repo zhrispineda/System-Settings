@@ -6,12 +6,10 @@
 import SwiftUI
 
 /// A placard view that displays an icon and a large toggle alongside a title, subtitle, and learn more link.
-struct PlacardToggle: View {
+struct PlacardToggle<Content: View>: View {
     @Binding var isOn: Bool
     let icon: String
-    let title: Text
-    let subtitle: Text
-    var disabled = false
+    @ViewBuilder let content: Content
 
     var body: some View {
         HStack(alignment: .top, spacing: 14) {
@@ -20,16 +18,16 @@ struct PlacardToggle: View {
                 .padding(.leading, -2)
                 .padding(.trailing, -6)
             Toggle(isOn: $isOn) {
-                title
-                subtitle
-                    .padding(.top, -0.5)
+                content
             }
             .controlSize(.large)
-            .disabled(disabled)
         }
     }
 }
 
 #Preview {
-    PlacardToggle(isOn: .constant(false), icon: "Icon", title: Text("Title"), subtitle: Text("Subtitle"))
+    PlacardToggle(isOn: .constant(false), icon: "Icon") {
+        Text("Title")
+        Text("Subtitle")
+    }
 }

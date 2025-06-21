@@ -14,7 +14,11 @@ struct BluetoothView: View {
     var body: some View {
         CustomForm(title: "bluetooth".localize(table: "Bluetooth")) {
             Section {
-                PlacardToggle(isOn: $bluetoothEnabled, icon: "com.apple.graphic-icon.bluetooth", title: Text(table.bluetooth), subtitle: Text("\(table.bluetoothTechDescription) [\(table.learnMore)](help:anchor=blth1004)"))
+                PlacardToggle(isOn: $bluetoothEnabled, icon: "com.apple.graphic-icon.bluetooth") {
+                    Text(table.bluetooth)
+                    Text("\(table.bluetoothTechDescription)[\(table.learnMore)](help:anchor=blth1004)")
+                        .font(.callout)
+                }
 
                 Text(bluetoothEnabled ? table.nowDiscoverableAsMac(Host.current().localizedName ?? "Mac") : table.bluetoothControllerOff)
                     .font(.callout)
