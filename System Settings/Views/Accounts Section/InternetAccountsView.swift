@@ -16,8 +16,11 @@ struct InternetAccountsView: View {
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .center)
             } footer: {
-                Button("Add Account…") {}
-                HelpButton(topicID: "mh35705")
+                HStack {
+                    Button("Add Account…") {}
+                    HelpButton(topicID: "mh35705")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }
