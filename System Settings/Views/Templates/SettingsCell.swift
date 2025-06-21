@@ -28,28 +28,13 @@ struct SettingsCell: View {
     var body: some View {
         HStack {
             if color == .accentColor {
-                switch symbol {
-                case "Messages", "Tips", "Wallet_Notification":
-                    Image(symbol)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25)
-                        .padding(.leading, -2.5)
-                        .padding(.trailing, -2)
-                        .mask {
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .foregroundStyle(color.gradient)
-                                .shadow(radius: 0.3, y: 0.3)
-                        }
-                default:
-                    Image(symbol)
-                        .resizable()
-                        .scaledToFit()
-                        .mask {
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .foregroundStyle(color.gradient)
-                        }
-                }
+                Image(symbol)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .mask {
+                        RoundedRectangle(cornerRadius: 5.0)
+                            .foregroundStyle(color.gradient)
+                    }
             } else if symbol.contains("com.") {
                 TestIconView(icon: symbol, size: 24)
                     .padding(.leading, sidebar ? -2 : 0)
