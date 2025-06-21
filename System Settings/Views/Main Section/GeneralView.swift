@@ -81,7 +81,7 @@ struct GeneralView: View {
                     SettingsCell("Startup Disk", symbol: "com.apple.graphic-icon.internal-drive")
                 }
                 NavigationLink(value: "Time Machine") {
-                    SettingsCell("Time Machine", symbol: "TimeMachineSettingsIcon")
+                    SettingsCell("Time Machine", symbol: "/System/Library/ExtensionKit/Extensions/TimeMachineSettings.appex", icon: "TimeMachineSettingsIcon")
                 }
             }
             

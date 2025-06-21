@@ -55,7 +55,7 @@ struct IconView: View {
     var color: Color
     var size: Int
 
-    init(_ symbol: String, color: Color, size: Int = 19) {
+    init(_ symbol: String, color: Color = .blue, size: Int = 19) {
         self.symbol = symbol
         self.color = color
         self.size = size

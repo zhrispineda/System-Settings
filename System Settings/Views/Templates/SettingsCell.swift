@@ -11,21 +11,25 @@ struct SettingsCell: View {
     let subtitle: String
     let color: Color
     let symbol: String
+    let icon: String
     let shadow: Bool
-    
-    init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, shadow: Bool = true) {
+    let sidebar: Bool
+
+    init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, icon: String = "AppIcon", shadow: Bool = true, sidebar: Bool = false) {
         self.title = title
         self.subtitle = subtitle
         self.color = color
         self.symbol = symbol
+        self.icon = icon
         self.shadow = shadow
+        self.sidebar = sidebar
     }
     
     var body: some View {
         HStack {
             if color == .accentColor {
                 switch symbol {
-                case "FaceTime", "Find My", "Home", "Kerberos", "Messages", "Tips", "Wallet_Notification":
+                case "Messages", "Tips", "Wallet_Notification":
                     Image(symbol)
                         .resizable()
                         .scaledToFit()
@@ -41,27 +45,26 @@ struct SettingsCell: View {
                     Image(symbol)
                         .resizable()
                         .scaledToFit()
-                        .padding(.horizontal, symbol == "iCloud" ? 2 : 0)
-                        .frame(width: symbol == "Wallet" || symbol == "iCloud" ? 24 : 20)
                         .mask {
                             RoundedRectangle(cornerRadius: 5.0)
                                 .foregroundStyle(color.gradient)
-                                .padding(.horizontal, symbol == "iCloud" ? 2 : 0)
                         }
                 }
             } else if symbol.contains("com.") {
                 TestIconView(icon: symbol, size: 24)
-            } else if symbol == "TimeMachineSettingsIcon" {
-                BundleIconView(bundlePath: "/System/Library/ExtensionKit/Extensions/TimeMachineSettings.appex", icon: symbol, size: 24)
+                    .padding(.leading, sidebar ? -2 : 0)
+            } else if symbol.contains("/") {
+                BundleIconView(bundlePath: symbol, icon: icon, size: 24)
+                    .padding(.leading, symbol.contains("Wallet") ? -2 : 0)
             } else {
                 IconView(symbol, color: color)
                     .shadow(radius: 0.0, y: 0.3)
             }
-            
+
             LabeledContent {} label: {
                 Text(title)
                     .foregroundStyle(appearsActive ? .primary : .secondary)
-                    .padding(.leading, -2)
+                    .padding(.leading, sidebar ? -5 : -2)
                 if !subtitle.isEmpty {
                     Text(subtitle)
                         .foregroundStyle(appearsActive ? .secondary : .tertiary)

@@ -18,9 +18,8 @@ struct NotificationsView: View {
         CustomForm(title: "Notifications") {
             Section {
                 HStack(alignment: .top, spacing: 15) {
-                    IconView("bell.badge.fill", color: .red)
-                        .scaleEffect(1.3)
-                        .padding(.top, 2)
+                    TestIconView(icon: "com.apple.graphic-icon.notifications", size: 32)
+                        .padding(.horizontal, -6)
                     VStack(alignment: .leading) {
                         Text("Notifications")
                         Text("Customize when and how notifications appear, if they play a sound, and which apps can send them. [Learn more…](help:anchor=mchl205da693)")
@@ -44,19 +43,19 @@ struct NotificationsView: View {
                 Text("Notification Center")
                 Text("Notification Center shows your notifications in the top-right corner of your screen. You can show and hide Notification Center by clicking the clock in the menu bar.")
             }
-            
+
             Section {
                 NavigationLink(value: "FaceTime") {
-                    SettingsCell("FaceTime", subtitle: "Badges, Sounds, Banners", color: .accentColor, symbol: "FaceTime")
+                    SettingsCell("FaceTime", subtitle: "Badges, Sounds, Banners", symbol: "/System/Applications/FaceTime.app")
                 }
                 NavigationLink(value: "Find My") {
-                    SettingsCell("Find My", subtitle: "Badges, Sounds", color: .accentColor, symbol: "Find My")
+                    SettingsCell("Find My", subtitle: "Badges, Sounds", symbol: "/System/Applications/FindMy.app")
                 }
                 NavigationLink(value: "Home") {
-                    SettingsCell("Home", subtitle: "Badges, Sounds, Time Sensitive", color: .accentColor, symbol: "Home")
+                    SettingsCell("Home", subtitle: "Badges, Sounds, Time Sensitive", symbol: "/System/Applications/Home.app")
                 }
                 NavigationLink(value: "Kerberos") {
-                    SettingsCell("Kerberos", subtitle: "Badges, Sounds, Alerts", color: .accentColor, symbol: "Kerberos")
+                    SettingsCell("Kerberos", subtitle: "Badges, Sounds, Alerts", symbol: "/System/Library/CoreServices/SecurityAgentPlugins/KerberosAgent.bundle", icon: "KerberosApp")
                 }
                 NavigationLink(value: "Messages") {
                     SettingsCell("Messages", subtitle: "Badges, Sounds, Banners, Critical", color: .accentColor, symbol: "Messages")

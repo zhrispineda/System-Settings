@@ -18,17 +18,16 @@ struct SettingsSection: View {
                         Button  {
                             path = NavigationPath()
                         } label: {
-                            HStack(spacing: 8) {
+                            HStack(spacing: 5) {
                                 IconView(setting.icon, color: .clear)
                                 Text(setting.title)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
-                            .padding(.leading, 2)
                         }
                         .buttonStyle(SelectedButtonStyle())
                     } else {
-                        SettingsCell(setting.title, color: setting.color, symbol: setting.icon)
+                        SettingsCell(setting.title, color: setting.color, symbol: setting.icon, sidebar: true)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
