@@ -58,10 +58,10 @@ struct NotificationsView: View {
                     SettingsCell("Kerberos", subtitle: "Badges, Sounds, Alerts", symbol: "/System/Library/CoreServices/SecurityAgentPlugins/KerberosAgent.bundle", icon: "KerberosApp")
                 }
                 NavigationLink(value: "Messages") {
-                    SettingsCell("Messages", subtitle: "Badges, Sounds, Banners, Critical", color: .accentColor, symbol: "Messages")
+                    SettingsCell("Messages", subtitle: "Badges, Sounds, Banners, Critical", symbol: "/System/Applications/Messages.app")
                 }
                 NavigationLink(value: "Tips") {
-                    SettingsCell("Tips", subtitle: "Alerts", color: .accentColor, symbol: "Tips")
+                    SettingsCell("Tips", subtitle: "Alerts", symbol: "/System/Applications/Tips.app")
                 }
                 NavigationLink(value: "Wallet") {
                     SettingsCell("Wallet", subtitle: "Badges, Sounds, Time Sensitive", color: .accentColor, symbol: "Wallet_Notification")

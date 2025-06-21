@@ -41,7 +41,7 @@ struct SelectedButtonStyle: ButtonStyle {
         configuration.label
             .padding(.horizontal, 4)
             .background(
-                RoundedRectangle(cornerRadius: 5.0)
+                RoundedRectangle(cornerRadius: 8.0)
                     .foregroundStyle(configuration.isPressed ? Color(NSColor.selectedContentBackgroundColor).opacity(0.2) : Color.clear)
                     .padding(.vertical, -4)
             )

@@ -24,9 +24,8 @@ struct SiriView: View {
         CustomForm(title: "SIRI_TITLE".localize(table: table)) {
             Section {
                 HStack(alignment: .top, spacing: 15) {
-                    IconView("Apple Intelligence & Siri", color: .clear)
+                    TestIconView(icon: "com.apple.application-icon.apple-intelligence", size: 32)
                         .symbolRenderingMode(.multicolor)
-                        .scaleEffect(1.3)
                         .overlay {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15.0)
