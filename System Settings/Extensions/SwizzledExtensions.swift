@@ -5,32 +5,28 @@
 
 import SwiftUI
 
+// Disables functionality related to collapsing and re-sizing the sidebar
 extension NSSplitViewItem {
-    @objc fileprivate var canCollapseSwizzled: Bool {
-        return false
-    }
+    @objc private var canCollapseSwizzled: Bool { false }
 
     static func swizzle() {
-        let canCollapse = #selector(getter: NSSplitViewItem.canCollapse)
-        let swizzledSelector = #selector(getter: canCollapseSwizzled)
-        
-        if let originalMethod = class_getInstanceMethod(self as AnyClass, canCollapse),
-           let swizzledMethod = class_getInstanceMethod(self as AnyClass, swizzledSelector) {
-            method_exchangeImplementations(originalMethod, swizzledMethod)
-        }
+        guard
+            let original = class_getInstanceMethod(self, #selector(getter: NSSplitViewItem.canCollapse)),
+            let swizzled = class_getInstanceMethod(self, #selector(getter: canCollapseSwizzled))
+        else { return }
+        method_exchangeImplementations(original, swizzled)
     }
 }
 
+// Disables right-click menus (temporary)
 extension NSView {
     @objc func rightMouseDownSwizzled(with event: NSEvent) {}
 
     static func swizzle() {
-        let rightMouseDown = #selector(NSView.rightMouseDown(with:))
-        let swizzledSelector = #selector(NSView.rightMouseDownSwizzled(with:))
-
-        if let originalMethod = class_getInstanceMethod(self as AnyClass, rightMouseDown),
-           let swizzledMethod = class_getInstanceMethod(self as AnyClass, swizzledSelector) {
-            method_exchangeImplementations(originalMethod, swizzledMethod)
-        }
+        guard
+            let original = class_getInstanceMethod(self, #selector(self.rightMouseDown(with:))),
+            let swizzled = class_getInstanceMethod(self, #selector(self.rightMouseDownSwizzled(with:)))
+        else { return }
+        method_exchangeImplementations(original, swizzled)
     }
 }

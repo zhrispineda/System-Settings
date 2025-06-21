@@ -1,7 +1,7 @@
-/*
-Abstract:
-An extension of String to add a localization function based on NSLocalizedString.
-*/
+//
+//  StringExtensions.swift
+//  System Settings
+//
 
 import SwiftUI
 
