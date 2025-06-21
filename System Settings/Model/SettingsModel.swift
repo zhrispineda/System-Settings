@@ -48,7 +48,6 @@ struct SettingsItem: Identifiable, Hashable {
     let type: SettingsOptions
     var title: String { type.rawValue }
     let icon: String
-    var color = Color.blue
     let destination: AnyView
     
     static func == (lhs: SettingsItem, rhs: SettingsItem) -> Bool {

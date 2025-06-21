@@ -27,7 +27,7 @@ struct SettingsSection: View {
                         }
                         .buttonStyle(SelectedButtonStyle())
                     } else {
-                        SettingsCell(setting.title, color: setting.color, symbol: setting.icon, sidebar: true)
+                        SettingsCell(setting.title, symbol: setting.icon, sidebar: true)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
