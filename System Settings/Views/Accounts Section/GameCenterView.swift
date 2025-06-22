@@ -8,17 +8,27 @@
 import SwiftUI
 
 struct GameCenterView: View {
-    @State private var gameCenterEnabled: Bool = false
+    @State private var gameCenterEnabled = false
+    @State private var showingPrivacy = false
 
     var body: some View {
         CustomForm(title: "Game Center") {
             PlacardToggle(isOn: $gameCenterEnabled, icon: "com.apple.gamecenter.bubbles") {
                 Text("Game Center")
                 Text("A social gaming service that lets you interact with friends, track and compare scores and achievements, challenge other players, and compete in multiplayer games.")
-                Text("See how your data is managed…")
-                    .foregroundStyle(.accent)
-                    .font(.callout)
+                Button("See how your data is managed…") {
+                    showingPrivacy.toggle()
+                }
+                .font(.callout)
+                .foregroundColor(.blue)
+                .buttonStyle(.plain)
             }
+        }
+        .background {
+            OnBoardingKitControllerView(bundleIdentifier: "com.apple.onboarding.gamecenter", showPopover: $showingPrivacy) {
+                showingPrivacy = false
+            }
+            .opacity(0)
         }
     }
 }

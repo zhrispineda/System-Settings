@@ -30,4 +30,5 @@ struct PlacardToggle<Content: View>: View {
         Text("Title")
         Text("Subtitle")
     }
+    .frame(width: 200, height: 100)
 }

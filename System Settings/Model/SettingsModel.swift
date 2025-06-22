@@ -49,7 +49,13 @@ struct SettingsItem: Identifiable, Hashable {
     var title: String { type.rawValue }
     let icon: String
     let destination: AnyView
-    
+
+    init(type: SettingsOptions, icon: String = "questionmark.square.dashed", destination: AnyView) {
+        self.type = type
+        self.icon = icon
+        self.destination = destination
+    }
+
     static func == (lhs: SettingsItem, rhs: SettingsItem) -> Bool {
         lhs.id == rhs.id
     }
@@ -61,7 +67,7 @@ struct SettingsItem: Identifiable, Hashable {
 
 @MainActor
 let accountOptions: [SettingsItem] = [
-    SettingsItem(type: .signIn, icon: "", destination: AnyView(SignInView()))
+    SettingsItem(type: .signIn, destination: AnyView(SignInView()))
 ]
 
 @MainActor

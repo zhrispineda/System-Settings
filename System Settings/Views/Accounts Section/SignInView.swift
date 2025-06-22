@@ -25,7 +25,7 @@ struct SignInView: View {
             Text("SPYGLASS_BODY", tableName: table)
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 80)
+                .padding(.horizontal, 60)
                 .padding(.bottom, 10)
             
             // Text field
@@ -36,43 +36,27 @@ struct SignInView: View {
                     .textFieldStyle(.plain)
                     .frame(minHeight: 22)
             }
-            .frame(width: 380)
+            .frame(width: 430)
             .background {
                 RoundedRectangle(cornerRadius: 5.0)
-                    .foregroundStyle(.background)
+                    .stroke(.fill, lineWidth: 1)
                     .padding(-8)
-                    .shadow(radius: 0.0, y: 0.3)
             }
-            
+
             // Continue button
             HStack {
                 Spacer()
                 Button("AUTHORIZE_BUTTON_TITLE".localize(table: table)) {}
                     .disabled(username.isEmpty)
-                    .padding(.trailing, 51)
+                    .padding(.trailing, 22)
                     .keyboardShortcut(.defaultAction)
             }
             .padding(.bottom)
             
-            // Privacy information text
-            Text("This Mac will be associated with your Apple Account and data such as photos, contacts, and documents will be stored in iCloud so you can access them on other devices.")
-                .fixedSize(horizontal: false, vertical: true)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-            
             // See how your data is managed… button
-            Button {} label: {
-                HStack(spacing: 5) {
-                    Image(_internalSystemName: "privacy.handshake")
-                    Text("AUTHORIZATION_PRIVACY_LEARN_MORE", tableName: table)
-                }
-            }
-            .font(.callout)
-            .foregroundStyle(.blue)
-            .buttonStyle(.plain)
-            
+            OBPrivacyLinkController(bundleIdentifier: "com.apple.onboarding.appleid")
+                .frame(maxWidth: 460)
+
             HStack {
                 // Forgot Password button
                 Button("FORGOT_PASSWORD".localize(table: table)) {}
