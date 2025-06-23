@@ -55,7 +55,7 @@ struct GeneralView: View {
                     SettingsCell("AppleCare & Warranty", symbol: "com.apple.graphic-icon.applecare")
                 }
             }
-            
+
             Section {
                 NavigationLink(value: "AirDrop & Handoff") {
                     SettingsCell("AirDrop & Handoff", symbol: "com.apple.graphic-icon.airdrop")
@@ -73,10 +73,10 @@ struct GeneralView: View {
                     SettingsCell("Language & Region", color: .blue, symbol: "com.apple.graphic-icon.language")
                 }
                 NavigationLink(value: "Login Items & Extensions") {
-                    SettingsCell("Login Items & Extensions", symbol: "com.example.graphic-icon.login-items")
+                    SettingsCell("Login Items & Extensions", symbol: "/System/Library/ExtensionKit/Extensions/LoginItems.appex")
                 }
                 NavigationLink(value: "Sharing") {
-                    SettingsCell("Sharing", symbol: "com.example.graphic-icon.sharing")
+                    SettingsCell("Sharing", symbol: "/System/Library/ExtensionKit/Extensions/Sharing.appex")
                 }
                 NavigationLink(value: "Startup Disk") {
                     SettingsCell("Startup Disk", symbol: "com.apple.graphic-icon.internal-drive")

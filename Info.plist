@@ -4,48 +4,5 @@
 <dict>
 	<key>CFAppleHelpAnchor</key>
 	<string>mh15217</string>
-	<key>UTExportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeIcons</key>
-			<dict>
-				<key>ISGraphicIconConfiguration</key>
-				<dict>
-					<key>ISEnclosureColor</key>
-					<string>gray</string>
-					<key>ISSymbolColor</key>
-					<string>white</string>
-					<key>ISSymbolName</key>
-					<string>figure.walk.diamond.fill</string>
-				</dict>
-			</dict>
-			<key>UTTypeIdentifier</key>
-			<string>com.example.graphic-icon.sharing</string>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeIcons</key>
-			<dict>
-				<key>ISGraphicIconConfiguration</key>
-				<dict>
-					<key>ISEnclosureColor</key>
-					<string>gray</string>
-					<key>ISSymbolColor</key>
-					<string>white</string>
-					<key>ISSymbolName</key>
-					<string>list.bullet</string>
-				</dict>
-			</dict>
-			<key>UTTypeIdentifier</key>
-			<string>com.example.graphic-icon.login-items</string>
-		</dict>
-	</array>
 </dict>
 </plist>
