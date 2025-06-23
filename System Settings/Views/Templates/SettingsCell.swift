@@ -37,7 +37,7 @@ struct SettingsCell: View {
                     }
             } else if symbol.contains("com.") {
                 TestIconView(icon: symbol, size: 24)
-                    .padding(.leading, sidebar ? -2 : 0)
+                    .padding(.leading, -2)
             } else if symbol.contains("/") {
                 BundleIconView(bundlePath: symbol, icon: icon, size: 24)
                     .padding(.leading, symbol.contains("Wallet") ? -2 : 0)
@@ -49,13 +49,14 @@ struct SettingsCell: View {
             LabeledContent {} label: {
                 Text(title)
                     .foregroundStyle(appearsActive ? .primary : .secondary)
-                    .padding(.leading, sidebar ? -5 : -2)
+                    .padding(.leading, sidebar ? -5 : 0)
                 if !subtitle.isEmpty {
                     Text(subtitle)
                         .foregroundStyle(appearsActive ? .secondary : .tertiary)
                 }
             }
         }
+        .frame(height: 22)
     }
 }
 

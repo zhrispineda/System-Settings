@@ -18,18 +18,19 @@ struct GeneralView: View {
                 VStack(spacing: 5) {
                     TestIconView(icon: "com.apple.graphic-icon.gear", size: 64)
                         .padding(.top, 8)
-                        .padding(.bottom, -19)
+                        .padding(.bottom, -1)
                         .overlay {
                             DividerGeometryView(dividerOpacity: $titleOpacity)
                         }
                     Text("General", tableName: table)
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding(.top, 20)
+                        .padding(.bottom, -5)
                     Text("Manage your overall setup and preferences for Mac, such as software updates, device language, AirDrop, and more.", tableName: table)
+                        .lineSpacing(2.5)
                         .foregroundStyle(.secondary)
                         .font(.callout)
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 10)
                 }
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
