@@ -87,7 +87,7 @@ let mainOptions: [SettingsItem] = [
     SettingsItem(type: .siri, icon: "com.apple.application-icon.apple-intelligence", destination: AnyView(SiriView())),
     SettingsItem(type: .desktopDock, icon: "com.apple.graphic-icon.desktop", destination: AnyView(DesktopDockView())),
     SettingsItem(type: .displays, icon: "com.apple.graphic-icon.display", destination: AnyView(DisplaysView())),
-    SettingsItem(type: .spotlight, icon: "com.apple.graphic-icon.search", destination: AnyView(SpotlightView())),
+    SettingsItem(type: .spotlight, icon: "com.apple.spotlight", destination: AnyView(SpotlightView())),
     SettingsItem(type: .wallpaper, icon: "com.apple.graphic-icon.wallpaper", destination: AnyView(WallpaperView()))
 ]
 
@@ -118,6 +118,6 @@ let serviceOptions: [SettingsItem] = [
 @MainActor
 let inputOptions: [SettingsItem] = [
     SettingsItem(type: .keyboard, icon: "com.apple.graphic-icon.keyboard", destination: AnyView(KeyboardView())),
-    SettingsItem(type: .trackpad, icon: "com.apple.graphic-icon.trackpad-and-mouse", destination: AnyView(TrackpadView())),
+    SettingsItem(type: .trackpad, icon: "/System/Library/ExtensionKit/Extensions/TrackpadExtension.appex", destination: AnyView(TrackpadView())),
     SettingsItem(type: .printersScanners, icon: "com.apple.graphic-icon.printer-sharing", destination: AnyView(PrintersScannersView()))
 ]

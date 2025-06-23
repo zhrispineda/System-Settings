@@ -6,6 +6,21 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+func getIcon(path: String) -> NSImage? {
+    guard FileManager.default.fileExists(atPath: path) else {
+        return nil
+    }
+    return NSWorkspace.shared.icon(forFile: path)
+}
+
+func getIcon(bundleID: String) -> NSImage? {
+    guard let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) else {
+        return nil
+    }
+    return getIcon(path: appURL.path)
+}
+
+
 struct BundleIconView: View {
     let bundlePath: String
     var icon: String = "AppIcon"
@@ -16,6 +31,11 @@ struct BundleIconView: View {
             Image(nsImage: nsImage)
                 .resizable()
                 .frame(width: size, height: size)
+        } else if let bundleIcon = getIcon(path: bundlePath) {
+            Image(nsImage: bundleIcon)
+                .resizable()
+                .frame(width: size, height: size)
+                .padding(.leading, -2)
         }
     }
 
@@ -46,6 +66,12 @@ struct TestIconView: View {
             Image(nsImage: icon)
                 .resizable()
                 .frame(width: size, height: size)
+        } else {
+            if let bundleIcon = getIcon(bundleID: icon) {
+                Image(nsImage: bundleIcon)
+                    .resizable()
+                    .frame(width: size, height: size)
+            }
         }
     }
 }
