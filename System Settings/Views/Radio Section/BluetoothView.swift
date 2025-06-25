@@ -9,18 +9,18 @@ import SwiftUI
 
 struct BluetoothView: View {
     @State private var bluetoothEnabled = true
-    let table = LocalizedStringResource.Bluetooth.self
+    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Bluetooth.appex"))
 
     var body: some View {
-        CustomForm(title: "bluetooth".localize(table: "Bluetooth")) {
+        CustomForm(title: "bluetooth".localized(using: localization)) {
             Section {
                 PlacardToggle(isOn: $bluetoothEnabled, icon: "com.apple.graphic-icon.bluetooth") {
-                    Text(table.bluetooth)
-                    Text("\(table.bluetoothTechDescription)[\(table.learnMore)](help:anchor=blth1004)")
+                    Text("bluetooth".localized(using: localization))
+                    Text("\("bluetooth_tech_description".localized(using: localization))[\("learn_more".localized(using: localization))](help:anchor=blth1004)")
                         .font(.callout)
                 }
 
-                Text(bluetoothEnabled ? table.nowDiscoverableAsMac(Host.current().localizedName ?? "Mac") : table.bluetoothControllerOff)
+                Text(bluetoothEnabled ? "now_discoverable_as_mac".localizedFormatted(using: localization, Host.current().localizedName ?? "Mac") : "bluetooth_controller_off".localized(using: localization))
                     .font(.callout)
                     .foregroundStyle(.secondary)
             } footer: {
@@ -32,23 +32,23 @@ struct BluetoothView: View {
             
             if bluetoothEnabled {
                 Section {
-                    Text(table.emptyConnectedPairedDevices)
+                    Text("empty_connected_paired_devices".localized(using: localization))
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(.secondary)
                 } header: {
-                    Text(table.myDevices)
+                    Text("my_devices".localized(using: localization))
                 } footer: {
                     HelpButton(topicID: "blth8111")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 
                 Section {
-                    Text(table.emptyNearbyDevices)
+                    Text("empty_nearby_devices".localized(using: localization))
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(.secondary)
                 } header: {
                     HStack {
-                        Text(table.nearbyDevices)
+                        Text("nearby_devices".localized(using: localization))
                         Spacer()
                         ProgressView()
                             .controlSize(.small)
