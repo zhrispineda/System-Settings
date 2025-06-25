@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
     @State private var username = ""
-    let table = LocalizedStringResource.AuthKitUI.self
+    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/PrivateFrameworks/AuthKitUI.framework"))
 
     var body: some View {
         VStack(spacing: 20) {
@@ -17,12 +17,12 @@ struct SignInView: View {
             Image(.signOutHeader)
             
             // Header title
-            Text(table.spyglassTitle)
+            Text("SPYGLASS_TITLE".localized(using: localization))
                 .font(.title)
                 .fontWeight(.bold)
             
             // Body text
-            Text(table.spyglassBody)
+            Text("SPYGLASS_BODY".localized(using: localization))
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 60)
@@ -30,8 +30,8 @@ struct SignInView: View {
             
             // Text field
             HStack {
-                Text(table.emailOrPhonePlaceholder)
-                TextField(table.requiredPlaceholder, text: $username)
+                Text("EMAIL_OR_PHONE_PLACEHOLDER".localized(using: localization))
+                TextField("REQUIRED_PLACEHOLDER".localized(using: localization), text: $username)
                     .textCase(.lowercase)
                     .multilineTextAlignment(.trailing)
                     .textFieldStyle(.plain)
@@ -47,7 +47,7 @@ struct SignInView: View {
             // Continue button
             HStack {
                 Spacer()
-                Button(table.authorizeButtonTitle) {}
+                Button("AUTHORIZE_BUTTON_TITLE".localized(using: localization)) {}
                     .disabled(username.isEmpty)
                     .padding(.trailing, 22)
                     .keyboardShortcut(.defaultAction)
@@ -60,17 +60,17 @@ struct SignInView: View {
 
             HStack {
                 // Forgot Password button
-                Button(table.forgotPassword) {}
+                Button("FORGOT_PASSWORD".localized(using: localization)) {}
                 Spacer()
                 // Don‘t Have an Account? button
-                Button(table.spyglassCreate) {}
+                Button("SPYGLASS_CREATE".localized(using: localization)) {}
                 // Help topic button
                 HelpButton(topicID: "mchla99dc8da")
             }
             .padding([.horizontal, .top])
         }
         .frame(width: 490, height: 300)
-        .navigationTitle(table.signInWatchOs)
+        .navigationTitle("SIGN_IN_WATCH_OS".localized(using: localization))
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 HStack {
