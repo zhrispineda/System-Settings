@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NetworkView: View {
+    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Network.appex"))
     @State private var selection = "Automatic"
     let options = ["Automatic"]
     
@@ -16,52 +17,52 @@ struct NetworkView: View {
             Section {
                 // Wi-Fi
                 NavigationLink {} label: {
-                    NetworkStatusView("Wi-Fi", status: .notConnected, symbol: "com.apple.graphic-icon.wifi", color: .blue)
+                    NetworkStatusView(localization: $localization, titleKey: "Wi-Fi", status: .notConnected, symbol: "com.apple.graphic-icon.wifi", color: .blue)
                 }
             }
             
             Section {
                 // Firewall
                 NavigationLink {} label: {
-                    NetworkStatusView("Firewall", status: .inactive, symbol: "firewall.fill", color: .orange)
+                    NetworkStatusView(localization: $localization, titleKey: "FIREWALL_NAME".localized(using: localization), status: .inactive, symbol: "firewall.fill", color: .orange)
                 }
             }
             
             Section {
                 // Thunderbolt Bridge
                 NavigationLink {} label: {
-                    NetworkStatusView("Thunderbolt Bridge", status: .notConnected, symbol: "thunderbolt", color: .gray)
+                    NetworkStatusView(localization: $localization, titleKey: "Thunderbolt Bridge", status: .notConnected, symbol: "thunderbolt", color: .gray)
                 }
             } header: {
-                Text("Other Services")
+                Text("OTHER_SERVICES".localized(using: localization))
             } footer: {
                 HStack {
                     Spacer()
                     Menu {
-                        Button("Add Service…") {}
+                        Button("SIDEBAR_POPOVER_ADD_SERVICE".localized(using: localization)) {}
                         Menu {
-                            Button("\("L2TP over IPSec".localize(table: "VPN"))…") {}
-                            Button("\("Cisco IPSec".localize(table: "VPN"))…") {}
-                            Button("\("IKEv2".localize(table: "VPN"))…") {}
+                            Button("L2TP over IPSec…".localized(using: localization)) {}
+                            Button("Cisco IPSec…".localized(using: localization)) {}
+                            Button("IKEv2…".localized(using: localization)) {}
                         } label: {
-                            Text("Add VPN Configuration", tableName: "VPN")
+                            Text("Add VPN Configuration".localized(using: localization))
                         }
                         Divider()
-                        Button("Manage Virtual Interfaces…") {}
-                        Button("Set Service Order…") {}
+                        Button("Manage Virtual Interfaces…".localized(using: localization)) {}
+                        Button("SIDEBAR_POPOVER_SET_SERVICE_ORDER".localized(using: localization)) {}
                         Divider()
                         Menu {
                             Picker("", selection: $selection) {
                                 ForEach(options, id: \.self) {
-                                    Text($0)
+                                    Text($0.localized(using: localization))
                                 }
                             }
                             .pickerStyle(.inline)
                             .labelsHidden()
                             Divider()
-                            Button("Edit Locations…") {}
+                            Button("EDIT_LOCATIONS".localized(using: localization)) {}
                         } label: {
-                            Text("Locations")
+                            Text("LOCATIONS".localized(using: localization))
                         }
                     } label: {
                         Image(systemName: "ellipsis")
@@ -75,6 +76,7 @@ struct NetworkView: View {
 
 /// A view that displays a simulated network interface option with an interface name, icon, and status.
 struct NetworkStatusView: View {
+    @Binding var localization: LocalizationManager
     let titleKey: String
     let status: NetworkStatus
     let symbol: String
@@ -92,17 +94,18 @@ struct NetworkStatusView: View {
     private var statusText: String {
         switch status {
         case .connected:
-            return "Connected"
+            return "Connected".localized(using: localization)
         case .notConnected:
-            return "Not connected"
+            return "Not Connected".localized(using: localization)
         case .inactive:
-            return "Inactive"
+            return "Inactive".localized(using: localization)
         case .notConfigured:
-            return "Not configured"
+            return "Not Configured".localized(using: localization)
         }
     }
     
-    init(_ titleKey: String, status: NetworkStatus, symbol: String, color: Color) {
+    init(localization: Binding<LocalizationManager>, titleKey: String, status: NetworkStatus, symbol: String, color: Color) {
+        self._localization = localization
         self.titleKey = titleKey
         self.status = status
         self.symbol = symbol
@@ -148,4 +151,14 @@ enum NetworkStatus {
     NavigationStack {
         NetworkView()
     }
+}
+
+#Preview {
+    NetworkStatusView(
+        localization: .constant(LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Network.appex"))),
+        titleKey: "Wi-Fi",
+        status: .notConnected,
+        symbol: "com.apple.graphic-icon.wifi",
+        color: .blue
+    )
 }
