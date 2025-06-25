@@ -27,4 +27,49 @@ extension String {
         
         return String(format: format, locale: .current, arguments: localizedVariables)
     }
+
+    // MARK: - Experimental
+    func localized(using localizer: NSObject?, preferredLocalizations: [String]) -> String {
+        guard let localizer = localizer else { return self }
+        let selector = NSSelectorFromString("localizedStringWithString:preferredLocalizations:")
+        guard localizer.responds(to: selector),
+              let methodIMP = localizer.method(for: selector) else {
+            return self
+        }
+        typealias LocalizedStringFunc = @convention(c) (NSObject, Selector, NSString, NSArray) -> NSString
+        let impl = unsafeBitCast(methodIMP, to: LocalizedStringFunc.self)
+        let result = impl(localizer, selector, self as NSString, preferredLocalizations as NSArray) as String
+        return result.isEmpty ? self : result
+    }
+
+    @MainActor func localized() -> String {
+        localized(using: Localization.localizer, preferredLocalizations: Localization.preferredLocalizations)
+    }
+
+    @MainActor func localizedFormatted(_ args: CVarArg...) -> String {
+        String(format: localized(), arguments: args)
+    }
+
+    private var localizedStringSelector: Selector {
+        NSSelectorFromString("localizedStringWithString:preferredLocalizations:")
+    }
+}
+
+func getLocalizable(bundleURL: URL, stringsFile: String) -> NSObject? {
+    guard let localizer = NSClassFromString("_LSStringLocalizer") else {
+        return nil
+    }
+
+    let allocSel = NSSelectorFromString("alloc")
+    guard let allocated = (localizer as AnyObject).perform(allocSel)?.takeUnretainedValue() as? NSObject else {
+        return nil
+    }
+
+    let initSel = NSSelectorFromString("initWithBundleURL:stringsFile:")
+    guard allocated.responds(to: initSel) else {
+        return nil
+    }
+
+    let initialized = allocated.perform(initSel, with: bundleURL as NSURL, with: stringsFile as NSString)?.takeUnretainedValue() as? NSObject
+    return initialized
 }

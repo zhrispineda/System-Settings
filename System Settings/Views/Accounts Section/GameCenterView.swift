@@ -11,17 +11,17 @@ struct GameCenterView: View {
     @State private var gameCenterEnabled = false
     @State private var showingPrivacy = false
 
+    init() {
+        let bundleURL = URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/GameCenterSettingsDeviceExpertExtension.appex")
+        Localization.localizer = getLocalizable(bundleURL: bundleURL, stringsFile: "Localizable")
+        Localization.preferredLocalizations = UserDefaults.standard.stringArray(forKey: "AppleLanguages") ?? []
+    }
+
     var body: some View {
-        CustomForm(title: "Game Center") {
+        CustomForm(title: "SETTINGS_DEEPLINK_EXT_SIGN_IN_PATH".localized()) {
             PlacardToggle(isOn: $gameCenterEnabled, icon: "com.apple.gamecenter.bubbles") {
-                Text("Game Center")
-                Text("A social gaming service that lets you interact with friends, track and compare scores and achievements, challenge other players, and compete in multiplayer games.")
-                Button("See how your data is managed…") {
-                    showingPrivacy.toggle()
-                }
-                .font(.callout)
-                .foregroundColor(.blue)
-                .buttonStyle(.plain)
+                Text(localize: "SETTINGS_DEEPLINK_EXT_SIGN_IN_PATH")
+                Text(.init("PLAYER_CARD_GAMECENTER_TOGGLE_OFF_FOOTER".localizedFormatted("[\("SETTINGS_PROFILE_PRIVACY_LINK_TEXT".localized())](systempreferences://)")))
             }
         }
         .background {
@@ -29,6 +29,11 @@ struct GameCenterView: View {
                 showingPrivacy = false
             }
             .opacity(0)
+        }
+        .onOpenURL { url in
+            if url.scheme == "systempreferences" {
+                showingPrivacy.toggle()
+            }
         }
     }
 }
