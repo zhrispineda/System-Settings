@@ -5,11 +5,6 @@
 
 import SwiftUI
 
-enum Localization {
-    @MainActor static var localizer: NSObject?
-    @MainActor static var preferredLocalizations: [String] = []
-}
-
 enum SettingsOptions: String {
     case signIn = "Sign in"
     

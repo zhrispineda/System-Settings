@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct InternetAccountsView: View {
+    @State private var localizationManager = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/PrivateFrameworks/AccountsUISettings.framework"))
+
     var body: some View {
-        CustomForm(title: "Internet Accounts") {
+        CustomForm(title: "INTERNET_ACCOUNTS_MAIN_TITLE".localized(using: localizationManager)) {
             Section {
-                Text("No accounts")
+                Text("NO_ACCOUNTS".localized(using: localizationManager))
                     .foregroundStyle(.secondary)
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .center)
             } footer: {
                 HStack {
-                    Button("Add Account…") {}
+                    Button("ADD_ACCOUNT_BUTTON_LABEL".localized(using: localizationManager)) {}
                     HelpButton(topicID: "mh35705")
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
