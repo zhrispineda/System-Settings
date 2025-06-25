@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DesktopDockView: View {
+    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/DesktopSettings.appex"))
     // Dock
     @State private var dockSize = 40.0
     @State private var dockMagnification = 0.0
@@ -22,7 +23,7 @@ struct DesktopDockView: View {
     // Desktop & Stage Manager
     @State private var showItemsDesktop = true
     @State private var showItemsStageManager = true
-    @State private var clickWallpaperAction = "Only in Stage Manager"
+    @State private var clickWallpaperAction = "Only in Stage Manager on Click"
     @State private var stageManagerEnabled = false
     @State private var stageManagerRecents = true
     @State private var stageManagerWindows = "All at Once"
@@ -48,26 +49,25 @@ struct DesktopDockView: View {
     @State private var dragWindowMissionControl = true
     let positionOptions = ["Left", "Bottom", "Right"]
     let effectOptions = ["Genie Effect", "Scale Effect"]
-    let windowActions = ["Fill", "Zoom", "Minimize", "Do Nothing"]
-    let clickWallpaperOptions = ["Always", "Only in Stage Manager"]
+    let windowActions = ["Fill", "Zoom", "Minimize", "No Action"]
+    let clickWallpaperOptions = ["Always on Wallpaper Click", "Only in Stage Manager on Click"]
     let stageManagerWindowOptions = ["All at Once", "One at a Time"]
     let widgetStyleOptions = ["Automatic", "Monochrome", "Full-color"]
     let webBrowsers = ["Safari"]
     let openWithTabsOptions = ["Never", "Always", "In Full Screen"]
-    let table = "DesktopSettings"
     
     var body: some View {
         CustomForm(title: "Desktop & Dock") {
-            Section("Dock".localize(table: table)) {
+            Section("Dock".localized(using: localization)) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Size", tableName: table)
+                        Text("Size".localized(using: localization))
                         Slider(value: $dockSize, in: 0...100, step: 50.0)
                             .labelsHidden()
                         HStack {
-                            Text("Small", tableName: table)
+                            Text("Small".localized(using: localization))
                             Spacer()
-                            Text("Large", tableName: table)
+                            Text("Large".localized(using: localization))
                         }
                         .font(.caption)
                     }
@@ -75,13 +75,13 @@ struct DesktopDockView: View {
                     .padding(.trailing, 10)
                     
                     VStack(alignment: .leading) {
-                        Text("Magnification", tableName: table)
+                        Text("Magnification".localized(using: localization))
                         Slider(value: $dockMagnification, in: 0...100, step: 50.0)
                             .labelsHidden()
                         HStack {
-                            Text("\("Off".localize(table: table))\t\("Small".localize(table: table))")
+                            Text("\("Off".localized(using: localization))\t\("Small".localized(using: localization))")
                             Spacer()
-                            Text("Large", tableName: table)
+                            Text("Large".localized(using: localization))
                         }
                         .font(.caption)
                     }
@@ -90,126 +90,129 @@ struct DesktopDockView: View {
             }
             
             Section {
-                Picker("Position on screen".localize(table: table), selection: $dockPosition) {
+                Picker("Dock position on screen".localized(using: localization), selection: $dockPosition) {
                     ForEach(positionOptions, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 }
-                Picker("Minimize windows using".localize(table: table), selection: $minimizeEffect) {
+                Picker("Minimized window animation".localized(using: localization), selection: $minimizeEffect) {
                     ForEach(effectOptions, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 }
-                Picker("Double-click a window’s title bar to".localize(table: table), selection: $doubleClickAction) {
+                Picker("Window title bar double-click action".localized(using: localization), selection: $doubleClickAction) {
                     ForEach(windowActions, id: \.self) { option in
                         if windowActions[windowActions.count - 2] == option {
-                            Text(option.localize(table: table))
+                            Text(option.localized(using: localization))
                             Divider()
                         } else {
-                            Text(option.localize(table: table))
+                            Text(option.localized(using: localization))
                         }
                     }
                 }
-                Toggle("Minimize windows into application icon".localize(table: table), isOn: $minimizeWindowIntoIcon)
+                Toggle("Minimize windows into application icon".localized(using: localization), isOn: $minimizeWindowIntoIcon)
             }
             
             Section {
-                Toggle("Automatically hide and show the Dock".localize(table: table), isOn: $autoHideDock)
-                Toggle("Animate opening applications".localize(table: table), isOn: $animateAppOpen)
-                Toggle("Show indicators for open applications".localize(table: table), isOn: $openAppIndicator)
-                Toggle("Show suggested and recent apps in Dock".localize(table: table), isOn: $suggestRecentApps)
+                Toggle("Automatically hide and show the Dock".localized(using: localization), isOn: $autoHideDock)
+                Toggle("Animate opening applications".localized(using: localization), isOn: $animateAppOpen)
+                Toggle("Show indicators for open applications".localized(using: localization), isOn: $openAppIndicator)
+                Toggle("Show suggested and recent apps in Dock".localized(using: localization), isOn: $suggestRecentApps)
             }
             
-            Section("Desktop & Stage Manager".localize(table: table)) {
+            Section("Desktop & Stage Manager".localized(using: localization)) {
                 HStack {
-                    Text("Show Items", tableName: table)
+                    Text("Show Items".localized(using: localization))
                     Spacer()
-                    Toggle("On Desktop".localize(table: table), isOn: $showItemsDesktop)
+                    Toggle("On Desktop".localized(using: localization), isOn: $showItemsDesktop)
                         .toggleStyle(.checkbox)
-                    Toggle("In Stage Manager".localize(table: table), isOn: $showItemsStageManager)
+                    Toggle("In Stage Manager".localized(using: localization), isOn: $showItemsStageManager)
                         .toggleStyle(.checkbox)
                 }
                 Picker(selection: $clickWallpaperAction) {
                     ForEach(clickWallpaperOptions, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 } label: {
-                    Text("Click wallpaper to reveal desktop", tableName: table)
-                    Text("Clicking your wallpaper will move all windows out of the way to allow access to your desktop items and widgets.", tableName: table)
+                    Text("Show Desktop".localized(using: localization))
+                    Text("Click wallpaper to move windows out of the way, revealing your desktop items and widgets.".localized(using: localization))
                 }
             }
             
             Section {
                 Toggle(isOn: $stageManagerEnabled) {
-                    Text("Stage Manager", tableName: table)
-                    Text("Stage Manager arranges your recent windows into a single strip for reduced clutter and quick access.", tableName: table)
+                    Text("Stage Manager".localized(using: localization))
+                    Text("Stage Manager arranges your recent windows into a single strip for reduced clutter and quick access.".localized(using: localization))
                 }
-                Toggle("Show recent apps in Stage Manager".localize(table: table), isOn: $stageManagerRecents)
-                Picker("Show windows from an application".localize(table: table), selection: $stageManagerWindows) {
+                Toggle("Show recent apps in Stage Manager".localized(using: localization), isOn: $stageManagerRecents)
+                Picker("Show windows from an application".localized(using: localization), selection: $stageManagerWindows) {
                     ForEach(stageManagerWindowOptions, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 }
             }
             
-            Section("Widgets".localize(table: table)) {
+            Section("Widgets".localized(using: localization)) {
                 HStack {
-                    Text("Show Widgets", tableName: table)
+                    Text("Show Widgets".localized(using: localization))
                     Spacer()
-                    Toggle("On Desktop".localize(table: table), isOn: $showWidgetsDesktop)
+                    Toggle("On Desktop".localized(using: localization), isOn: $showWidgetsDesktop)
                         .toggleStyle(.checkbox)
-                    Toggle("In Stage Manager".localize(table: table), isOn: $showWidgetsStageManager)
+                    Toggle("In Stage Manager".localized(using: localization), isOn: $showWidgetsStageManager)
                         .toggleStyle(.checkbox)
                 }
-                Picker("Widget style".localize(table: table), selection: $widgetStyle) {
+                Picker("Widget style".localized(using: localization), selection: $widgetStyle) {
                     ForEach(widgetStyleOptions, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 }
-                Toggle("Use iPhone widgets".localize(table: table), isOn: $phoneWidgets)
+                Toggle("iPhone Widgets".localized(using: localization), isOn: $phoneWidgets)
             }
             
             Section {
-                Picker("Default web browser".localize(table: table), selection: $defaultBrowser) {
+                Picker("Default web browser".localized(using: localization), selection: $defaultBrowser) {
                     ForEach(webBrowsers, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 }
             }
             
-            Section("Windows".localize(table: table)) {
-                Picker("Prefer tabs when opening documents".localize(table: table), selection: $preferTabsDocs) {
+            Section("Windows".localized(using: localization)) {
+                Picker("Prefer tabs when opening documents".localized(using: localization), selection: $preferTabsDocs) {
                     ForEach(openWithTabsOptions, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 }
-                Toggle("Ask to keep changes when closing documents".localize(table: table), isOn: $askKeepChanges)
+                Toggle("Ask to keep changes when closing documents".localized(using: localization), isOn: $askKeepChanges)
                 Toggle(isOn: $closeWindowsOnQuit) {
-                    Text("Close windows when quitting an application", tableName: table)
-                    Text("When enabled, open documents and windows will not be restored when you re-open an application.", tableName: table)
+                    Text("Close windows when quitting an application".localized(using: localization))
+                    Text("When enabled, open documents and windows will not be restored when you re-open an application.".localized(using: localization))
                 }
             }
-            
+
             Section {
-                Toggle("Drag windows to screen edges to tile".localize(table: table), isOn: $dragWindowToTile)
-                Toggle("Drag windows to menu bar to fill screen".localize(table: table), isOn: $dragWindowToFill)
-                Toggle("Hold ⌥ key while dragging windows to tile".localize(table: table), isOn: $holdKeyToTile)
-                Toggle("Tiled windows have margins".localize(table: table), isOn: $tiledWindowsMargins)
+                Toggle("Drag windows to left or right edge of screen to tile".localized(using: localization), isOn: $dragWindowToTile)
+                Toggle("Drag windows to menu bar to fill screen".localized(using: localization), isOn: $dragWindowToFill)
+                Toggle("Hold ⌥ key while dragging windows to tile".localized(using: localization), isOn: $holdKeyToTile)
+                Toggle("Tiled windows have margins".localized(using: localization), isOn: $tiledWindowsMargins)
             }
             
             Section {
-                Toggle("Automatically rearrange Spaces based on most recent use".localize(table: table), isOn: $autoRearrangeSpaces)
-                Toggle("When switching to an application, switch to a Space with open windows for the application".localize(table: table), isOn: $openWindowsSpaces)
-                Toggle("Group windows by application".localize(table: table), isOn: $groupWindowsByApps)
-                Toggle("Displays have separate Spaces".localize(table: table), isOn: $displaysSeparateSpaces)
-                Toggle("Drag windows to top of screen to enter Mission Control".localize(table: table), isOn: $dragWindowMissionControl)
+                Toggle("Automatically rearrange Spaces based on most recent use".localized(using: localization), isOn: $autoRearrangeSpaces)
+                Toggle("When switching to an application, switch to a Space with open windows for the application".localized(using: localization), isOn: $openWindowsSpaces)
+                Toggle("Group windows by application".localized(using: localization), isOn: $groupWindowsByApps)
+                Toggle("Displays have separate Spaces".localized(using: localization), isOn: $displaysSeparateSpaces)
+                Toggle("Drag windows to top of screen to enter Mission Control".localized(using: localization), isOn: $dragWindowMissionControl)
             } header: {
-                Text("Mission Control", tableName: table)
-                Text("Mission Control shows an overview of your open windows and thumbnails of full-screen applications, all arranged in a unified view.", tableName: table)
+                Text("Mission Control".localized(using: localization))
+                Text("Mission Control shows an overview of your open windows and thumbnails of full-screen applications, all arranged in a unified view.".localized(using: localization))
             } footer: {
-                Button("Shortcuts…".localize(table: table)) {}
-                Button("Hot Corners…".localize(table: table)) {}
-                HelpButton(topicID: "mchlp1119")
+                HStack {
+                    Button("Shortcuts…".localized(using: localization)) {}
+                    Button("Hot Corners…".localized(using: localization)) {}
+                    HelpButton(topicID: "mchlp1119")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }
@@ -217,5 +220,5 @@ struct DesktopDockView: View {
 
 #Preview {
     DesktopDockView()
-        .frame(width: 500, height: 1700)
+        .frame(width: 500, height: 1650)
 }
