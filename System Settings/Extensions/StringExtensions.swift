@@ -39,14 +39,6 @@ extension String {
         return objcLocalized(localizer, preferredLocalizations: manager.preferredLocalizations)
     }
 
-    @MainActor func localized() -> String {
-        localized(using: Localization.localizer, preferredLocalizations: Localization.preferredLocalizations)
-    }
-
-    @MainActor func localizedFormatted(_ args: CVarArg...) -> String {
-        String(format: localized(), arguments: args)
-    }
-
     func localizedFormatted(using manager: LocalizationManager, _ args: CVarArg...) -> String {
         let localized = self.localized(using: manager)
         return String(format: localized, arguments: args)
