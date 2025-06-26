@@ -7,18 +7,20 @@ import SwiftUI
 
 @Observable class LocalizationManager {
     var bundleURL: URL {
-        didSet { configure() }
+        didSet { configure(stringsFile: stringsFile) }
     }
     var localizer: NSObject? = nil
     var preferredLocalizations: [String] = []
+    var stringsFile: String
     
-    init(bundleURL: URL) {
+    init(bundleURL: URL, stringsFile: String = "Localizable") {
         self.bundleURL = bundleURL
-        configure()
+        self.stringsFile = stringsFile
+        configure(stringsFile: stringsFile)
     }
     
-    func configure() {
-        localizer = getLocalizable(bundleURL: bundleURL, stringsFile: "Localizable")
+    func configure(stringsFile: String = "Localizable") {
+        localizer = getLocalizable(bundleURL: bundleURL, stringsFile: stringsFile)
         preferredLocalizations = UserDefaults.standard.stringArray(forKey: "AppleLanguages") ?? []
     }
 }

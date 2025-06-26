@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Charts
+import IOKit.ps
 
 struct BatteryData {
     let date: Date
@@ -82,19 +83,20 @@ struct BatteryChart: View {
 }
 
 struct BatteryView: View {
+    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex"), stringsFile: "BatteryUI")
+    @State private var J316 = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex"), stringsFile: "BatteryUI-J316")
+    @State private var powerTable = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex"))
     @State private var selectedBattery = "ENERGY_MODE_AUTO"
     @State private var selectedPower = "ENERGY_MODE_AUTO"
     @State private var selectedTimeframe = "HOURLY_GRAPH_TITLE_FMT"
     let powerOptions = ["ENERGY_MODE_ECO", "ENERGY_MODE_AUTO", "ENERGY_MODE_PRO"]
-    let powerTable = "PowerPreferences"
     let timeframeOptions = ["HOURLY_GRAPH_TITLE_FMT", "DAILY_GRAPH_TITLE_FMT"]
-    let table = "BatteryUI"
     private var onBatteryText: String {
         switch selectedBattery {
         case "ENERGY_MODE_ECO":
             return "ENERGY_MODE_ECO_TEXT"
         case "ENERGY_MODE_PRO":
-            return "ENERGY_MODE_PRO_TEXT".localize(table: "BatteryUI-J316")
+            return "ENERGY_MODE_PRO_TEXT"
         default:
             return "ENERGY_MODE_AUTO_TEXT"
         }
@@ -102,12 +104,31 @@ struct BatteryView: View {
     private var onPowerText: String {
         switch selectedPower {
         case "ENERGY_MODE_PRO":
-            return "ENERGY_MODE_PRO_TEXT".localize(table: "BatteryUI-J316")
+            return "ENERGY_MODE_PRO_TEXT"
         case "ENERGY_MODE_ECO":
             return "ENERGY_MODE_ECO_ADAPTER_TEXT"
         default:
             return "ENERGY_MODE_AUTO_TEXT"
         }
+    }
+    private var batteryIcon: String {
+        if isBatteryCharging() {
+            return "battery.100percent.bolt"
+        } else {
+            switch getBatteryLevel() {
+            case 50..<100:
+                return "battery.75percent"
+            case 30..<50:
+                return "battery.50percent"
+            case 0..<30:
+                return "battery.25percent"
+            default:
+                return "battery.100percent"
+            }
+        }
+    }
+    private var batteryStatus: String {
+        return isBatteryCharging() ? "Charging" : "Battery Level"
     }
     
     var body: some View {
@@ -115,7 +136,7 @@ struct BatteryView: View {
             Section {
                 // Battery Health
                 HStack {
-                    LabeledContent("BATT_HEALTH_TITLE".localize(table: table), value: "BATT_HEALTH_CONDITION_NORMAL".localize(table: table))
+                    LabeledContent("BATT_HEALTH_TITLE".localized(using: localization), value: "BATT_HEALTH_CONDITION_NORMAL".localized(using: localization))
                     Button("", systemImage: "info.circle") {
                         
                     }
@@ -129,43 +150,51 @@ struct BatteryView: View {
             // Energy Mode
             Section {
                 VStack(alignment: .leading) {
-                    Picker("On battery".localize(table: powerTable), selection: $selectedBattery) {
+                    Picker("On battery".localized(using: powerTable), selection: $selectedBattery) {
                         ForEach(powerOptions, id: \.self) { option in
-                            Text(option.localize(table: powerOptions[2] == option ? "BatteryUI-J316" : table))
+                            if option == powerOptions[2] {
+                                Text(option.localized(using: J316))
+                            } else {
+                                Text(option.localized(using: localization))
+                            }
                         }
                     }
-                    Text(onBatteryText.localize(table: table))
+                    Text(onBatteryText.localized(using: localization))
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
                 VStack(alignment: .leading) {
-                    Picker("On power adapter".localize(table: powerTable), selection: $selectedPower) {
+                    Picker("On power adapter".localized(using: powerTable), selection: $selectedPower) {
                         ForEach(powerOptions, id: \.self) { option in
-                            Text(option.localize(table: powerOptions[2] == option ? "BatteryUI-J316" : table))
+                            if option == powerOptions[2] {
+                                Text(option.localized(using: J316))
+                            } else {
+                                Text(option.localized(using: localization))
+                            }
                         }
                     }
-                    Text(onPowerText.localize(table: table))
+                    Text(onPowerText.localized(using: localization))
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
             } header: {
-                Text("Energy Mode", tableName: powerTable)
-                Text("Your Mac can optimize either its battery usage with Low Power Mode, or its performance in resource-intensive tasks with High Power Mode.", tableName: powerTable)
+                Text("Energy Mode".localized(using: powerTable))
+                Text("Your Mac can optimize either its battery usage with Low Power Mode, or its performance in resource-intensive tasks with High Power Mode.".localized(using: powerTable))
             }
             
             // Battery usage
             Section {
                 Picker("", selection: $selectedTimeframe) {
                     ForEach(timeframeOptions, id: \.self) { timeframe in
-                        Text(timeframe.localize(table: table, timeframe == timeframeOptions[0] ? "24" : "10"))
+                        Text(timeframe.localizedFormatted(using: localization, timeframe == timeframeOptions[0] ? "24" : "10"))
                     }
                 }
                 .frame(maxWidth: .infinity)
                 .pickerStyle(.palette)
                 .labelsHidden()
-
+                
                 VStack(alignment: .leading) {
-                    Text("LAST_CHARGED_TO_FMT".localize(table: table, "100%"))
+                    Text("LAST_CHARGED_TO_FMT".localizedFormatted(using: localization, "100%"))
                     Text("Today, 9:41 AM")
                         .font(.caption)
                         .fontWeight(.regular)
@@ -173,7 +202,7 @@ struct BatteryView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("BATTERY_LEVEL_GRAPH_TITLE", tableName: table)
+                    Text("BATTERY_LEVEL_GRAPH_TITLE".localized(using: localization))
                         .font(.headline)
                         .fontWeight(.bold)
                     
@@ -181,15 +210,15 @@ struct BatteryView: View {
                         .frame(height: 110)
                         .padding(.top, -5)
                 }
-
+                
                 VStack(alignment: .leading) {
-                    Text("SCREEN_ON_USAGE_GRAPH_TITLE", tableName: table)
+                    Text("SCREEN_ON_USAGE_GRAPH_TITLE".localized(using: localization))
                         .font(.headline)
                         .fontWeight(.bold)
                 }
             } footer: {
                 HStack {
-                    Button("Options…".localize(table: powerTable)) {}
+                    Button("Options…".localized(using: powerTable)) {}
                     HelpButton(topicID: "mchlfc3b7879")
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -197,15 +226,52 @@ struct BatteryView: View {
         }
         .safeAreaBar(edge: .top) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("BATTERY_PREF_TITLE".localize(table: powerTable))
-                    .fontWeight(.semibold)
-                Text("\(Image(systemName: "battery.100")) Battery Level: 100%")
-                    .font(.footnote)
+                Text("BATTERY_PREF_TITLE".localized(using: powerTable))
+                    .fontWeight(.bold)
+                    .opacity(0.8)
+                Text("\(Image(systemName: batteryIcon)) \(batteryStatus): \(getBatteryLevel())%")
+                    .font(.system(size: 11))
                     .foregroundStyle(.secondary)
             }
-            .padding(.leading, -150)
-            .padding(.top, -40)
+            .padding(.leading, -153)
+            .padding(.top, -41)
         }
+    }
+    
+    private func getBatteryLevel() -> Int {
+        guard let snapshot = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
+              let sources: NSArray = IOPSCopyPowerSourcesList(snapshot)?.takeRetainedValue() else {
+            return 100
+        }
+        
+        for ps in sources {
+            guard let info: NSDictionary = IOPSGetPowerSourceDescription(snapshot, ps as CFTypeRef)?.takeUnretainedValue() else {
+                return 100
+            }
+            
+            if let capacity = info[kIOPSCurrentCapacityKey] as? Int {
+                return capacity
+            }
+        }
+        
+        return 100
+    }
+    
+    private func isBatteryCharging() -> Bool {
+        guard let snapshot = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
+              let sources = IOPSCopyPowerSourcesList(snapshot)?.takeRetainedValue() as? [CFTypeRef] else {
+            return false
+        }
+
+        for ps in sources {
+            if let description = IOPSGetPowerSourceDescription(snapshot, ps)?.takeUnretainedValue() as? [String: Any] {
+                if let isCharging = description[kIOPSIsChargingKey as String] as? Bool {
+                    return isCharging
+                }
+            }
+        }
+
+        return false
     }
 }
 
