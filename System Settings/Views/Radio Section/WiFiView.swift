@@ -11,67 +11,68 @@ struct WiFiView: View {
     @AppStorage("WiFiEnabled") private var WiFiEnabled = false
     @AppStorage("AskJoinNetworks") private var askJoinNetworksIndex = 1
     @AppStorage("AskJoinHotspots") private var askJoinHotspotsIndex = 1
-    let table = LocalizedStringResource.WiFi.self
-    let joinNetworkOptions: [LocalizedStringResource] = [
-        LocalizedStringResource.WiFi.off,
-        LocalizedStringResource.WiFi.notify,
-        LocalizedStringResource.WiFi.ask
+    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Wi-Fi.appex"))
+    let joinNetworkOptions = [
+        "Off",
+        "Notify",
+        "Ask"
     ]
-    let joinHotspotOptions: [LocalizedStringResource] = [
-        LocalizedStringResource.WiFi.personalHotspotNever,
-        LocalizedStringResource.WiFi.personalHotspotAskToJoin,
-        LocalizedStringResource.WiFi.personalHotspotAutomatic,
+    let joinHotspotOptions = [
+        "Personal Hotspot Never",
+        "Personal Hotspot Ask To Join",
+        "Personal Hotspot Automatic",
     ]
     
     var body: some View {
         CustomForm(title: "Wi‑Fi".localize(table: "Wi-Fi")) {
             Section {
                 PlacardToggle(isOn: .constant(false), icon: "com.apple.graphic-icon.wifi") {
-                    Text(table.wiFi)
-                    Text("\(table.setUpWiFiToWirelesslyConnectYourMacToTheInternetTurnOnWiFiThenChooseANetworkToJoin) [\(table.learnMore)](help:anchor=mchlp1180)")
+                    Text("Wi-Fi".localized(using: localization))
+                    Text("\("Set up Wi‑Fi to wirelessly connect your Mac to the internet. Turn on Wi‑Fi, then choose a network to join.".localized(using: localization)) [\("Learn More…".localized(using: localization))](help:anchor=mchlp1180)")
                         .padding(.top, -0.5)
                 }
                 .disabled(true)
+                
                 HStack {
                     Image(systemName: "circle.fill")
                         .foregroundStyle(.red)
                         .imageScale(.small)
-                    Text(table.wifiOff)
+                    Text("WIFI_OFF".localized(using: localization))
                         .foregroundStyle(.secondary)
                     Spacer()
-                    Button(table.details) {}
+                    Button("Details…".localized(using: localization)) {}
                 }
             }
             
             Section {
                 Picker(selection: $askJoinNetworksIndex) {
                     ForEach(joinNetworkOptions.indices, id: \.self) { index in
-                        Text(joinNetworkOptions[index])
+                        Text(joinNetworkOptions[index].localized(using: localization))
                     }
                 } label: {
-                    Text(table.askToJoinNetworks)
+                    Text("Ask to join networks".localized(using: localization))
                     switch askJoinNetworksIndex {
                     case 0:
-                        Text(table.knownNetworksWillBeJoinedAutomaticallyIfNoKnownNetworksAreAvailableYouWillHaveToManuallySelectANetwork)
+                        Text("Known networks will be joined automatically. If no known networks are available, you will have to manually select a network.".localized(using: localization))
                     case 1:
-                        Text(table.knownNetworksWillBeJoinedAutomaticallyIfNoKnownNetworksAreAvailableYouWillBeNotifiedOfAvailableNetworks)
+                        Text("Known networks will be joined automatically. If no known networks are available, you will be notified of available networks.".localized(using: localization))
                     default:
-                        Text(table.knownNetworksWillBeJoinedAutomaticallyIfNoKnownNetworksAreAvailableYouWillBeAskedBeforeJoiningANewNetwork)
+                        Text("Known networks will be joined automatically. If no known networks are available, you will be asked before joining a new network.".localized(using: localization))
                     }
                 }
                 
                 Picker(selection: $askJoinHotspotsIndex) {
                     ForEach(joinHotspotOptions.indices, id: \.self) { index in
-                        Text(joinHotspotOptions[index])
+                        Text(joinHotspotOptions[index].localized(using: localization))
                     }
                 } label: {
-                    Text(table.askToJoinHotspots)
-                    Text(table.allowThisMacToAutomaticallyDiscoverNearbyPersonalHotspotsWhenNoWiFiNetworkIsAvailable)
+                    Text("Ask to join hotspots".localized(using: localization))
+                    Text("Allow this Mac to automatically discover nearby personal hotspots when no Wi‑Fi network is available.".localized(using: localization))
                 }
             } footer: {
                 HStack {
                     Spacer()
-                    Button(table.advanced) {}
+                    Button("Advanced…".localized(using: localization)) {}
                     HelpButton(topicID: "mh11935")
                 }
                 

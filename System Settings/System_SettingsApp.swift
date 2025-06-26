@@ -18,7 +18,7 @@ struct System_SettingsApp: App {
         Window("System Settings", id: "System Settings") {
             ContentView()
                 .frame(width: 715)
-                .frame(minHeight: 415)
+                .frame(minHeight: 415, idealHeight: 574)
         }
         .windowResizability(.contentSize)
     }
