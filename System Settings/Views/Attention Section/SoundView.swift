@@ -15,6 +15,7 @@ struct AudioDevice: Identifiable {
 
 struct SoundView: View {
     @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/Sound.appex"))
+    @State private var alerts = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/Sound.appex"), stringsFile: "AlertSounds")
     @State private var alertSound = "Tink"
     @State private var alertVolume = 100.0
     @State private var outputBalance = 50.0
@@ -45,7 +46,7 @@ struct SoundView: View {
                 HStack {
                     Picker("SOUND_EFFECT".localized(using: localization), selection: $alertSound) {
                         ForEach(alertSounds, id: \.self) { sound in
-                            Text(sound.localize(table: "AlertSounds"))
+                            Text(sound.localized(using: localization))
                                 .onHover { hovering in
                                     if hovering {
                                         startSoundTask(sound: sound)
