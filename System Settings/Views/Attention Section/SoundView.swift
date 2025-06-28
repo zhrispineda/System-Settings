@@ -14,6 +14,7 @@ struct AudioDevice: Identifiable {
 }
 
 struct SoundView: View {
+    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/Sound.appex"))
     @State private var alertSound = "Tink"
     @State private var alertVolume = 100.0
     @State private var outputBalance = 50.0
@@ -37,13 +38,12 @@ struct SoundView: View {
         AudioDevice(name: "Speakers", type: "Built-in")
     ]
     let outputOptions = ["DEFAULT_ALERT_DEVICE"]
-    let table = "Sound"
     
     var body: some View {
         CustomForm(title: "Sound") {
-            Section("SOUND_EFFECTS".localize(table: table)) {
+            Section("SOUND_EFFECTS".localized(using: localization)) {
                 HStack {
-                    Picker("SOUND_EFFECT".localize(table: table), selection: $alertSound) {
+                    Picker("SOUND_EFFECT".localized(using: localization), selection: $alertSound) {
                         ForEach(alertSounds, id: \.self) { sound in
                             Text(sound.localize(table: "AlertSounds"))
                                 .onHover { hovering in
@@ -53,7 +53,7 @@ struct SoundView: View {
                                 }
                         }
                     }
-                    Button("PLAY_SOUND".localize(table: table), systemImage: "play.circle") {
+                    Button("PLAY_SOUND".localized(using: localization), systemImage: "play.circle") {
                         playSound(sound: alertSound)
                     }
                     .buttonStyle(.plain)
@@ -62,29 +62,29 @@ struct SoundView: View {
                     .labelStyle(.iconOnly)
                 }
                 
-                Picker("ALERT_DEVICES".localize(table: table), selection: $selectedOutput) {
+                Picker("ALERT_DEVICES".localized(using: localization), selection: $selectedOutput) {
                     ForEach(outputOptions, id: \.self) { output in
-                        Text(output.localize(table: table))
+                        Text(output.localized(using: localization))
                     }
                 }
                 
                 Slider(value: $alertVolume, in: 0...100, step: 15) {
-                    Text("ALERT_VOLUME", tableName: table)
+                    Text("ALERT_VOLUME".localized(using: localization))
                 } minimumValueLabel: {
                     Image(systemName: "speaker.fill")
                 } maximumValueLabel: {
                     Image(systemName: "speaker.3.fill")
                 }
                 
-                Toggle("PLAY_BOOT_CHIME".localize(table: table), isOn: $startupSound)
-                Toggle("PLAY_UI_EFFECTS".localize(table: table), isOn: $soundEffects)
-                Toggle("PLAY_VOLUME_KEY_FEEDBACK".localize(table: table), isOn: $feedbackSound)
+                Toggle("PLAY_BOOT_CHIME".localized(using: localization), isOn: $startupSound)
+                Toggle("PLAY_UI_EFFECTS".localized(using: localization), isOn: $soundEffects)
+                Toggle("PLAY_VOLUME_KEY_FEEDBACK".localized(using: localization), isOn: $feedbackSound)
             }
             
-            Section("OUTPUT_INPUT".localize(table: table)) {
+            Section("OUTPUT_INPUT".localized(using: localization)) {
                 Picker("", selection: $selectedDevice) {
                     ForEach(deviceOptions, id: \.self) { output in
-                        Text(output.localize(table: table))
+                        Text(output.localized(using: localization))
                     }
                 }
                 .pickerStyle(.segmented)
@@ -109,21 +109,21 @@ struct SoundView: View {
                 if selectedDevice == "OUTPUT" {
                     VStack {
                         Slider(value: $outputVolume, in: 0...100, step: 15) {
-                            Text("OUTPUT_VOLUME", tableName: table)
+                            Text("OUTPUT_VOLUME".localized(using: localization))
                         } minimumValueLabel: {
                             Image(systemName: "speaker.fill")
                         } maximumValueLabel: {
                             Image(systemName: "speaker.3.fill")
                         }
                         
-                        Toggle("OUTPUT_MUTE".localize(table: table), isOn: $outputMuted)
+                        Toggle("OUTPUT_MUTE".localized(using: localization), isOn: $outputMuted)
                             .toggleStyle(.checkbox)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                     
                     VStack {
                         Slider(value: $outputBalance, in: 0...100, step: 50) {
-                            Text("BALANCE", tableName: table)
+                            Text("BALANCE".localized(using: localization))
                         }
                         
                         HStack {
@@ -136,7 +136,7 @@ struct SoundView: View {
                     }
                 } else {
                     Slider(value: $inputVolume, in: 0...100, step: 15) {
-                        Text("INPUT_VOLUME", tableName: table)
+                        Text("INPUT_VOLUME".localized(using: localization))
                     } minimumValueLabel: {
                         Image(systemName: "microphone.and.signal.meter.fill")
                     } maximumValueLabel: {
@@ -144,7 +144,7 @@ struct SoundView: View {
                     }
                     
                     HStack(spacing: 10) {
-                        Text("INPUT_LEVEL", tableName: table)
+                        Text("INPUT_LEVEL".localized(using: localization))
                         Spacer()
                         ForEach(1...15, id: \.self) {_ in
                             Image(.levelOff)
