@@ -8,42 +8,40 @@
 import SwiftUI
 
 struct AppearanceView: View {
-    @State private var selectedTheme = "AUTO"
+    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/Appearance.appex"))
+    @State private var selectedTheme = "Auto"
     @State private var selectedAccent = "Multicolor"
     @State private var selectedAccentColor = Color.blue
     @State private var selectedHighlight = "Accent Color"
     @State private var selectedFolderColor = FolderColor.automatic
-    @State private var selectedSidebar = "SIDEBAR_ICON_MEDIUM"
+    @State private var selectedSidebar = "Medium"
     @State private var selectedScroll = 1
-    @State private var selectedClick = "NEXT_PAGE"
+    @State private var selectedClick = "Jump to the next page"
     @State private var wallpaperTinting = true
     @State private var accentHover = true
-    let themeOptions = ["AUTO", "LIGHT", "DARK"]
     let highlightOptions = ["Accent Color", "Blue", "Purple", "Pink", "Red", "Orange", "Yellow", "Green", "Graphite", "Other"]
-    let sidebarOptions = ["SIDEBAR_ICON_SMALL", "SIDEBAR_ICON_MEDIUM", "SIDEBAR_ICON_LARGE"]
-    let scrollOptions = ["SHOW_SCROLL_AUTOMATICALLY", "SHOW_SCROLL_WHEN_SCROLLING", "SHOW_SCROLL_ALWAYS"]
-    let clickOptions = ["NEXT_PAGE", "GO_THERE"]
-    let table = "Appearance"
+    let sidebarOptions = ["Small", "Medium", "Large"]
+    let clickOptions = ["Jump to the next page", "Jump to the spot that’s clicked"]
 
     var body: some View {
-        CustomForm(title: "APPEARANCE".localize(table: table)) {
+        CustomForm(title: "Appearance".localized(using: localization)) {
             Section {
                 HStack(alignment: .top) {
-                    Text("APPEARANCE", tableName: table)
+                    Text("Appearance".localized(using: localization))
 
                     Spacer()
 
-                    DisplayButton(option: "AUTO", helpText: "AUTO_TOOLTIP", image: .appearanceAuto, selected: $selectedTheme, color: $selectedAccentColor)
+                    DisplayButton(option: "Auto", helpText: "Automatically adjusts the appearance of buttons, menus and windows throughout the day.", image: .appearanceAuto, selected: $selectedTheme, color: $selectedAccentColor, table: $localization)
 
-                    DisplayButton(option: "LIGHT", helpText: "LIGHT_TOOLTIP", image: .appearanceLight, selected: $selectedTheme, color: $selectedAccentColor)
+                    DisplayButton(option: "Light", helpText: "Use a light appearance for buttons, menus, and windows.", image: .appearanceLight, selected: $selectedTheme, color: $selectedAccentColor, table: $localization)
 
-                    DisplayButton(option: "DARK", helpText: "DARK_TOOLTIP", image: .appearanceDark, selected: $selectedTheme, color: $selectedAccentColor)
+                    DisplayButton(option: "Dark", helpText: "Use a dark appearance for buttons, menus, and windows.", image: .appearanceDark, selected: $selectedTheme, color: $selectedAccentColor, table: $localization)
                 }
             }
 
-            Section("Theme") {
+            Section("Theme".localized(using: localization)) {
                 HStack(alignment: .top, spacing: -3) {
-                    Text("ACCENT_COLOR_TITLE", tableName: table)
+                    Text("Accent color".localized(using: localization))
                     Spacer()
                     AccentButton(label: "Multicolor", option: .clear, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
                     AccentButton(label: "Blue", option: .blue, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
@@ -63,7 +61,7 @@ struct AppearanceView: View {
                     }
                 }
 
-                Picker("Text highlight color".localize(table: table), selection: $selectedHighlight) {
+                Picker("Text highlight color".localized(using: localization), selection: $selectedHighlight) {
                     ForEach(highlightOptions, id: \.self) { color in
                         HStack {
                             switch color {
@@ -82,11 +80,11 @@ struct AppearanceView: View {
 
             Section {
                 HStack {
-                    Text("Icon & widget style")
+                    Text("Icon & widget style".localized(using: localization))
                     Spacer()
                     BundleIconView(bundlePath: "/System/Applications/Weather.app", size: 36)
                 }
-                Picker("Folder color", selection: $selectedFolderColor) {
+                Picker("Folder color".localized(using: localization), selection: $selectedFolderColor) {
                     ForEach(FolderColor.allCases) { option in
                         if FolderColor.automatic == option || FolderColor.graphite == option {
                             HStack {
@@ -110,28 +108,28 @@ struct AppearanceView: View {
                 }
             }
 
-            Section("Windows") {
-                Picker("SIDEBAR_ICON_SIZE_TITLE".localize(table: table), selection: $selectedSidebar) {
+            Section("Windows".localized(using: localization)) {
+                Picker("Sidebar icon size".localized(using: localization), selection: $selectedSidebar) {
                     ForEach(sidebarOptions, id: \.self) { size in
-                        Text(size.localize(table: table))
+                        Text(size.localized(using: localization))
                     }
                 }
 
-                Toggle("ALLOW_WALLPAPER_TINTING_TITLE".localize(table: table), isOn: $wallpaperTinting)
+                Toggle("Allow wallpaper tinting in windows".localized(using: localization), isOn: $wallpaperTinting)
             }
 
             Section {
-                Picker(selection: $selectedScroll, label: Text("SHOW_SCROLL_TITLE", tableName: table)) {
-                    Text("SHOW_SCROLL_AUTOMATICALLY", tableName: table).tag(1)
-                    Text("SHOW_SCROLL_WHEN_SCROLLING", tableName: table).tag(2)
-                    Text("SHOW_SCROLL_ALWAYS", tableName: table).tag(3)
+                Picker(selection: $selectedScroll, label: Text("Show scroll bars".localized(using: localization))) {
+                    Text("Automatically based on mouse or trackpad".localized(using: localization)).tag(1)
+                    Text("When scrolling".localized(using: localization)).tag(2)
+                    Text("Always-ScrollBar".localized(using: localization)).tag(3)
                 }
                 .pickerStyle(.radioGroup)
 
                 VStack {
-                    Picker("SCROLLER_CLICKS_TITLE".localize(table: table), selection: $selectedClick) {
+                    Picker("Click in the scroll bar to".localized(using: localization), selection: $selectedClick) {
                         ForEach(clickOptions, id: \.self) { option in
-                            Text(option.localize(table: table))
+                            Text(option.localized(using: localization))
                         }
                     }
                     .pickerStyle(.radioGroup)
@@ -220,6 +218,7 @@ struct DisplayButton: View {
     let image: ImageResource
     @Binding var selected: String
     @Binding var color: Color
+    @Binding var table: LocalizationManager
 
     var body: some View {
         Button {
@@ -234,15 +233,15 @@ struct DisplayButton: View {
                             RoundedRectangle(cornerRadius: 5.0)
                                 .stroke(selected == option ? .white : .clear, lineWidth: 1)
                         }
-                    Image(option == "AUTO" ? .selectionColorMaskAuto : .selectionColorMask)
+                    Image(option == "Auto" ? .selectionColorMaskAuto : .selectionColorMask)
                         .foregroundStyle(color)
                 }
-                Text(option.localize(table: "Appearance"))
+                Text(option.localized(using: table))
                     .font(.callout)
                     .fontWeight(selected == option ? .semibold : .regular)
                     .foregroundStyle(selected == option ? .primary : .secondary)
             }
-            .help(helpText.localize(table: "Appearance"))
+            .help(helpText.localized(using: table))
         }
         .buttonStyle(.plain)
     }
