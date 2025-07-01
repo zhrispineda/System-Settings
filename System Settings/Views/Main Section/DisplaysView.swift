@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DisplaysView: View {
+    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/DisplaysExt.appex"))
     @State private var hover = false
     @State private var selected: ImageResource = .resolution2
     @State private var brightness = 0.5
@@ -19,18 +20,17 @@ struct DisplaysView: View {
     let presetOptions = ["Apple XDR Display (P3-1600 nits)"]
     let refreshOptions = ["ProMotion", "60 Hertz", "59.94 Hertz", "50 Hertz", "48 Hertz", "47.95 Hertz"]
     let tvOptions = ["Ask What to Show", "Mirror Entire Screen", "Choose Window or App", "Use as Extended Display"]
-    let table = "DisplaysExt"
     
     var body: some View {
-        CustomForm(title: "Displays".localize(table: table)) {
+        CustomForm(title: "Displays".localized(using: localization)) {
             Section {
                 VStack {
                     HStack(spacing: 10) {
-                        ResolutionOption(selected: $selected, title: "Larger Text", image: .resolution5, resolution: "1168 × 755")
-                        ResolutionOption(selected: $selected, image: .resolution4, resolution: "1312 × 848")
-                        ResolutionOption(selected: $selected, image: .resolution3, resolution: "1496 × 967")
-                        ResolutionOption(selected: $selected, title: "Default", image: .resolution2, resolution: "1728 × 1117")
-                        ResolutionOption(selected: $selected, title: "More Space", image: .resolution1, resolution: "2056 × 1329")
+                        ResolutionOption(selected: $selected, table: $localization, title: "Larger Text", image: .resolution5, resolution: "1168 × 755")
+                        ResolutionOption(selected: $selected, table: $localization, image: .resolution4, resolution: "1312 × 848")
+                        ResolutionOption(selected: $selected, table: $localization, image: .resolution3, resolution: "1496 × 967")
+                        ResolutionOption(selected: $selected, table: $localization, title: "Default", image: .resolution2, resolution: "1728 × 1117")
+                        ResolutionOption(selected: $selected, table: $localization, title: "More Space", image: .resolution1, resolution: "2056 × 1329")
                     }
                     .padding(.bottom, -15)
                     
@@ -44,7 +44,7 @@ struct DisplaysView: View {
                     .padding(.horizontal)
                 }
                 if selected != .resolution2 {
-                    Text("Using a scaled resolution may affect performance.", tableName: table)
+                    Text("Using a scaled resolution may affect performance.".localized(using: localization))
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
@@ -54,7 +54,7 @@ struct DisplaysView: View {
             
             Section {
                 Slider(value: $brightness, in: 0.0...1.0) {
-                        Text("Brightness", tableName: table)
+                        Text("Brightness".localized(using: localization))
                     } minimumValueLabel: {
                         Image(systemName: "sun.min.fill")
                             .font(.system(size: 13))
@@ -63,19 +63,19 @@ struct DisplaysView: View {
                             .font(.system(size: 13))
                     }
                 Toggle(isOn: $autoBrightness) {
-                    Text("Automatically adjust brightness", tableName: table)
+                    Text("Automatically adjust brightness".localized(using: localization))
                     if !autoBrightness {
-                        Text("%@ Energy usage may be higher when your display does not automatically adjust. Display and battery performance may also be reduced over time when this is turned off.".localize(table: table, "⚠️"))
+                        Text("%@ Energy usage may be higher when your display does not automatically adjust. Display and battery performance may also be reduced over time when this is turned off.".localizedFormatted(using: localization, "⚠️"))
                     }
                 }
                 Toggle(isOn: $trueTone) {
-                    Text("True Tone", tableName: table)
-                    Text("Automatically adapt display to make colors appear consistent in different ambient lighting conditions.", tableName: table)
+                    Text("True Tone".localized(using: localization))
+                    Text("Automatically adapt display to make colors appear consistent in different ambient lighting conditions.".localized(using: localization))
                 }
             }
             
             Section {
-                Picker("Preset".localize(table: table), selection: $preset) {
+                Picker("Preset".localized(using: localization), selection: $preset) {
                     ForEach(presetOptions, id: \.self) { option in
                         Text(option)
                     }
@@ -83,7 +83,7 @@ struct DisplaysView: View {
             }
             
             Section {
-                Picker("Refresh rate".localize(table: table), selection: $refreshRate) {
+                Picker("Refresh rate".localized(using: localization), selection: $refreshRate) {
                     ForEach(refreshOptions, id: \.self) { option in
                         if option == refreshOptions[0] {
                             Text(option)
@@ -98,16 +98,19 @@ struct DisplaysView: View {
             Section {
                 Picker(selection: $tvOption) {
                     ForEach(tvOptions, id: \.self) { option in
-                        Text(option.localize(table: table))
+                        Text(option.localized(using: localization))
                     }
                 } label: {
-                    Text("When connected to TV", tableName: table)
-                    Text("Choose what to show or use the TV as a secondary display.", tableName: table)
+                    Text("When connected to TV".localized(using: localization))
+                    Text("Choose what to show or use the TV as a secondary display.".localized(using: localization))
                 }
             } footer: {
-                Button("Advanced…".localize(table: table)) {}
-                Button("Night Shift…".localize(table: table)) {}
-                HelpButton(topicID: "mh40768")
+                HStack {
+                    Button("Advanced…".localized(using: localization)) {}
+                    Button("Night Shift…".localized(using: localization)) {}
+                    HelpButton(topicID: "mh40768")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }
@@ -115,11 +118,11 @@ struct DisplaysView: View {
 
 struct ResolutionOption: View {
     @Binding var selected: ImageResource
+    @Binding var table: LocalizationManager
     @State private var hovering = false
-    var title: LocalizedStringKey = ""
+    var title: String = ""
     var image: ImageResource
-    var resolution: LocalizedStringKey
-    let table = "DisplaysExt"
+    var resolution: String
     
     var body: some View {
         Button {
@@ -138,10 +141,10 @@ struct ResolutionOption: View {
                     .onHover { hover in
                         hovering = hover
                     }
-                Text(title, tableName: table)
+                Text(title.localized(using: table))
                     .font(.system(size: 11))
                     .fontWeight(title == "Default" ? .semibold : .regular)
-                Text(resolution, tableName: table)
+                Text(resolution.localized(using: table))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .opacity(hovering ? 1 : 0)
