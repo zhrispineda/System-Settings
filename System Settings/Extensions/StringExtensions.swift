@@ -28,12 +28,6 @@ extension String {
         return String(format: format, locale: .current, arguments: localizedVariables)
     }
     
-    func localize(bundle: Bundle? = .main, table: String? = nil, _ args: CVarArg...) -> String {
-        let resolvedBundle = bundle ?? .main
-        let format = NSLocalizedString(self, tableName: table, bundle: resolvedBundle, value: "", comment: "")
-        return String(format: format, arguments: args)
-    }
-    
     // MARK: - Experimental
     func localized(using localizer: NSObject?, preferredLocalizations: [String]) -> String {
         guard let localizer else { return self }

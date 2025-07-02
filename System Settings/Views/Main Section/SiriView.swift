@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SiriView: View {
-    //@State private var appleIntelligenceEnabled = false
+    @State private var table = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/SiriPreferenceExtension.appex"))
     @State private var selectedLanguage = "English (United States)"
     @State private var selectedListenOption = "OFF_KEY"
     @State private var selectedShortcutOption = "Hold 🎤︎"
@@ -17,20 +17,19 @@ struct SiriView: View {
     let listenOptions = ["“Siri“ or “Hey Siri“", "“Hey Siri“", "OFF_KEY"]
     let shortcutOptions = ["SAE_GLOBE_S", "Hold 🎤︎", "RIGHT_COMMAND_TWICE", "EITHER_COMMAND_TWICE", "CUSTOMIZE_KEY"]
     let languageOptions = ["English (United States)"]
-    let bundle = Bundle(path: "/System/Library/ExtensionKit/Extensions/SiriPreferenceExtension.appex")
     
     var body: some View {
-        CustomForm(title: "SIRI_SIDEBAR_TITLE_SAE".localize(bundle: bundle)) {
+        CustomForm(title: "SIRI_SIDEBAR_TITLE_SAE".localized(using: table)) {
             Section {
                 Placard(icon: "com.apple.application-icon.apple-intelligence") {
-                    Text("SIRI_SIDEBAR_TITLE_SAE", bundle: bundle)
+                    Text("SIRI_SIDEBAR_TITLE_SAE".localized(using: table))
                     Text("\("A personal intelligence system integrated deeply into your Mac, apps, and Siri.") [\("Learn more…")](help:anchor=mchl46361784)")
                 }
                 .overlay {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15.0)
                             .foregroundStyle(Color(NSColor.headerTextColor))
-                        Text("GM_BETA_LABEL", bundle: bundle)
+                        Text("GM_BETA_LABEL".localized(using: table))
                             .font(.system(size: 7))
                             .foregroundStyle(Color(NSColor.gridColor))
                     }
@@ -47,27 +46,27 @@ struct SiriView: View {
                 .padding(.top, 2)
             
             Section {
-                Toggle("SIRI_TITLE".localize(bundle: bundle), isOn: $siriEnabled)
-                Picker("VOICE_ACTIVATION_PHRASE_TITLE".localize(bundle: bundle), selection: $selectedListenOption) {
+                Toggle("SIRI_TITLE".localized(using: table), isOn: $siriEnabled)
+                Picker("VOICE_ACTIVATION_PHRASE_TITLE".localized(using: table), selection: $selectedListenOption) {
                     ForEach(listenOptions, id: \.self) { option in
-                        Text(option.localize(bundle: bundle))
+                        Text(option.localized(using: table))
                     }
                 }
                 .disabled(true)
                 
-                Picker("KEYBOARD_SHORTCUT_LABEL".localize(bundle: bundle), selection: $selectedShortcutOption) {
+                Picker("KEYBOARD_SHORTCUT_LABEL".localized(using: table), selection: $selectedShortcutOption) {
                     ForEach(shortcutOptions, id: \.self) { option in
                         if shortcutOptions.first == option || shortcutOptions[shortcutOptions.count - 2] == option {
-                            Text(option.localize(bundle: bundle, "🎤︎"))
+                            Text(option.localizedFormatted(using: table, "🎤︎"))
                             Divider()
                         } else {
-                            Text(option.localize(bundle: bundle))
+                            Text(option.localized(using: table))
                         }
                     }
                 }
                 .disabled(true)
                 
-                Picker("LANGUAGE_LABEL".localize(bundle: bundle), selection: $selectedLanguage) {
+                Picker("LANGUAGE_LABEL".localized(using: table), selection: $selectedLanguage) {
                     ForEach(languageOptions, id: \.self) { option in
                         Text(option)
                     }
@@ -75,14 +74,14 @@ struct SiriView: View {
                 .disabled(true)
                 
                 HStack {
-                    LabeledContent("VOICE_LABEL".localize(bundle: bundle), value: "American (Voice 4)")
-                    Button("SIRI_VOICE_BUTTON".localize(bundle: bundle)) {}.disabled(true)
+                    LabeledContent("VOICE_LABEL".localized(using: table), value: "American (Voice 4)")
+                    Button("SIRI_VOICE_BUTTON".localized(using: table)) {}.disabled(true)
                 }
                 
                 HStack {
-                    Text("DELETE_HISTORY_LABEL", bundle: bundle)
+                    Text("DELETE_HISTORY_LABEL".localized(using: table))
                     Spacer()
-                    Button("DELETE_HISTORY_BUTTON".localize(bundle: bundle)) {}
+                    Button("DELETE_HISTORY_BUTTON".localized(using: table)) {}
                 }
                 
                 Picker("Siri responses", selection: .constant(0)) {
@@ -90,7 +89,7 @@ struct SiriView: View {
                 }
                 .disabled(true)
             } header: {
-                Text("SIRI_REQUESTS", bundle: bundle)
+                Text("SIRI_REQUESTS".localized(using: table))
             }
             
             Section {} footer: {
