@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DisplaysView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/DisplaysExt.appex"))
     @State private var hover = false
     @State private var selected: ImageResource = .resolution2
@@ -112,6 +113,30 @@ struct DisplaysView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
+        }
+        .safeAreaBar(edge: .top) { // Top header area
+            Divider()
+                .offset(y: -80)
+            ZStack {
+                Rectangle()
+                    .foregroundStyle(Color(colorScheme == .light ? NSColor.quaternarySystemFill : NSColor.underPageBackgroundColor))
+                TestIconView(icon: "com.apple.macbookpro-16-2021-space-gray", size: 160)
+                    .offset(y: -13)
+                Text("Built-in Display")
+                    .fontWeight(.semibold)
+                    .offset(y: 53)
+            }
+            .frame(height: 159)
+        }
+        .safeAreaBar(edge: .bottom) { // Bottom bar (Arrange… Button) (+ Menu)
+            HStack {
+                Button("Arrange…".localized(using: localization)) {}
+                Menu {} label: {
+                    Image(systemName: "plus")
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding([.bottom, .trailing], 20)
         }
     }
 }
