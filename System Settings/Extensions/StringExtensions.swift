@@ -27,23 +27,29 @@ extension String {
         
         return String(format: format, locale: .current, arguments: localizedVariables)
     }
-
+    
+    func localize(bundle: Bundle? = .main, table: String? = nil, _ args: CVarArg...) -> String {
+        let resolvedBundle = bundle ?? .main
+        let format = NSLocalizedString(self, tableName: table, bundle: resolvedBundle, value: "", comment: "")
+        return String(format: format, arguments: args)
+    }
+    
     // MARK: - Experimental
     func localized(using localizer: NSObject?, preferredLocalizations: [String]) -> String {
         guard let localizer else { return self }
         return objcLocalized(localizer, preferredLocalizations: preferredLocalizations)
     }
-
+    
     func localized(using manager: LocalizationManager) -> String {
         guard let localizer = manager.localizer else { return self }
         return objcLocalized(localizer, preferredLocalizations: manager.preferredLocalizations)
     }
-
+    
     func localizedFormatted(using manager: LocalizationManager, _ args: CVarArg...) -> String {
         let localized = self.localized(using: manager)
         return String(format: localized, arguments: args)
     }
-
+    
     private func objcLocalized(_ localizer: NSObject, preferredLocalizations: [String]) -> String {
         let selector = localizedStringSelector
         guard localizer.responds(to: selector),
@@ -55,7 +61,7 @@ extension String {
         let result = impl(localizer, selector, self as NSString, preferredLocalizations as NSArray) as String
         return result.isEmpty ? self : result
     }
-
+    
     private var localizedStringSelector: Selector {
         NSSelectorFromString("localizedStringWithString:preferredLocalizations:")
     }
@@ -65,17 +71,17 @@ func getLocalizable(bundleURL: URL, stringsFile: String) -> NSObject? {
     guard let localizer = NSClassFromString("_LSStringLocalizer") else {
         return nil
     }
-
+    
     let allocSel = NSSelectorFromString("alloc")
     guard let allocated = (localizer as AnyObject).perform(allocSel)?.takeUnretainedValue() as? NSObject else {
         return nil
     }
-
+    
     let initSel = NSSelectorFromString("initWithBundleURL:stringsFile:")
     guard allocated.responds(to: initSel) else {
         return nil
     }
-
+    
     let initialized = allocated.perform(initSel, with: bundleURL as NSURL, with: stringsFile as NSString)?.takeUnretainedValue() as? NSObject
     return initialized
 }
