@@ -17,7 +17,7 @@ struct System_SettingsApp: App {
     var body: some Scene {
         Window("System Settings", id: "System Settings") {
             ContentView()
-                .frame(width: 715)
+                .frame(width: 723)
                 .frame(minHeight: 415, idealHeight: 574)
         }
         .windowResizability(.contentSize)
