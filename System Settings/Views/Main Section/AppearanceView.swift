@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppearanceView: View {
-    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/Appearance.appex"))
+    @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     @State private var selectedTheme = "Auto"
     @State private var selectedAccent = "Multicolor"
     @State private var selectedAccentColor = Color.blue

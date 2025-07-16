@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SiriView: View {
-    @State private var table = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/SiriPreferenceExtension.appex"))
+    @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/SiriPreferenceExtension.appex")
     @State private var selectedLanguage = "English (United States)"
     @State private var selectedListenOption = "OFF_KEY"
     @State private var selectedShortcutOption = "Hold 🎤︎"

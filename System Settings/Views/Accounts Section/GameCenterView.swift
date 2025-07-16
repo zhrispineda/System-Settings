@@ -10,7 +10,7 @@ import SwiftUI
 struct GameCenterView: View {
     @State private var gameCenterEnabled = false
     @State private var showingPrivacy = false
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/GameCenterSettingsDeviceExpertExtension.appex"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/GameCenterSettingsDeviceExpertExtension.appex")
 
     var body: some View {
         CustomForm(title: "SETTINGS_DEEPLINK_EXT_SIGN_IN_PATH".localized(using: localization)) {

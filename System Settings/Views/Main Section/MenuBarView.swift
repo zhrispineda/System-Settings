@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MenuBarView: View {
-    @State private var table = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/ControlCenterSettings.appex"))
+    @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/ControlCenterSettings.appex")
     @State private var autoMenuBar = "In Full Screen Only"
     @State private var recentCount = "10"
     let autoMenuBarOptions = ["Always", "On Desktop Only", "In Full Screen Only", "Never"]

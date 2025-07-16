@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GeneralView: View {
     @State private var titleOpacity = 0.0
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Applications/System Settings.app/Contents/PlugIns/GeneralSettings.appex"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Applications/System Settings.app/Contents/PlugIns/GeneralSettings.appex")
     
     var body: some View {
         CustomForm(title: "General") {

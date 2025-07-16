@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PrintersScannersView: View {
-    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/PrinterScannerSettings.appex"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/PrinterScannerSettings.appex")
     @State private var selectedPaperSize = "US Letter"
     @State private var selectedPrinter = "PRINTER_LAST"
     let paperOptions = ["US Letter", "US Legal", "A4", "A5", "JIS B5", "B5", "Envelope #10", "Envelope DL", "Tabloid", "A3", "Tabloid Oversize", "ROC 16K", "Envelope Choukei 3", "Super B/A3"]

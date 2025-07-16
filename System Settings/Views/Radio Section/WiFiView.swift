@@ -11,7 +11,7 @@ struct WiFiView: View {
     @AppStorage("WiFiEnabled") private var WiFiEnabled = false
     @AppStorage("AskJoinNetworks") private var askJoinNetworksIndex = 1
     @AppStorage("AskJoinHotspots") private var askJoinHotspotsIndex = 1
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Wi-Fi.appex"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Wi-Fi.appex")
     let joinNetworkOptions = [
         "Off",
         "Notify",

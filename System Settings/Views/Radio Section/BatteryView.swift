@@ -83,9 +83,9 @@ struct BatteryChart: View {
 }
 
 struct BatteryView: View {
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex"), stringsFile: "BatteryUI")
-    @State private var J316 = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex"), stringsFile: "BatteryUI-J316")
-    @State private var powerTable = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex", stringsFile: "BatteryUI")
+    @State private var J316 = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex", stringsFile: "BatteryUI-J316")
+    @State private var powerTable = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/PowerPreferences.appex")
     @State private var selectedBattery = "ENERGY_MODE_AUTO"
     @State private var selectedPower = "ENERGY_MODE_AUTO"
     @State private var selectedTimeframe = "HOURLY_GRAPH_TITLE_FMT"

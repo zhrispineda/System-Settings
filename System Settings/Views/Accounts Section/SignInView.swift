@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
     @State private var username = ""
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/PrivateFrameworks/AuthKitUI.framework"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/PrivateFrameworks/AuthKitUI.framework")
 
     var body: some View {
         VStack(spacing: 20) {

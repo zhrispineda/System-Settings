@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DesktopDockView: View {
-    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/DesktopSettings.appex"))
+    @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/DesktopSettings.appex")
     // Dock
     @State private var dockSize = 40.0
     @State private var dockMagnification = 0.0

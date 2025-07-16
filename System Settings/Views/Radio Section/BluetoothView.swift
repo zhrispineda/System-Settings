@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BluetoothView: View {
     @State private var bluetoothEnabled = true
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Bluetooth.appex"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Bluetooth.appex")
 
     var body: some View {
         CustomForm(title: "bluetooth".localized(using: localization)) {

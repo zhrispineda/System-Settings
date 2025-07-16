@@ -14,8 +14,8 @@ struct AudioDevice: Identifiable {
 }
 
 struct SoundView: View {
-    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/Sound.appex"))
-    @State private var alerts = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/Sound.appex"), stringsFile: "AlertSounds")
+    @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Sound.appex")
+    @State private var alerts = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Sound.appex", stringsFile: "AlertSounds")
     @State private var alertSound = "Tink"
     @State private var alertVolume = 100.0
     @State private var outputBalance = 50.0

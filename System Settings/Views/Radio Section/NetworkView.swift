@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NetworkView: View {
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Network.appex"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Network.appex")
     @State private var selection = "Automatic"
     let options = ["Automatic"]
     
@@ -155,7 +155,7 @@ enum NetworkStatus {
 
 #Preview {
     NetworkStatusView(
-        localization: .constant(LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/ExtensionKit/Extensions/Network.appex"))),
+        localization: .constant(LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Network.appex")),
         titleKey: "Wi-Fi",
         status: .notConnected,
         symbol: "com.apple.graphic-icon.wifi",

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InternetAccountsView: View {
-    @State private var localization = LocalizationManager(bundleURL: URL(fileURLWithPath: "/System/Library/PrivateFrameworks/AccountsUISettings.framework"))
+    @State private var localization = LocalizationManager(bundleURL: "/System/Library/PrivateFrameworks/AccountsUISettings.framework")
 
     var body: some View {
         CustomForm(title: "INTERNET_ACCOUNTS_MAIN_TITLE".localized(using: localization)) {

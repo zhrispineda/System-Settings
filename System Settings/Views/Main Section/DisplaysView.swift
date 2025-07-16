@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DisplaysView: View {
     @Environment(\.colorScheme) private var colorScheme
-    @State private var localization = LocalizationManager(bundleURL: URL(filePath: "/System/Library/ExtensionKit/Extensions/DisplaysExt.appex"))
+    @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/DisplaysExt.appex")
     @State private var hover = false
     @State private var selected: ImageResource = .resolution2
     @State private var brightness = 0.5
