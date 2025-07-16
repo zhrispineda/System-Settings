@@ -37,7 +37,11 @@ struct PrintersScannersView: View {
             } footer: {
                 HStack {
                     Spacer()
-                    Button("ADD_PRINTER_ETC".localized(using: localization)) {}
+                    Button("ADD_PRINTER_ETC".localized(using: localization)) {
+                        if let url = URL(string: "file:///System/Library/CoreServices/AddPrinter.app") {
+                            NSWorkspace.shared.open(url)
+                        }
+                    }
                     HelpButton(topicID: "prtct004")
                 }
             }

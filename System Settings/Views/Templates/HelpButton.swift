@@ -15,7 +15,7 @@ struct HelpButton: View {
             }
         } label: {
             Image(systemName: "questionmark")
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
         }
         .clipShape(Circle())
         .accessibilityLabel("Help")
