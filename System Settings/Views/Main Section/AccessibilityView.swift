@@ -29,82 +29,82 @@ struct AccessibilityView: View {
             
             Section("Vision") {
                 NavigationLink(value: "VoiceOver") {
-                    SettingsCell("VoiceOver", color: .black, symbol: "voiceover")
+                    SettingsCell("VoiceOver", symbol: "com.apple.graphic-icon.voice-over")
                 }
                 NavigationLink(value: "Zoom") {
-                    SettingsCell("Zoom", color: .black, symbol: "arrowtriangles.up.right.down.left.magnifyingglass")
+                    SettingsCell("Zoom", symbol: "com.apple.AccessibilityUIServer.zoom")
                 }
                 NavigationLink(value: "Hover Text") {
-                    SettingsCell("Hover Text", color: .blue, symbol: "character.magnify")
+                    SettingsCell("Hover Text", symbol: "com.apple.AccessibilityUIServer.hovertext")
                 }
                 NavigationLink(value: "Display") {
-                    SettingsCell("Display", color: .blue, symbol: "display")
+                    SettingsCell("Display", symbol: "com.apple.accessibility-settings.icon.display")
                 }
                 NavigationLink(value: "Motion") {
-                    SettingsCell("Motion", color: .green, symbol: "circle.dotted.and.circle")
+                    SettingsCell("Motion", symbol: "com.apple.graphic-icon.motion")
                 }
                 NavigationLink(value: "Read & Speak") {
-                    SettingsCell("Read & Speak", color: .black, symbol: "rectangle.3.group.bubble.fill")
+                    SettingsCell("Read & Speak", symbol: "com.apple.graphic-icon.spoken-content")
                 }
                 NavigationLink(value: "Audio Descriptions") {
-                    SettingsCell("Audio Descriptions", color: .black, symbol: "quote.bubble.fill")
+                    SettingsCell("Audio Descriptions", symbol: "com.apple.AccessibilityUIServer.audio.descriptions")
                 }
             }
             
             Section("Hearing") {
                 NavigationLink(value: "Hearing Devices") {
-                    SettingsCell("Hearing Devices", color: .blue, symbol: "ear")
+                    SettingsCell("Hearing Devices", symbol: "com.apple.graphic-icon.hearing")
                 }
                 NavigationLink(value: "Audio") {
-                    SettingsCell("Audio", color: .pink, symbol: "speaker.3.fill")
+                    SettingsCell("Audio", symbol: "com.apple.graphic-icon.sound")
                 }
                 NavigationLink(value: "RTT") {
-                    SettingsCell("RTT", color: .green, symbol: "teletype")
+                    SettingsCell("RTT", symbol: "com.apple.graphic-icon.tty")
                 }
                 NavigationLink(value: "Captions") {
-                    SettingsCell("Captions", color: .black, symbol: "captions.bubble.fill")
+                    SettingsCell("Captions", symbol: "com.apple.graphic-icon.subtitles-and-captioning")
                 }
                 NavigationLink(value: "Live Captions") {
-                    SettingsCell("Live Captions", color: .black, symbol: "waveform.bubble.fill")
+                    SettingsCell("Live Captions", symbol: "com.apple.AccessibilityUIServer.live.captions")
                 }
                 NavigationLink(value: "Name Recognition") {
-                    SettingsCell("Name Recognition", color: .blue, symbol: "person.wave.2.fill")
+                    SettingsCell("Name Recognition", symbol: "com.apple.accessibility-settings.icon.namerecognition")
                 }
             }
             
             Section("Motor") {
                 NavigationLink(value: "Voice Control") {
-                    SettingsCell("Voice Control", color: .blue, symbol: "voice.control")
+                    SettingsCell("Voice Control", symbol: "com.apple.AccessibilityUIServer.voice.control")
                 }
                 NavigationLink(value: "Keyboard") {
-                    SettingsCell("Keyboard", color: .gray, symbol: "keyboard.fill")
+                    SettingsCell("Keyboard", symbol: "com.apple.graphic-icon.keyboard")
                 }
                 NavigationLink(value: "Pointer Control") {
-                    SettingsCell("Pointer Control", color: .gray, symbol: "cursorarrow.resize.north.east.south.east")
+                    SettingsCell("Pointer Control", symbol: "com.apple.accessibility-settings.icon.pointercontrol")
                 }
                 NavigationLink(value: "Switch Control") {
-                    SettingsCell("Switch Control", color: .black, symbol: "square.grid.2x2")
+                    SettingsCell("Switch Control", symbol: "com.apple.accessibility-settings.icon.switchcontrol")
                 }
             }
             
             Section("Speech") {
                 NavigationLink(value: "Live Speech") {
-                    SettingsCell("Live Speech", color: .black, symbol: "keyboard.badge.waveform.fill")
+                    SettingsCell("Live Speech", symbol: "com.apple.accessibility-settings.icon.livespeech")
                 }
                 NavigationLink(value: "Personal Voice") {
-                    SettingsCell("Personal Voice", color: .blue, symbol: "person.badge.waveform.fill")
+                    SettingsCell("Personal Voice", symbol: "com.apple.AccessibilityUIServer.personal.voice")
                 }
                 NavigationLink(value: "Vocal Shortcuts") {
-                    SettingsCell("Vocal Shortcuts", color: .blue, symbol: "waveform.arrow.triangle.branch.right")
+                    SettingsCell("Vocal Shortcuts", symbol: "com.apple.AccessibilityUIServer.vocal.shortcuts")
                 }
             }
             
             Section {
                 NavigationLink(value: "Siri") {
-                    SettingsCell("Siri", color: .blue, symbol: "siri")
+                    SettingsCell("Siri", symbol: "com.apple.application-icon.siri")
                 }
                 NavigationLink(value: "Shortcut") {
-                    SettingsCell("Shortcut", color: .blue, symbol: "accessibility.badge.arrow.up.right")
+                    SettingsCell("Shortcut", symbol: "com.apple.accessibility-settings.icon.shortcut")
                 }
             } header: {
                 Text("General")
