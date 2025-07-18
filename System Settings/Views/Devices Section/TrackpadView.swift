@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct TrackpadView: View {
+    @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/TrackpadExtension.appex")
     @State private var selectedTab = "Point & Click"
     let options = ["Point & Click", "Scroll & Zoom", "More Gestures"]
     
     var body: some View {
         CustomForm(title: "Trackpad") {
             Section {
-                Text("Tracking speed")
-                Text("Click")
-                Text("Force Click and haptic feedback")
-                Text("Look up & data detectors")
-                Text("Secondary click")
-                Text("Tap to click")
+                Text("Tracking speed".localized(using: table))
+                Text("Click".localized(using: table))
+                Text("GNAME_FORCE_CLICK".localized(using: table))
+                Text("GNAME_LOOKUP".localized(using: table))
+                Text("GNAME_SECONDARYCLICK".localized(using: table))
+                Text("GNAME_CLICK".localized(using: table))
             } footer: {
                 HStack {
-                    Button("Set Up Bluetooth Trackpad…") {}
+                    Button("Set Up Bluetooth Trackpad…".localized(using: table)) {}
                     HelpButton(topicID: "mchlp1226")
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -43,7 +44,7 @@ struct TrackpadView: View {
                     }
                     Picker("", selection: $selectedTab) {
                         ForEach(options, id: \.self) { option in
-                            Text(option)
+                            Text(option.localized(using: table))
                         }
                     }
                     .pickerStyle(.palette)
@@ -57,4 +58,5 @@ struct TrackpadView: View {
 
 #Preview {
     TrackpadView()
+        .frame(height: 600)
 }
