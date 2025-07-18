@@ -10,17 +10,73 @@ import SwiftUI
 struct TrackpadView: View {
     @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/TrackpadExtension.appex")
     @State private var selectedTab = "Point & Click"
+    @State private var trackingSpeed = 3.0
+    @State private var click = 1.0
+    @State private var forceClickHaptic = true
+    @State private var lookUpGesture = "GNAME_LOOKUP_FORCECLICK"
+    @State private var lookUpTap = true
+    @State private var secondaryClick = "GNAME_SECONDARYCLICK_2F"
+    @State private var tapToClick = false
     let options = ["Point & Click", "Scroll & Zoom", "More Gestures"]
+    let lookUpOptions = ["GNAME_OFF", "GNAME_LOOKUP_FORCECLICK", "GNAME_LOOKUP_T3FAP"]
+    let secondaryOptions = ["GNAME_OFF", "GNAME_SECONDARYCLICK_2F", "GNAME_SECONDARYCLICK_BOTTOM_RIGHT_CORNER", "GNAME_SECONDARYCLICK_BOTTOM_LEFT_CORNER"]
+    let secondaryTapOptions = ["GNAME_OFF", "GNAME_SECONDARYTAP_2F", "GNAME_SECONDARYCLICK_BOTTOM_RIGHT_CORNER", "GNAME_SECONDARYCLICK_BOTTOM_LEFT_CORNER"]
     
     var body: some View {
         CustomForm(title: "Trackpad") {
             Section {
-                Text("Tracking speed".localized(using: table))
-                Text("Click".localized(using: table))
-                Text("GNAME_FORCE_CLICK".localized(using: table))
-                Text("GNAME_LOOKUP".localized(using: table))
-                Text("GNAME_SECONDARYCLICK".localized(using: table))
-                Text("GNAME_CLICK".localized(using: table))
+                Slider(
+                    value: $trackingSpeed,
+                    in: 0...9,
+                    step: 1
+                ) {
+                    Text("Tracking speed".localized(using: table))
+                } minimumValueLabel: {
+                    Text("Slow")
+                } maximumValueLabel: {
+                    Text("Fast")
+                }
+                Slider(
+                    value: $click,
+                    in: 0...2,
+                    step: 1
+                ) {
+                    Text("Click".localized(using: table))
+                } minimumValueLabel: {
+                    Text("Light")
+                } maximumValueLabel: {
+                    Text("Firm")
+                }
+                Toggle(isOn: $forceClickHaptic) {
+                    Text("GNAME_FORCE_CLICK".localized(using: table))
+                    Text("GNAME_FORCE_CLICK_LABEL".localized(using: table))
+                }
+                if forceClickHaptic {
+                    Picker("GNAME_LOOKUP".localized(using: table), selection: $lookUpGesture) {
+                        ForEach(lookUpOptions, id: \.self) { option in
+                            Text(option.localized(using: table))
+                        }
+                    }
+                } else {
+                    Toggle(isOn: $lookUpTap) {
+                        Text("GNAME_LOOKUP".localized(using: table))
+                        Text("GNAME_DEEP_CLICK_LABEL".localized(using: table))
+                    }
+                }
+                Picker("GNAME_SECONDARYCLICK".localized(using: table), selection: $secondaryClick) {
+                    ForEach(tapToClick ? secondaryTapOptions : secondaryOptions, id: \.self) { option in
+                        Text(option.localized(using: table))
+                    }
+                }
+                Toggle(isOn: $tapToClick) {
+                    Text("GNAME_CLICK".localized(using: table))
+                    Text("GNAME_CLICK_LABEL".localized(using: table))
+                }
+                .onChange(of: tapToClick) {
+                    if secondaryClick == "GNAME_SECONDARYCLICK_2F" || secondaryClick == "GNAME_SECONDARYTAP_2F" {
+                        secondaryClick = tapToClick ? "GNAME_SECONDARYTAP_2F" : "GNAME_SECONDARYCLICK_2F"
+                    }
+                }
             } footer: {
                 HStack {
                     Button("Set Up Bluetooth Trackpad…".localized(using: table)) {}
@@ -48,6 +104,7 @@ struct TrackpadView: View {
                         }
                     }
                     .pickerStyle(.palette)
+                    .padding(.vertical, 6)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -58,5 +115,5 @@ struct TrackpadView: View {
 
 #Preview {
     TrackpadView()
-        .frame(height: 600)
+        .frame(width: 500, height: 600)
 }
