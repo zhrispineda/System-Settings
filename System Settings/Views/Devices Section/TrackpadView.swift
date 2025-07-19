@@ -17,19 +17,75 @@ struct TrackpadView: View {
     @State private var lookUpTap = true
     @State private var secondaryClick = "GNAME_SECONDARYCLICK_2F"
     @State private var tapToClick = false
+    @State private var naturalScroll = true
+    @State private var zoomGesture = true
+    @State private var smartZoom = true
+    @State private var rotate = true
+    @State private var swipePages = "GNAME_NAVIGATION_EDGE"
+    @State private var swipeFullscreen = "GNAME_DASHBOARD_H3FINGER"
+    @State private var notificationCenter = true
+    @State private var missionControl = "GNAME_MISSIONCONTROL_V3FINGER"
+    @State private var appExpose = "GNAME_OFF"
+    @State private var showDesktop = true
     let options = ["Point & Click", "Scroll & Zoom", "More Gestures"]
     let lookUpOptions = ["GNAME_OFF", "GNAME_LOOKUP_FORCECLICK", "GNAME_LOOKUP_T3FAP"]
     let secondaryOptions = ["GNAME_OFF", "GNAME_SECONDARYCLICK_2F", "GNAME_SECONDARYCLICK_BOTTOM_RIGHT_CORNER", "GNAME_SECONDARYCLICK_BOTTOM_LEFT_CORNER"]
     let secondaryTapOptions = ["GNAME_OFF", "GNAME_SECONDARYTAP_2F", "GNAME_SECONDARYCLICK_BOTTOM_RIGHT_CORNER", "GNAME_SECONDARYCLICK_BOTTOM_LEFT_CORNER"]
+    let swipeOptions = ["GNAME_OFF", "GNAME_NAVIGATION_EDGE", "GNAME_NAVIGATION_SWIPE", "GNAME_NAVIGATION_BOTH"]
+    let fullscreenOptions = ["GNAME_OFF", "GNAME_DASHBOARD_H3FINGER", "GNAME_DASHBOARD_H4FINGER"]
+    let missionControlOptions = ["GNAME_OFF", "GNAME_MISSIONCONTROL_V3FINGER", "GNAME_MISSIONCONTROL_V4FINGER"]
+    let exposeOptions = ["GNAME_OFF", "GNAME_APPEXPOSE_V3FINGER", "GNAME_APPEXPOSE_V4FINGER"]
     
     var body: some View {
         CustomForm(title: "Trackpad") {
             Section {
                 switch selectedTab {
                 case "Scroll & Zoom":
-                    EmptyView()
+                    Toggle(isOn: $naturalScroll) {
+                        Text("GNAME_SCROLL_NEW".localized(using: table))
+                        Text("GNAME_SCROLL_LABEL".localized(using: table))
+                    }
+                    Toggle(isOn: $zoomGesture) {
+                        Text("GNAME_PINCH".localized(using: table))
+                        Text("GNAME_PINCH_LABEL".localized(using: table))
+                    }
+                    Toggle(isOn: $smartZoom) {
+                        Text("GNAME_SMARTZOOM".localized(using: table))
+                        Text("GNAME_SMARTZOOM_LABEL".localized(using: table))
+                    }
+                    Toggle(isOn: $rotate) {
+                        Text("GNAME_ROTATE".localized(using: table))
+                        Text("GNAME_ROTATE_LABEL".localized(using: table))
+                    }
                 case "More Gestures":
-                    EmptyView()
+                    Picker("GNAME_NAVIGATION".localized(using: table), selection: $swipePages){
+                        ForEach(swipeOptions, id: \.self) { option in
+                            Text(option.localized(using: table))
+                        }
+                    }
+                    Picker("GNAME_DASHBOARD".localized(using: table), selection: $swipeFullscreen){
+                        ForEach(fullscreenOptions, id: \.self) { option in
+                            Text(option.localized(using: table))
+                        }
+                    }
+                    Toggle(isOn: $notificationCenter) {
+                        Text("GNAME_NOTIFICATION_CENTER".localized(using: table))
+                        Text("GNAME_NOTIFICATION_CENTER_LABEL".localized(using: table))
+                    }
+                    Picker("GNAME_MISSIONCONTROL".localized(using: table), selection: $missionControl){
+                        ForEach(missionControlOptions, id: \.self) { option in
+                            Text(option.localized(using: table))
+                        }
+                    }
+                    Picker("GNAME_APPEXPOSE".localized(using: table), selection: $appExpose){
+                        ForEach(exposeOptions, id: \.self) { option in
+                            Text(option.localized(using: table))
+                        }
+                    }
+                    Toggle(isOn: $showDesktop) {
+                        Text("GNAME_SHOWDESKTOP".localized(using: table))
+                        Text("GNAME_SHOWDESKTOP_LABEL".localized(using: table))
+                    }
                 default:
                     VStack(alignment: .trailing) {
                         Slider(
