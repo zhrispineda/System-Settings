@@ -25,56 +25,75 @@ struct TrackpadView: View {
     var body: some View {
         CustomForm(title: "Trackpad") {
             Section {
-                Slider(
-                    value: $trackingSpeed,
-                    in: 0...9,
-                    step: 1
-                ) {
-                    Text("Tracking speed".localized(using: table))
-                } minimumValueLabel: {
-                    Text("Slow")
-                } maximumValueLabel: {
-                    Text("Fast")
-                }
-                Slider(
-                    value: $click,
-                    in: 0...2,
-                    step: 1
-                ) {
-                    Text("Click".localized(using: table))
-                } minimumValueLabel: {
-                    Text("Light")
-                } maximumValueLabel: {
-                    Text("Firm")
-                }
-                Toggle(isOn: $forceClickHaptic) {
-                    Text("GNAME_FORCE_CLICK".localized(using: table))
-                    Text("GNAME_FORCE_CLICK_LABEL".localized(using: table))
-                }
-                if forceClickHaptic {
-                    Picker("GNAME_LOOKUP".localized(using: table), selection: $lookUpGesture) {
-                        ForEach(lookUpOptions, id: \.self) { option in
+                switch selectedTab {
+                case "Scroll & Zoom":
+                    EmptyView()
+                case "More Gestures":
+                    EmptyView()
+                default:
+                    VStack(alignment: .trailing) {
+                        Slider(
+                            value: $trackingSpeed,
+                            in: 0...9,
+                            step: 1
+                        ) {
+                            Text("Tracking speed".localized(using: table))
+                        }
+                        HStack {
+                            Text("Slow".localized(using: table))
+                            Spacer()
+                            Text("Fast".localized(using: table))
+                        }
+                        .frame(width: 240)
+                        .font(.caption)
+                    }
+                    VStack(alignment: .trailing) {
+                        Slider(
+                            value: $click,
+                            in: 0...2,
+                            step: 1
+                        ) {
+                            Text("Click".localized(using: table))
+                        }
+                        HStack {
+                            Text("Light".localized(using: table))
+                            Spacer()
+                            Text("Medium".localized(using: table))
+                            Spacer()
+                            Text("Firm".localized(using: table))
+                        }
+                        .frame(width: 240)
+                        .font(.caption)
+                    }
+                    Toggle(isOn: $forceClickHaptic) {
+                        Text("GNAME_FORCE_CLICK".localized(using: table))
+                        Text("GNAME_FORCE_CLICK_LABEL".localized(using: table))
+                    }
+                    if forceClickHaptic {
+                        Picker("GNAME_LOOKUP".localized(using: table), selection: $lookUpGesture) {
+                            ForEach(lookUpOptions, id: \.self) { option in
+                                Text(option.localized(using: table))
+                            }
+                        }
+                    } else {
+                        Toggle(isOn: $lookUpTap) {
+                            Text("GNAME_LOOKUP".localized(using: table))
+                            Text("GNAME_DEEP_CLICK_LABEL".localized(using: table))
+                        }
+                    }
+                    Picker("GNAME_SECONDARYCLICK".localized(using: table), selection: $secondaryClick) {
+                        ForEach(tapToClick ? secondaryTapOptions : secondaryOptions, id: \.self) { option in
                             Text(option.localized(using: table))
                         }
                     }
-                } else {
-                    Toggle(isOn: $lookUpTap) {
-                        Text("GNAME_LOOKUP".localized(using: table))
-                        Text("GNAME_DEEP_CLICK_LABEL".localized(using: table))
+                    Toggle(isOn: $tapToClick) {
+                        Text("GNAME_CLICK".localized(using: table))
+                        Text("GNAME_CLICK_LABEL".localized(using: table))
                     }
-                }
-                Picker("GNAME_SECONDARYCLICK".localized(using: table), selection: $secondaryClick) {
-                    ForEach(tapToClick ? secondaryTapOptions : secondaryOptions, id: \.self) { option in
-                        Text(option.localized(using: table))
-                    }
-                }
-                Toggle(isOn: $tapToClick) {
-                    Text("GNAME_CLICK".localized(using: table))
-                    Text("GNAME_CLICK_LABEL".localized(using: table))
-                }
-                .onChange(of: tapToClick) {
-                    if secondaryClick == "GNAME_SECONDARYCLICK_2F" || secondaryClick == "GNAME_SECONDARYTAP_2F" {
-                        secondaryClick = tapToClick ? "GNAME_SECONDARYTAP_2F" : "GNAME_SECONDARYCLICK_2F"
+                    .onChange(of: tapToClick) {
+                        if secondaryClick == "GNAME_SECONDARYCLICK_2F" || secondaryClick == "GNAME_SECONDARYTAP_2F" {
+                            secondaryClick = tapToClick ? "GNAME_SECONDARYTAP_2F" : "GNAME_SECONDARYCLICK_2F"
+                        }
                     }
                 }
             } footer: {
@@ -90,7 +109,7 @@ struct TrackpadView: View {
                 RoundedRectangle(cornerRadius: 3.0)
                     .foregroundStyle(.fill.opacity(0.15))
                     .frame(width: 220, height: 140)
-                    .offset(x: -115, y: -16)
+                    .offset(x: -115, y: -22)
                 VStack {
                     if let asset = NSImage.asset(path: "/System/Library/ExtensionKit/Extensions/TrackpadExtension.appex", name: "Trackpad") {
                         Image(nsImage: asset)
