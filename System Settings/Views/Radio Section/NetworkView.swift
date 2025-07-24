@@ -88,7 +88,7 @@ struct NetworkStatusView: View {
         case .notConnected, .notConfigured:
             return .red
         case .inactive:
-            return .gray
+            return Color(NSColor.darkGray)
         }
     }
     private var statusText: String {
