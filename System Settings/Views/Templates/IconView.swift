@@ -89,14 +89,14 @@ struct IconView: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 5.0)
-                .foregroundStyle(color.gradient)
-                .scaledToFit()
-                .frame(width: CGFloat(size), height: CGFloat(size))
             if symbol.contains("com.") {
                 TestIconView(icon: symbol, size: 24)
                     .padding(.trailing, -2)
             } else {
+                RoundedRectangle(cornerRadius: 5.0)
+                    .foregroundStyle(color.gradient)
+                    .scaledToFit()
+                    .frame(width: CGFloat(size), height: CGFloat(size))
                 Image(_internalSystemName: symbol)
                     .font(.callout)
                     .frame(width: 14, height: 14)
