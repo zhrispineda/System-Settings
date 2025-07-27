@@ -30,7 +30,7 @@ struct DesktopDockView: View {
     // Widgets
     @State private var showWidgetsDesktop = true
     @State private var showWidgetsStageManager = true
-    @State private var widgetStyle = "Automatic"
+    @State private var widgetStyle = "Automatically"
     @State private var phoneWidgets = true
     @State private var defaultBrowser = "Safari"
     // Windows
@@ -52,7 +52,7 @@ struct DesktopDockView: View {
     let windowActions = ["Fill", "Zoom", "Minimize", "No Action"]
     let clickWallpaperOptions = ["Always on Wallpaper Click", "Only in Stage Manager on Click"]
     let stageManagerWindowOptions = ["All at Once", "One at a Time"]
-    let widgetStyleOptions = ["Automatic", "Monochrome", "Full-color"]
+    let widgetStyleOptions = ["Automatically", "Always", "Never"]
     let webBrowsers = ["Safari"]
     let openWithTabsOptions = ["Never", "Always", "In Full Screen"]
     
@@ -161,7 +161,7 @@ struct DesktopDockView: View {
                     Toggle("In Stage Manager".localized(using: localization), isOn: $showWidgetsStageManager)
                         .toggleStyle(.checkbox)
                 }
-                Picker("Widget style".localized(using: localization), selection: $widgetStyle) {
+                Picker("Dim widgets on desktop".localized(using: localization), selection: $widgetStyle) {
                     ForEach(widgetStyleOptions, id: \.self) { option in
                         Text(option.localized(using: localization))
                     }

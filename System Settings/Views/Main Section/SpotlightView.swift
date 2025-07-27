@@ -8,132 +8,205 @@
 import SwiftUI
 
 struct SpotlightView: View {
-    @State private var applications = true
+    @State var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/SpotlightPreferenceExtension.appex")
+    @State var frameworkTable = LocalizationManager(bundleURL: "/System/Library/PrivateFrameworks/Spotlight.framework")
+    @State var privacyTable = LocalizationManager(bundleURL: "/System/Library/OnBoardingBundles/com.apple.onboarding.sirisuggestions.bundle", stringsFile: "SiriSuggestions")
+    @State private var showRelatedContent = true
+    @State private var appStore = true
+    @State private var books = true
     @State private var calculator = true
+    @State private var calendar = true
     @State private var contacts = true
-    @State private var conversion = true
-    @State private var definition = true
-    @State private var developer = true
-    @State private var documents = true
-    @State private var eventsReminders = true
-    @State private var folders = true
-    @State private var fonts = true
-    @State private var images = true
-    @State private var mailMessages = true
-    @State private var movies = true
-    @State private var music = true
-    @State private var other = true
-    @State private var PDFDocuments = true
-    @State private var presentations = true
-    @State private var siriSuggestions = true
-    @State private var spreadsheets = true
+    @State private var dictionary = true
+    @State private var mail = true
+    @State private var messages = true
+    @State private var notes = true
+    @State private var photos = true
+    @State private var podcasts = true
+    @State private var reminders = true
+    @State private var safari = true
+    @State private var shortcuts = true
     @State private var systemSettings = true
     @State private var tips = true
-    @State private var websites = true
+    @State private var voiceMemos = true
     @State private var improveSearch = true
+    @State private var showingPrivacy = false
     
     var body: some View {
-        CustomForm(title: "Spotlight") {
+        CustomForm(title: "SPORTLIGHT".localized(using: table)) {
             Section {
-                HStack(alignment: .top, spacing: 15) {
-                    IconView("magnifyingglass", color: .gray)
-                        .scaleEffect(1.3)
-                        .padding(.top, 2)
-                    VStack(alignment: .leading) {
-                        Text("Spotlight")
-                        Text("Spotlight helps you quickly find things on your computer and shows suggestions from the Internet, Music, App Store, movie showtimes, locations nearby, and more.")
-                            .foregroundStyle(.secondary)
-                            .font(.footnote)
-                    }
-                }
-                .padding([.leading, .trailing], 6)
-            }
-            
-            Section {
-                VStack(alignment: .leading) {
-                    Text("Search results")
-                    Text("Only selected categories will appear in Spotlight search results.")
-                        .foregroundStyle(.secondary)
-                        .font(.footnote)
-                    Divider()
-                        ._safeAreaInsets(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
-                    Group {
-                        Toggle("Applications", isOn: $applications)
-                        CustomDivider()
-                        Toggle("Calculator", isOn: $calculator)
-                        CustomDivider()
-                        Toggle("Contacts", isOn: $contacts)
-                        CustomDivider()
-                        Toggle("Conversion", isOn: $conversion)
-                        CustomDivider()
-                        Toggle("Definition", isOn: $definition)
-                        CustomDivider()
-                        Toggle("Developer", isOn: $developer)
-                        CustomDivider()
-                        Toggle("Documents", isOn: $documents)
-                        CustomDivider()
-                        Toggle("Events & Reminders", isOn: $eventsReminders)
-                        CustomDivider()
-                        Toggle("Folders", isOn: $folders)
-                        CustomDivider()
-                        Toggle("Fonts", isOn: $fonts)
-                        CustomDivider()
-                        Toggle("Images", isOn: $images)
-                        CustomDivider()
-                        Toggle("Mail & Messages", isOn: $mailMessages)
-                        CustomDivider()
-                        Toggle("Movies", isOn: $movies)
-                        CustomDivider()
-                        Toggle("Music", isOn: $music)
-                        CustomDivider()
-                        Toggle("Other", isOn: $other)
-                        CustomDivider()
-                        Toggle("PDF Documents", isOn: $PDFDocuments)
-                        CustomDivider()
-                        Toggle("Presentations", isOn: $presentations)
-                        CustomDivider()
-                        Toggle("Siri Suggestions", isOn: $siriSuggestions)
-                        CustomDivider()
-                        Toggle("Spreadsheets", isOn: $spreadsheets)
-                        CustomDivider()
-                        Toggle("System Settings", isOn: $systemSettings)
-                        CustomDivider()
-                        Toggle("Tips", isOn: $tips)
-                        CustomDivider()
-                        Toggle("Websites", isOn: $websites)
-                    }
-                    .toggleStyle(.checkbox)
-                    ._safeAreaInsets(EdgeInsets(top: -3, leading: 0, bottom: -3, trailing: 0))
+                Placard(icon: "com.apple.spotlight") {
+                    Text("SPORTLIGHT".localized(using: table))
+                    Text("SPORTLIGHT_DESC".localized(using: table))
                 }
             }
             
             Section {
-                Toggle("Help Apple Improve Search", isOn: $improveSearch)
+                Toggle(isOn: $showRelatedContent) {
+                    Text("Show Related Content".localized(using: table))
+                    Text(.init("Allow content from Apple partners to be shown when searching or when looking up text or objects and photos. %@".localizedFormatted(using: table, "[\("BUTTON_TITLE".localized(using: privacyTable))](systempreferences://)")))
+                }
+            }
+            
+            Section {
+                HStack {
+                    LabeledContent {} label: {
+                        Text("Reset Quick Keys".localized(using: table))
+                        Text("Restore Spotlight Quick Keys to their default settings.".localized(using: table))
+                    }
+                    Button("Reset Quick Keys…".localized(using: table)) {}
+                }
+                HStack {
+                    Text("Spotlight Search History".localized(using: table))
+                    Spacer()
+                    Button("Delete Search History…".localized(using: table)) {}
+                }
+            }
+            
+            Section {
+                Toggle("SEARCH_ALLOW_ANONYMOUS_RECORDS".localized(using: table), isOn: $improveSearch)
                 VStack(alignment: .leading) {
-                    Text("Help improve Search by allowing Apple to store your Safari, Siri, Spotlight, Lookup, and #images search queries. The information collected is stored in a way that does not identify you and is used to improve search results.")
+                    Text("SEARCH_ALLOW_ANONYMOUS_RECORDS_DESC".localized(using: table))
                         .font(.callout)
                         .foregroundStyle(.secondary)
-                    Divider().opacity(0.0)
-                    Text("Searches include general knowledge queries and requests to do things like play music and get directions. [About Search & Privacy…]()")
+                    Text(.init("\("SEARCH_ALLOW_ANONYMOUS_RECORDS_FOOTER_FORMAT".localizedFormatted(using: table, "[\("BUTTON_TITLE".localized(using: privacyTable))](systempreferences://)"))"))
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
-                
-            } footer: {
-                Button("Search Privacy…") {}
-                HelpButton(topicID: "mchl54d95e8a")
+            }
+            
+            Section {
+                LabeledContent {} label: {
+                    Text("Results from Apps".localized(using: frameworkTable))
+                    Text("Allows app and its content to appear in Spotlight.".localized(using: frameworkTable))
+                }
+                Toggle(isOn: $appStore) {
+                    HStack {
+                        IconView("com.apple.AppStore")
+                        Text("App Store".localized(using: frameworkTable))
+                    }
+                }
+                Toggle(isOn: $books) {
+                    HStack {
+                        IconView("com.apple.iBooksX")
+                        Text("Books")
+                    }
+                }
+                Toggle(isOn: $calculator) {
+                    HStack {
+                        IconView("com.apple.calculator")
+                        Text("Calculator")
+                    }
+                }
+                Toggle(isOn: $calendar) {
+                    HStack {
+                        IconView("com.apple.iCal")
+                        Text("Calendar")
+                    }
+                }
+                Toggle(isOn: $contacts) {
+                    HStack {
+                        IconView("com.apple.AddressBook")
+                        Text("Contacts")
+                    }
+                }
+                Toggle(isOn: $dictionary) {
+                    HStack {
+                        IconView("com.apple.dictionary")
+                        Text("Dictionary")
+                    }
+                }
+                Toggle(isOn: $mail) {
+                    HStack {
+                        IconView("com.apple.mail")
+                        Text("Mail")
+                    }
+                }
+                Toggle(isOn: $messages) {
+                    HStack {
+                        IconView("com.apple.MobileSMS")
+                        Text("Messages")
+                    }
+                }
+                Toggle(isOn: $notes) {
+                    HStack {
+                        IconView("com.apple.notes")
+                        Text("Notes")
+                    }
+                }
+                Toggle(isOn: $photos) {
+                    HStack {
+                        IconView("com.apple.photos")
+                        Text("Photos")
+                    }
+                }
+                Toggle(isOn: $podcasts) {
+                    HStack {
+                        IconView("com.apple.podcasts")
+                        Text("Podcasts")
+                    }
+                }
+                Toggle(isOn: $reminders) {
+                    HStack {
+                        IconView("com.apple.reminders")
+                        Text("Reminders")
+                    }
+                }
+                Toggle(isOn: $safari) {
+                    HStack {
+                        IconView("com.apple.safari")
+                        Text("Safari")
+                    }
+                }
+                Toggle(isOn: $shortcuts) {
+                    HStack {
+                        IconView("com.apple.shortcuts")
+                        Text("Shortcuts")
+                    }
+                }
+                Toggle(isOn: $systemSettings) {
+                    HStack {
+                        IconView("com.apple.systempreferences")
+                        Text("System Settings")
+                    }
+                }
+                Toggle(isOn: $tips) {
+                    HStack {
+                        IconView("com.apple.tips")
+                        Text("Tips")
+                    }
+                }
+                Toggle(isOn: $voiceMemos) {
+                    HStack {
+                        IconView("com.apple.voicememos")
+                        Text("Voice Memos")
+                    }
+                }
+            }
+            
+            Section {} footer: {
+                HStack {
+                    Button("SEARCH_PRIVACY".localized(using: table)) {}
+                    HelpButton(topicID: "mchl54d95e8a")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+        }
+        .background {
+            OnBoardingKitControllerView(bundleIdentifier: "com.apple.onboarding.sirisuggestions", showPopover: $showingPrivacy) {
+                showingPrivacy = false
+            }
+            .opacity(0)
+        }
+        .onOpenURL { url in
+            if url.scheme == "systempreferences" {
+                showingPrivacy.toggle()
             }
         }
     }
 }
 
-struct CustomDivider: View {
-    var body: some View {
-        Divider()
-            ._safeAreaInsets(EdgeInsets(top: 4, leading: 20, bottom: 0, trailing: 0))
-    }
-}
-
 #Preview {
     SpotlightView()
+        .frame(height: 700)
 }
