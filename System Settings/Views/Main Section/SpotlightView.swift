@@ -12,6 +12,8 @@ struct SpotlightView: View {
     @State var frameworkTable = LocalizationManager(bundleURL: "/System/Library/PrivateFrameworks/Spotlight.framework")
     @State var privacyTable = LocalizationManager(bundleURL: "/System/Library/OnBoardingBundles/com.apple.onboarding.sirisuggestions.bundle", stringsFile: "SiriSuggestions")
     @State private var showRelatedContent = true
+    @State private var improveSearch = true
+    @State private var showingPrivacy = false
     @State private var appStore = true
     @State private var books = true
     @State private var calculator = true
@@ -29,8 +31,13 @@ struct SpotlightView: View {
     @State private var systemSettings = true
     @State private var tips = true
     @State private var voiceMemos = true
-    @State private var improveSearch = true
-    @State private var showingPrivacy = false
+    @State private var appsResults = true
+    @State private var docsResults = true
+    @State private var folderResults = true
+    @State private var phoneAppResults = true
+    @State private var menuItemResults = true
+    @State private var clipboard = "Off"
+    let clipboardOptions = ["On", "Off"]
     
     var body: some View {
         CustomForm(title: "SPORTLIGHT".localized(using: table)) {
@@ -184,7 +191,40 @@ struct SpotlightView: View {
                 }
             }
             
-            Section {} footer: {
+            Section {
+                LabeledContent {} label: {
+                    Text("Results from System".localized(using: frameworkTable))
+                    Text("Allows items and their content to appear in Spotlight.".localized(using: frameworkTable))
+                }
+                Toggle("Apps".localized(using: frameworkTable), isOn: $appsResults)
+                Toggle(isOn: $docsResults) {
+                    HStack {
+                        Text("Documents".localized(using: frameworkTable))
+                        Spacer()
+                        Button("", systemImage: "info.circle") {
+                            
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(.secondary)
+                        .frame(width: 0)
+                    }
+                }
+                Toggle("Folders".localized(using: frameworkTable), isOn: $folderResults)
+                Toggle("iPhone Apps".localized(using: frameworkTable), isOn: $phoneAppResults)
+                Toggle("Menu Items".localized(using: frameworkTable), isOn: $menuItemResults)
+            }
+            
+            Section {
+                LabeledContent {} label: {
+                    Text("Results from Clipboard".localized(using: table))
+                    Text("Allows the contents of your clipboard to appear in Spotlight".localized(using: table))
+                }
+                Picker("Clipboard History".localized(using: table), selection: $clipboard) {
+                    ForEach(clipboardOptions, id: \.self) { option in
+                        Text(option.localized(using: table))
+                    }
+                }
+            } footer: {
                 HStack {
                     Button("SEARCH_PRIVACY".localized(using: table)) {}
                     HelpButton(topicID: "mchl54d95e8a")
