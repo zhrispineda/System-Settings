@@ -8,68 +8,79 @@
 import SwiftUI
 
 struct NotificationsView: View {
-    @State private var showPreviews = "When Unlocked"
+    @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/NotificationsSettings.appex")
+    @State private var showPreviews = ""
     @State private var notifyWhenSleep = false
     @State private var notifyWhenLocked = true
-    @State private var notifyWhenMirroring = false
+    @State private var notifyWhenMirroring = "Notifications Off"
     let previewOptions = ["Always", "When Unlocked", "Never"]
+    let mirrorOptions = ["Notifications Off", "Allow Notifications"]
     
     var body: some View {
-        CustomForm(title: "Notifications") {
+        CustomForm(title: "Notifications".localized(using: table)) {
             Section {
-                HStack(alignment: .top, spacing: 15) {
-                    TestIconView(icon: "com.apple.graphic-icon.notifications", size: 32)
-                        .padding(.horizontal, -6)
-                    VStack(alignment: .leading) {
-                        Text("Notifications")
-                        Text("Customize when and how notifications appear, if they play a sound, and which apps can send them. [Learn more…](help:anchor=mchl205da693)")
-                            .foregroundStyle(.secondary)
-                            .font(.footnote)
-                    }
+                Placard(icon: "com.apple.graphic-icon.notifications") {
+                    Text("Notifications".localized(using: table))
+                    Text(.init("Customize when and how notifications appear, if they play a sound, and which apps can send them. [Learn more…](help:anchor=mchl205da693%20bookID=com.apple.machelp)".localized(using: table)))
                 }
-                .padding([.leading, .trailing], 6)
             }
             
             Section {
-                Picker("Show previews", selection: $showPreviews) {
+                Picker("Show previews".localized(using: table), selection: $showPreviews) {
                     ForEach(previewOptions, id: \.self) { option in
-                        Text(option)
+                        Text(option.localized(using: table))
                     }
                 }
-                Toggle("Allow notifications when the display is sleeping", isOn: $notifyWhenSleep)
-                Toggle("Allow notifications when the screen is locked", isOn: $notifyWhenLocked)
-                Toggle("Allow notifications when mirroring or sharing the display", isOn: $notifyWhenMirroring)
+                Text("Show Notifications:".localized(using: table))
+                    .listRowInsets(EdgeInsets(top: 0, leading: 90, bottom: 0, trailing: 0))
+                Group {
+                    VStack {
+                        Toggle("when display is sleeping".localized(using: table), isOn: $notifyWhenSleep)
+                        Divider()
+                        Toggle("when screen is locked".localized(using: table), isOn: $notifyWhenLocked)
+                        Divider()
+                        Picker("when mirroring or sharing the display".localized(using: table), selection: $notifyWhenMirroring) {
+                            ForEach(mirrorOptions, id: \.self) { option in
+                                Text(option.localized(using: table))
+                            }
+                        }
+                    }
+                }
+                .padding(.leading, 30)
             } header: {
-                Text("Notification Center")
-                Text("Notification Center shows your notifications in the top-right corner of your screen. You can show and hide Notification Center by clicking the clock in the menu bar.")
+                Text("Notification Center".localized(using: table))
+                Text("Notification Center shows your notifications in the top-right corner of your screen. You can show and hide Notification Center by clicking the clock in the menu bar.".localized(using: table))
             }
 
             Section {
                 NavigationLink(value: "FaceTime") {
-                    SettingsCell("FaceTime", subtitle: "Badges, Sounds, Banners", symbol: "/System/Applications/FaceTime.app")
+                    SettingsCell("FaceTime", subtitle: "Badges, Sounds, Banners", symbol: "/System/Applications/FaceTime.app", larger: true)
                 }
                 NavigationLink(value: "Find My") {
-                    SettingsCell("Find My", subtitle: "Badges, Sounds", symbol: "/System/Applications/FindMy.app")
+                    SettingsCell("Find My", subtitle: "Badges, Sounds", symbol: "/System/Applications/FindMy.app", larger: true)
                 }
                 NavigationLink(value: "Home") {
-                    SettingsCell("Home", subtitle: "Badges, Sounds, Time Sensitive", symbol: "/System/Applications/Home.app")
+                    SettingsCell("Home", subtitle: "Badges, Sounds, Time Sensitive", symbol: "/System/Applications/Home.app", larger: true)
                 }
                 NavigationLink(value: "Kerberos") {
-                    SettingsCell("Kerberos", subtitle: "Badges, Sounds, Alerts", symbol: "/System/Library/CoreServices/SecurityAgentPlugins/KerberosAgent.bundle", icon: "KerberosApp")
+                    SettingsCell("Kerberos", subtitle: "Badges, Sounds, Alerts", symbol: "/System/Library/CoreServices/SecurityAgentPlugins/KerberosAgent.bundle", larger: true)
                 }
                 NavigationLink(value: "Messages") {
-                    SettingsCell("Messages", subtitle: "Badges, Sounds, Banners, Critical", symbol: "/System/Applications/Messages.app")
+                    SettingsCell("Messages", subtitle: "Badges, Sounds, Banners, Critical", symbol: "/System/Applications/Messages.app", larger: true)
                 }
                 NavigationLink(value: "Tips") {
-                    SettingsCell("Tips", subtitle: "Alerts", symbol: "/System/Applications/Tips.app")
+                    SettingsCell("Tips", subtitle: "Alerts", symbol: "/System/Applications/Tips.app", larger: true)
                 }
                 NavigationLink(value: "Wallet") {
-                    SettingsCell("Wallet", subtitle: "Badges, Sounds, Time Sensitive", color: .accentColor, symbol: "Wallet_Notification")
+                    SettingsCell("Wallet", subtitle: "Badges, Sounds, Time Sensitive", symbol: "/System/Library/CoreServices/SecurityAgentPlugins/KerberosAgent.bundle", larger: true)
                 }
             } header: {
-                Text("Application Notifications")
+                Text("Application Notifications".localized(using: table))
             } footer: {
-                HelpButton(topicID: "mh40583")
+                HStack {
+                    HelpButton(topicID: "mh40583")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }

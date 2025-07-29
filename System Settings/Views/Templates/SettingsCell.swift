@@ -14,8 +14,9 @@ struct SettingsCell: View {
     let icon: String
     let shadow: Bool
     let sidebar: Bool
+    let larger: Bool
 
-    init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, icon: String = "AppIcon", shadow: Bool = true, sidebar: Bool = false) {
+    init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, icon: String = "AppIcon", shadow: Bool = true, sidebar: Bool = false, larger: Bool = false) {
         self.title = title
         self.subtitle = subtitle
         self.color = color
@@ -23,6 +24,7 @@ struct SettingsCell: View {
         self.icon = icon
         self.shadow = shadow
         self.sidebar = sidebar
+        self.larger = larger
     }
     
     var body: some View {
@@ -30,7 +32,7 @@ struct SettingsCell: View {
             if color == .accentColor {
                 Image(symbol)
                     .resizable()
-                    .frame(width: 24, height: 24)
+                    .frame(width: larger ? 30: 24, height: larger ? 30 : 24)
                     .mask {
                         RoundedRectangle(cornerRadius: 5.0)
                             .foregroundStyle(color.gradient)
@@ -39,8 +41,8 @@ struct SettingsCell: View {
                 TestIconView(icon: symbol, size: 24)
                     .padding(.leading, -2)
             } else if symbol.contains("/") {
-                BundleIconView(bundlePath: symbol, icon: icon, size: 24)
-                    .padding(.leading, symbol.contains("Wallet") ? -2 : 0)
+                BundleIconView(bundlePath: symbol, icon: icon, size: larger ? 30 : 24)
+                    .padding(.leading, symbol.contains("Ker") ? 3 : 0)
             } else {
                 IconView(symbol, color: color)
                     .shadow(radius: 0.0, y: 0.3)
