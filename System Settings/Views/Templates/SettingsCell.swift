@@ -38,7 +38,7 @@ struct SettingsCell: View {
                             .foregroundStyle(color.gradient)
                     }
             } else if symbol.contains("com.") {
-                TestIconView(icon: symbol, size: 24)
+                TestIconView(icon: symbol, size: larger ? 30 : 24)
                     .padding(.leading, -2)
             } else if symbol.contains("/") {
                 BundleIconView(bundlePath: symbol, icon: icon, size: larger ? 30 : 24)
