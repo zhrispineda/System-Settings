@@ -46,7 +46,7 @@ struct SoundView: View {
                 HStack {
                     Picker("SOUND_EFFECT".localized(using: localization), selection: $alertSound) {
                         ForEach(alertSounds, id: \.self) { sound in
-                            Text(sound.localized(using: localization))
+                            Text(sound.localized(using: alerts))
                                 .onHover { hovering in
                                     if hovering {
                                         startSoundTask(sound: sound)
@@ -89,8 +89,7 @@ struct SoundView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .fixedSize(horizontal: false, vertical: true)
-                ._safeAreaInsets(EdgeInsets(top: 0, leading: -356, bottom: 0, trailing: 0))
+                .labelsHidden()
                 
                 if selectedDevice == "OUTPUT" {
                     Table(outputDevices, selection: $selectedOutputDevice) {
@@ -153,8 +152,10 @@ struct SoundView: View {
                     }
                 }
             } footer: {
-                Spacer()
-                HelpButton(topicID: "mchl9777ee30")
+                HStack {
+                    HelpButton(topicID: "mchl9777ee30")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }
