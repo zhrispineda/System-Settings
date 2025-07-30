@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct FocusView: View {
+    @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/FocusSettingsExtension.appex")
     @State private var shareFocus = false
-    
+
     var body: some View {
-        CustomForm(title: "Focus") {
+        CustomForm(title: "FOCUS".localized(using: table)) {
             Section {
                 NavigationLink {} label: {
-                    SettingsCell("Focus", symbol: "com.apple.graphic-icon.focus", larger: true)
+                    SettingsCell("FOCUS".localized(using: table), symbol: "com.apple.graphic-icon.focus", larger: true)
                 }
             } footer: {
-                Button("Add Focus…") {}.frame(maxWidth: .infinity, alignment: .trailing)
+                Button("ADD_FOCUS".localized(using: table)) {}.frame(maxWidth: .infinity, alignment: .trailing)
             }
             
             Section {
                 Toggle(isOn: $shareFocus) {
-                    Text("Share across devices")
-                    Text("Sharing from this device is currently unavailable.")
+                    Text("SHARE_ACROSS_DEVICES".localized(using: table))
+                    Text("SHARING_UNAVAILABLE".localized(using: table))
                 }
             }
             
@@ -31,12 +32,12 @@ struct FocusView: View {
                 NavigationLink {} label: {
                     LabeledContent {} label: {
                         HStack {
-                            Text("Focus status")
+                            Text("FOCUS_STATUS_ITEM_HEADER".localized(using: table))
                             Spacer()
-                            Text("Off")
+                            Text("OFF".localized(using: table))
                                 .foregroundStyle(.secondary)
                         }
-                        Text("When you give an app permission, it can share that you have notifications silenced when using Focus.")
+                        Text("FOCUS_STATUS_ITEM_SUBHEAD".localized(using: table))
                     }
                 }
             }
