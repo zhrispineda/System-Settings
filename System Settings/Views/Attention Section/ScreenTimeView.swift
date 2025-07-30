@@ -27,29 +27,9 @@ struct ScreenTimeView: View {
                 NavigationLink {} label: {
                     SettingsCell("App & Website Activity".localized(using: table), symbol: "com.apple.prefpane.screentime.appUsage")
                 }
-                NavigationLink {} label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 6.0)
-                            .foregroundStyle(.white.gradient)
-                            .scaledToFit()
-                            .frame(width: 20)
-                        if let img = NSImage.asset(path: "/System/Library/ExtensionKit/Extensions/ScreenTimePreferencesExtension.appex", name: "screen-distance") {
-                            Image(nsImage: img)
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundStyle(.blue)
-                                .frame(width: 20)
-                        }
-                    }
-                    Text("Screen Distance".localized(using: table))
-                        .padding(.leading, 2)
-                }
             }
             
             Section("Communication".localized(using: table)) {
-                NavigationLink {} label: {
-                    SettingsCell("Communication Limits".localized(using: table), symbol: "com.apple.prefpane.screentime.communicationLimits")
-                }
                 NavigationLink {} label: {
                     SettingsCell("Communication Safety".localized(using: table), symbol: "com.apple.prefpane.screentime.communicationSafety")
                 }
@@ -59,14 +39,6 @@ struct ScreenTimeView: View {
                 NavigationLink {} label: {
                     SettingsCell("Content & Privacy".localized(using: table), symbol: "com.apple.prefpane.screentime.contentPrivacy")
                 }
-            }
-            
-            Section {
-                Toggle(isOn: .constant(false)) {
-                    Text("Share across devices".localized(using: table))
-                    Text("You can enable this on any device signed in to iCloud to sync your Screen Time settings.".localized(using: table))
-                }
-                .disabled(true)
             }
             
             Section {
