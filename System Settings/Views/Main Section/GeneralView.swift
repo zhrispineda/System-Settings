@@ -37,9 +37,10 @@ struct GeneralView: View {
                 .navigationTitle(titleOpacity > 37.0 ? "General".localized(using: localization) : "")
             }
 
-
             Section {
-                NavigationLink(value: "About") {
+                NavigationLink {
+                    AboutView()
+                } label: {
                     SettingsCell("About", symbol: "com.apple.graphic-icon.about-current-device")
                 }
                 NavigationLink(value: "Software Update") {
