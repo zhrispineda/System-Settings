@@ -21,6 +21,16 @@ struct System_SettingsApp: App {
                 .frame(minHeight: 415, idealHeight: 574)
         }
         .windowResizability(.contentSize)
+        .commands {
+            CommandGroup(after: .help) {
+                Button("macOS Help") {}
+                Button("User Manual") {}
+                Button("macOS Support") {}
+                Divider()
+                Button("MacBook Pro Specifications") {}
+                Button("Hardware Support") {}
+            }
+        }
     }
 }
 
