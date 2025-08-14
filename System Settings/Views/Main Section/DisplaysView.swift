@@ -26,7 +26,7 @@ struct DisplaysView: View {
         CustomForm(title: "Displays".localized(using: localization)) {
             Section {
                 VStack {
-                    HStack(spacing: 10) {
+                    HStack(spacing: 7) {
                         ResolutionOption(selected: $selected, table: $localization, title: "Larger Text", image: .resolution5, resolution: "1168 × 755")
                         ResolutionOption(selected: $selected, table: $localization, image: .resolution4, resolution: "1312 × 848")
                         ResolutionOption(selected: $selected, table: $localization, image: .resolution3, resolution: "1496 × 967")

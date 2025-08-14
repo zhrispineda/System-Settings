@@ -113,30 +113,18 @@ struct NetworkStatusView: View {
     }
     
     var body: some View {
-        HStack(alignment: .top, spacing: 15) {
-            if symbol.contains("com.") {
-                TestIconView(icon: symbol, size: 32)
-                    .padding(-8)
-            } else {
-                IconView(symbol, color: color)
-                    .scaleEffect(1.3)
-                    .padding(.top, 2)
+        Placard(icon: symbol, color: color) {
+            Text(titleKey)
+            HStack(spacing: 5) {
+                Image(systemName: "circle.fill")
+                    .foregroundStyle(statusColor)
+                    .imageScale(.small)
+                Text(statusText)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
             }
-            VStack(alignment: .leading) {
-                Text(titleKey)
-                HStack(spacing: 5) {
-                    Image(systemName: "circle.fill")
-                        .foregroundStyle(statusColor)
-                        .imageScale(.small)
-                    Text(statusText)
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .offset(y: -6)
         }
-        .padding([.leading, .top, .trailing], 6)
-        .padding(.bottom, -6)
+        .padding(.leading, symbol.contains("com.") ? 0 : 4)
     }
 }
 
