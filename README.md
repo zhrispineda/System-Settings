@@ -19,7 +19,7 @@ A **work-in-progress** SwiftUI recreation of the macOS System Settings app.
 </details>
 
 ## Information
-- This project is a recreation of the System Settings app for macOS 26 **beta 7** (25A5346a).
+- This project is a recreation of the System Settings app for macOS 26 **beta 8** (25A5349a).
 - All features within the app are only simulations and have no effect on the device.
 
 ## Usage
