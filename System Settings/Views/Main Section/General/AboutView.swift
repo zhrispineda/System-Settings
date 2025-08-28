@@ -12,7 +12,12 @@ struct AboutView: View {
     
     var body: some View {
         CustomForm(title: "About", root: false) {
-            Section {} header: {
+            Section {
+                LabeledContent("Name", value: Host.current().localizedName ?? macInfo.model().name)
+                LabeledContent("Chip", value: MGHelper.read(key: "Z06ZMtQY6G3kKrC7fs/gOA") ?? "Unknown")
+                LabeledContent("Memory", value: "\(MacInfo.memory) GB")
+                LabeledContent("Serial number", value: MGHelper.read(key: "VasUgeSzVyHdB27g2XpN0g") ?? "Unknown")
+            } header: {
                 HStack {
                     Spacer()
                     VStack(spacing: 0) {
@@ -32,8 +37,6 @@ struct AboutView: View {
                     }
                     Spacer()
                 }
-                
-                
             }
         }
     }
