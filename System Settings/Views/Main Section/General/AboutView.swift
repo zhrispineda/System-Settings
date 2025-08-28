@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct AboutView: View {
+    let icon = NSWorkspace.shared.icon(forFile: "/System/Applications/Weather.app")
+    let appearancePath = "/System/Library/PrivateFrameworks/SystemDesktopAppearance.framework"
     let macInfo = MacInfo()
+    let buildNumber: String = {
+        if let dict = NSDictionary(contentsOfFile: "/System/Library/CoreServices/SystemVersion.plist"),
+           let build = dict["ProductBuildVersion"] as? String {
+            return build
+        }
+        return "Unknown"
+    }()
     
     var body: some View {
         CustomForm(title: "About", root: false) {
@@ -38,10 +47,27 @@ struct AboutView: View {
                     Spacer()
                 }
             }
+            
+            Section("macOS") {
+                if let dict = NSDictionary(contentsOfFile: "/System/Library/CoreServices/SystemVersion.plist"),
+                   let build = dict["ProductBuildVersion"] as? String {
+                    let _ = print("macOS build number: \(build)")
+                }
+                HStack {
+                    if let logo = NSImage.asset(path: appearancePath, name: "AboutThisMacRoundel") {
+                        Image(nsImage: logo)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30)
+                    }
+                    LabeledContent("macOS \(macInfo.system().name)", value: "Version \(macInfo.system().version) (\(buildNumber))")
+                }
+            }
         }
     }
 }
 
 #Preview {
     AboutView()
+        .frame(height: 600)
 }
