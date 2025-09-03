@@ -46,13 +46,10 @@ struct AboutView: View {
                     }
                     Spacer()
                 }
+                .padding(.bottom, 8)
             }
             
             Section("macOS") {
-                if let dict = NSDictionary(contentsOfFile: "/System/Library/CoreServices/SystemVersion.plist"),
-                   let build = dict["ProductBuildVersion"] as? String {
-                    let _ = print("macOS build number: \(build)")
-                }
                 HStack {
                     if let logo = NSImage.asset(path: appearancePath, name: "AboutThisMacRoundel") {
                         Image(nsImage: logo)
@@ -62,6 +59,18 @@ struct AboutView: View {
                     }
                     LabeledContent("macOS \(macInfo.system().name)", value: "Version \(macInfo.system().version) (\(buildNumber))")
                 }
+            }
+            
+            Section("Displays") {
+                Button("Display Settings…") {}.frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            
+            Section("Storage") {
+                Button("Storage Settings…") {}.frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            
+            Section {} header: {
+                Button("System Report…") {}.frame(maxWidth: .infinity, alignment: .center)
             }
         }
     }
