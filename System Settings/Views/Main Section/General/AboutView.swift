@@ -22,7 +22,11 @@ struct AboutView: View {
     var body: some View {
         CustomForm(title: "About", root: false) {
             Section {
-                LabeledContent("Name", value: Host.current().localizedName ?? macInfo.model().name)
+                HStack {
+                    Text("Name")
+                    Spacer()
+                    Text(Host.current().localizedName ?? macInfo.model().name)
+                }
                 LabeledContent("Chip", value: MGHelper.read(key: "Z06ZMtQY6G3kKrC7fs/gOA") ?? "Unknown")
                 LabeledContent("Memory", value: "\(MacInfo.memory) GB")
                 LabeledContent("Serial number", value: MGHelper.read(key: "VasUgeSzVyHdB27g2XpN0g") ?? "Unknown")
@@ -62,15 +66,30 @@ struct AboutView: View {
             }
             
             Section("Displays") {
+                if let deviceImage = macInfo.color() {
+                    Image(nsImage: deviceImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32)
+                }
                 Button("Display Settings…") {}.frame(maxWidth: .infinity, alignment: .trailing)
             }
             
             Section("Storage") {
+                HStack {
+                    TestIconView(icon: "com.apple.storage-internal", size: 32)
+                    Text("\(macInfo.drives().name)")
+                }
                 Button("Storage Settings…") {}.frame(maxWidth: .infinity, alignment: .trailing)
             }
             
             Section {} header: {
-                Button("System Report…") {}.frame(maxWidth: .infinity, alignment: .center)
+                Button("System Report…") {
+                    if let url = URL(string: "file:///System/Applications/Utilities/System%20Information.app") {
+                        NSWorkspace.shared.open(url)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
             }
         }
     }
