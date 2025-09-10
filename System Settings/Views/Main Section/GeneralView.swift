@@ -43,7 +43,9 @@ struct GeneralView: View {
                 } label: {
                     SettingsCell("About", symbol: "com.apple.graphic-icon.about-current-device")
                 }
-                NavigationLink(value: "Software Update") {
+                NavigationLink {
+                    SoftwareUpdateView()
+                } label: {
                     SettingsCell("Software Update", symbol: "com.apple.graphic-icon.software-update")
                 }
                 NavigationLink(value: "Storage") {
