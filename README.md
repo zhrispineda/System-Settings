@@ -1,9 +1,6 @@
 #  System Settings
 A **work-in-progress** SwiftUI recreation of the macOS System Settings app.
 
-> [!IMPORTANT]  
-> This project is currently focused on macOS 26 beta using Xcode 26 beta. Use an older branch to deploy this project on macOS 15/Xcode 16 or earlier.
-
 <details open>
 <summary>macOS 26</summary>
   
@@ -19,11 +16,11 @@ A **work-in-progress** SwiftUI recreation of the macOS System Settings app.
 </details>
 
 ## Information
-- This project is a recreation of the System Settings app for macOS 26 **RC** (25A353).
+- This project is a recreation of the System Settings app for macOS 26 (25A354).
 - All features within the app are only simulations and have no effect on the device.
 
 ## Usage
-Clone, open, and run the project in Xcode on any Mac on **macOS 26**. Use the 15.5 branch if you are on an older version as new beta APIs are being used in the main branch.
+Clone, open, and run the project in Xcode on any Mac on macOS 26 or newer. Use an older branch if you are on an older version.
 
 Feel free to download and modify the project for your own personal use.
 
