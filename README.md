@@ -8,13 +8,6 @@ A **work-in-progress** SwiftUI recreation of the macOS System Settings app.
 
 </details>
 
-<details>
-<summary>macOS 15</summary>
-  
-![An image of the recreated macOS 15 System Settings app in both dark and light mode. General is selected on the sidebar with its options shown on the main pane next to it.](Assets/XcodePreview.png)
-
-</details>
-
 ## Information
 - This project is a recreation of the System Settings app for macOS 26 (25A354).
 - All features within the app are only simulations and have no effect on the device.
