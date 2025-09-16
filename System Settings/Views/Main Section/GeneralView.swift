@@ -38,14 +38,10 @@ struct GeneralView: View {
             }
 
             Section {
-                NavigationLink {
-                    AboutView()
-                } label: {
+                NavigationLink(value: "About") {
                     SettingsCell("About", symbol: "com.apple.graphic-icon.about-current-device")
                 }
-                NavigationLink {
-                    SoftwareUpdateView()
-                } label: {
+                NavigationLink(value: "Software Update") {
                     SettingsCell("Software Update", symbol: "com.apple.graphic-icon.software-update")
                 }
                 NavigationLink(value: "Storage") {
@@ -99,6 +95,16 @@ struct GeneralView: View {
                 NavigationLink(value: "Transfer or Reset") {
                     SettingsCell("Transfer or Reset", symbol: "com.apple.graphic-icon.transfer-or-reset-iphone")
                 }
+            }
+        }
+        .navigationDestination(for: String.self) { value in
+            switch value {
+            case "About":
+                AboutView()
+            case "Software Update":
+                SoftwareUpdateView()
+            default:
+                EmptyView()
             }
         }
     }

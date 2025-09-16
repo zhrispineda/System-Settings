@@ -17,7 +17,6 @@ struct CustomForm<Content: View>: View {
         .scrollEdgeEffectStyle(.soft, for: .all)
         .contentMargins(.top, -20, for: .scrollContent)
         .formStyle(.grouped)
-        .navigationDestination(for: String.self) {_ in }
         .navigationTitle(title)
         .navigationSplitViewColumnWidth(500)
         .toolbar {
