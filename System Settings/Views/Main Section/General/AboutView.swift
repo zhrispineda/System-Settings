@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AboutView: View {
+    @State private var showingBuild = false
     let icon = NSWorkspace.shared.icon(forFile: "/System/Applications/Weather.app")
     let appearancePath = "/System/Library/PrivateFrameworks/SystemDesktopAppearance.framework"
     let macInfo = MacInfo()
@@ -61,7 +62,14 @@ struct AboutView: View {
                             .scaledToFit()
                             .frame(width: 30)
                     }
-                    LabeledContent("macOS \(macInfo.system().name)", value: "Version \(macInfo.system().version) (\(buildNumber))")
+                    Text("macOS \(macInfo.system().name)")
+                    Spacer()
+                    Text("Version \(macInfo.system().version)\(showingBuild ? " (\(buildNumber))" : "")")
+                        .foregroundStyle(.secondary)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            showingBuild = true
+                        }
                 }
             }
             
@@ -88,6 +96,37 @@ struct AboutView: View {
                     if let url = URL(string: "file:///System/Applications/Utilities/System%20Information.app") {
                         NSWorkspace.shared.open(url)
                     }
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+            } footer: {
+                VStack {
+                    HStack {
+                        Button("Software License Agreement") {
+                            macInfo.softwareLicenseFile()
+                        }
+                        .buttonStyle(.plain)
+                        .underline()
+                        Text("-")
+                        Button("Regulatory Certification") {
+                            macInfo.regulatoryFile()
+                        }
+                        .buttonStyle(.plain)
+                        .underline()
+                    }
+                    HStack {
+                        Button("ENERGY STAR® Compliance") {
+                            macInfo.energyStarFile()
+                        }
+                        .buttonStyle(.plain)
+                        .underline()
+                        Text("-")
+                        Button("License Agreement") {
+                            macInfo.openDocumentation()
+                        }
+                        .buttonStyle(.plain)
+                        .underline()
+                    }
+                    Text("™ and © 1983-2025 Apple Inc. All Rights Reserved.")
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
             }

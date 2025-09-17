@@ -19,6 +19,38 @@ class MacInfo {
         return String(formatted)
     }
     
+    // Open `ENERGY STAR.pdf` file
+    func energyStarFile() -> Void {
+        let fileURL = "/System/Library/ProductDocuments/ProductGuides/ENERGY STAR.pdf"
+        
+        if NSWorkspace.shared.open(URL(fileURLWithPath: fileURL)) {
+            logger.log("Successfully opened ENERGY STAR file: \(fileURL)")
+        } else {
+            logger.error("Error opening ENERGY STAR file: \(fileURL)")
+        }
+    }
+    
+    // Open Finder with path `/Library/Documentation/`
+    func openDocumentation() -> Void {
+        let fileURL = "/Library/Documentation/"
+        if NSWorkspace.shared.open(URL(fileURLWithPath: fileURL)) {
+            logger.log("Successfully opened Finder with path: \(fileURL)")
+        } else {
+            logger.error("Error opening Finder with path: \(fileURL)")
+        }
+    }
+    
+    // Open `License.lpdf` file
+    func softwareLicenseFile() -> Void {
+        let fileURL = "/Library/Documentation/License.lpdf"
+
+        if NSWorkspace.shared.open(URL(fileURLWithPath: fileURL)) {
+            logger.log("Successfully opened Software License Agreement file: \(fileURL)")
+        } else {
+            logger.error("Error opening Software License Agreement file: \(fileURL)")
+        }
+    }
+    
     // Get RegulatoryModelNumber and TargetSubType key values to open Regulatory Certification .lpdf file
     func regulatoryFile() -> Void {
         let regulatoryModelNumber = MGHelper.read(key: "97JDvERpVwO+GHtthIh7hA") // RegulatoryModelNumber
