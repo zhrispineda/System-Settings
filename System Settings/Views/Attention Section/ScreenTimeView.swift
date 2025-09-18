@@ -25,19 +25,19 @@ struct ScreenTimeView: View {
             
             Section("Limit Usage".localized(using: table)) {
                 NavigationLink {} label: {
-                    SettingsCell("App & Website Activity".localized(using: table), symbol: "com.apple.prefpane.screentime.appUsage")
+                    SettingsCell("App & Website Activity".localized(using: table), symbol: "com.apple.graphic-icon.analytics-and-improvements")
                 }
             }
             
             Section("Communication".localized(using: table)) {
                 NavigationLink {} label: {
-                    SettingsCell("Communication Safety".localized(using: table), symbol: "com.apple.prefpane.screentime.communicationSafety")
+                    SettingsCell("Communication Safety".localized(using: table), symbol: "com.apple.graphic-icon.communication-safety")
                 }
             }
             
             Section("Restrictions".localized(using: table)) {
                 NavigationLink {} label: {
-                    SettingsCell("Content & Privacy".localized(using: table), symbol: "com.apple.prefpane.screentime.contentPrivacy")
+                    SettingsCell("Content & Privacy".localized(using: table), symbol: "com.apple.graphic-icon.content-and-privacy-restrictions")
                 }
             }
             
