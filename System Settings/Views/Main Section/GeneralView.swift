@@ -103,6 +103,8 @@ struct GeneralView: View {
                 AboutView()
             case "Software Update":
                 SoftwareUpdateView()
+            case "Storage":
+                StorageView()
             default:
                 EmptyView()
             }

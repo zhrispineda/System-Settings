@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BluetoothView: View {
-    @State private var bluetoothEnabled = true
+    @State private var bluetoothEnabled = false
     @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Bluetooth.appex")
 
     var body: some View {

@@ -10,7 +10,7 @@ import SwiftUI
 struct WiFiView: View {
     @AppStorage("WiFiEnabled") private var WiFiEnabled = false
     @AppStorage("AskJoinNetworks") private var askJoinNetworksIndex = 1
-    @AppStorage("AskJoinHotspots") private var askJoinHotspotsIndex = 1
+    @AppStorage("AskJoinHotspots") private var askJoinHotspotsIndex = 0
     @State private var localization = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Wi-Fi.appex")
     let joinNetworkOptions = [
         "Off",
