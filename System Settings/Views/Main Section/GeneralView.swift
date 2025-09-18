@@ -36,7 +36,7 @@ struct GeneralView: View {
                 .multilineTextAlignment(.center)
                 .navigationTitle(titleOpacity > 37.0 ? "General".localized(using: localization) : "")
             }
-
+            
             Section {
                 NavigationLink(value: "About") {
                     SettingsCell("About", symbol: "com.apple.graphic-icon.about-current-device")
@@ -50,11 +50,16 @@ struct GeneralView: View {
             }
             
             Section {
-                NavigationLink(value: "AppleCare & Warranty") {
+                Button {} label: {
                     SettingsCell("AppleCare & Warranty", symbol: "com.apple.graphic-icon.applecare")
+                    Image(systemName: "chevron.right")
+                        .imageScale(.small)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.tertiary)
                 }
+                .buttonStyle(.plain)
             }
-
+            
             Section {
                 NavigationLink(value: "AirDrop & Handoff") {
                     SettingsCell("AirDrop & Handoff", symbol: "com.apple.graphic-icon.airdrop")
@@ -106,7 +111,9 @@ struct GeneralView: View {
             case "Storage":
                 StorageView()
             default:
-                EmptyView()
+                CustomForm(title: value, root: false) {
+                    
+                }
             }
         }
     }
