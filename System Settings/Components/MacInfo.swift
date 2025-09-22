@@ -8,6 +8,7 @@ import AppKit
 import os
 
 class MacInfo {
+    private let infoTable = LocalizationManager(bundleURL: "")
     let fileManager = FileManager.default
     let resourceKeys: [URLResourceKey] = [.volumeNameKey]
     let logger = Logger()
@@ -146,9 +147,9 @@ class MacInfo {
             let modelNameString = String(modelName)
             let modelYearString = String(modelYear)
             
-            return (name: modelNameString.localize(table: "SPInfo"), year: modelYearString.localize(table: "SPInfo"))
+            return (name: modelNameString.localized(using: infoTable), year: modelYearString.localized(using: infoTable))
         }
-        return (name: "UNKNOWN".localize(table: "SPInfo"), year: "UNKNOWN".localize(table: "SPInfo"))
+        return (name: "UNKNOWN".localized(using: infoTable), year: "UNKNOWN".localized(using: infoTable))
     }
     
     // Use regular expression to get and format OS information from operatingSystemVersionString
@@ -173,7 +174,7 @@ class MacInfo {
             systemName = "UNKNOWN"
         }
         
-        return (name: systemName, version: String(splitString[1]), build: String(splitString[3]), subtext: "\(betaBuild ? "OS_BETA_VERSION_BUILD" : "OS_VERSION_BUILD")".localize(table: "SPInfo", String(splitString[1]), String(splitString[3])))
+        return (name: systemName, version: String(splitString[1]), build: String(splitString[3]), subtext: "\(betaBuild ? "OS_BETA_VERSION_BUILD" : "OS_VERSION_BUILD")".localizedFormatted(using: infoTable, String(splitString[1]), String(splitString[3])))
     }
     
     // Check name and count of drives

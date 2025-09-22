@@ -24,7 +24,7 @@ struct WiFiView: View {
     ]
     
     var body: some View {
-        CustomForm(title: "Wi‑Fi".localize(table: "Wi-Fi")) {
+        CustomForm(title: "Wi-Fi".localized(using: localization)) {
             Section {
                 PlacardToggle(isOn: .constant(false), icon: "com.apple.graphic-icon.wifi") {
                     Text("Wi-Fi".localized(using: localization))
