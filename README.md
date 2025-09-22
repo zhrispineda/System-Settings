@@ -4,7 +4,7 @@ A **work-in-progress** SwiftUI recreation of the macOS System Settings app.
 <details open>
 <summary>macOS 26</summary>
   
-![An image of the recreated macOS 26 System Settings app in both dark and light mode. General is selected on the sidebar with its options shown on the main pane next to it.](Assets/XcodePreviewBeta.png)
+![An image of the recreated macOS 26 System Settings app in both dark and light mode. General is selected on the sidebar with its options shown on the main pane next to it.](Assets/XcodePreview.png)
 
 </details>
 
