@@ -7,20 +7,21 @@ import Foundation
 import AppKit
 import os
 
+///  A utility type that contains hardware information and device-related files based on Mac identifiers.
 class MacInfo {
     private let infoTable = LocalizationManager(bundleURL: "")
     let fileManager = FileManager.default
     let resourceKeys: [URLResourceKey] = [.volumeNameKey]
     let logger = Logger()
     
-    // Use ProcessInfo to get memory in GB
+    /// Returns the total memory in GB from ProcessInfo as a string value. Does not include the `GB` suffix.
     static var memory: String {
         let memory = ProcessInfo.processInfo.physicalMemory
         let formatted = memory / (1024 * 1024 * 1024)
         return String(formatted)
     }
     
-    // Open `ENERGY STAR.pdf` file
+    /// Opens the included `ENERGY STAR.pdf` file from `/System/Library/ProductDocuments/ProductGuides/`.
     func energyStarFile() -> Void {
         let fileURL = "/System/Library/ProductDocuments/ProductGuides/ENERGY STAR.pdf"
         
@@ -31,7 +32,7 @@ class MacInfo {
         }
     }
     
-    // Open Finder with path `/Library/Documentation/`
+    /// Opens the path `/Library/Documentation/`.
     func openDocumentation() -> Void {
         let fileURL = "/Library/Documentation/"
         if NSWorkspace.shared.open(URL(fileURLWithPath: fileURL)) {
@@ -41,7 +42,7 @@ class MacInfo {
         }
     }
     
-    // Open `License.lpdf` file
+    /// Open `License.lpdf` file
     func softwareLicenseFile() -> Void {
         let fileURL = "/Library/Documentation/License.lpdf"
 
@@ -52,7 +53,9 @@ class MacInfo {
         }
     }
     
-    // Get RegulatoryModelNumber and TargetSubType key values to open Regulatory Certification .lpdf file
+    /// Opens the Regulatory Certification `.lpdf` file located in /System/Library/ProductDocuments/RegulatoryCertifications/.
+    ///
+    /// The key values for `RegulatoryModelNumber` and `TargetSubType` are obtained by MGHelper.
     func regulatoryFile() -> Void {
         let regulatoryModelNumber = MGHelper.read(key: "97JDvERpVwO+GHtthIh7hA") // RegulatoryModelNumber
         let targetSubType = MGHelper.read(key: "oYicEKzVTz4/CxxE05pEgQ")?.dropLast(2) // TargetSubType
@@ -65,10 +68,12 @@ class MacInfo {
         }
     }
     
-    // Get device housing color based off of ThinningProductType and DeviceEnclosureColor
+    /// Returns the `NSImage` product image from `/System/Library/CoreServices/CoreTypes.bundle/Contents/Library/`.
+    ///
+    /// Device housing color keys, `ThinningProductType` and `DeviceEnclosureColor`, are obtained by MGHelper.
     func color() -> NSImage? {
-        let thinningProductType = MGHelper.read(key: "0+nc/Udy4WNG8S+Q7a/s1A") ?? "UNKNOWN" // ThinningProductType
-        let deviceEnclosureColor = MGHelper.read(key: "JhEU414EIaDvAz8ki5DSqw") ?? "UNKNOWN" // DeviceEnclosureColor
+        let thinningProductType = MGHelper.read(key: "0+nc/Udy4WNG8S+Q7a/s1A") ?? "UNKNOWN"
+        let deviceEnclosureColor = MGHelper.read(key: "JhEU414EIaDvAz8ki5DSqw") ?? "UNKNOWN"
         var iconPath = "/System/Library/CoreServices/CoreTypes.bundle/Contents/Library/"
         
         switch thinningProductType {
@@ -132,7 +137,9 @@ class MacInfo {
         return iconImage
     }
     
-    // Get `marketing-name` key value and then format it separately to model and year variables
+    /// Returns a tuple of `String` values, model `name`, and model `year`.
+    ///
+    /// Obtains the `marketing-name` key value from MGHelper and formats it separately to `name` and `year` variables.
     func model() -> (name: String, year: String) {
         let fullString = MGHelper.read(key: "Z/dqyWS6OZTRy10UcmUAhw") ?? "UNKNOWN"
         let trimmedString = fullString.trimmingCharacters(in: .whitespaces)
@@ -152,7 +159,9 @@ class MacInfo {
         return (name: "UNKNOWN".localized(using: infoTable), year: "UNKNOWN".localized(using: infoTable))
     }
     
-    // Use regular expression to get and format OS information from operatingSystemVersionString
+    /// Returns a tuple of `String` values for OS `name`, `version`, `build`, and `subtext`.
+    ///
+    /// Formats OS information from operatingSystemVersionString, which is obtained from MGHelper.
     func system() -> (name: String, version: String, build: String, subtext: String) {
         let pattern = "[^A-Za-z0-9.]+"
         let fullString = ProcessInfo.processInfo.operatingSystemVersionString
@@ -177,7 +186,9 @@ class MacInfo {
         return (name: systemName, version: String(splitString[1]), build: String(splitString[3]), subtext: "\(betaBuild ? "OS_BETA_VERSION_BUILD" : "OS_VERSION_BUILD")".localizedFormatted(using: infoTable, String(splitString[1]), String(splitString[3])))
     }
     
-    // Check name and count of drives
+    /// Returns a tuple of the first drive's `name` and `count`.
+    ///
+    /// Uses FileManager to obtain storage information.
     func drives() -> (name: String, count: Int) {
         var drives: [String] = []
         
