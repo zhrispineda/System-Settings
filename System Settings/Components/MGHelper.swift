@@ -6,7 +6,11 @@
 import Foundation
 import os
 
+///  A utility type that queries MobileGestalt for device information.
 class MGHelper {
+    /// Returns the `String` value of a given key.
+    /// - Parameter key: The key value to query MobileGestalt with.
+    /// - Returns: An optional `String` value. If the key is invalid or restricted, it will return nil.
     static func read(key: String) -> String? {
         typealias MGKey = (@convention(c) (CFString) -> CFTypeRef?)
         let logger = Logger()
