@@ -14,7 +14,9 @@ struct SignInView: View {
     var body: some View {
         VStack(spacing: 20) {
             // Apple logo header image
-            Image(.signOutHeader)
+            if let header = NSImage.asset(path: "/System/Library/PrivateFrameworks/AuthKitUI.framework", name: "signOutHeaderIcon") {
+                Image(nsImage: header)
+            }
             
             // Header title
             Text("SPYGLASS_TITLE".localized(using: localization))
