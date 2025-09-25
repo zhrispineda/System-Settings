@@ -85,9 +85,10 @@ struct SoundView: View {
             Section("OUTPUT_INPUT".localized(using: localization)) {
                 Picker("", selection: $selectedDevice) {
                     ForEach(deviceOptions, id: \.self) { output in
-                        Text(output.localized(using: localization))
+                        Text("\t\t\t\(output.localized(using: localization))\t\t\t")
                     }
                 }
+                .frame(maxWidth: .infinity)
                 .pickerStyle(.segmented)
                 .labelsHidden()
                 
@@ -147,7 +148,9 @@ struct SoundView: View {
                         Text("INPUT_LEVEL".localized(using: localization))
                         Spacer()
                         ForEach(1...15, id: \.self) {_ in
-                            Image(.levelOff)
+                            if let tick = NSImage.asset(path: "/System/Library/ExtensionKit/Extensions/Sound.appex", name: "level_off") {
+                                Image(nsImage: tick)
+                            }
                         }
                     }
                 }
