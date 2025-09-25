@@ -88,103 +88,103 @@ struct SpotlightView: View {
                 }
                 Toggle(isOn: $appStore) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.AppStore", size: 24)
+                        IconView(icon: "com.apple.AppStore", size: 24)
                         Text("App Store".localized(using: frameworkTable))
                     }
                 }
                 Toggle(isOn: $books) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.iBooksX", size: 24)
+                        IconView(icon: "com.apple.iBooksX", size: 24)
                         Text("Books")
                     }
                 }
                 Toggle(isOn: $calculator) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.calculator", size: 24)
+                        IconView(icon: "com.apple.calculator", size: 24)
                         Text("Calculator")
                     }
                 }
                 Toggle(isOn: $calendar) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.iCal", size: 24)
+                        IconView(icon: "com.apple.iCal", size: 24)
                         Text("Calendar")
                     }
                 }
                 Toggle(isOn: $contacts) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.AddressBook", size: 24)
+                        IconView(icon: "com.apple.AddressBook", size: 24)
                         Text("Contacts")
                     }
                 }
                 Toggle(isOn: $dictionary) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.dictionary", size: 24)
+                        IconView(icon: "com.apple.dictionary", size: 24)
                         Text("Dictionary")
                     }
                 }
                 Toggle(isOn: $mail) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.mail", size: 24)
+                        IconView(icon: "com.apple.mail", size: 24)
                         Text("Mail")
                     }
                 }
                 Toggle(isOn: $messages) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.MobileSMS", size: 24)
+                        IconView(icon: "com.apple.MobileSMS", size: 24)
                         Text("Messages")
                     }
                 }
                 Toggle(isOn: $notes) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.notes", size: 24)
+                        IconView(icon: "com.apple.notes", size: 24)
                         Text("Notes")
                     }
                 }
                 Toggle(isOn: $photos) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.photos", size: 24)
+                        IconView(icon: "com.apple.photos", size: 24)
                         Text("Photos")
                     }
                 }
                 Toggle(isOn: $podcasts) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.podcasts", size: 24)
+                        IconView(icon: "com.apple.podcasts", size: 24)
                         Text("Podcasts")
                     }
                 }
                 Toggle(isOn: $reminders) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.reminders", size: 24)
+                        IconView(icon: "com.apple.reminders", size: 24)
                         Text("Reminders")
                     }
                 }
                 Toggle(isOn: $safari) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.safari", size: 24)
+                        IconView(icon: "com.apple.safari", size: 24)
                         Text("Safari")
                     }
                 }
                 Toggle(isOn: $shortcuts) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.shortcuts", size: 24)
+                        IconView(icon: "com.apple.shortcuts", size: 24)
                         Text("Shortcuts")
                     }
                 }
                 Toggle(isOn: $systemSettings) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.systempreferences", size: 24)
+                        IconView(icon: "com.apple.systempreferences", size: 24)
                         Text("System Settings")
                     }
                 }
                 Toggle(isOn: $tips) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.tips", size: 24)
+                        IconView(icon: "com.apple.tips", size: 24)
                         Text("Tips")
                     }
                 }
                 Toggle(isOn: $voiceMemos) {
                     HStack(spacing: 6) {
-                        TestIconView(icon: "com.apple.voicememos", size: 24)
+                        IconView(icon: "com.apple.voicememos", size: 24)
                         Text("Voice Memos")
                     }
                 }

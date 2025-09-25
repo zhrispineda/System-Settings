@@ -120,7 +120,7 @@ struct DisplaysView: View {
             ZStack {
                 Rectangle()
                     .foregroundStyle(Color(colorScheme == .light ? NSColor.quaternarySystemFill : NSColor.underPageBackgroundColor))
-                TestIconView(icon: "com.apple.macbookpro-16-2021-space-gray", size: 160)
+                IconView(icon: "com.apple.macbookpro-16-2021-space-gray", size: 160)
                     .offset(y: -13)
                 Text("Built-in Display")
                     .fontWeight(.semibold)

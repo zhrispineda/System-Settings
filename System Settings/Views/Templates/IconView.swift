@@ -25,7 +25,7 @@ struct BundleIconView: View {
     let bundlePath: String
     var icon: String = "AppIcon"
     let size: CGFloat
-
+    
     var body: some View {
         if let nsImage = iconImage {
             Image(nsImage: nsImage)
@@ -38,40 +38,37 @@ struct BundleIconView: View {
                 .padding(.leading, -2)
         }
     }
-
+    
     private var iconImage: NSImage? {
         guard let bundle = Bundle(path: bundlePath) else { return nil }
-
+        
         if let image = bundle.image(forResource: NSImage.Name(icon)) {
             return image
         }
-
+        
         if let iconFile = bundle.infoDictionary?["CFBundleIconFile"] as? String {
             let iconBaseName = (iconFile as NSString).deletingPathExtension
             return bundle.image(forResource: NSImage.Name(iconBaseName))
         }
-
+        
         return nil
     }
 }
 
-// MARK: Experimental; to replace IconView
-struct TestIconView: View {
+struct IconView: View {
     let icon: String
     let size: CGFloat
-
+    
     var body: some View {
         if let type = UTType(icon) {
             let icon = NSWorkspace.shared.icon(for: type)
             Image(nsImage: icon)
                 .resizable()
                 .frame(width: size, height: size)
-        } else {
-            if let bundleIcon = getIcon(bundleID: icon) {
-                Image(nsImage: bundleIcon)
-                    .resizable()
-                    .frame(width: size, height: size)
-            }
+        } else if let bundleIcon = getIcon(bundleID: icon) {
+            Image(nsImage: bundleIcon)
+                .resizable()
+                .frame(width: size, height: size)
         }
     }
 }

@@ -71,7 +71,7 @@ struct MenuBarView: View {
             
             Section {
                 HStack(spacing: 4) {
-                    TestIconView(icon: "com.apple.controlcenter.clock", size: 24)
+                    IconView(icon: "com.apple.controlcenter.clock", size: 24)
                     Text("Clock".localized(using: table))
                     Spacer()
                     Button("Clock Options…".localized(using: table)) {}
@@ -80,31 +80,31 @@ struct MenuBarView: View {
                 Group {
                     Toggle(isOn: $siri) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.siri", size: 24)
+                            IconView(icon: "com.apple.siri", size: 24)
                             Text("Siri".localized(using: table))
                         }
                     }
                     Toggle(isOn: $spotlight) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.spotlight", size: 24)
+                            IconView(icon: "com.apple.spotlight", size: 24)
                             Text("Spotlight".localized(using: table))
                         }
                     }
                     Toggle(isOn: $wifi) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.graphic-icon.wifi", size: 24)
+                            IconView(icon: "com.apple.graphic-icon.wifi", size: 24)
                             Text("Wi-Fi".localized(using: table))
                         }
                     }
                     Toggle(isOn: $bluetooth) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.graphic-icon.bluetooth", size: 24)
+                            IconView(icon: "com.apple.graphic-icon.bluetooth", size: 24)
                             Text("Bluetooth".localized(using: table))
                         }
                     }
                     Toggle(isOn: $battery) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.graphic-icon.battery", size: 24)
+                            IconView(icon: "com.apple.graphic-icon.battery", size: 24)
                             Text("Battery".localized(using: table))
                             Spacer()
                             Button("Battery Options…") {}
@@ -112,7 +112,7 @@ struct MenuBarView: View {
                     }
                     Toggle(isOn: $focus) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.graphic-icon.focus", size: 24)
+                            IconView(icon: "com.apple.graphic-icon.focus", size: 24)
                             Text("Focus".localized(using: table))
                             Spacer()
                             Picker("Focus".localized(using: table), selection: $focusShown) {
@@ -125,7 +125,7 @@ struct MenuBarView: View {
                     }
                     Toggle(isOn: $screenMirroring) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.controlcenter.screenmirroring", size: 24)
+                            IconView(icon: "com.apple.controlcenter.screenmirroring", size: 24)
                             Text("Screen Mirroring".localized(using: table))
                             Spacer()
                             Picker("Screen Mirroring".localized(using: table), selection: $mirrorShown) {
@@ -138,7 +138,7 @@ struct MenuBarView: View {
                     }
                     Toggle(isOn: $display) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.graphic-icon.display", size: 24)
+                            IconView(icon: "com.apple.graphic-icon.display", size: 24)
                             Text("Display".localized(using: table))
                             Spacer()
                             Picker("Display".localized(using: table), selection: $displayShown) {
@@ -151,7 +151,7 @@ struct MenuBarView: View {
                     }
                     Toggle(isOn: $sound) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.graphic-icon.sound", size: 24)
+                            IconView(icon: "com.apple.graphic-icon.sound", size: 24)
                             Text("Sound".localized(using: table))
                             Spacer()
                             Picker("Sound".localized(using: table), selection: $soundShown) {
@@ -164,7 +164,7 @@ struct MenuBarView: View {
                     }
                     Toggle(isOn: $nowPlaying) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.controlcenter.nowplaying", size: 24)
+                            IconView(icon: "com.apple.controlcenter.nowplaying", size: 24)
                             Text("Now Playing".localized(using: table))
                             Spacer()
                             Picker("Now Playing".localized(using: table), selection: $playingShown) {
@@ -177,13 +177,13 @@ struct MenuBarView: View {
                     }
                     Toggle(isOn: $timeMachine) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.backup.launcher", size: 24)
+                            IconView(icon: "com.apple.backup.launcher", size: 24)
                             Text("Time Machine".localized(using: table))
                         }
                     }
                     Toggle(isOn: $weather) {
                         HStack(spacing: 4) {
-                            TestIconView(icon: "com.apple.weather", size: 24)
+                            IconView(icon: "com.apple.weather", size: 24)
                             Text("Weather".localized(using: table))
                         }
                     }

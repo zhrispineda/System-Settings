@@ -16,7 +16,7 @@ struct GeneralView: View {
             // Placard
             Section {
                 VStack(spacing: 5) {
-                    TestIconView(icon: "com.apple.graphic-icon.gear", size: 64)
+                    IconView(icon: "com.apple.graphic-icon.gear", size: 64)
                         .padding(.top, 8)
                         .padding(.bottom, -1)
                         .overlay {

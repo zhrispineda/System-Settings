@@ -85,7 +85,7 @@ struct AboutView: View {
             
             Section("Storage") {
                 HStack {
-                    TestIconView(icon: "com.apple.storage-internal", size: 32)
+                    IconView(icon: "com.apple.storage-internal", size: 32)
                     Text("\(macInfo.drives().name)")
                 }
                 Button("Storage Settings…") {}.frame(maxWidth: .infinity, alignment: .trailing)
