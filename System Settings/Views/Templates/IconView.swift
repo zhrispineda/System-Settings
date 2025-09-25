@@ -76,36 +76,6 @@ struct TestIconView: View {
     }
 }
 
-struct IconView: View {
-    var symbol: String
-    var color: Color
-    var size: Int
-
-    init(_ symbol: String, color: Color = .blue, size: Int = 19) {
-        self.symbol = symbol
-        self.color = color
-        self.size = size
-    }
-
-    var body: some View {
-        ZStack {
-            if symbol.contains("com.") {
-                TestIconView(icon: symbol, size: 24)
-                    .padding(.trailing, -2)
-            } else {
-                RoundedRectangle(cornerRadius: 5.0)
-                    .foregroundStyle(color.gradient)
-                    .scaledToFit()
-                    .frame(width: CGFloat(size), height: CGFloat(size))
-                Image(_internalSystemName: symbol)
-                    .font(.callout)
-                    .frame(width: 14, height: 14)
-                    .foregroundStyle(.white)
-            }
-        }
-    }
-}
-
 #Preview {
     ContentView()
 }

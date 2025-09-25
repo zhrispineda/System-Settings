@@ -18,8 +18,8 @@ struct SettingsSection: View {
                         Button  {
                             path = NavigationPath()
                         } label: {
-                            HStack(spacing: 5) {
-                                IconView(setting.icon, color: .clear)
+                            HStack(spacing: 3) {
+                                TestIconView(icon: setting.icon, size: 24)
                                 Text(setting.title)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)

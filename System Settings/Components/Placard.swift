@@ -12,16 +12,10 @@ struct Placard<Content: View>: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 14) {
-            if icon.contains("com.") {
-                TestIconView(icon: icon, size: 32)
-                    .padding(.top, -1)
-                    .padding(.leading, -2)
-                    .padding(.trailing, -6)
-            } else {
-                IconView(icon, color: color)
-                    .scaleEffect(1.3)
-                    .padding(.top, 2)
-            }
+            TestIconView(icon: icon, size: 32)
+                .padding(.top, -1)
+                .padding(.leading, -2)
+                .padding(.trailing, -6)
             LabeledContent {} label: {
                 content
             }

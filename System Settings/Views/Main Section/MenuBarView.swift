@@ -183,7 +183,7 @@ struct MenuBarView: View {
                     }
                     Toggle(isOn: $weather) {
                         HStack(spacing: 4) {
-                            IconView("com.apple.weather")
+                            TestIconView(icon: "com.apple.weather", size: 24)
                             Text("Weather".localized(using: table))
                         }
                     }

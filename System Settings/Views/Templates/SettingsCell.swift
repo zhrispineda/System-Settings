@@ -43,9 +43,6 @@ struct SettingsCell: View {
             } else if symbol.contains("/") {
                 BundleIconView(bundlePath: symbol, icon: icon, size: larger ? 30 : 24)
                     .padding(.leading, symbol.contains("Ker") ? 3 : 0)
-            } else {
-                IconView(symbol, color: color)
-                    .shadow(radius: 0.0, y: 0.3)
             }
 
             LabeledContent {} label: {
