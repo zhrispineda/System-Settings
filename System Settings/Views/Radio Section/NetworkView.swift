@@ -17,21 +17,21 @@ struct NetworkView: View {
             Section {
                 // Wi-Fi
                 NavigationLink {} label: {
-                    NetworkStatusView(localization: $localization, titleKey: "Wi-Fi", status: .notConnected, symbol: "com.apple.graphic-icon.wifi", color: .blue)
+                    NetworkStatusView(localization: $localization, titleKey: "Wi-Fi", status: .notConnected, icon: "com.apple.graphic-icon.wifi")
                 }
             }
             
             Section {
                 // Firewall
                 NavigationLink {} label: {
-                    NetworkStatusView(localization: $localization, titleKey: "FIREWALL_NAME".localized(using: localization), status: .inactive, symbol: "firewall.fill", color: .orange)
+                    NetworkStatusView(localization: $localization, titleKey: "FIREWALL_NAME".localized(using: localization), status: .inactive, icon: "com.apple.graphic-icon.network.firewall")
                 }
             }
             
             Section {
                 // Thunderbolt Bridge
                 NavigationLink {} label: {
-                    NetworkStatusView(localization: $localization, titleKey: "Thunderbolt Bridge", status: .notConnected, symbol: "thunderbolt", color: .gray)
+                    NetworkStatusView(localization: $localization, titleKey: "Thunderbolt Bridge", status: .notConnected, icon: "com.apple.graphic-icon.network.thunderbolt")
                 }
             } header: {
                 Text("OTHER_SERVICES".localized(using: localization))
@@ -79,8 +79,7 @@ struct NetworkStatusView: View {
     @Binding var localization: LocalizationManager
     let titleKey: String
     let status: NetworkStatus
-    let symbol: String
-    let color: Color
+    let icon: String
     private var statusColor: Color {
         switch status {
         case .connected:
@@ -104,16 +103,15 @@ struct NetworkStatusView: View {
         }
     }
     
-    init(localization: Binding<LocalizationManager>, titleKey: String, status: NetworkStatus, symbol: String, color: Color) {
+    init(localization: Binding<LocalizationManager>, titleKey: String, status: NetworkStatus, icon: String) {
         self._localization = localization
         self.titleKey = titleKey
         self.status = status
-        self.symbol = symbol
-        self.color = color
+        self.icon = icon
     }
     
     var body: some View {
-        Placard(icon: symbol, color: color) {
+        Placard(icon: icon) {
             Text(titleKey)
             HStack(spacing: 5) {
                 Image(systemName: "circle.fill")
@@ -124,7 +122,6 @@ struct NetworkStatusView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .padding(.leading, symbol.contains("com.") ? 0 : 4)
     }
 }
 
@@ -146,7 +143,6 @@ enum NetworkStatus {
         localization: .constant(LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/Network.appex")),
         titleKey: "Wi-Fi",
         status: .notConnected,
-        symbol: "com.apple.graphic-icon.wifi",
-        color: .blue
+        icon: "com.apple.graphic-icon.wifi"
     )
 }
