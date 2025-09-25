@@ -11,20 +11,11 @@ struct AccessibilityView: View {
     var body: some View {
         CustomForm(title: "Accessibility") {
             Section {
-                HStack(alignment: .top, spacing: 15) {
-                    IconView("accessibility", color: .blue)
-                        .scaleEffect(1.3)
-                        .padding(.top, 2)
-                    VStack(alignment: .leading) {
-                        Text("Accessibility")
-                        Text("\("Personalize Mac in ways that work best for you with accessibility features for vision, hearing, motor, speech, and cognition.") [\("Learn More…")](help:anchor=mh35884)")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .offset(y: -6)
+                Placard(icon: "com.apple.graphic-icon.accessibility") {
+                    Text("Accessibility")
+                    Text("\("Personalize Mac in ways that work best for you with accessibility features for vision, hearing, motor, speech, and cognition.") [\("Learn More…")](help:anchor=mh35884)")
+                        .padding(.top, -0.5)
                 }
-                .padding([.leading, .top, .trailing], 6)
-                .padding(.bottom, -6)
             }
             
             Section("Vision") {
