@@ -36,8 +36,7 @@ struct SpotlightView: View {
     @State private var folderResults = true
     @State private var phoneAppResults = true
     @State private var menuItemResults = true
-    @State private var clipboard = "Off"
-    let clipboardOptions = ["On", "Off"]
+    @State private var clipboard = false
     
     var body: some View {
         CustomForm(title: "SPORTLIGHT".localized(using: table)) {
@@ -88,104 +87,104 @@ struct SpotlightView: View {
                     Text("Allows app and its content to appear in Spotlight.".localized(using: frameworkTable))
                 }
                 Toggle(isOn: $appStore) {
-                    HStack {
-                        IconView("com.apple.AppStore")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.AppStore", size: 24)
                         Text("App Store".localized(using: frameworkTable))
                     }
                 }
                 Toggle(isOn: $books) {
-                    HStack {
-                        IconView("com.apple.iBooksX")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.iBooksX", size: 24)
                         Text("Books")
                     }
                 }
                 Toggle(isOn: $calculator) {
-                    HStack {
-                        IconView("com.apple.calculator")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.calculator", size: 24)
                         Text("Calculator")
                     }
                 }
                 Toggle(isOn: $calendar) {
-                    HStack {
-                        IconView("com.apple.iCal")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.iCal", size: 24)
                         Text("Calendar")
                     }
                 }
                 Toggle(isOn: $contacts) {
-                    HStack {
-                        IconView("com.apple.AddressBook")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.AddressBook", size: 24)
                         Text("Contacts")
                     }
                 }
                 Toggle(isOn: $dictionary) {
-                    HStack {
-                        IconView("com.apple.dictionary")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.dictionary", size: 24)
                         Text("Dictionary")
                     }
                 }
                 Toggle(isOn: $mail) {
-                    HStack {
-                        IconView("com.apple.mail")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.mail", size: 24)
                         Text("Mail")
                     }
                 }
                 Toggle(isOn: $messages) {
-                    HStack {
-                        IconView("com.apple.MobileSMS")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.MobileSMS", size: 24)
                         Text("Messages")
                     }
                 }
                 Toggle(isOn: $notes) {
-                    HStack {
-                        IconView("com.apple.notes")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.notes", size: 24)
                         Text("Notes")
                     }
                 }
                 Toggle(isOn: $photos) {
-                    HStack {
-                        IconView("com.apple.photos")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.photos", size: 24)
                         Text("Photos")
                     }
                 }
                 Toggle(isOn: $podcasts) {
-                    HStack {
-                        IconView("com.apple.podcasts")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.podcasts", size: 24)
                         Text("Podcasts")
                     }
                 }
                 Toggle(isOn: $reminders) {
-                    HStack {
-                        IconView("com.apple.reminders")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.reminders", size: 24)
                         Text("Reminders")
                     }
                 }
                 Toggle(isOn: $safari) {
-                    HStack {
-                        IconView("com.apple.safari")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.safari", size: 24)
                         Text("Safari")
                     }
                 }
                 Toggle(isOn: $shortcuts) {
-                    HStack {
-                        IconView("com.apple.shortcuts")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.shortcuts", size: 24)
                         Text("Shortcuts")
                     }
                 }
                 Toggle(isOn: $systemSettings) {
-                    HStack {
-                        IconView("com.apple.systempreferences")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.systempreferences", size: 24)
                         Text("System Settings")
                     }
                 }
                 Toggle(isOn: $tips) {
-                    HStack {
-                        IconView("com.apple.tips")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.tips", size: 24)
                         Text("Tips")
                     }
                 }
                 Toggle(isOn: $voiceMemos) {
-                    HStack {
-                        IconView("com.apple.voicememos")
+                    HStack(spacing: 6) {
+                        TestIconView(icon: "com.apple.voicememos", size: 24)
                         Text("Voice Memos")
                     }
                 }
@@ -215,14 +214,9 @@ struct SpotlightView: View {
             }
             
             Section {
-                LabeledContent {} label: {
-                    Text("Results from Clipboard".localized(using: table))
-                    Text("Allows the contents of your clipboard to appear in Spotlight".localized(using: table))
-                }
-                Picker("Clipboard History".localized(using: table), selection: $clipboard) {
-                    ForEach(clipboardOptions, id: \.self) { option in
-                        Text(option.localized(using: table))
-                    }
+                Toggle(isOn: $clipboard) {
+                    Text("Clipboard Search".localized(using: table))
+                    Text("Allow Spotlight to search and display items you’ve copied to your clipboard. Items on your clipboard will be available for eight hours. Personal and sensitive information may appear in search results.".localized(using: table))
                 }
             } footer: {
                 HStack {
