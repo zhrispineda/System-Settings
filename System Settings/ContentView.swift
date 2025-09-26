@@ -11,6 +11,17 @@ struct ContentView: View {
     @State private var path = NavigationPath()
     @State private var searchText = ""
     @State private var selection: SettingsItem? = mainOptions.first
+    /// Returns an extra width value based on preferred language.
+    var extraWidth: CGFloat {
+        switch Locale.preferredLanguages.first {
+        case "vi":
+            return 30
+        case "de", "ja":
+            return 10
+        default:
+            return 0
+        }
+    }
     
     var body: some View {
         NavigationSplitView {
@@ -49,7 +60,7 @@ struct ContentView: View {
                 isFocused = true
             }
             .toolbar(removing: .sidebarToggle)
-            .navigationSplitViewColumnWidth(215)
+            .navigationSplitViewColumnWidth(215 + extraWidth)
         } detail: {
             NavigationStack(path: $path) {
                 selection?.destination
