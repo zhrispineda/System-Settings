@@ -2,14 +2,70 @@
 //  GeneralView.swift
 //  System Settings
 //
-//  System Settings > General
-//
 
 import SwiftUI
 
+/// The view for `System Settings > General`
 struct GeneralView: View {
     @State private var titleOpacity = 0.0
-    @State private var localization = LocalizationManager(bundleURL: "/System/Applications/System Settings.app/Contents/PlugIns/GeneralSettings.appex")
+    let localization = LocalizationManager(
+        bundleURL: "/System/Applications/System Settings.app/Contents/PlugIns/GeneralSettings.appex"
+    )
+    let aboutTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/AboutExtension.appex",
+        stringsFile: "InfoPlist"
+    )
+    let updateTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/SoftwareUpdateSettingsExtension.appex",
+        stringsFile: "InfoPlist"
+    )
+    let storageTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/Storage.appex",
+        stringsFile: "InfoPlist"
+    )
+    let coverageTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/CoverageSettings.appex",
+        stringsFile: "InfoPlist"
+    )
+    let handoffTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/AirDropHandoffExtension.appex",
+        stringsFile: "InfoPlist"
+    )
+    let autofillTable = LocalizationManager(
+        bundleURL: "/System/Applications/Passwords.app"
+    )
+    let dateTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/DateAndTime Extension.appex",
+        stringsFile: "InfoPlist"
+    )
+    let localeTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/Localization.appex",
+        stringsFile: "InfoPlist"
+    )
+    let loginTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/LoginItems.appex",
+        stringsFile: "InfoPlist"
+    )
+    let sharingTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/Sharing.appex",
+        stringsFile: "InfoPlist"
+    )
+    let startupTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/StartupDisk.appex",
+        stringsFile: "InfoPlist"
+    )
+    let timeTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/TimeMachineSettings.appex",
+        stringsFile: "InfoPlist"
+    )
+    let mdmTable = LocalizationManager(
+        bundleURL: "/System/Library/PrivateFrameworks/DeviceManagement.framework",
+        stringsFile: "InfoPlist"
+    )
+    let transferTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/TransferResetExtension.appex",
+        stringsFile: "InfoPlist"
+    )
     
     var body: some View {
         CustomForm(title: "General") {
@@ -39,19 +95,31 @@ struct GeneralView: View {
             
             Section {
                 NavigationLink(value: "About") {
-                    SettingsCell("About", symbol: "com.apple.graphic-icon.about-current-device")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: aboutTable),
+                        symbol: "com.apple.graphic-icon.about-current-device"
+                    )
                 }
                 NavigationLink(value: "Software Update") {
-                    SettingsCell("Software Update", symbol: "com.apple.graphic-icon.software-update")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: updateTable),
+                        symbol: "com.apple.graphic-icon.software-update"
+                    )
                 }
                 NavigationLink(value: "Storage") {
-                    SettingsCell("Storage", symbol: "com.apple.settings.PrivacySecurity.extension.privacy-blockDevice")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: storageTable),
+                        symbol: "com.apple.settings.PrivacySecurity.extension.privacy-blockDevice"
+                    )
                 }
             }
             
             Section {
                 Button {} label: {
-                    SettingsCell("AppleCare & Warranty", symbol: "com.apple.graphic-icon.applecare")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: coverageTable),
+                        symbol: "com.apple.graphic-icon.applecare"
+                    )
                     Image(systemName: "chevron.right")
                         .imageScale(.small)
                         .fontWeight(.semibold)
@@ -62,43 +130,73 @@ struct GeneralView: View {
             
             Section {
                 NavigationLink(value: "AirDrop & Handoff") {
-                    SettingsCell("AirDrop & Handoff", symbol: "com.apple.graphic-icon.airdrop")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: handoffTable),
+                        symbol: "com.apple.graphic-icon.airdrop"
+                    )
                 }
             }
             
             Section {
                 NavigationLink(value: "AutoFill & Passwords") {
-                    SettingsCell("AutoFill & Passwords", symbol: "com.apple.Passwords-Settings.AutoFill")
+                    SettingsCell(
+                        "AutoFill & Passwords".localized(using: autofillTable),
+                        symbol: "com.apple.Passwords-Settings.AutoFill"
+                    )
                 }
                 NavigationLink(value: "Date & Time") {
-                    SettingsCell("Date & Time", symbol: "com.apple.graphic-icon.date-and-time")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: dateTable),
+                        symbol: "com.apple.graphic-icon.date-and-time"
+                    )
                 }
                 NavigationLink(value: "Language & Region") {
-                    SettingsCell("Language & Region", color: .blue, symbol: "com.apple.graphic-icon.language")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: localeTable),
+                        symbol: "com.apple.graphic-icon.language"
+                    )
                 }
                 NavigationLink(value: "Login Items & Extensions") {
-                    SettingsCell("Login Items & Extensions", symbol: "/System/Library/ExtensionKit/Extensions/LoginItems.appex")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: loginTable),
+                        symbol: "/System/Library/ExtensionKit/Extensions/LoginItems.appex"
+                    )
                 }
                 NavigationLink(value: "Sharing") {
-                    SettingsCell("Sharing", symbol: "/System/Library/ExtensionKit/Extensions/Sharing.appex")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: sharingTable),
+                        symbol: "/System/Library/ExtensionKit/Extensions/Sharing.appex"
+                    )
                 }
                 NavigationLink(value: "Startup Disk") {
-                    SettingsCell("Startup Disk", symbol: "com.apple.graphic-icon.internal-drive")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: startupTable),
+                        symbol: "com.apple.graphic-icon.internal-drive"
+                    )
                 }
                 NavigationLink(value: "Time Machine") {
-                    SettingsCell("Time Machine", symbol: "com.apple.backup.launcher")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: timeTable),
+                        symbol: "com.apple.backup.launcher"
+                    )
                 }
             }
             
             Section {
                 NavigationLink(value: "Device Management") {
-                    SettingsCell("Device Management", symbol: "com.apple.NetworkExtensionSettingsUI.icon.profile")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: mdmTable),
+                        symbol: "com.apple.NetworkExtensionSettingsUI.icon.profile"
+                    )
                 }
             }
             
             Section {
                 NavigationLink(value: "Transfer or Reset") {
-                    SettingsCell("Transfer or Reset", symbol: "com.apple.graphic-icon.transfer-or-reset-iphone")
+                    SettingsCell(
+                        "CFBundleDisplayName".localized(using: transferTable),
+                        symbol: "com.apple.graphic-icon.transfer-or-reset-iphone"
+                    )
                 }
             }
         }
