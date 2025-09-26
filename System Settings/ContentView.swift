@@ -14,7 +14,7 @@ struct ContentView: View {
     /// Returns an extra width value based on preferred language.
     var extraWidth: CGFloat {
         switch Locale.preferredLanguages.first {
-        case "vi":
+        case "el", "vi":
             return 30
         case "de", "ja":
             return 10

@@ -32,6 +32,6 @@ class LocalizationManager {
     
     func configure(stringsFile: String = "Localizable") {
         localizer = getLocalizable(bundleURL: URL(filePath: bundleURL), stringsFile: stringsFile)
-        preferredLocalizations = UserDefaults.standard.stringArray(forKey: "AppleLanguages") ?? []
+        preferredLocalizations = Locale.preferredLanguages
     }
 }
