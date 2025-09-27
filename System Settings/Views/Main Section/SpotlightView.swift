@@ -73,12 +73,10 @@ struct SpotlightView: View {
                 Toggle("SEARCH_ALLOW_ANONYMOUS_RECORDS".localized(using: table), isOn: $improveSearch)
                 VStack(alignment: .leading) {
                     Text("SEARCH_ALLOW_ANONYMOUS_RECORDS_DESC".localized(using: table))
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
                     Text(.init("\("SEARCH_ALLOW_ANONYMOUS_RECORDS_FOOTER_FORMAT".localizedFormatted(using: table, "[\("BUTTON_TITLE".localized(using: privacyTable))](systempreferences://)"))"))
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
                 }
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
             }
             
             Section {
