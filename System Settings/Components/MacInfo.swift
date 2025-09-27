@@ -9,7 +9,7 @@ import os
 
 ///  A utility type that contains hardware information and device-related files based on Mac identifiers.
 class MacInfo {
-    private let infoTable = LocalizationManager(bundleURL: "")
+    private let infoTable = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/AboutExtension.appex", stringsFile: "SupportLinks")
     let fileManager = FileManager.default
     let resourceKeys: [URLResourceKey] = [.volumeNameKey]
     let logger = Logger()
@@ -23,13 +23,36 @@ class MacInfo {
     
     /// Opens the included `ENERGY STAR.pdf` file from `/System/Library/ProductDocuments/ProductGuides/`.
     func energyStarFile() -> Void {
-        let fileURL = "/System/Library/ProductDocuments/ProductGuides/ENERGY STAR.pdf"
+        /// File name is based on `ENERGY_STAR` in `/System/Library/ExtensionKit/Extensions/AboutExtension.appex`
+        let fileName = "ENERGY_STAR".localized(using: infoTable)
+        let fileURL = "/System/Library/ProductDocuments/ProductGuides/\(fileName)"
         
         if NSWorkspace.shared.open(URL(fileURLWithPath: fileURL)) {
             logger.log("Successfully opened ENERGY STAR file: \(fileURL)")
         } else {
             logger.error("Error opening ENERGY STAR file: \(fileURL)")
         }
+    }
+    
+    /// Returns the device's SPConfigCode for opening the matching Apple Support Tech Specs page. Based on `AppleSystemInfo.framework`
+    /// - Parameter deviceCode: The `String` device identifier
+    /// - Returns: `String` SPConfigCode for use with support-sp.apple.com
+    func helpPage(deviceCode: String) -> String {
+        let path = "/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/SPConfigCodes-\(deviceCode).plist"
+        let url = URL(fileURLWithPath: path)
+        
+        guard let data = try? Data(contentsOf: url),
+              let plist = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil),
+              let dict = plist as? [String: Any] else {
+            print("Could not load plist for identifier: \(deviceCode)")
+            return ""
+        }
+        
+        if let firstValue = dict.values.first as? String {
+            return firstValue
+        }
+        
+        return ""
     }
     
     /// Opens the path `/Library/Documentation/`.
@@ -44,7 +67,9 @@ class MacInfo {
     
     /// Open `License.lpdf` file
     func softwareLicenseFile() -> Void {
-        let fileURL = "/Library/Documentation/License.lpdf"
+        /// File name is based on `OSX_LICENSE` in `/System/Library/ExtensionKit/Extensions/AboutExtension.appex`
+        let fileName = "OSX_LICENSE".localized(using: infoTable)
+        let fileURL = "/Library/Documentation/\(fileName)"
 
         if NSWorkspace.shared.open(URL(fileURLWithPath: fileURL)) {
             logger.log("Successfully opened Software License Agreement file: \(fileURL)")
