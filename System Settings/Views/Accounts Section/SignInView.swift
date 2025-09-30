@@ -9,8 +9,9 @@ import SwiftUI
 
 struct SignInView: View {
     @State private var username = ""
-    @State private var localization = LocalizationManager(bundleURL: "/System/Library/PrivateFrameworks/AuthKitUI.framework")
-
+    let localization = LocalizationManager(bundleURL: "/System/Library/PrivateFrameworks/AuthKitUI.framework")
+    let accountTable = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/AppleIDSettings.appex")
+    
     var body: some View {
         VStack(spacing: 20) {
             // Apple logo header image
@@ -27,7 +28,7 @@ struct SignInView: View {
             Text("SPYGLASS_BODY".localized(using: localization))
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 60)
+                .padding(.horizontal, 50)
                 .padding(.bottom, 10)
             
             // Text field
@@ -45,21 +46,19 @@ struct SignInView: View {
                     .stroke(.fill, lineWidth: 1)
                     .padding(-8)
             }
-
+            
             // Continue button
-            HStack {
-                Spacer()
-                Button("AUTHORIZE_BUTTON_TITLE".localized(using: localization)) {}
-                    .disabled(username.isEmpty)
-                    .padding(.trailing, 22)
-                    .keyboardShortcut(.defaultAction)
-            }
-            .padding(.bottom)
+            Button("AUTHORIZE_BUTTON_TITLE".localized(using: localization)) {}
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .disabled(username.isEmpty)
+                .padding(.trailing, 22)
+                .keyboardShortcut(.defaultAction)
+                .padding(.bottom)
             
             // See how your data is managed… button
             OBPrivacyLinkController(bundleIdentifier: "com.apple.onboarding.appleid")
                 .frame(maxWidth: 460)
-
+            
             HStack {
                 // Forgot Password button
                 Button("FORGOT_PASSWORD".localized(using: localization)) {}
@@ -71,8 +70,11 @@ struct SignInView: View {
             }
             .padding([.horizontal, .top])
         }
+        .background(WindowAccessor { window in
+            window.titlebarAppearsTransparent = true
+        })
         .frame(width: 490, height: 300)
-        .navigationTitle("SIGN_IN_WATCH_OS".localized(using: localization))
+        .navigationTitle("SPYGLASS_TITLE_SIGN_IN".localized(using: accountTable))
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 HStack {
@@ -84,6 +86,22 @@ struct SignInView: View {
             }
         }
     }
+}
+
+struct WindowAccessor: NSViewRepresentable {
+    let callback: (NSWindow) -> Void
+    
+    func makeNSView(context: Context) -> NSView {
+        let nsView = NSView()
+        Task {
+            if let window = nsView.window {
+                callback(window)
+            }
+        }
+        return nsView
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {}
 }
 
 #Preview {
