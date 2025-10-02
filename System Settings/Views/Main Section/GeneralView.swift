@@ -8,6 +8,7 @@ import SwiftUI
 /// The view for `System Settings > General`
 struct GeneralView: View {
     @State private var titleOpacity = 0.0
+    @State private var coverageSignInAlert = false
     let localization = LocalizationManager(
         bundleURL: "/System/Applications/System Settings.app/Contents/PlugIns/GeneralSettings.appex"
     )
@@ -115,7 +116,9 @@ struct GeneralView: View {
             }
             
             Section {
-                Button {} label: {
+                Button {
+                    coverageSignInAlert.toggle()
+                } label: {
                     SettingsCell(
                         "CFBundleDisplayName".localized(using: coverageTable),
                         symbol: "com.apple.graphic-icon.applecare"
@@ -126,6 +129,34 @@ struct GeneralView: View {
                         .foregroundStyle(.tertiary)
                 }
                 .buttonStyle(.plain)
+                .sheet(isPresented: $coverageSignInAlert) {
+                    VStack(spacing: 20) {
+                        IconView(icon: "com.apple.graphic-icon.applecare", size: 64)
+                        Text("Sign In to View AppleCare  & Warranty")
+                            .bold()
+                        Text("Sign in with your Apple Account and then come back to view Coverage for your devices.")
+                            .font(.caption)
+                        HStack {
+                            Button {
+                                coverageSignInAlert.toggle()
+                            } label: {
+                                Text("Cancel")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            
+                            Button {
+                                coverageSignInAlert.toggle()
+                            } label: {
+                                Text("Sign in…")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                    }
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .frame(width: 250)
+                }
             }
             
             Section {
