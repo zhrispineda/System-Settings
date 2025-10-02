@@ -24,6 +24,9 @@ struct GeneralView: View {
         bundleURL: "/System/Library/ExtensionKit/Extensions/Storage.appex",
         stringsFile: "InfoPlist"
     )
+    let accountTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/AppleIDSettings.appex"
+    )
     let coverageTable = LocalizationManager(
         bundleURL: "/System/Library/ExtensionKit/Extensions/CoverageSettings.appex"
     )
@@ -143,14 +146,14 @@ struct GeneralView: View {
                             Button {
                                 coverageSignInAlert.toggle()
                             } label: {
-                                Text("Cancel")
+                                Text("CANCEL".localized(using: accountTable))
                                     .frame(maxWidth: .infinity)
                             }
                             
                             Button {
                                 coverageSignInAlert.toggle()
                             } label: {
-                                Text("Sign in…")
+                                Text("SIGN_IN".localized(using: accountTable))
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(.borderedProminent)
