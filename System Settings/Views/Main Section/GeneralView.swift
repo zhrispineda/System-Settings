@@ -25,6 +25,9 @@ struct GeneralView: View {
         stringsFile: "InfoPlist"
     )
     let coverageTable = LocalizationManager(
+        bundleURL: "/System/Library/ExtensionKit/Extensions/CoverageSettings.appex"
+    )
+    let coverageTitleTable = LocalizationManager(
         bundleURL: "/System/Library/ExtensionKit/Extensions/CoverageSettings.appex",
         stringsFile: "InfoPlist"
     )
@@ -120,7 +123,7 @@ struct GeneralView: View {
                     coverageSignInAlert.toggle()
                 } label: {
                     SettingsCell(
-                        "CFBundleDisplayName".localized(using: coverageTable),
+                        "CFBundleDisplayName".localized(using: coverageTitleTable),
                         symbol: "com.apple.graphic-icon.applecare"
                     )
                     Image(systemName: "chevron.right")
@@ -132,9 +135,9 @@ struct GeneralView: View {
                 .sheet(isPresented: $coverageSignInAlert) {
                     VStack(spacing: 20) {
                         IconView(icon: "com.apple.graphic-icon.applecare", size: 64)
-                        Text("Sign In to View AppleCare  & Warranty")
+                        Text("APPLEID_SIGN_IN_TITLE".localized(using: coverageTable))
                             .bold()
-                        Text("Sign in with your Apple Account and then come back to view Coverage for your devices.")
+                        Text("APPLEID_SIGN_IN_SUBTITLE".localized(using: coverageTable))
                             .font(.caption)
                         HStack {
                             Button {
