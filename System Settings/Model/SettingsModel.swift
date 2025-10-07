@@ -5,6 +5,12 @@
 
 import SwiftUI
 
+enum Capabilities {
+    case hasBattery
+    case noBattery
+    case none
+}
+
 enum SettingsOptions: String {
     case signIn = "Sign in"
     
@@ -12,6 +18,7 @@ enum SettingsOptions: String {
     case bluetooth = "Bluetooth"
     case network = "Network"
     case battery = "Battery"
+    case energy = "Energy"
     
     case general = "General"
     case accessibility = "Accessibility"
@@ -48,11 +55,18 @@ struct SettingsItem: Identifiable, Hashable {
     let type: SettingsOptions
     var title: String { type.rawValue }
     let icon: String
+    let capability: Capabilities
     let destination: AnyView
 
-    init(type: SettingsOptions, icon: String = "questionmark.square.dashed", destination: AnyView) {
+    init(
+        type: SettingsOptions,
+        icon: String = "questionmark.square.dashed",
+        capability: Capabilities = .none,
+        destination: AnyView
+    ) {
         self.type = type
         self.icon = icon
+        self.capability = capability
         self.destination = destination
     }
 
@@ -75,7 +89,22 @@ let radioOptions: [SettingsItem] = [
     SettingsItem(type: .wifi, icon: "com.apple.graphic-icon.wifi", destination: AnyView(WiFiView())),
     SettingsItem(type: .bluetooth, icon: "com.apple.graphic-icon.bluetooth", destination: AnyView(BluetoothView())),
     SettingsItem(type: .network, icon: "com.apple.graphic-icon.local-network", destination: AnyView(NetworkView())),
-    SettingsItem(type: .battery, icon: "com.apple.graphic-icon.battery", destination: AnyView(BatteryView()))
+    SettingsItem(
+        type: .battery,
+        icon: "com.apple.graphic-icon.battery",
+        capability: .hasBattery,
+        destination: AnyView(
+            BatteryView()
+        )
+    ),
+    SettingsItem(
+        type: .energy,
+        icon: "com.apple.graphic-icon.energy",
+        capability: .noBattery,
+        destination: AnyView(
+            EmptyView()
+        )
+    )
 ]
 
 @MainActor
