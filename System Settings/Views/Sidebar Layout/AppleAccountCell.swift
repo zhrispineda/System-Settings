@@ -23,6 +23,7 @@ struct AppleAccountCell: View {
                     .fontWeight(.semibold)
                 /// en: with your Apple Account
                 Text("SPYGLASS_DESCRIPTION_SIGN_IN_REBRAND".localized(using: localization))
+                    .lineLimit(2)
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
