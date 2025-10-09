@@ -6,11 +6,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(SettingsViewModel.self) private var model
     @Environment(\.appearsActive) var appearsActive
     @FocusState private var isFocused: Bool
     @State private var path = NavigationPath()
     @State private var searchText = ""
-    @State private var selection: SettingsItem? = mainOptions.first
+    @State private var selection: SettingsItem? = nil
     /// Returns an extra width value based on preferred language.
     var extraWidth: CGFloat {
         switch Locale.preferredLanguages.first {
@@ -28,7 +29,7 @@ struct ContentView: View {
             List(selection: $selection) {
                 // MARK: Apple Account
                 Section {
-                    ForEach(accountOptions) { setting in
+                    ForEach(model.accountOptions) { setting in
                         NavigationLink(value: setting) {
                             AppleAccountCell()
                         }
@@ -36,28 +37,31 @@ struct ContentView: View {
                 }
                 
                 // MARK: Radio + Battery/Power
-                SettingsSection(path: $path, selection: $selection, options: radioOptions)
+                SettingsSection(path: $path, selection: $selection, options: model.radioOptions)
                 
                 // MARK: Main
-                SettingsSection(path: $path, selection: $selection, options: mainOptions)
+                SettingsSection(path: $path, selection: $selection, options: model.mainOptions)
                 
                 // MARK: Focus
-                SettingsSection(path: $path, selection: $selection, options: focusOptions)
+                SettingsSection(path: $path, selection: $selection, options: model.focusOptions)
                 
                 // MARK: Authentication
-                SettingsSection(path: $path, selection: $selection, options: authOptions)
+                SettingsSection(path: $path, selection: $selection, options: model.authOptions)
                 
                 // MARK: Services
-                SettingsSection(path: $path, selection: $selection, options: serviceOptions)
+                SettingsSection(path: $path, selection: $selection, options: model.serviceOptions)
                 
                 // MARK: Input
-                SettingsSection(path: $path, selection: $selection, options: inputOptions)
+                SettingsSection(path: $path, selection: $selection, options: model.inputOptions)
             }
             .searchable(text: $searchText, placement: .sidebar)
             .focused($isFocused)
             .opacity(appearsActive ? 1.0 : 0.5)
             .onAppear {
                 isFocused = true
+                if selection == nil {
+                    selection = model.mainOptions.first
+                }
             }
             .toolbar(removing: .sidebarToggle)
             .navigationSplitViewColumnWidth(215 + extraWidth)

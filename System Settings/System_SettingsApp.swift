@@ -7,6 +7,7 @@ import SwiftUI
 
 @main
 struct System_SettingsApp: App {
+    @State private var viewModel = SettingsViewModel()
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     init() {
@@ -26,6 +27,7 @@ struct System_SettingsApp: App {
         
         Window("System Settings", id: "System Settings") {
             ContentView()
+                .environment(viewModel)
                 .frame(width: 723)
                 .frame(minHeight: 415, idealHeight: 574)
         }
