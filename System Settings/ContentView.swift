@@ -75,5 +75,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(SettingsViewModel())
         .frame(width: 715, height: 700)
 }

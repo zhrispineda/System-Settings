@@ -51,7 +51,7 @@ enum SettingsOptions: String {
 }
 
 struct SettingsItem: Identifiable, Hashable {
-    var id = UUID()
+    var id: SettingsOptions { type }
     let type: SettingsOptions
     var title: String { type.rawValue }
     let icon: String
