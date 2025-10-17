@@ -116,7 +116,7 @@ struct BatteryView: View {
             return "battery.100percent.bolt"
         } else {
             switch getBatteryLevel() {
-            case 50..<100:
+            case 50..<95:
                 return "battery.75percent"
             case 30..<50:
                 return "battery.50percent"
