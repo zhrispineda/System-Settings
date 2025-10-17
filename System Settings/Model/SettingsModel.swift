@@ -79,8 +79,11 @@ struct SettingsItem: Identifiable, Hashable {
     }
 }
 
+@MainActor
 @Observable final class SettingsViewModel {
+    var path: [String] = []
     var selectedOption: SettingsItem? = nil
+    
     let accountOptions: [SettingsItem]
     let radioOptions: [SettingsItem]
     let mainOptions: [SettingsItem]
@@ -89,7 +92,6 @@ struct SettingsItem: Identifiable, Hashable {
     let serviceOptions: [SettingsItem]
     let inputOptions: [SettingsItem]
     
-    @MainActor
     init() {
         accountOptions = [
             SettingsItem(

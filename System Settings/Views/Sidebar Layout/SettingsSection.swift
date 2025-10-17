@@ -6,8 +6,7 @@
 import SwiftUI
 
 struct SettingsSection: View {
-    @Binding var path: NavigationPath
-    @Binding var selection: SettingsItem?
+    @Environment(SettingsViewModel.self) private var model
     let options: [SettingsItem]
     
     var body: some View {
@@ -15,9 +14,9 @@ struct SettingsSection: View {
             ForEach(options) { setting in
                 if verifyCapabilities(capability: setting.capability) {
                     NavigationLink(value: setting) {
-                        if selection == setting && !path.isEmpty {
+                        if model.selectedOption == setting && !model.path.isEmpty {
                             Button  {
-                                path = NavigationPath()
+                                model.path = []
                             } label: {
                                 HStack(spacing: 3) {
                                     IconView(icon: setting.icon, size: 24)
@@ -83,5 +82,6 @@ func hasBattery() -> Bool {
 
 #Preview {
     ContentView()
+        .environment(SettingsViewModel())
         .frame(height: 500)
 }
