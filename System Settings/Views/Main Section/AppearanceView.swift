@@ -67,9 +67,8 @@ struct AppearanceView: View {
                             switch color {
                             case "Accent Color":
                                 Image(.nsMulticolorHighlight)
-                                    .clipShape(Circle())
                             default:
-                                EmptyView()
+                                Image(systemName: "circle.fill")
                             }
                             Text(color)
                         }
@@ -272,7 +271,7 @@ enum FolderColor: String, CaseIterable, Identifiable {
         case .purple: return "Purple"
         case .pink: return "Pink"
         case .graphite: return "Graphite"
-        case .other: return "Other"
+        case .other: return "Choose Color…"
         }
     }
 
