@@ -96,9 +96,7 @@ struct SettingsItem: Identifiable, Hashable {
         accountOptions = [
             SettingsItem(
                 type: .signIn,
-                destination: AnyView(
-                    SignInView()
-                )
+                destination: AnyView(SignInView())
             )
         ]
 
@@ -106,39 +104,29 @@ struct SettingsItem: Identifiable, Hashable {
             SettingsItem(
                 type: .wifi,
                 icon: "com.apple.graphic-icon.wifi",
-                destination: AnyView(
-                    WiFiView()
-                )
+                destination: AnyView(WiFiView())
             ),
             SettingsItem(
                 type: .bluetooth,
                 icon: "com.apple.graphic-icon.bluetooth",
-                destination: AnyView(
-                    BluetoothView()
-                )
+                destination: AnyView(BluetoothView())
             ),
             SettingsItem(
                 type: .network,
                 icon: "com.apple.graphic-icon.local-network",
-                destination: AnyView(
-                    NetworkView()
-                )
+                destination: AnyView(NetworkView())
             ),
             SettingsItem(
                 type: .battery,
                 icon: "com.apple.graphic-icon.battery",
                 capability: .hasBattery,
-                destination: AnyView(
-                    BatteryView()
-                )
+                destination: AnyView(BatteryView())
             ),
             SettingsItem(
                 type: .energy,
                 icon: "com.apple.graphic-icon.energy",
                 capability: .noBattery,
-                destination: AnyView(
-                    EmptyView()
-                )
+                destination: AnyView(EmptyView())
             )
         ]
 
@@ -146,65 +134,47 @@ struct SettingsItem: Identifiable, Hashable {
             SettingsItem(
                 type: .general,
                 icon: "com.apple.graphic-icon.gear",
-                destination: AnyView(
-                    GeneralView()
-                )
+                destination: AnyView(GeneralView())
             ),
             SettingsItem(
                 type: .accessibility,
                 icon: "com.apple.graphic-icon.accessibility",
-                destination: AnyView(
-                    AccessibilityView()
-                )
+                destination: AnyView(AccessibilityView())
             ),
             SettingsItem(
                 type: .appearance,
                 icon: "com.apple.graphic-icon.dark-mode",
-                destination: AnyView(
-                    AppearanceView()
-                )
+                destination: AnyView(AppearanceView())
             ),
             SettingsItem(
                 type: .menuBar,
                 icon: "com.apple.controlcenter.settings",
-                destination: AnyView(
-                    MenuBarView()
-                )
+                destination: AnyView(MenuBarView())
             ),
             SettingsItem(
                 type: .siri,
                 icon: "com.apple.application-icon.apple-intelligence",
-                destination: AnyView(
-                    SiriView()
-                )
+                destination: AnyView(SiriView())
             ),
             SettingsItem(
                 type: .desktopDock,
                 icon: "com.apple.graphic-icon.desktop",
-                destination: AnyView(
-                    DesktopDockView()
-                )
+                destination: AnyView(DesktopDockView())
             ),
             SettingsItem(
                 type: .displays,
                 icon: "com.apple.graphic-icon.display",
-                destination: AnyView(
-                    DisplaysView()
-                )
+                destination: AnyView(DisplaysView())
             ),
             SettingsItem(
                 type: .spotlight,
                 icon: "com.apple.spotlight",
-                destination: AnyView(
-                    SpotlightView()
-                )
+                destination: AnyView(SpotlightView())
             ),
             SettingsItem(
                 type: .wallpaper,
                 icon: "com.apple.graphic-icon.wallpaper",
-                destination: AnyView(
-                    WallpaperView()
-                )
+                destination: AnyView(WallpaperView())
             )
         ]
 
@@ -212,30 +182,22 @@ struct SettingsItem: Identifiable, Hashable {
             SettingsItem(
                 type: .notifications,
                 icon: "com.apple.graphic-icon.notifications",
-                destination: AnyView(
-                    NotificationsView()
-                )
+                destination: AnyView(NotificationsView())
             ),
             SettingsItem(
                 type: .sound,
                 icon: "com.apple.graphic-icon.sound",
-                destination: AnyView(
-                    SoundView()
-                )
+                destination: AnyView(SoundView())
             ),
             SettingsItem(
                 type: .focus,
                 icon: "com.apple.graphic-icon.focus",
-                destination: AnyView(
-                    FocusView()
-                )
+                destination: AnyView(FocusView())
             ),
             SettingsItem(
                 type: .screenTime,
                 icon: "com.apple.graphic-icon.screen-time",
-                destination: AnyView(
-                    ScreenTimeView()
-                )
+                destination: AnyView(ScreenTimeView())
             )
         ]
 
@@ -243,30 +205,22 @@ struct SettingsItem: Identifiable, Hashable {
             SettingsItem(
                 type: .lockScreen,
                 icon: "com.apple.controlcenter.lockscreen",
-                destination: AnyView(
-                    LockScreenView()
-                )
+                destination: AnyView(LockScreenView())
             ),
             SettingsItem(
                 type: .privacySecurity,
                 icon: "com.apple.graphic-icon.privacy",
-                destination: AnyView(
-                    PrivacySecurityView()
-                )
+                destination: AnyView(PrivacySecurityView())
             ),
             SettingsItem(
                 type: .touchIDPassword,
                 icon: "com.apple.graphic-icon.touch-id",
-                destination: AnyView(
-                    PasswordView()
-                )
+                destination: AnyView(PasswordView())
             ),
             SettingsItem(
                 type: .usersGroups,
                 icon: "com.apple.graphic-icon.group",
-                destination: AnyView(
-                    UsersGroupsView()
-                )
+                destination: AnyView(UsersGroupsView())
             )
         ]
 
@@ -274,30 +228,22 @@ struct SettingsItem: Identifiable, Hashable {
             SettingsItem(
                 type: .internetAccounts,
                 icon: "com.apple.accounts.generic-account",
-                destination: AnyView(
-                    InternetAccountsView()
-                )
+                destination: AnyView(InternetAccountsView())
             ),
             SettingsItem(
                 type: .gameCenter,
                 icon: "com.apple.gamecenter.bubbles",
-                destination: AnyView(
-                    GameCenterView()
-                )
+                destination: AnyView(GameCenterView())
             ),
             SettingsItem(
                 type: .icloud,
                 icon: "com.apple.application-icon.icq.icloud",
-                destination: AnyView(
-                    SignInView()
-                )
+                destination: AnyView(SignInView())
             ),
             SettingsItem(
                 type: .walletApplePay,
                 icon: "/System/Library/ExtensionKit/Extensions/WalletSettingsExtension.appex",
-                destination: AnyView(
-                    WalletView()
-                )
+                destination: AnyView(WalletView())
             )
         ]
 
@@ -305,23 +251,17 @@ struct SettingsItem: Identifiable, Hashable {
             SettingsItem(
                 type: .keyboard,
                 icon: "com.apple.graphic-icon.keyboard",
-                destination: AnyView(
-                    KeyboardView()
-                )
+                destination: AnyView(KeyboardView())
             ),
             SettingsItem(
                 type: .trackpad,
                 icon: "/System/Library/ExtensionKit/Extensions/TrackpadExtension.appex",
-                destination: AnyView(
-                    TrackpadView()
-                )
+                destination: AnyView(TrackpadView())
             ),
             SettingsItem(
                 type: .printersScanners,
                 icon: "com.apple.graphic-icon.printer-sharing",
-                destination: AnyView(
-                    PrintersScannersView()
-                )
+                destination: AnyView(PrintersScannersView())
             )
         ]
     }
