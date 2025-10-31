@@ -34,7 +34,7 @@ struct SiriView: View {
                             .foregroundStyle(Color(NSColor.gridColor))
                     }
                     .frame(width: 25, height: 10)
-                    .offset(x: -195, y: 4)
+                    .offset(x: -197, y: 5)
                 }
                 Button("Turn on Apple Intelligence") {}.frame(maxWidth: .infinity, alignment: .trailing)
             }
