@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NotificationsView: View {
     @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/NotificationsSettings.appex")
-    @State private var showPreviews = ""
+    @State private var showPreviews = "When Unlocked"
     @State private var notifyWhenSleep = false
     @State private var notifyWhenLocked = true
     @State private var notifyWhenMirroring = "Notifications Off"
@@ -54,13 +54,13 @@ struct NotificationsView: View {
 
             Section {
                 NavigationLink(value: "FaceTime") {
-                    SettingsCell("FaceTime", subtitle: "Badges, Sounds, Banners", symbol: "/System/Applications/FaceTime.app", larger: true)
+                    SettingsCell("FaceTime", subtitle: "Badges, Sounds, Banners", symbol: "/System/Applications/FaceTime.app/Contents/PlugIns/RemotePeoplePicker.appex", larger: true)
                 }
                 NavigationLink(value: "Find My") {
-                    SettingsCell("Find My", subtitle: "Badges, Sounds", symbol: "/System/Applications/FindMy.app", larger: true)
+                    SettingsCell("Find My", subtitle: "Badges, Sounds", symbol: "/System/Applications/FindMy.app/Contents/PlugIns/FindMyNotificationsService.appex", larger: true)
                 }
                 NavigationLink(value: "Home") {
-                    SettingsCell("Home", subtitle: "Badges, Sounds, Time Sensitive", symbol: "/System/Applications/Home.app", larger: true)
+                    SettingsCell("Home", subtitle: "Badges, Sounds, Time Sensitive", symbol: "com.apple.Home", larger: true)
                 }
                 NavigationLink(value: "Kerberos") {
                     SettingsCell("Kerberos", subtitle: "Badges, Sounds, Alerts", symbol: "/System/Library/CoreServices/SecurityAgentPlugins/KerberosAgent.bundle", larger: true)
@@ -72,7 +72,7 @@ struct NotificationsView: View {
                     SettingsCell("Tips", subtitle: "Alerts", symbol: "/System/Applications/Tips.app", larger: true)
                 }
                 NavigationLink(value: "Wallet") {
-                    SettingsCell("Wallet", subtitle: "Badges, Sounds, Time Sensitive", symbol: "/System/Library/CoreServices/SecurityAgentPlugins/KerberosAgent.bundle", larger: true)
+                    SettingsCell("Wallet", subtitle: "Badges, Sounds, Time Sensitive", symbol: "com.apple.application-icon.pass-viewer.wallet", larger: true)
                 }
             } header: {
                 Text("Application Notifications".localized(using: table))

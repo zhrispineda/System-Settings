@@ -16,7 +16,16 @@ struct SettingsCell: View {
     let sidebar: Bool
     let larger: Bool
 
-    init(_ title: String, subtitle: String = "", color: Color = .gray, symbol: String, icon: String = "AppIcon", shadow: Bool = true, sidebar: Bool = false, larger: Bool = false) {
+    init(
+        _ title: String,
+        subtitle: String = "",
+        color: Color = .gray,
+        symbol: String,
+        icon: String = "AppIcon",
+        shadow: Bool = true,
+        sidebar: Bool = false,
+        larger: Bool = false
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.color = color
@@ -28,22 +37,16 @@ struct SettingsCell: View {
     }
     
     var body: some View {
-        HStack {
-            if color == .accentColor {
-                Image(symbol)
-                    .resizable()
-                    .frame(width: larger ? 30: 24, height: larger ? 30 : 24)
-                    .mask {
-                        RoundedRectangle(cornerRadius: 5.0)
-                            .foregroundStyle(color.gradient)
-                    }
-            } else if symbol.contains("com.") {
-                IconView(icon: symbol, size: larger ? 30 : 24)
-                    .padding(.leading, -2)
-            } else if symbol.contains("/") {
-                BundleIconView(bundlePath: symbol, icon: icon, size: larger ? 30 : 24)
-                    .padding(.leading, symbol.contains("Ker") ? 3 : 0)
+        HStack(spacing: 0) {
+            ZStack {
+                if symbol.contains("com.") {
+                    IconView(icon: symbol, size: larger ? 31 : 24)
+                        .padding(.leading, -2)
+                } else if symbol.contains("/") {
+                    BundleIconView(bundlePath: symbol, icon: icon, size: larger ? 31 : 24)
+                }
             }
+            .frame(width: subtitle.isEmpty ? 30 : 38, alignment: .leading)
 
             LabeledContent {} label: {
                 Text(title)
@@ -61,4 +64,5 @@ struct SettingsCell: View {
 
 #Preview {
     ContentView()
+        .environment(SettingsViewModel())
 }
