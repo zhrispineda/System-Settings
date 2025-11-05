@@ -47,9 +47,9 @@ struct AppearanceView: View {
 
                     Spacer()
 
-                    DisplayButton(option: "Clear", helpText: "TODO", imageName: "GlassClear", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
+                    DisplayButton(option: "Clear", helpText: "Clear is more transparent, revealing the content beneath.", imageName: "GlassClear", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
 
-                    DisplayButton(option: "Tinted", helpText: "TODO", imageName: "GlassTinted", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
+                    DisplayButton(option: "Tinted", helpText: "Tinted increases opacity and adds more contrast.", imageName: "GlassTinted", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
                 }
             }
 
