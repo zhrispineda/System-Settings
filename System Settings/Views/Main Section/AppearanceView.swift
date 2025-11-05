@@ -10,6 +10,7 @@ import SwiftUI
 struct AppearanceView: View {
     @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     @State private var selectedTheme = "Auto"
+    @State private var selectedGlass = "Clear"
     @State private var selectedAccent = "Multicolor"
     @State private var selectedAccentColor = Color.blue
     @State private var selectedHighlight = "Accent Color"
@@ -37,11 +38,24 @@ struct AppearanceView: View {
 
                     DisplayButton(option: "Dark", helpText: "Use a dark appearance for buttons, menus, and windows.", image: .appearanceDark, selected: $selectedTheme, color: $selectedAccentColor, table: $localization)
                 }
+                
+                HStack(alignment: .top) {
+                    LabeledContent {} label: {
+                        Text("Liquid Glass".localized(using: localization))
+                        Text("Choose your preferred look for Liquid Glass.".localized(using: localization))
+                    }
+
+                    Spacer()
+
+                    DisplayButton(option: "Clear", helpText: "TODO", imageName: "GlassClear", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
+
+                    DisplayButton(option: "Tinted", helpText: "TODO", imageName: "GlassTinted", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
+                }
             }
 
             Section("Theme".localized(using: localization)) {
                 HStack(alignment: .top, spacing: -3) {
-                    Text("Accent color".localized(using: localization))
+                    Text("Color".localized(using: localization))
                     Spacer()
                     AccentButton(label: "Multicolor", option: .clear, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
                     AccentButton(label: "Blue", option: .blue, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
@@ -214,26 +228,42 @@ struct AccentButton: View {
 struct DisplayButton: View {
     let option: String
     let helpText: String
-    let image: ImageResource
+    var image: ImageResource = ImageResource(name: "", bundle: Bundle())
+    var imageName: String = ""
     @Binding var selected: String
     @Binding var color: Color
     @Binding var table: LocalizationManager
 
     var body: some View {
         Button {
-            selected = option
+            withAnimation {
+                selected = option
+            }
         } label: {
             VStack {
                 ZStack {
-                    Image(image)
-                        .background {
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .stroke(selected == option ? color : .clear, lineWidth: 6)
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .stroke(selected == option ? .white : .clear, lineWidth: 1)
+                    if imageName.isEmpty {
+                        Image(image)
+                            .background {
+                                RoundedRectangle(cornerRadius: 5.0)
+                                    .stroke(selected == option ? color : .clear, lineWidth: 6)
+                                RoundedRectangle(cornerRadius: 5.0)
+                                    .stroke(selected == option ? .white : .clear, lineWidth: 1)
+                            }
+                        Image(option == "Auto" ? .selectionColorMaskAuto : .selectionColorMask)
+                            .foregroundStyle(color)
+                    } else {
+                        if let imageAsset = NSImage.asset(path: "/System/Library/ExtensionKit/Extensions/Appearance.appex", name: imageName) {
+                            Image(nsImage: imageAsset)
+                                .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                                .background {
+                                    RoundedRectangle(cornerRadius: 5.0)
+                                        .stroke(selected == option ? color : .clear, lineWidth: 6)
+                                    RoundedRectangle(cornerRadius: 5.0)
+                                        .stroke(selected == option ? .white : .clear, lineWidth: 1)
+                                }
                         }
-                    Image(option == "Auto" ? .selectionColorMaskAuto : .selectionColorMask)
-                        .foregroundStyle(color)
+                    }
                 }
                 Text(option.localized(using: table))
                     .font(.callout)
