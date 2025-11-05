@@ -18,9 +18,9 @@ struct System_SettingsApp: App {
     var body: some Scene {
         let infoTable = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/AboutExtension.appex", stringsFile: "SupportLinks")
         let macInfo = MacInfo()
-        let deviceCode = MGHelper.read(key: "oYicEKzVTz4/CxxE05pEgQ")?.dropLast(3)
+        let deviceCode = "\(macInfo.model().name) (\(macInfo.model().year))"
         let locale = Locale.current
-        let spCode = macInfo.helpPage(deviceCode: String(deviceCode ?? ""))
+        let spCode = macInfo.helpPage(deviceCode: deviceCode)
         let languageCode = locale.language.languageCode?.identifier ?? "en"
         let regionCode = locale.region?.identifier ?? "US"
         let formattedLocale = "\(languageCode)-\(regionCode)_\(regionCode)"

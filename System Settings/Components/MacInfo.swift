@@ -38,7 +38,7 @@ class MacInfo {
     /// - Parameter deviceCode: The `String` device identifier
     /// - Returns: `String` SPConfigCode for use with support-sp.apple.com
     func helpPage(deviceCode: String) -> String {
-        let path = "/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/SPConfigCodes-\(deviceCode).plist"
+        let path = "/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/SPConfigCodes.plist"
         let url = URL(fileURLWithPath: path)
         
         guard let data = try? Data(contentsOf: url),
@@ -48,8 +48,8 @@ class MacInfo {
             return ""
         }
         
-        if let firstValue = dict.values.first as? String {
-            return firstValue
+        if let value = dict[deviceCode] as? String {
+            return value
         }
         
         return ""
