@@ -17,10 +17,9 @@ struct System_SettingsApp: App {
     
     var body: some Scene {
         let infoTable = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/AboutExtension.appex", stringsFile: "SupportLinks")
-        let macInfo = MacInfo()
-        let deviceCode = "\(macInfo.model().name) (\(macInfo.model().year))"
+        let deviceCode = "\(MacInfo.shared.model().name) (\(MacInfo.shared.model().year))"
         let locale = Locale.current
-        let spCode = macInfo.helpPage(deviceCode: deviceCode)
+        let spCode = MacInfo.shared.helpPage(deviceCode: deviceCode)
         let languageCode = locale.language.languageCode?.identifier ?? "en"
         let regionCode = locale.region?.identifier ?? "US"
         let formattedLocale = "\(languageCode)-\(regionCode)_\(regionCode)"
@@ -54,7 +53,7 @@ struct System_SettingsApp: App {
                 
                 Divider()
                 
-                Button("\(macInfo.model().name) Specifications") {
+                Button("\(MacInfo.shared.model().name) Specifications") {
                     let key = "URL_MAC_SPECS".localizedFormatted(using: infoTable, spCode, formattedLocale)
                     if let url = URL(string: key) {
                         NSWorkspace.shared.open(url)

@@ -8,7 +8,9 @@ import AppKit
 import os
 
 ///  A utility type that contains hardware information and device-related files based on Mac identifiers.
-class MacInfo {
+@MainActor
+final class MacInfo {
+    static let shared = MacInfo()
     private let infoTable = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/AboutExtension.appex", stringsFile: "SupportLinks")
     let fileManager = FileManager.default
     let resourceKeys: [URLResourceKey] = [.volumeNameKey]

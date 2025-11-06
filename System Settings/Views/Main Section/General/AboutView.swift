@@ -11,7 +11,6 @@ struct AboutView: View {
     @State private var showingBuild = false
     let icon = NSWorkspace.shared.icon(forFile: "/System/Applications/Weather.app")
     let appearancePath = "/System/Library/PrivateFrameworks/SystemDesktopAppearance.framework"
-    let macInfo = MacInfo()
     let buildNumber: String = {
         if let dict = NSDictionary(contentsOfFile: "/System/Library/CoreServices/SystemVersion.plist"),
            let build = dict["ProductBuildVersion"] as? String {
@@ -26,7 +25,7 @@ struct AboutView: View {
                 HStack {
                     Text("Name")
                     Spacer()
-                    Text(Host.current().localizedName ?? macInfo.model().name)
+                    Text(Host.current().localizedName ?? MacInfo.shared.model().name)
                 }
                 LabeledContent("Chip", value: MGHelper.read(key: "Z06ZMtQY6G3kKrC7fs/gOA") ?? "Unknown")
                 LabeledContent("Memory", value: "\(MacInfo.memory) GB")
@@ -35,16 +34,16 @@ struct AboutView: View {
                 HStack {
                     Spacer()
                     VStack(spacing: 0) {
-                        if let deviceImage = macInfo.color() {
+                        if let deviceImage = MacInfo.shared.color() {
                             Image(nsImage: deviceImage)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 140)
                         }
-                        Text(macInfo.model().name)
+                        Text(MacInfo.shared.model().name)
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        Text(macInfo.model().year)
+                        Text(MacInfo.shared.model().year)
                             .font(.subheadline)
                             .fontWeight(.regular)
                             .foregroundStyle(.tertiary)
@@ -62,9 +61,9 @@ struct AboutView: View {
                             .scaledToFit()
                             .frame(width: 30)
                     }
-                    Text("macOS \(macInfo.system().name)")
+                    Text("macOS \(MacInfo.shared.system().name)")
                     Spacer()
-                    Text("Version \(macInfo.system().version)\(showingBuild ? " (\(buildNumber))" : "")")
+                    Text("Version \(MacInfo.shared.system().version)\(showingBuild ? " (\(buildNumber))" : "")")
                         .foregroundStyle(.secondary)
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -74,7 +73,7 @@ struct AboutView: View {
             }
             
             Section("Displays") {
-                if let deviceImage = macInfo.color() {
+                if let deviceImage = MacInfo.shared.color() {
                     Image(nsImage: deviceImage)
                         .resizable()
                         .scaledToFit()
@@ -86,7 +85,7 @@ struct AboutView: View {
             Section("Storage") {
                 HStack {
                     IconView(icon: "com.apple.storage-internal", size: 32)
-                    Text("\(macInfo.drives().name)")
+                    Text("\(MacInfo.shared.drives().name)")
                 }
                 Button("Storage Settings…") {}.frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -102,26 +101,26 @@ struct AboutView: View {
                 VStack {
                     HStack {
                         Button("Software License Agreement") {
-                            macInfo.softwareLicenseFile()
+                            MacInfo.shared.softwareLicenseFile()
                         }
                         .buttonStyle(.plain)
                         .underline()
                         Text("-")
                         Button("Regulatory Certification") {
-                            macInfo.regulatoryFile()
+                            MacInfo.shared.regulatoryFile()
                         }
                         .buttonStyle(.plain)
                         .underline()
                     }
                     HStack {
                         Button("ENERGY STAR® Compliance") {
-                            macInfo.energyStarFile()
+                            MacInfo.shared.energyStarFile()
                         }
                         .buttonStyle(.plain)
                         .underline()
                         Text("-")
                         Button("License Agreement") {
-                            macInfo.openDocumentation()
+                            MacInfo.shared.openDocumentation()
                         }
                         .buttonStyle(.plain)
                         .underline()
