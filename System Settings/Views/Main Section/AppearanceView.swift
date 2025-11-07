@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AppearanceView: View {
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     @State private var selectedTheme = "Auto"
     @State private var selectedGlass = "Clear"
@@ -48,14 +49,30 @@ struct AppearanceView: View {
                 HStack(alignment: .top) {
                     LabeledContent {} label: {
                         Text("Liquid Glass".localized(using: localization))
-                        Text("Choose your preferred look for Liquid Glass.".localized(using: localization))
+                        Text(.init("\(reduceTransparency ? "Turn off Reduce Transparency and Increase Contrast to set a look for Liquid Glass. [Accessibility settings…](x-apple.systempreferences:com.apple.Accessibility-Settings.extension?Seeing_Display)" : "Choose your preferred look for Liquid Glass.")".localized(using: localization)))
                     }
 
                     Spacer()
 
-                    DisplayButton(option: "Clear", helpText: "Clear is more transparent, revealing the content beneath.", imageName: "GlassClear", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
-
-                    DisplayButton(option: "Tinted", helpText: "Tinted increases opacity and adds more contrast.", imageName: "GlassTinted", selected: $selectedGlass, color: $selectedAccentColor, table: $localization)
+                    Group {
+                        DisplayButton(
+                            option: "Clear",
+                            helpText: "Clear is more transparent, revealing the content beneath.",
+                            imageName: "GlassClear",
+                            selected: $selectedGlass,
+                            color: $selectedAccentColor,
+                            table: $localization
+                        )
+                        DisplayButton(
+                            option: "Tinted",
+                            helpText: "Tinted increases opacity and adds more contrast.",
+                            imageName: "GlassTinted",
+                            selected: $selectedGlass,
+                            color: $selectedAccentColor,
+                            table: $localization
+                        )
+                    }
+                    .disabled(reduceTransparency)
                 }
             }
 
