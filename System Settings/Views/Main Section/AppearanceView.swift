@@ -95,7 +95,26 @@ struct AppearanceView: View {
                 HStack {
                     Text("Icon & widget style".localized(using: localization))
                     Spacer()
-                    BundleIconView(bundlePath: "/System/Applications/Weather.app", size: 36)
+                    IconServicesPreview(
+                        bundleID: "com.apple.weather",
+                        appearance: .light,
+                        variant: .none
+                    )
+                    IconServicesPreview(
+                        bundleID: "com.apple.weather",
+                        appearance: .dark,
+                        variant: .none
+                    )
+                    IconServicesPreview(
+                        bundleID: "com.apple.weather",
+                        appearance: .light,
+                        variant: .clear
+                    )
+                    IconServicesPreview(
+                        bundleID: "com.apple.weather",
+                        appearance: .light,
+                        variant: .tinted
+                    )
                 }
                 Picker("Folder color".localized(using: localization), selection: $selectedFolderColor) {
                     ForEach(FolderColor.allCases) { option in
@@ -321,9 +340,43 @@ enum FolderColor: String, CaseIterable, Identifiable {
     }
 }
 
+struct IconServicesPreview: View {
+    @State private var icon: NSImage?
+    let bundleID: String
+    let appearance: IconAppearance
+    let variant: IconVariant
+    let size: CGFloat = 37
+    
+    var body: some View {
+        ZStack {
+            if let image = icon {
+                Image(nsImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: size, height: size)
+            }
+        }
+        .onAppear {
+            loadIcon()
+        }
+    }
+    
+    private func loadIcon() {
+        let iconData = IconServicesHelper.shared.getAppIcon(
+            bundleID: bundleID,
+            appearance: appearance,
+            variant: variant,
+            size: size
+        )
+        
+        self.icon = iconData
+    }
+}
+
 #Preview {
     NavigationStack {
         AppearanceView()
     }
+    .frame(height: 500)
 }
 
