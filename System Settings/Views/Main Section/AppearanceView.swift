@@ -14,15 +14,19 @@ struct AppearanceView: View {
     @State private var selectedGlass = "Clear"
     @State private var selectedAccent = "Multicolor"
     @State private var selectedAccentColor = Color.blue
-    @State private var selectedHighlight = "Accent Color"
+    @State private var selectedHighlight = "Automatic"
     @State private var selectedIconStyle = "Default"
+    @State private var selectedIconStyleDarkTime = "Always"
+    @State private var selectedIconStyleTime = "Dark"
     @State private var selectedFolderColor = FolderColor.automatic
     @State private var selectedSidebar = "Medium"
     @State private var selectedScroll = 1
     @State private var selectedClick = "Jump to the next page"
     @State private var wallpaperTinting = true
     @State private var accentHover = true
-    let highlightOptions = ["Accent Color", "Blue", "Purple", "Pink", "Red", "Orange", "Yellow", "Green", "Graphite", "Other"]
+    let highlightOptions = ["Automatic", "Blue", "Purple", "Pink", "Red", "Orange", "Yellow", "Green", "Graphite", "Choose Color…"]
+    let iconStyleDarkTimeOptions = ["Always", "Auto"]
+    let iconStyleTimeOptions = ["Light", "Dark", "Auto"]
     let sidebarOptions = ["Small", "Medium", "Large"]
     let clickOptions = ["Jump to the next page", "Jump to the spot that’s clicked"]
 
@@ -71,7 +75,7 @@ struct AppearanceView: View {
                 }
                 .onChange(of: selectedAccent) {
                     if selectedAccent == "Multicolor" {
-                        selectedHighlight = "Accent Color"
+                        selectedHighlight = "Automatic"
                     } else {
                         selectedHighlight = selectedAccent
                     }
@@ -94,40 +98,58 @@ struct AppearanceView: View {
             }
 
             Section {
-                HStack(alignment: .top) {
-                    Text("Icon & widget style".localized(using: localization))
-                    Spacer()
-                    IconStyleButton(
-                        selectedIconStyle: $selectedIconStyle,
-                        bundleID: "com.apple.weather",
-                        appearance: .light,
-                        variant: .none,
-                        value: "Default"
-                    )
-                    IconStyleButton(
-                        selectedIconStyle: $selectedIconStyle,
-                        bundleID: "com.apple.weather",
-                        appearance: .dark,
-                        variant: .none,
-                        value: "Dark"
-                    )
-                    IconStyleButton(
-                        selectedIconStyle: $selectedIconStyle,
-                        bundleID: "com.apple.weather",
-                        appearance: colorScheme == .light ? .light : .dark,
-                        variant: .clear,
-                        value: "Clear"
-                    )
-                    IconStyleButton(
-                        selectedIconStyle: $selectedIconStyle,
-                        bundleID: "com.apple.weather",
-                        appearance: colorScheme == .light ? .light : .dark,
-                        variant: .tinted,
-                        value: "Tinted"
-                    )
+                VStack(spacing: 20) {
+                    HStack(alignment: .top) {
+                        Text("Icon & widget style".localized(using: localization))
+                        Spacer()
+                        IconStyleButton(
+                            selectedIconStyle: $selectedIconStyle,
+                            bundleID: "com.apple.weather",
+                            appearance: .light,
+                            variant: .none,
+                            value: "Default"
+                        )
+                        IconStyleButton(
+                            selectedIconStyle: $selectedIconStyle,
+                            bundleID: "com.apple.weather",
+                            appearance: .dark,
+                            variant: .none,
+                            value: "Dark"
+                        )
+                        IconStyleButton(
+                            selectedIconStyle: $selectedIconStyle,
+                            bundleID: "com.apple.weather",
+                            appearance: colorScheme == .light ? .light : .dark,
+                            variant: .clear,
+                            value: "Clear"
+                        )
+                        IconStyleButton(
+                            selectedIconStyle: $selectedIconStyle,
+                            bundleID: "com.apple.weather",
+                            appearance: colorScheme == .light ? .light : .dark,
+                            variant: .tinted,
+                            value: "Tinted"
+                        )
+                    }
+                    
+                    if selectedIconStyle == "Dark" {
+                        Picker("", selection: $selectedIconStyleDarkTime) {
+                            ForEach(iconStyleDarkTimeOptions, id: \.self) { option in
+                                Text(option)
+                            }
+                        }
+                        .pickerStyle(.radioGroup)
+                    } else if selectedIconStyle == "Clear" || selectedIconStyle == "Tinted" {
+                        Picker("", selection: $selectedIconStyleTime) {
+                            ForEach(iconStyleTimeOptions, id: \.self) { option in
+                                Text(option)
+                            }
+                        }
+                        .pickerStyle(.radioGroup)
+                    }
                 }
                 
-                Picker("Folder color".localized(using: localization), selection: $selectedFolderColor) {
+                Picker("\(selectedIconStyle == "Tinted" ? "Icon, widget & folder color" : "Folder color")".localized(using: localization), selection: $selectedFolderColor) {
                     ForEach(FolderColor.allCases) { option in
                         if FolderColor.automatic == option || FolderColor.graphite == option {
                             HStack {
@@ -158,7 +180,7 @@ struct AppearanceView: View {
                     }
                 }
 
-                Toggle("Allow wallpaper tinting in windows".localized(using: localization), isOn: $wallpaperTinting)
+                Toggle("Tint window background with wallpaper color".localized(using: localization), isOn: $wallpaperTinting)
             }
 
             Section {
@@ -219,10 +241,6 @@ struct AccentButton: View {
                                 Circle()
                                     .stroke(selected == label ? .blue : .clear, lineWidth: 3)
                                     .padding(-2)
-                                // Inner white ring
-                                Circle()
-                                    .stroke(selected == label ? .white : .clear, lineWidth: 1)
-                                    .padding(-0.5)
                             }
                     }
                     .frame(width: 38, height: 24)
@@ -312,6 +330,7 @@ struct IconStyleButton: View {
     let appearance: IconAppearance
     let variant: IconVariant
     let value: String
+    private let localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     
     var body: some View {
         Button {
@@ -330,14 +349,14 @@ struct IconStyleButton: View {
                             .scaleEffect(0.95)
                     }
                 }
-                Text(value)
+                Text(value.localized(using: localization))
                     .font(.subheadline)
                     .foregroundStyle(selectedIconStyle == value ? .primary : .secondary)
                     .fontWeight(selectedIconStyle == value ? .bold : .regular)
             }
         }
         .buttonStyle(.plain)
-        .frame(width: 44)
+        .frame(minWidth: 44)
     }
 }
 
