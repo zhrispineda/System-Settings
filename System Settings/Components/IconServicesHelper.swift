@@ -43,7 +43,8 @@ final class IconServicesHelper {
     private func createDescriptor(
         appearance: IconAppearance,
         variant: IconVariant,
-        size: CGFloat
+        size: CGFloat,
+        color: NSColor
     ) -> NSObject? {
         guard let descriptorClass = NSClassFromString("ISImageDescriptor") else {
             return nil
@@ -62,9 +63,8 @@ final class IconServicesHelper {
         desc.setValue(NSNumber(value: appearance.rawValue), forKey: "appearance")
         desc.setValue(NSNumber(value: variant.rawValue), forKey: "appearanceVariant")
         
-        let accentColor = NSColor.controlAccentColor
         if let ifColorClass = NSClassFromString("IFColor") {
-            if let concreteColor = accentColor.usingColorSpace(.sRGB) ?? accentColor.usingColorSpace(.deviceRGB) {
+            if let concreteColor = color.usingColorSpace(.sRGB) ?? color.usingColorSpace(.deviceRGB) {
                 if let allocated = (ifColorClass as AnyObject).perform(NSSelectorFromString("alloc")) {
                     if let initialized = (allocated.takeUnretainedValue() as AnyObject).perform(NSSelectorFromString("initWithCGColor:"), with: concreteColor.cgColor) {
                         desc.setValue(initialized.takeRetainedValue(), forKey: "tintColor")
@@ -80,7 +80,8 @@ final class IconServicesHelper {
         bundleID: String,
         appearance: IconAppearance,
         variant: IconVariant,
-        size: CGFloat
+        size: CGFloat,
+        color: NSColor = .controlAccentColor
     ) -> NSImage? {
         guard let iconObj = self.createIconFactory(bundleID: bundleID) else {
             return nil
@@ -89,7 +90,8 @@ final class IconServicesHelper {
         guard let descriptor = self.createDescriptor(
             appearance: appearance,
             variant: variant,
-            size: size
+            size: size,
+            color: color
         ) else {
             return nil
         }

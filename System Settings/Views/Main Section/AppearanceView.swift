@@ -73,22 +73,16 @@ struct AppearanceView: View {
                     AccentButton(label: "Green", option: .green, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
                     AccentButton(label: "Graphite", option: .gray, selected: $selectedAccent, accent: $selectedAccentColor, accentHover: $accentHover)
                 }
-                .onChange(of: selectedAccent) {
-                    if selectedAccent == "Multicolor" {
-                        selectedHighlight = "Automatic"
-                    } else {
-                        selectedHighlight = selectedAccent
-                    }
-                }
 
                 Picker("Text highlight color".localized(using: localization), selection: $selectedHighlight) {
                     ForEach(highlightOptions, id: \.self) { color in
                         HStack {
                             switch color {
-                            case "Accent Color":
-                                Image(.nsMulticolorHighlight)
+                            case "Automatic":
+                                Image("NSMulticolorHighlight")
                             default:
                                 Image(systemName: "circle.fill")
+                                    .tint(.blue)
                             }
                             Text(color)
                         }
@@ -128,7 +122,8 @@ struct AppearanceView: View {
                             bundleID: "com.apple.weather",
                             appearance: colorScheme == .light ? .light : .dark,
                             variant: .tinted,
-                            value: "Tinted"
+                            value: "Tinted",
+                            color: NSColor(selectedAccentColor)
                         )
                     }
                     
@@ -154,7 +149,7 @@ struct AppearanceView: View {
                         if FolderColor.automatic == option || FolderColor.graphite == option {
                             HStack {
                                 Image(systemName: "circle.fill")
-                                    .tint(option.color)
+                                    .tint(option == .automatic ? selectedAccentColor : option.color)
                                 Text(option.label)
                             }
                             .tag(option)
@@ -293,10 +288,9 @@ struct DisplayButton: View {
                     if imageName.isEmpty {
                         Image(image)
                             .background {
-                                RoundedRectangle(cornerRadius: 5.0)
-                                    .stroke(selected == option ? color : .clear, lineWidth: 6)
-                                RoundedRectangle(cornerRadius: 5.0)
-                                    .stroke(selected == option ? .white : .clear, lineWidth: 1)
+                                RoundedRectangle(cornerRadius: 7.0)
+                                    .stroke(selected == option ? color : .clear, lineWidth: 3)
+                                    .padding(-2)
                             }
                         Image(option == "Auto" ? .selectionColorMaskAuto : .selectionColorMask)
                             .foregroundStyle(color)
@@ -305,14 +299,15 @@ struct DisplayButton: View {
                             Image(nsImage: imageAsset)
                                 .clipShape(RoundedRectangle(cornerRadius: 5.0))
                                 .background {
-                                    RoundedRectangle(cornerRadius: 5.0)
-                                        .stroke(selected == option ? color : .clear, lineWidth: 6)
-                                    RoundedRectangle(cornerRadius: 5.0)
-                                        .stroke(selected == option ? .white : .clear, lineWidth: 1)
+                                    RoundedRectangle(cornerRadius: 7.0)
+                                        .stroke(selected == option ? color : .clear, lineWidth: 3)
+                                        .padding(-2)
                                 }
                         }
                     }
                 }
+                .shadow(radius: 1)
+                
                 Text(option.localized(using: table))
                     .font(.callout)
                     .fontWeight(selected == option ? .semibold : .regular)
@@ -330,6 +325,7 @@ struct IconStyleButton: View {
     let appearance: IconAppearance
     let variant: IconVariant
     let value: String
+    var color: NSColor = .controlAccentColor
     private let localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     
     var body: some View {
@@ -340,13 +336,14 @@ struct IconStyleButton: View {
                 IconServicesPreview(
                     bundleID: self.bundleID,
                     appearance: self.appearance,
-                    variant: self.variant
+                    variant: self.variant,
+                    color: self.color
                 )
                 .background {
                     if selectedIconStyle == value {
                         RoundedRectangle(cornerRadius: 10.0)
                             .stroke(.blue, lineWidth: 3)
-                            .scaleEffect(0.95)
+                            .padding(1)
                     }
                 }
                 Text(value.localized(using: localization))
@@ -411,6 +408,7 @@ struct IconServicesPreview: View {
     let appearance: IconAppearance
     let variant: IconVariant
     let size: CGFloat = 37
+    var color: NSColor = .controlAccentColor
     
     var body: some View {
         ZStack {
@@ -424,6 +422,9 @@ struct IconServicesPreview: View {
         .onAppear {
             loadIcon()
         }
+        .onChange(of: color) {
+            loadIcon()
+        }
     }
     
     private func loadIcon() {
@@ -431,7 +432,8 @@ struct IconServicesPreview: View {
             bundleID: bundleID,
             appearance: appearance,
             variant: variant,
-            size: size
+            size: size,
+            color: color
         )
         
         self.icon = iconData
