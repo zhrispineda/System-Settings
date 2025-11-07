@@ -53,12 +53,7 @@ final class IconServicesHelper {
             return nil
         }
         
-        let initSel = NSSelectorFromString("initWithSize:scale:")
-        guard let initialized = (allocated.takeUnretainedValue() as AnyObject).perform(initSel, with: NSValue(size: CGSize(width: 128, height: 128)), with: NSNumber(value: 1.0)) else {
-            return nil
-        }
-        
-        guard let desc = initialized.takeRetainedValue() as? NSObject else {
+        guard let desc = allocated.takeRetainedValue() as? NSObject else {
             return nil
         }
         
@@ -70,10 +65,8 @@ final class IconServicesHelper {
         let accentColor = NSColor.controlAccentColor
         if let ifColorClass = NSClassFromString("IFColor") {
             if let concreteColor = accentColor.usingColorSpace(.sRGB) ?? accentColor.usingColorSpace(.deviceRGB) {
-                let cgColor = concreteColor.cgColor
-                let allocSel = NSSelectorFromString("alloc")
-                if let allocated = (ifColorClass as AnyObject).perform(allocSel) {
-                    if let initialized = (allocated.takeUnretainedValue() as AnyObject).perform(NSSelectorFromString("initWithCGColor:"), with: cgColor) {
+                if let allocated = (ifColorClass as AnyObject).perform(NSSelectorFromString("alloc")) {
+                    if let initialized = (allocated.takeUnretainedValue() as AnyObject).perform(NSSelectorFromString("initWithCGColor:"), with: concreteColor.cgColor) {
                         desc.setValue(initialized.takeRetainedValue(), forKey: "tintColor")
                     }
                 }
@@ -103,16 +96,13 @@ final class IconServicesHelper {
         
         let prepareImageSel = NSSelectorFromString("prepareImageForDescriptor:")
         if iconObj.responds(to: prepareImageSel) {
-            _ = iconObj.perform(prepareImageSel, with: descriptor)
+            iconObj.perform(prepareImageSel, with: descriptor)
         }
         
         let cgImageDescriptorSel = NSSelectorFromString("CGImageForDescriptor:")
         if iconObj.responds(to: cgImageDescriptorSel) {
             if let imgResult = iconObj.perform(cgImageDescriptorSel, with: descriptor) {
-                let cgImage = imgResult.takeUnretainedValue() as! CGImage
-                print("Got CGImage for \(bundleID) with size: \(cgImage.width)x\(cgImage.height)")
-                let nsImage = NSImage(cgImage: cgImage, size: NSZeroSize)
-                return nsImage
+                return NSImage(cgImage: imgResult.takeUnretainedValue() as! CGImage, size: NSZeroSize)
             }
         }
         
