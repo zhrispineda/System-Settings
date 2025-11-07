@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct AppearanceView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     @State private var selectedTheme = "Auto"
     @State private var selectedGlass = "Clear"
     @State private var selectedAccent = "Multicolor"
     @State private var selectedAccentColor = Color.blue
     @State private var selectedHighlight = "Accent Color"
+    @State private var selectedIconStyle = "Default"
     @State private var selectedFolderColor = FolderColor.automatic
     @State private var selectedSidebar = "Medium"
     @State private var selectedScroll = 1
@@ -92,30 +94,39 @@ struct AppearanceView: View {
             }
 
             Section {
-                HStack {
+                HStack(alignment: .top) {
                     Text("Icon & widget style".localized(using: localization))
                     Spacer()
-                    IconServicesPreview(
+                    IconStyleButton(
+                        selectedIconStyle: $selectedIconStyle,
                         bundleID: "com.apple.weather",
                         appearance: .light,
-                        variant: .none
+                        variant: .none,
+                        value: "Default"
                     )
-                    IconServicesPreview(
+                    IconStyleButton(
+                        selectedIconStyle: $selectedIconStyle,
                         bundleID: "com.apple.weather",
                         appearance: .dark,
-                        variant: .none
+                        variant: .none,
+                        value: "Dark"
                     )
-                    IconServicesPreview(
+                    IconStyleButton(
+                        selectedIconStyle: $selectedIconStyle,
                         bundleID: "com.apple.weather",
-                        appearance: .light,
-                        variant: .clear
+                        appearance: colorScheme == .light ? .light : .dark,
+                        variant: .clear,
+                        value: "Clear"
                     )
-                    IconServicesPreview(
+                    IconStyleButton(
+                        selectedIconStyle: $selectedIconStyle,
                         bundleID: "com.apple.weather",
-                        appearance: .light,
-                        variant: .tinted
+                        appearance: colorScheme == .light ? .light : .dark,
+                        variant: .tinted,
+                        value: "Tinted"
                     )
                 }
+                
                 Picker("Folder color".localized(using: localization), selection: $selectedFolderColor) {
                     ForEach(FolderColor.allCases) { option in
                         if FolderColor.automatic == option || FolderColor.graphite == option {
@@ -292,6 +303,41 @@ struct DisplayButton: View {
             .help(helpText.localized(using: table))
         }
         .buttonStyle(.plain)
+    }
+}
+
+struct IconStyleButton: View {
+    @Binding var selectedIconStyle: String
+    let bundleID: String
+    let appearance: IconAppearance
+    let variant: IconVariant
+    let value: String
+    
+    var body: some View {
+        Button {
+            selectedIconStyle = value
+        } label: {
+            VStack {
+                IconServicesPreview(
+                    bundleID: self.bundleID,
+                    appearance: self.appearance,
+                    variant: self.variant
+                )
+                .background {
+                    if selectedIconStyle == value {
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .stroke(.blue, lineWidth: 3)
+                            .scaleEffect(0.95)
+                    }
+                }
+                Text(value)
+                    .font(.subheadline)
+                    .foregroundStyle(selectedIconStyle == value ? .primary : .secondary)
+                    .fontWeight(selectedIconStyle == value ? .bold : .regular)
+            }
+        }
+        .buttonStyle(.plain)
+        .frame(width: 44)
     }
 }
 
