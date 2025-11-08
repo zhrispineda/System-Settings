@@ -10,7 +10,6 @@ import SwiftUI
 struct AppearanceView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-    @State private var localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     @State private var selectedTheme = "Auto"
     @State private var selectedGlass = "Clear"
     @State private var selectedAccent = "Multicolor"
@@ -25,6 +24,7 @@ struct AppearanceView: View {
     @State private var selectedClick = "Jump to the next page"
     @State private var wallpaperTinting = true
     @State private var accentHover = true
+    private let localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
     let highlightOptions = ["Automatic", "Blue", "Purple", "Pink", "Red", "Orange", "Yellow", "Green", "Graphite", "Choose Color…"]
     let iconStyleDarkTimeOptions = ["Always", "Auto"]
     let iconStyleTimeOptions = ["Light", "Dark", "Auto"]
@@ -39,11 +39,29 @@ struct AppearanceView: View {
 
                     Spacer()
 
-                    DisplayButton(option: "Auto", helpText: "Automatically adjusts the appearance of buttons, menus and windows throughout the day.", image: .appearanceAuto, selected: $selectedTheme, color: $selectedAccentColor, table: $localization)
-
-                    DisplayButton(option: "Light", helpText: "Use a light appearance for buttons, menus, and windows.", image: .appearanceLight, selected: $selectedTheme, color: $selectedAccentColor, table: $localization)
-
-                    DisplayButton(option: "Dark", helpText: "Use a dark appearance for buttons, menus, and windows.", image: .appearanceDark, selected: $selectedTheme, color: $selectedAccentColor, table: $localization)
+                    DisplayButton(
+                        option: "Auto",
+                        helpText: "Automatically adjusts the appearance of buttons, menus and windows throughout the day.",
+                        image: .appearanceAuto,
+                        selected: $selectedTheme,
+                        color: $selectedAccentColor
+                    )
+                    
+                    DisplayButton(
+                        option: "Light",
+                        helpText: "Use a light appearance for buttons, menus, and windows.",
+                        image: .appearanceLight,
+                        selected: $selectedTheme,
+                        color: $selectedAccentColor
+                    )
+                    
+                    DisplayButton(
+                        option: "Dark",
+                        helpText: "Use a dark appearance for buttons, menus, and windows.",
+                        image: .appearanceDark,
+                        selected: $selectedTheme,
+                        color: $selectedAccentColor
+                    )
                 }
                 
                 HStack(alignment: .top) {
@@ -60,16 +78,14 @@ struct AppearanceView: View {
                             helpText: "Clear is more transparent, revealing the content beneath.",
                             imageName: "GlassClear",
                             selected: $selectedGlass,
-                            color: $selectedAccentColor,
-                            table: $localization
+                            color: $selectedAccentColor
                         )
                         DisplayButton(
                             option: "Tinted",
                             helpText: "Tinted increases opacity and adds more contrast.",
                             imageName: "GlassTinted",
                             selected: $selectedGlass,
-                            color: $selectedAccentColor,
-                            table: $localization
+                            color: $selectedAccentColor
                         )
                     }
                     .disabled(reduceTransparency)
@@ -292,7 +308,7 @@ struct DisplayButton: View {
     var imageName: String = ""
     @Binding var selected: String
     @Binding var color: Color
-    @Binding var table: LocalizationManager
+    private let localization = LocalizationManager(bundleURL:  "/System/Library/ExtensionKit/Extensions/Appearance.appex")
 
     var body: some View {
         Button {
@@ -325,12 +341,12 @@ struct DisplayButton: View {
                 }
                 .shadow(radius: 1)
                 
-                Text(option.localized(using: table))
+                Text(option.localized(using: localization))
                     .font(.callout)
                     .fontWeight(selected == option ? .semibold : .regular)
                     .foregroundStyle(selected == option ? .primary : .secondary)
             }
-            .help(helpText.localized(using: table))
+            .help(helpText.localized(using: localization))
         }
         .buttonStyle(.plain)
     }
