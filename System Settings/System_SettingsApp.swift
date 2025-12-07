@@ -32,6 +32,14 @@ struct System_SettingsApp: App {
         }
         .windowResizability(.contentSize)
         .commands {
+            CommandGroup(before: .toolbar) {
+                Button("Back") {}.keyboardShortcut("[", modifiers: .command).disabled(true)
+                Button("Forward") {}.keyboardShortcut("]", modifiers: .command).disabled(true)
+                Button("Search") {}.keyboardShortcut("F", modifiers: .command)
+                
+                Divider()
+            }
+            
             CommandGroup(after: .help) {
                 Button("macOS Help") {
                     if let url = URL(string: "help:anchor=mh15217") {
@@ -59,6 +67,7 @@ struct System_SettingsApp: App {
                         NSWorkspace.shared.open(url)
                     }
                 }
+                
                 Button("Hardware Support") {
                     let key = "URL_MAC_SUPPORT".localizedFormatted(using: infoTable, spCode, formattedLocale)
                     if let url = URL(string: key) {
