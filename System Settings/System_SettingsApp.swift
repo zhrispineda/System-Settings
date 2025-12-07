@@ -35,7 +35,9 @@ struct System_SettingsApp: App {
             CommandGroup(before: .toolbar) {
                 Button("Back") {}.keyboardShortcut("[", modifiers: .command).disabled(true)
                 Button("Forward") {}.keyboardShortcut("]", modifiers: .command).disabled(true)
-                Button("Search") {}.keyboardShortcut("F", modifiers: .command)
+                Button("Search") {
+                    viewModel.searchFocused = true
+                }.keyboardShortcut("F", modifiers: .command)
                 
                 Divider()
             }

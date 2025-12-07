@@ -83,6 +83,7 @@ struct SettingsItem: Identifiable, Hashable {
 @Observable final class SettingsViewModel {
     var path: [String] = []
     var selectedOption: SettingsItem? = nil
+    var searchFocused = false
     
     let accountOptions: [SettingsItem]
     let radioOptions: [SettingsItem]

@@ -54,7 +54,7 @@ struct ContentView: View {
                 // MARK: Input
                 SettingsSection(options: model.inputOptions)
             }
-            .searchable(text: $searchText, placement: .sidebar)
+            .searchable(text: $searchText, isPresented: $model.searchFocused, placement: .sidebar)
             .focused($isFocused)
             .opacity(appearsActive ? 1.0 : 0.5)
             .onAppear {
