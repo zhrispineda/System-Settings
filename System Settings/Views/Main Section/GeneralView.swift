@@ -256,5 +256,6 @@ struct GeneralView: View {
 
 #Preview {
     ContentView()
-        .frame(height: 600)
+        .frame(width: 715, height: 700)
+        .environment(SettingsViewModel())
 }
