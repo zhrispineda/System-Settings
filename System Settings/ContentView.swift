@@ -69,6 +69,17 @@ struct ContentView: View {
             NavigationStack(path: $model.path) {
                 model.selectedOption?.destination
             }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    if model.internalBuild && model.showingTapToRadarButton {
+                        Button("Tap-To-Radar", systemImage: "ant") {
+                            if let url = URL(string: "tap-to-radar://new?ComponentID=219293&ComponentName=System%20Settings%20App&ComponentVersion=macOS&Title=&Description=&DeleteOnAttach=0&IncludeDevicePrefixInTitle=0") {
+                                NSWorkspace.shared.open(url)
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

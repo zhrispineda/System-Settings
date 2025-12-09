@@ -33,6 +33,11 @@ struct System_SettingsApp: App {
         .windowResizability(.contentSize)
         .commands {
             CommandGroup(before: .toolbar) {
+                if viewModel.internalBuild {
+                    Button("\(viewModel.showingTapToRadarButton ? "Hide" : "Show") Tap-To-Radar") {
+                        viewModel.showingTapToRadarButton.toggle()
+                    }
+                }
                 Button("Back") {}.keyboardShortcut("[", modifiers: .command).disabled(true)
                 Button("Forward") {}.keyboardShortcut("]", modifiers: .command).disabled(true)
                 Button("Search") {

@@ -84,6 +84,11 @@ struct SettingsItem: Identifiable, Hashable {
     var path: [String] = []
     var selectedOption: SettingsItem? = nil
     var searchFocused = false
+    var showingTapToRadarButton: Bool {
+        didSet {
+            UserDefaults.standard.set(showingTapToRadarButton, forKey: "showingTapToRadarButton")
+        }
+    }
     
     let accountOptions: [SettingsItem]
     let radioOptions: [SettingsItem]
@@ -92,6 +97,7 @@ struct SettingsItem: Identifiable, Hashable {
     let authOptions: [SettingsItem]
     let serviceOptions: [SettingsItem]
     let inputOptions: [SettingsItem]
+    let internalBuild = FileManager.default.fileExists(atPath: "/System/Library/CoreServices/AppleInternalVariant.plist")
     
     init() {
         accountOptions = [
@@ -265,5 +271,12 @@ struct SettingsItem: Identifiable, Hashable {
                 destination: AnyView(PrintersScannersView())
             )
         ]
+        
+        if UserDefaults.standard.object(forKey: "showingTapToRadarButton") == nil {
+            self.showingTapToRadarButton = true
+            UserDefaults.standard.set(true, forKey: "showingTapToRadarButton")
+        } else {
+            self.showingTapToRadarButton = UserDefaults.standard.bool(forKey: "showingTapToRadarButton")
+        }
     }
 }
