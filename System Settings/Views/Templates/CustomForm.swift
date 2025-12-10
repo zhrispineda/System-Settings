@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct CustomForm<Content: View>: View {
+    @Environment(SettingsViewModel.self) private var model
     let title: String
     var root = true
     @ViewBuilder let content: Content
@@ -28,6 +29,16 @@ struct CustomForm<Content: View>: View {
                     }
                     Button("Forward", systemImage: "chevron.right") {}
                         .disabled(true)
+                }
+            }
+            
+            ToolbarItem(placement: .primaryAction) {
+                if model.internalBuild && model.showingTapToRadarButton {
+                    Button("Tap-To-Radar", systemImage: "ant") {
+                        if let url = URL(string: "tap-to-radar://new?ComponentID=219293&ComponentName=System%20Settings%20App&ComponentVersion=macOS&Title=&Description=&DeleteOnAttach=0&IncludeDevicePrefixInTitle=0") {
+                            NSWorkspace.shared.open(url)
+                        }
+                    }
                 }
             }
         }
