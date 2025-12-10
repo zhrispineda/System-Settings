@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AboutView: View {
     @State private var showingBuild = false
-    let icon = NSWorkspace.shared.icon(forFile: "/System/Applications/Weather.app")
     let appearancePath = "/System/Library/PrivateFrameworks/SystemDesktopAppearance.framework"
     let buildNumber: String = {
         if let dict = NSDictionary(contentsOfFile: "/System/Library/CoreServices/SystemVersion.plist"),
@@ -73,11 +72,14 @@ struct AboutView: View {
             }
             
             Section("Displays") {
-                if let deviceImage = MacInfo.shared.color() {
-                    Image(nsImage: deviceImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 32)
+                if let displayRecord = record(for: CGMainDisplayID()) {
+                    Label {
+                        Text(verbatim: displayRecord.value(forKey: "displayName") as! String)
+                    } icon: {
+                        if let display = displayRecord.value(forKey: "image") as? NSImage {
+                            Image(nsImage: display)
+                        }
+                    }
                 }
                 Button("Display Settings…") {}.frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -131,9 +133,24 @@ struct AboutView: View {
             }
         }
     }
+    
+    private func record(for displayID: CGDirectDisplayID) -> NSObject? {
+        let path = "/System/Library/PrivateFrameworks/AboutSettings.framework/AboutSettings"
+        guard let handle = dlopen(path, RTLD_NOW) else { return nil }
+        defer { dlclose(handle) }
+
+        guard let cls = NSClassFromString("ASDisplayRecord") as? NSObject.Type else { return nil }
+
+        let instance = cls.init()
+        let selector = NSSelectorFromString("initWithCGSDisplayID:")
+        guard instance.responds(to: selector) else { return nil }
+
+        return instance.perform(selector, with: NSNumber(value: Int(displayID)))?.takeUnretainedValue() as? NSObject
+    }
 }
 
 #Preview {
     AboutView()
+        .environment(SettingsViewModel())
         .frame(height: 600)
 }
