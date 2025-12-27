@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MenuBarView: View {
-    @State private var table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/ControlCenterSettings.appex")
+    private let table = LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/ControlCenterSettings.appex")
     @State private var autoMenuBar = "In Full Screen Only"
     @State private var menuBarBackground = false
     @State private var recentCount = "10"
@@ -34,7 +34,11 @@ struct MenuBarView: View {
     let showOptions = ["Always Show", "Show When Active"]
     
     var body: some View {
-        CustomForm(title: "MENUBAR_SIDEBAR_TITLE".localized(using: table)) {
+        CustomForm(
+            title: "CFBundleDisplayName".localized(
+            using: LocalizationManager(bundleURL: "/System/Library/ExtensionKit/Extensions/ControlCenterSettings.appex", stringsFile: "InfoPlist")
+            )
+        ) {
             Section {
                 Picker("Automatically hide and show the menu bar".localized(using: table), selection: $autoMenuBar) {
                     ForEach(autoMenuBarOptions, id: \.self) { option in
@@ -55,11 +59,13 @@ struct MenuBarView: View {
                         Text("System and app controls can be configured to appear in both Control Center and the menu bar.".localized(using: table))
                             .foregroundStyle(.secondary)
                             .font(.system(size: 11))
-                        Button("Add Controls…") {}
+                        Button("Add Controls…".localized(using: table)) {}
                     }
                     .padding(-2)
                     if let asset = NSImage.asset(path: "/System/Library/ExtensionKit/Extensions/ControlCenterSettings.appex", name: "education-asset") {
                         Image(nsImage: asset)
+                            .renderingMode(.template)
+                            .foregroundStyle(.tertiary)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding(.vertical, -10)
                             .padding(.trailing, -10)
@@ -107,7 +113,7 @@ struct MenuBarView: View {
                             IconView(icon: "com.apple.graphic-icon.battery", size: 24)
                             Text("Battery".localized(using: table))
                             Spacer()
-                            Button("Battery Options…") {}
+                            Button("Battery Options…".localized(using: table)) {}
                         }
                     }
                     Toggle(isOn: $focus) {
@@ -193,7 +199,7 @@ struct MenuBarView: View {
             
             Section {} footer: {
                 HStack {
-                    Button("Reset Menu Bar and Control Center…".localized(using: table)) {}
+                    Button("Reset Control Center…".localized(using: table)) {}
                     HelpButton(topicID: "mchlad96d366")
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -204,6 +210,7 @@ struct MenuBarView: View {
 
 #Preview {
     MenuBarView()
+        .environment(SettingsViewModel())
         .frame(height: 700)
 }
 
