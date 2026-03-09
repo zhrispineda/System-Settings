@@ -5,7 +5,7 @@ A **work-in-progress** SwiftUI recreation of the macOS System Settings app.
 > This project is focused on the latest public releases of macOS and Xcode. Use an older branch to use older versions.
 
 ## Information
-- Based on macOS 26.3 (25D125).
+- Based on macOS 26.3.1 (25D2128).
 - All features within the app are only simulations and have no effect on the device.
 - Previous versions are available as their own branches, going as far back as 15.5. Fewer features are available in earlier versions.
 
